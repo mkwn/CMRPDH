@@ -539,7 +539,7 @@ Matthew Kwan
 \end_layout
 
 \begin_layout Section
-Hamiltonicity in hypergraphs
+Perfect Matching in Hypergraphs
 \end_layout
 
 \begin_layout Definition
@@ -680,7 +680,8 @@ There is
 \end_layout
 
 \begin_layout Proof
-We use Hall's marriage theorem: we need to show that 
+We use Hall's marriage theorem: we need to show that a.a.s.
+ 
 \begin_inset Formula $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$
 \end_inset
 
@@ -728,7 +729,7 @@ We use Hall's marriage theorem: we need to show that
 \end_inset
 
 .
- It is straightfoward to prove that for any individual such 
+ It is relatively straightfoward to prove that for any individual such 
 \begin_inset Formula $W$
 \end_inset
 
@@ -805,7 +806,11 @@ key "KS96"
 \begin_inset Formula $\varepsilon>0$
 \end_inset
 
- be a small constant that will be determined later (
+ be a small constant depending on 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ that will be determined later (assume for now that 
 \begin_inset Formula $\varepsilon<\alpha/8$
 \end_inset
 
@@ -839,7 +844,7 @@ exceptional
 \begin_inset Quotes erd
 \end_inset
 
- sets 
+ clusters 
 \begin_inset Formula $V_{0}^{1}$
 \end_inset
 
@@ -1016,7 +1021,7 @@ Now, in
 
  edges to other clusters.
  There are at most 
-\begin_inset Formula $\varepsilon n\left|V_{0}^{\ell}\right|$
+\begin_inset Formula $\varepsilon n\left|V_{i}^{\ell}\right|$
 \end_inset
 
  edges to the exceptional cluster 
@@ -1032,6 +1037,14 @@ Now, in
 \begin_inset Formula $d_{\mathfrak{G}}\left(V_{i}^{\ell}\right)\ge\left(\left(\beta+\varepsilon\right)n\left|V_{i}^{\ell}\right|-\varepsilon n\left|V_{i}^{\ell}\right|\right)/\left|V_{i}^{\ell}\right|^{2}\ge\alpha'k$
 \end_inset
 
+ and 
+\begin_inset Formula $\mathfrak{G}$
+\end_inset
+
+ has minimum degree at least 
+\begin_inset Formula $\alpha'k$
+\end_inset
+
 .
 \end_layout
 
@@ -1041,7 +1054,7 @@ Consider any
 \end_inset
 
  with 
-\begin_inset Formula $\alpha n\le\left|W\right|\le\ceil{n/2}$
+\begin_inset Formula $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$
 \end_inset
 
 .
@@ -1054,7 +1067,7 @@ Consider any
 \end_inset
 
 , and let 
-\begin_inset Formula $Q$
+\begin_inset Formula $\mathfrak{H}$
 \end_inset
 
  be the set of clusters 
@@ -1067,18 +1080,18 @@ Consider any
 
 .
  Now, if 
-\begin_inset Formula $V_{j}^{2}\in N_{\mathfrak{G}}\left(Q\right)$
+\begin_inset Formula $V_{j}^{2}\in N_{\mathfrak{G}}\left(\mathfrak{H}\right)$
 \end_inset
 
- then in 
-\begin_inset Formula $G'$
-\end_inset
-
-, by 
+ then by 
 \begin_inset Formula $\varepsilon$
 \end_inset
 
--regularity there are edges from 
+-regularity there are edges in 
+\begin_inset Formula $G'$
+\end_inset
+
+ from 
 \begin_inset Formula $W$
 \end_inset
 
@@ -1091,11 +1104,8 @@ Consider any
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Proof
-It follows that if 
-\begin_inset Formula $\left|N_{\mathfrak{G}}\left(Q\right)\right|=k$
+ It follows that if 
+\begin_inset Formula $\left|N_{\mathfrak{G}}\left(\mathfrak{H}\right)\right|=k$
 \end_inset
 
  (that is, every 
@@ -1103,32 +1113,44 @@ It follows that if
 \end_inset
 
  is a neighbour of 
-\begin_inset Formula $Q$
+\begin_inset Formula $\mathfrak{H}$
 \end_inset
 
 ) then 
 \begin_inset Formula $\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G'}\left(W\right)\right|\ge\left(1-\varepsilon\right)\left(n-\left|V_{0}^{2}\right|\right)\ge\left|W\right|$
 \end_inset
 
- and we are done.
- Otherwise, choose 
-\begin_inset Formula $S\subseteq N\left(Q\right)$
+ for small 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+, and we are done.
+\end_layout
+
+\begin_layout Proof
+Otherwise, choose 
+\begin_inset Formula $\mathfrak{S}\subseteq N\left(\mathfrak{H}\right)$
 \end_inset
 
  with 
-\begin_inset Formula $\left|S\right|=\beta k$
+\begin_inset Formula $\left|S\right|=\alpha'k$
 \end_inset
 
-, so that 
-\begin_inset Formula $W$
-\end_inset
-
- has 
-\begin_inset Formula $\left(1-\varepsilon\right)\beta kbn\ge\left(1-\varepsilon\right)^{2}\beta n$
-\end_inset
-
- neighbours among the clusters in 
+ and let 
 \begin_inset Formula $S$
+\end_inset
+
+ be the vertices in the clusters of 
+\begin_inset Formula $\mathfrak{S}$
+\end_inset
+
+.
+ By the same 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+-regularity argument, 
+\begin_inset Formula $\left|N_{G'}\left(W\right)\cap S\right|\ge\left(1-\varepsilon\right)\alpha'kbn\ge\left(1-\varepsilon\right)^{2}\alpha'n$
 \end_inset
 
 .
@@ -1137,15 +1159,15 @@ It follows that if
 \end_inset
 
  outside 
-\begin_inset Formula $N_{\mathfrak{G}}\left(Q\right)$
+\begin_inset Formula $N_{\mathfrak{G}}\left(\mathfrak{H}\right)$
 \end_inset
 
  which has 
-\begin_inset Formula $\beta k$
+\begin_inset Formula $\alpha'k$
 \end_inset
 
  neighbours outside 
-\begin_inset Formula $Q$
+\begin_inset Formula $\mathfrak{H}$
 \end_inset
 
  in 
@@ -1153,7 +1175,7 @@ It follows that if
 \end_inset
 
 , so 
-\begin_inset Formula $\left|Q\right|\le\left(1-\beta\right)k$
+\begin_inset Formula $\left|\mathfrak{H}\right|\le\left(1-\alpha'\right)k$
 \end_inset
 
 .
@@ -1170,7 +1192,7 @@ It follows that if
 \end_inset
 
 , at most 
-\begin_inset Formula $\beta k\left(ab+\xi\left(\alpha\right)\right)n$
+\begin_inset Formula $\alpha'k\left(ab+\xi\left(\alpha\right)\right)n$
 \end_inset
 
  of which are in 
@@ -1179,42 +1201,18 @@ It follows that if
 
 .
  So, 
-\begin_inset Formula $W$
+\begin_inset Formula 
+\begin{align*}
+\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in\mathfrak{H}}\pi_{i}an-\left(\alpha'k\left(ab+\xi\left(\alpha\right)\right)+\xi\left(\alpha\right)\right)n\left|Q\right|-\xi\left(\alpha\right)\\
+ & \ge\left|W\right|-\varepsilon n-\alpha'\left(1-\alpha'\right)\left(\left(1-\varepsilon\right)^{2}+k^{2}\xi\left(\alpha\right)\right)n-k\xi\left(\alpha\right)n,
+\end{align*}
+
 \end_inset
 
- has at least 
+and
 \begin_inset Formula 
 \[
-\sum_{V_{i}^{1}\in Q}\pi_{i}an-\left(\beta k\left(ab+\xi\left(\alpha\right)\right)+\xi\left(\alpha\right)\right)n\left|Q\right|-\xi\left(\alpha\right)\ge\left|W\right|-\varepsilon n-\beta\left(1-\beta\right)\left(\left(1-\varepsilon\right)^{2}+k^{2}\xi\left(\alpha\right)\right)n-k\xi\left(\alpha\right)n
-\]
-
-\end_inset
-
-neighbours outside 
-\begin_inset Formula $S$
-\end_inset
-
-.
- Combining with the 
-\begin_inset Formula $\left(1-\varepsilon\right)^{2}\beta n$
-\end_inset
-
- neighbours of 
-\begin_inset Formula $W$
-\end_inset
-
- in 
-\begin_inset Formula $G'$
-\end_inset
-
- inside 
-\begin_inset Formula $S$
-\end_inset
-
-, we have
-\begin_inset Formula 
-\[
-\left|N_{G'\cup M}\left(W\right)\right|\ge\left|W\right|+\left(\beta\left(1-\varepsilon\right)^{2}-\varepsilon-\beta\left(1-\beta\right)\left(\left(1-\varepsilon\right)^{2}+k^{2}\xi\left(\alpha\right)\right)-k\xi\left(\alpha\right)\right)n.
+\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|+\left(\alpha'\left(1-\varepsilon\right)^{2}-\varepsilon-\alpha'\left(1-\alpha'\right)\left(\left(1-\varepsilon\right)^{2}+k^{2}\xi\left(\alpha'\right)\right)-k\xi\left(\alpha'\right)\right)n.
 \]
 
 \end_inset
@@ -1244,6 +1242,19 @@ If
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Proof
@@ -1409,12 +1420,12 @@ Our chosen matching
 \begin_inset Formula $M_{0}$
 \end_inset
 
- couples with a uniformly random partition of 
+ can be used to give a uniformly random partition of 
 \begin_inset Formula $B_{0}$
 \end_inset
 
- into pairs: for every 
-\begin_inset Formula $\left\{ a,b,b'\right\} \in M$
+ into pairs of vertices: for every 
+\begin_inset Formula $\left\{ a,b,b'\right\} \in M_{0}$
 \end_inset
 
 , pair up 
@@ -1434,7 +1445,20 @@ Our chosen matching
 \end_inset
 
  into pairs uniformly at random.
- Conditioning on the set of pairs 
+ Let 
+\begin_inset Formula $B$
+\end_inset
+
+ be the resulting set of pairs of elements of 
+\begin_inset Formula $B_{0}$
+\end_inset
+
+.
+ Conditioning on 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
 \begin_inset Formula $B$
 \end_inset
 
@@ -1458,22 +1482,57 @@ Our chosen matching
 \end_layout
 
 \begin_layout Proof
-In order to apply Lemma 
+We consider only the hyperedges in 
+\begin_inset Formula $H\cup R$
+\end_inset
+
+ between a vertex of 
+\begin_inset Formula $A$
+\end_inset
+
+ and a pair of 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ Each of these hyperedges can be viewed as an edge in the bipartite graph
+ with partitions 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ The theorem will follow from Lemma 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "lem:bipartite-plus-big-matching-perfect"
 
 \end_inset
 
-, we just need to show that a uniformly random choice of 
-\begin_inset Formula $A,B$
+ if we can show that with a uniformly random choice of 
+\begin_inset Formula $A$
 \end_inset
 
- induces a bipartite graph with linear minimum degree.
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+, 
+\begin_inset Formula $H$
+\end_inset
+
+ induces a bipartite graph 
+\begin_inset Formula $G$
+\end_inset
+
+ with linear minimum degree.
 \end_layout
 
 \begin_layout Proof
-Let 
+So, let 
 \begin_inset Formula $a_{1},\dots,a_{n/3},b_{n/3+1},\dots,b_{n}$
 \end_inset
 
@@ -1504,22 +1563,22 @@ Let
 
 .
  Let 
-\begin_inset Formula $\Gamma\left(v\right)$
-\end_inset
-
- be the set of all pairs of vertices 
-\begin_inset Formula $\left\{ w,u\right\} $
-\end_inset
-
- and let 
 \begin_inset Formula $\Gamma\left(v,w\right)$
 \end_inset
 
- be the set of all vertices 
+ (respectively 
+\begin_inset Formula $\Gamma\left(v\right)$
+\end_inset
+
+) be the set of all vertices 
 \begin_inset Formula $u$
 \end_inset
 
- such that 
+ (respectively, all pairs of vertices 
+\begin_inset Formula $\left\{ w,u\right\} $
+\end_inset
+
+) such that 
 \begin_inset Formula $\left\{ v,w,u\right\} $
 \end_inset
 
@@ -1546,8 +1605,11 @@ Let
 \begin_inset Formula $\varepsilon>0$
 \end_inset
 
- be some small constant to be determined later, and fix distinct vertices
- 
+ be a small constant (depending on 
+\begin_inset Formula $\alpha$
+\end_inset
+
+), and fix distinct vertices 
 \begin_inset Formula $v,w$
 \end_inset
 
@@ -1618,7 +1680,8 @@ Similarly,
 \begin_inset Formula $\Pr\left(\left|B_{0}\cap\Gamma\left(v,w\right)\right|<\left(2\alpha/3-\varepsilon\right)n\right)\le e^{-\Omega\left(n\right)}$
 \end_inset
 
-, so a.a.s.
+.
+ By a union bound, a.a.s.
  every pair of vertices 
 \begin_inset Formula $v,w$
 \end_inset
@@ -1652,7 +1715,7 @@ The degree of each
 \end_inset
 
  is 
-\begin_inset Formula $\left|N\left(b_{2i-1},b_{2i}\right)\right|$
+\begin_inset Formula $\left|N\left(b_{2i-1},b_{2i}\right)\cap A\right|$
 \end_inset
 
 , which we have just shown is uniformly
@@ -1662,6 +1725,10 @@ The degree of each
 .
  It remains to show that the degree of each 
 \begin_inset Formula $a\in A$
+\end_inset
+
+ in 
+\begin_inset Formula $G$
 \end_inset
 
  is 
@@ -1712,19 +1779,7 @@ Now, condition on
 \end_inset
 
 .
- There are at most 
-\begin_inset Formula $2i\left|B_{0}\right|$
-\end_inset
-
- hyperedges containing 
-\begin_inset Formula $a$
-\end_inset
-
- and some conditioned 
-\begin_inset Formula $b_{j}$
-\end_inset
-
-, so the probability that 
+ The probability that 
 \begin_inset Formula $\left\{ a,b_{2i+1},b_{2i+2}\right\} $
 \end_inset
 
@@ -1732,16 +1787,24 @@ Now, condition on
 \begin_inset Formula $H$
 \end_inset
 
- is at least 
-\begin_inset Formula $\alpha-2\varepsilon-6i/n$
+ is (for large 
+\begin_inset Formula $n$
 \end_inset
 
-, which is at least 
+) at least 
+\begin_inset Formula 
+\[
+\left|\Gamma\left(a\right)\right|-2i\left|B_{0}\right|/{\left|B_{0}\right| \choose 2}\ge\left(\alpha-2\varepsilon-6i/n\right)n,
+\]
+
+\end_inset
+
+which is at least 
 \begin_inset Formula $\alpha/2$
 \end_inset
 
  for 
-\begin_inset Formula $i\le\left(\alpha/12-\varepsilon/3\right)n$
+\begin_inset Formula $i\le\left(\alpha/12-\varepsilon/3\right)n=\Omega\left(n\right)$
 \end_inset
 
 .
@@ -1759,11 +1822,11 @@ Now, condition on
 
 .
  By a Chernoff bound, 
-\begin_inset Formula $\sum_{i=1}^{\left(\alpha/12-\varepsilon/3\right)n}X_{i}$
+\begin_inset Formula $\sum_{i=1}^{\Omega\left(n\right)}X_{i}$
 \end_inset
 
  (and therefore 
-\begin_inset Formula $\left|N\left(a\right)\cap B\right|$
+\begin_inset Formula $\left|N_{G}\left(a\right)\right|$
 \end_inset
 
 ) is 
@@ -1777,7 +1840,7 @@ Now, condition on
 .
  By a union bound, it follows that a.a.s.
  
-\begin_inset Formula $d_{G}\left(a\right)=\Omega\left(n\right)$
+\begin_inset Formula $\delta_{G}\left(a\right)=\Omega\left(n\right)$
 \end_inset
 
 .
