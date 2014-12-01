@@ -539,20 +539,340 @@ Matthew Kwan
 \end_layout
 
 \begin_layout Section
-Perfect Matching in Hypergraphs
+Perfect Matchings and Hamilton Cycles in Hypergraphs
+\end_layout
+
+\begin_layout Standard
+For hypergraphs, there is no single most natural notion of 
+\begin_inset Quotes eld
+\end_inset
+
+minimum degree
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Definition
-The 2-degree of a pair of vertices 
-\begin_inset Formula $v,w$
+Let 
+\begin_inset Formula $H$
 \end_inset
 
- is the number of hyperedges containing both 
-\begin_inset Formula $v$
+ be a 
+\begin_inset Formula $k$
+\end_inset
+
+-uniform hypergraph.
+ The 
+\emph on
+degree
+\emph default
+ of a set of vertices 
+\begin_inset Formula $s\subseteq V\left(H\right)$
+\end_inset
+
+ is the number of hyperedges that include 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ The 
+\emph on
+minimum 
+\begin_inset Formula $q$
+\end_inset
+
+-degree
+\emph default
+ 
+\begin_inset Formula $\delta_{q}\left(H\right)$
+\end_inset
+
+ of 
+\begin_inset Formula $H$
+\end_inset
+
+ is the minimum degree among all 
+\begin_inset Formula $s\subseteq V\left(H\right)$
+\end_inset
+
+ with 
+\begin_inset Formula $\left|s\right|=q$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Remark
+\begin_inset CommandInset label
+LatexCommand label
+name "rem:hypergraph-degree-transfer"
+
+\end_inset
+
+We say graphs are dense if they have many edges (have large 
+\begin_inset Formula $\delta_{0}$
+\end_inset
+
+), or more strongly if they have large minimum degree (have large 
+\begin_inset Formula $\delta_{1}$
+\end_inset
+
+).
+ The idea of minimum 
+\begin_inset Formula $q$
+\end_inset
+
+-degree generalizes this for hypergraphs.
+ Indeed, for a 
+\begin_inset Formula $k$
+\end_inset
+
+-regular hypergraph 
+\begin_inset Formula $H$
+\end_inset
+
+, a double-counting argument shows that if 
+\begin_inset Formula $q\le p$
+\end_inset
+
+ then 
+\begin_inset Formula 
+\[
+\delta_{q}\left(H\right)\ge\delta_{p}\left(H\right){n-q \choose p-q}\left.\vphantom{\sum}\right/{k-q \choose p-q}.
+\]
+
+\end_inset
+
+So, imposing that a 
+\begin_inset Formula $k$
+\end_inset
+
+-uniform hypergraph has large 
+\begin_inset Formula $\left(k-1\right)$
+\end_inset
+
+-degree ensures that it has large 
+\begin_inset Formula $q$
+\end_inset
+
+-degrees for all 
+\begin_inset Formula $q$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition
+Let 
+\begin_inset Formula $\HH_{k}\left(n,m\right)$
+\end_inset
+
+ be the random 
+\begin_inset Formula $k$
+\end_inset
+
+-uniform hypergraph on the vertex set 
+\begin_inset Formula $\left[n\right]$
+\end_inset
+
+ chosen uniformly from all 3-uniform hypergraphs with 
+\begin_inset Formula $m$
+\end_inset
+
+ hyperedges.
+\end_layout
+
+\begin_layout Standard
+The purpose of this section is to prove the following two theorems.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:hypergraph-perfect-matching"
+
+\end_inset
+
+There is 
+\begin_inset Formula $\beta_{k}\left(\alpha\right)$
+\end_inset
+
+ such that if 
+\begin_inset Formula $H$
+\end_inset
+
+ is a 
+\begin_inset Formula $k$
+\end_inset
+
+-uniform hypergraph on 
+\begin_inset Formula $\left[kn\right]$
+\end_inset
+
+ with 
+\begin_inset Formula $\delta_{k-1}\left(H\right)\ge\alpha n$
+\end_inset
+
+, and 
+\begin_inset Formula $R\in\HH\left(kn,\beta_{k}\left(\alpha\right)n\right)$
+\end_inset
+
+, then 
+\begin_inset Formula $H\cup R$
+\end_inset
+
+ a.a.s.
+ has a perfect matching.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:hypergraph-hamiltonian"
+
+\end_inset
+
+There is 
+\begin_inset Formula $\gamma_{k}\left(\alpha\right)$
+\end_inset
+
+ such that if 
+\begin_inset Formula $H$
+\end_inset
+
+ is a 
+\begin_inset Formula $k$
+\end_inset
+
+-uniform hypergraph on 
+\begin_inset Formula $\left[\left(k-1\right)n\right]$
+\end_inset
+
+with 
+\begin_inset Formula $\delta_{k-1}\left(H\right)\ge\alpha n$
+\end_inset
+
+, and 
+\begin_inset Formula $R\in\HH\left(\left(k-1\right)n,\gamma_{k}\left(\alpha\right)n\right)$
+\end_inset
+
+, then 
+\begin_inset Formula $H\cup R$
+\end_inset
+
+ a.a.s.
+ has a loose Hamilton cycle.
+\end_layout
+
+\begin_layout Remark
+\begin_inset CommandInset label
+LatexCommand label
+name "rem:large-degrees-all-orders"
+
+\end_inset
+
+By Remark 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "rem:hypergraph-degree-transfer"
+
+\end_inset
+
+, our requirement 
+\begin_inset Formula $\delta_{k-1}\left(H\right)=\Omega\left(n\right)$
+\end_inset
+
+ actually implies 
+\begin_inset Formula $\delta_{q}\left(H\right)=\Omega\left(n^{k-q}\right)$
+\end_inset
+
+ for all 
+\begin_inset Formula $q$
+\end_inset
+
+.
+ We do not know whether such requirements on the 
+\begin_inset Formula $q$
+\end_inset
+
+-degrees with 
+\begin_inset Formula $q<k-1$
+\end_inset
+
+ suffice for the conclusions of our theorems.
+ I NEED TO THINK ABOUT THIS.
+\end_layout
+
+\begin_layout Subsection
+Proofs of Theorems 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:hypergraph-perfect-matching"
+
 \end_inset
 
  and 
-\begin_inset Formula $w$
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:hypergraph-hamiltonian"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Our theorems will follow from a sequence of lemmas.
+ The first step is to show that 
+\begin_inset Formula $R$
+\end_inset
+
+ almost gives the structure of interest on its own.
+ Let a
+\emph on
+ sub-cycle
+\emph default
+ be a hypergraph which can be extended to a loose Hamilton cycle by adding
+ edges.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:large-hypergraph-matching"
+
+\end_inset
+
+For any 
+\begin_inset Formula $\varepsilon>0$
+\end_inset
+
+, there is 
+\begin_inset Formula $\beta_{k}'\left(\varepsilon\right)$
+\end_inset
+
+ such that a random hypergraph distributed as 
+\begin_inset Formula $\HH_{k}\left(kn,\beta_{k}'\left(\varepsilon\right)\right)$
+\end_inset
+
+ a.a.s.
+ has a matching of size 
+\begin_inset Formula $\left(1-\varepsilon\right)n$
 \end_inset
 
 .
@@ -571,59 +891,366 @@ status open
 
 \end_layout
 
-\begin_layout Definition
-Let 
-\begin_inset Formula $\HH\left(n,m\right)$
-\end_inset
-
- be the random 3-uniform hypergraph on the vertex set 
-\begin_inset Formula $\left[n\right]$
-\end_inset
-
- chosen uniformly from all 3-uniform hypergraphs with 
-\begin_inset Formula $m$
-\end_inset
-
- hyperedges.
-\end_layout
-
-\begin_layout Theorem
+\begin_layout Lemma
 \begin_inset CommandInset label
 LatexCommand label
-name "thm:hypergraph-perfect-matching"
+name "lem:large-hypergraph-subcycle"
 
 \end_inset
 
-There is 
-\begin_inset Formula $\beta\left(\alpha\right)$
+For any 
+\begin_inset Formula $\varepsilon>0$
 \end_inset
 
- such that if 
-\begin_inset Formula $H$
+, there is 
+\begin_inset Formula $\gamma_{k}'\left(\varepsilon\right)$
 \end_inset
 
- is a 3-uniform hypergraph on 
-\begin_inset Formula $\left[n\right]$
-\end_inset
-
- with minimal 2-degree at least 
-\begin_inset Formula $\alpha n$
-\end_inset
-
- and 
-\begin_inset Formula $R\in\HH\left(n,\beta\left(\alpha\right)n\right)$
-\end_inset
-
-, then 
-\begin_inset Formula $H\cup R$
+ such that a random hypergraph distributed as 
+\begin_inset Formula $\HH_{k}\left(\left(k-1\right)n,\gamma_{k}'\left(\varepsilon\right)\right)$
 \end_inset
 
  a.a.s.
- has a perfect matching.
+ has a sub-cycle of size 
+\begin_inset Formula $\left(1-\varepsilon\right)n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Proof of Lemma 
+\backslash
+ref{lem:large-hypergraph-matching}]
+\end_layout
+
+\end_inset
+
+To realize the distribution 
+\begin_inset Formula $\HH_{k}\left(kn,\beta_{k}'\left(\varepsilon\right)n\right)$
+\end_inset
+
+, imagine that independently uniformly random hyperedges are repeatedly
+ dropping into 
+\begin_inset Formula $R$
+\end_inset
+
+, until we have seen 
+\begin_inset Formula $\beta_{k}'\left(\varepsilon\right)$
+\end_inset
+
+ distinct hyperedges.
+ We iteratively build a matching 
+\begin_inset Formula $M$
+\end_inset
+
+ greedily.
+ If a new hyperedge 
+\begin_inset Formula $e$
+\end_inset
+
+ drops into 
+\begin_inset Formula $R$
+\end_inset
+
+ which does not share any vertices with the hyperedges in 
+\begin_inset Formula $M$
+\end_inset
+
+ so far, then add 
+\begin_inset Formula $e$
+\end_inset
+
+ to 
+\begin_inset Formula $M$
+\end_inset
+
+.
+ If we have already added 
+\begin_inset Formula $i$
+\end_inset
+
+ hyperedges to 
+\begin_inset Formula $M$
+\end_inset
+
+, then the probability we will add the next random hyperedge is
+\begin_inset Formula 
+\[
+p_{i}={kn-ki \choose k}\left.\vphantom{\sum}\right/{kn \choose k}=\Omega\left(\left(\frac{n-i}{n}\right)^{k}\right).
+\]
+
+\end_inset
+
+The number of random edges required to build a matching of size 
+\begin_inset Formula $\left(1-\varepsilon\right)n$
+\end_inset
+
+ therefore has the distribution of
+\begin_inset Formula 
+\[
+X=\sum_{i=1}^{\left(1-\varepsilon\right)n}X_{i},
+\]
+
+\end_inset
+
+where each 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is independently geometrically distributed with success probability 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+.
+ By Chebyshev's inequality or a Chernoff bound, 
+\begin_inset Formula $X$
+\end_inset
+
+ is a.a.s.
+ close to its expectation, which is at most 
+\begin_inset Formula 
+\[
+O\left(\sum_{i=1}^{\left(1-\varepsilon\right)n}n^{k}/\left(n-i\right)^{k}\right)=O\left(n^{k}\int_{\varepsilon n}^{\infty}\frac{1}{x^{k}}dx\right)=O\left(n\right).
+\]
+
+\end_inset
+
+So, if 
+\begin_inset Formula $\beta_{k}'\left(\varepsilon\right)$
+\end_inset
+
+ is large enough then a.a.s.
+ 
+\begin_inset Formula $\left|M\right|\ge\left(1-\varepsilon\right)n$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-This theorem will follow from a lemma.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Proof of Lemma 
+\backslash
+ref{lem:large-hypergraph-subcycle}]
+\end_layout
+
+\end_inset
+
+A sub-cycle is a loose Hamilton cycle or a disjoint union of loose paths,
+ but a union of disjoint paths may not be a sub-cycle if it has so many
+ paths that there are not enough vertices left to link them together.
+ A union of 
+\begin_inset Formula $j$
+\end_inset
+
+ paths (which have length greater than zero) with a total of 
+\begin_inset Formula $i$
+\end_inset
+
+ hyperedges is a sub-cycle precisely when 
+\begin_inset Formula $i+j\le n$
+\end_inset
+
+.
+ Call such sub-cycles 
+\emph on
+proper 
+\emph default
+sub-cycles.
+\end_layout
+
+\begin_layout Proof
+As in the proof of 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:large-hypergraph-matching"
+
+\end_inset
+
+, imagine that independently uniformly random hyperedges are repeatedly
+ dropping into 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ We build a proper sub-cycle 
+\begin_inset Formula $S$
+\end_inset
+
+ greedily.
+ Suppose we are at a point where 
+\begin_inset Formula $S$
+\end_inset
+
+ has 
+\begin_inset Formula $i$
+\end_inset
+
+ hyperedges and 
+\begin_inset Formula $j$
+\end_inset
+
+ paths, with 
+\begin_inset Formula $i\le\left(1-\varepsilon\right)n$
+\end_inset
+
+.
+ There are 
+\begin_inset Formula $\left(k-1\right)i+j\le\left(k-2\right)i+n$
+\end_inset
+
+ vertices in the paths in 
+\begin_inset Formula $S$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+There are 3 kinds of hyperedges we can add to 
+\begin_inset Formula $S$
+\end_inset
+
+: a hyperedge that starts a new loose path (
+\begin_inset Quotes eld
+\end_inset
+
+type 1
+\begin_inset Quotes erd
+\end_inset
+
+), a hyperedge that extends an existing path (
+\begin_inset Quotes eld
+\end_inset
+
+type 2
+\begin_inset Quotes erd
+\end_inset
+
+), or a hyperedge that joins two paths together (
+\begin_inset Quotes eld
+\end_inset
+
+type 3
+\begin_inset Quotes erd
+\end_inset
+
+).
+ We can only add a type 1 hyperedge when 
+\begin_inset Formula $i+j\le n-2$
+\end_inset
+
+, and can only add a type 2 hyperedge when 
+\begin_inset Formula $i+j\le n-1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+If 
+\begin_inset Formula $i+j\le n-2$
+\end_inset
+
+ then there are at least 
+\begin_inset Formula 
+\[
+{\left(k-1\right)n-\left(\left(k-2\right)i+n\right) \choose k}={\left(k-2\right)\left(n-i\right) \choose k}=\Omega\left(\left(n-i\right)^{k}\right)
+\]
+
+\end_inset
+
+type-1 hyperedges that could possibly be added.
+ Otherwise, we must have 
+\begin_inset Formula $j>n-2-i\ge\varepsilon n-2$
+\end_inset
+
+, so (identifying one vertex in an extremal hyperedge of each path as 
+\begin_inset Quotes eld
+\end_inset
+
+eligible to be joined
+\begin_inset Quotes erd
+\end_inset
+
+), there are at least 
+\begin_inset Formula 
+\[
+{j \choose 2}{\left(k-2\right)\left(n-i\right) \choose k-2}=\Omega\left(n^{2}\left(n-i\right)^{k-2}\right)=\Omega\left(\left(n-i\right)^{k}\right)
+\]
+
+\end_inset
+
+type-3 hyperedges that could be added.
+ Combining both cases, we can see that if 
+\begin_inset Formula $S$
+\end_inset
+
+ has 
+\begin_inset Formula $i\le\left(1-\varepsilon\right)n$
+\end_inset
+
+ hyperedges, then the next edge will be added with probability at least
+\begin_inset Formula 
+\[
+\Omega\left(\left(n-i\right)^{k}\right)\left.\vphantom{\sum}\right/{\left(k-1\right)n \choose k}=\Omega\left(\left(\frac{n-i}{n}\right)^{k}\right).
+\]
+
+\end_inset
+
+We conclude with the same reasoning as the proof of Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:large-hypergraph-matching"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The second step to prove Theorems 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:hypergraph-perfect-matching"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:hypergraph-hamiltonian"
+
+\end_inset
+
+ is to show that a dense hypergraph plus a large partial structure a.a.s.
+ gives the structure we are looking for.
+ For both theorems, we will be able to reduce this step to the following
+ lemma.
 \end_layout
 
 \begin_layout Lemma
@@ -634,7 +1261,7 @@ name "lem:bipartite-plus-big-matching-perfect"
 \end_inset
 
 There is 
-\begin_inset Formula $\xi\left(\alpha\right)$
+\begin_inset Formula $\xi\left(\alpha\right)>0$
 \end_inset
 
  such that the following holds.
@@ -745,12 +1372,25 @@ We use Hall's marriage theorem: we need to show that a.a.s.
 \end_inset
 
 .
- Our approach is to use Szemeredi's regularity lemma on 
+ Our approach is to use Szemer
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+'
+\end_layout
+
+\end_inset
+
+edi's regularity lemma on 
 \begin_inset Formula $G$
 \end_inset
 
  and to show that the random matching a.a.s.
- distributes evenly over the clusters.
+ distributes very evenly over the resulting clusters.
  Then, 
 \begin_inset Formula $\varepsilon$
 \end_inset
@@ -823,12 +1463,12 @@ key "KS96"
 \begin_inset Formula $\alpha$
 \end_inset
 
- such that we can write 
-\begin_inset Formula $A=V_{0}^{1}\sqcup\dots\sqcup V_{k}^{1}$
+ such that there exist partitions 
+\begin_inset Formula $A=V_{0}^{1}\cup\dots\cup V_{k}^{1}$
 \end_inset
 
  and 
-\begin_inset Formula $B=V_{0}^{2}\sqcup\dots\sqcup V_{k}^{2}$
+\begin_inset Formula $B=V_{0}^{2}\cup\dots\cup V_{k}^{2}$
 \end_inset
 
  with 
@@ -928,6 +1568,10 @@ Fix some
 \begin_inset Formula $V_{j}^{2}$
 \end_inset
 
+, with 
+\begin_inset Formula $i,j\ge1$
+\end_inset
+
 .
  The vertices of each 
 \begin_inset Formula $V_{i}^{1}$
@@ -1004,6 +1648,7 @@ key "JDP83"
 \end_inset
 
 .
+ We assume this holds for the remainder of the proof.
 \end_layout
 
 \begin_layout Proof
@@ -1079,6 +1724,15 @@ Consider any
 \end_inset
 
 .
+ If 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ is small, 
+\begin_inset Formula $\mathfrak{H}$
+\end_inset
+
+ must be nonempty.
  Now, if 
 \begin_inset Formula $V_{j}^{2}\in N_{\mathfrak{G}}\left(\mathfrak{H}\right)$
 \end_inset
@@ -1133,7 +1787,7 @@ Otherwise, choose
 \end_inset
 
  with 
-\begin_inset Formula $\left|S\right|=\alpha'k$
+\begin_inset Formula $\left|\mathfrak{S}\right|=\alpha'k$
 \end_inset
 
  and let 
@@ -1150,11 +1804,11 @@ Otherwise, choose
 \end_inset
 
 -regularity argument, 
-\begin_inset Formula $\left|N_{G'}\left(W\right)\cap S\right|\ge\left(1-\varepsilon\right)\alpha'kbn\ge\left(1-\varepsilon\right)^{2}\alpha'n$
+\begin_inset Formula $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'k\left(1-\varepsilon\right)bn\ge\left(1-\varepsilon\right)^{2}\alpha'n$
 \end_inset
 
 .
- There is 
+ We are assuming there is 
 \begin_inset Formula $V_{j}^{2}$
 \end_inset
 
@@ -1162,7 +1816,11 @@ Otherwise, choose
 \begin_inset Formula $N_{\mathfrak{G}}\left(\mathfrak{H}\right)$
 \end_inset
 
- which has 
+, and this 
+\begin_inset Formula $V_{j}^{2}$
+\end_inset
+
+ must have 
 \begin_inset Formula $\alpha'k$
 \end_inset
 
@@ -1179,23 +1837,27 @@ Otherwise, choose
 \end_inset
 
 .
- Each 
-\begin_inset Formula $V_{i}^{1}$
+ Since 
+\begin_inset Formula $\left|M\right|=\left(1-\xi\left(\alpha\right)\right)n$
+\end_inset
+
+, each 
+\begin_inset Formula $V_{i}^{1}\cap W$
 \end_inset
 
  has at least 
-\begin_inset Formula $\left(a-\xi\left(\alpha\right)\right)n$
+\begin_inset Formula $\left(\pi_{i}a-\xi\left(\alpha\right)\right)n$
 \end_inset
 
  neighbours in 
 \begin_inset Formula $M$
 \end_inset
 
-, at most 
+, and at most 
 \begin_inset Formula $\alpha'k\left(ab+\xi\left(\alpha\right)\right)n$
 \end_inset
 
- of which are in 
+ of these are in 
 \begin_inset Formula $S$
 \end_inset
 
@@ -1203,8 +1865,8 @@ Otherwise, choose
  So, 
 \begin_inset Formula 
 \begin{align*}
-\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in\mathfrak{H}}\pi_{i}an-\left(\alpha'k\left(ab+\xi\left(\alpha\right)\right)+\xi\left(\alpha\right)\right)n\left|Q\right|-\xi\left(\alpha\right)\\
- & \ge\left|W\right|-\varepsilon n-\alpha'\left(1-\alpha'\right)\left(\left(1-\varepsilon\right)^{2}+k^{2}\xi\left(\alpha\right)\right)n-k\xi\left(\alpha\right)n,
+\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in\mathfrak{H}}\left(\pi_{i}a-\xi\left(\alpha\right)\right)n-\left|\mathfrak{H}\right|\left(\alpha'k\left(ab+\xi\left(\alpha\right)\right)\right)n\\
+ & \ge\left|W\right|-\varepsilon n-\left(1-\alpha'\right)\alpha'\left(1-\varepsilon\right)^{2}-k^{2}\xi\left(\alpha\right)n
 \end{align*}
 
 \end_inset
@@ -1212,7 +1874,7 @@ Otherwise, choose
 and
 \begin_inset Formula 
 \[
-\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|+\left(\alpha'\left(1-\varepsilon\right)^{2}-\varepsilon-\alpha'\left(1-\alpha'\right)\left(\left(1-\varepsilon\right)^{2}+k^{2}\xi\left(\alpha'\right)\right)-k\xi\left(\alpha'\right)\right)n.
+\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|+\left(\alpha'\left(1-\varepsilon\right)^{2}-\varepsilon-\left(1-\alpha'\right)\alpha'\left(1-\varepsilon\right)^{2}-k^{2}\xi\left(\alpha\right)\right)n.
 \]
 
 \end_inset
@@ -1245,602 +1907,618 @@ If
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
+Now we describe the reduction of Theorems 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:hypergraph-perfect-matching"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Proof
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-[Proof of Theorem 
-\backslash
-ref{thm:hypergraph-perfect-matching}]
-\end_layout
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:hypergraph-hamiltonian"
 
 \end_inset
 
-The idea is to reduce this theorem to Lemma 
+ to Lemma 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "lem:bipartite-plus-big-matching-perfect"
 
 \end_inset
 
-: roughly speaking, 
+.
+ Consider a 
+\begin_inset Formula $k$
+\end_inset
+
+-uniform hypergraph 
 \begin_inset Formula $H$
 \end_inset
 
- induces a bipartite graph, and 
-\begin_inset Formula $R$
-\end_inset
-
- provides a uniformly random large matching.
- First, uniformly randomly partition 
-\begin_inset Formula $V\left(H\right)$
-\end_inset
-
- into a set 
-\begin_inset Formula $A$
-\end_inset
-
- of 
-\begin_inset Formula $n/3$
-\end_inset
-
- vertices and a set 
-\begin_inset Formula $B_{0}$
-\end_inset
-
- of 
-\begin_inset Formula $2n/3$
-\end_inset
-
- vertices.
- 
-\end_layout
-
-\begin_layout Proof
-We can construct a random hypergraph distributed as 
-\begin_inset Formula $\HH\left(n,\beta\left(\alpha\right)n\right)$
-\end_inset
-
- by repeatedly choosing random hyperedges with repetition, and stopping
- when we have seen 
-\begin_inset Formula $\beta\left(\alpha\right)n$
-\end_inset
-
- distinct hyperedges.
- We will show that for any 
-\begin_inset Formula $\varepsilon$
-\end_inset
-
- there is 
-\begin_inset Formula $\beta$
-\end_inset
-
- such that a.a.s.
- the first 
-\begin_inset Formula $\beta\left(\alpha\right)n$
-\end_inset
-
- random edges will contain a matching 
-\begin_inset Formula $M_{0}$
-\end_inset
-
- of 
-\begin_inset Formula $\left(1-\varepsilon\right)n/3$
-\end_inset
-
- hyperedges, each comprising a vertex of 
-\begin_inset Formula $A$
-\end_inset
-
- and two vertices of 
-\begin_inset Formula $B_{0}$
-\end_inset
-
 .
- This matching can be chosen greedily: each new random hyperedge is immediately
- added to 
-\begin_inset Formula $M_{0}$
-\end_inset
-
- if it has one vertex in 
+ Suppose 
 \begin_inset Formula $A$
 \end_inset
 
- and two vertices in 
-\begin_inset Formula $B_{0}$
+ is a set of 
+\begin_inset Formula $n$
 \end_inset
 
-, and does not conflict with any hyperedge added so far.
- If our matching-in-progress has 
-\begin_inset Formula $i$
+ vertices and 
+\begin_inset Formula $B$
 \end_inset
 
- hyperedges, the probability that the next random edge will be added is
- 
-\begin_inset Formula 
-\[
-p_{i}=\left(n/3-i\right)\left.{2n/3-2i \choose 2}\right/{n \choose 3}=\Omega\left(\left(\frac{n-i}{n}\right)^{3}\right).
-\]
-
+ is a 
+\begin_inset Formula $\left(k-1\right)$
 \end_inset
 
-The number of random edges required to build a matching of size 
-\begin_inset Formula $\left(1-\varepsilon\right)n/3$
+-uniform hypergraph on the remaining vertices.
+ Then we define a bipartite graph 
+\begin_inset Formula $G_{A,B}\left(H\right)$
 \end_inset
 
- therefore has the distribution of
-\begin_inset Formula 
-\[
-X=\sum_{i=1}^{\left(1-\varepsilon\right)n/3}X_{i},
-\]
-
+ as follows.
+ The vertices of 
+\begin_inset Formula $G_{A,B}\left(H\right)$
 \end_inset
 
-where each 
-\begin_inset Formula $X_{i}$
+ are the vertices in 
+\begin_inset Formula $A$
 \end_inset
 
- is independently geometrically distributed with success probability 
-\begin_inset Formula $p_{i}$
+, as well as the edges in 
+\begin_inset Formula $B$
 \end_inset
 
-.
- By Chebyshev's inequality or a Chernoff bound, 
-\begin_inset Formula $X$
+ (we abuse notation and identify the hypergraph 
+\begin_inset Formula $B$
 \end_inset
 
- is a.a.s.
- close to its expectation, which is at most 
-\begin_inset Formula 
-\[
-O\left(\sum_{i=1}^{\left(1-\varepsilon\right)n/3}n^{3}/\left(n-i\right)^{3}\right)=O\left(n^{3}\int_{\varepsilon n/3}^{\infty}\frac{1}{x^{3}}dx\right)=O\left(n\right).
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Proof
-Our chosen matching 
-\begin_inset Formula $M_{0}$
-\end_inset
-
- can be used to give a uniformly random partition of 
-\begin_inset Formula $B_{0}$
-\end_inset
-
- into pairs of vertices: for every 
-\begin_inset Formula $\left\{ a,b,b'\right\} \in M_{0}$
-\end_inset
-
-, pair up 
-\begin_inset Formula $b$
+ with its edge set).
+ We put an edge between 
+\begin_inset Formula $a\in A$
 \end_inset
 
  and 
-\begin_inset Formula $b'$
+\begin_inset Formula $\left\{ b_{1},\dots,b_{k-1}\right\} \in B$
 \end_inset
 
-, and partition the remaining 
-\begin_inset Formula $2\varepsilon n/3$
+ if 
+\begin_inset Formula $\left\{ a,b_{1},\dots,b_{k-1}\right\} $
 \end_inset
 
- elements of 
-\begin_inset Formula $B_{0}$
-\end_inset
-
- into pairs uniformly at random.
- Let 
-\begin_inset Formula $B$
-\end_inset
-
- be the resulting set of pairs of elements of 
-\begin_inset Formula $B_{0}$
-\end_inset
-
-.
- Conditioning on 
-\begin_inset Formula $A$
-\end_inset
-
- and 
-\begin_inset Formula $B$
-\end_inset
-
-, 
-\begin_inset Formula $M_{0}$
-\end_inset
-
- is distributed uniformly at random among all matchings consisting of 
-\begin_inset Formula $\left(1-\varepsilon\right)n/3$
-\end_inset
-
- hyperedges between a pair of 
-\begin_inset Formula $B$
-\end_inset
-
- and a vertex of 
-\begin_inset Formula $A$
+ is a hyperedge in 
+\begin_inset Formula $H$
 \end_inset
 
 .
 \end_layout
 
-\begin_layout Proof
-We consider only the hyperedges in 
-\begin_inset Formula $H\cup R$
+\begin_layout Standard
+The significance of 
+\begin_inset Formula $G_{A,B}\left(H\right)$
 \end_inset
 
- between a vertex of 
-\begin_inset Formula $A$
-\end_inset
-
- and a pair of 
+ is that if 
 \begin_inset Formula $B$
 \end_inset
 
-.
- Each of these hyperedges can be viewed as an edge in the bipartite graph
- with partitions 
-\begin_inset Formula $A$
+ is a perfect matching or loose Hamilton cycle on 
+\begin_inset Formula $V\left(H\right)\backslash A$
 \end_inset
 
- and 
-\begin_inset Formula $B$
+, and if 
+\begin_inset Formula $G_{A,B}\left(H\right)$
+\end_inset
+
+ has a large matching 
+\begin_inset Formula $M$
+\end_inset
+
+, then the edges of 
+\begin_inset Formula $M$
+\end_inset
+
+ correspond to a large matching (respectively, a large sub-cycle) in 
+\begin_inset Formula $H$
 \end_inset
 
 .
- The theorem will follow from Lemma 
+ Conversely, if 
+\begin_inset Formula $H$
+\end_inset
+
+ has a large matching or Hamilton cycle (as provided by Lemmas 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "lem:bipartite-plus-big-matching-perfect"
+reference "lem:large-hypergraph-matching"
 
-\end_inset
-
- if we can show that with a uniformly random choice of 
-\begin_inset Formula $A$
 \end_inset
 
  and 
-\begin_inset Formula $B$
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:large-hypergraph-subcycle"
+
 \end_inset
 
-, 
-\begin_inset Formula $H$
-\end_inset
-
- induces a bipartite graph 
-\begin_inset Formula $G$
-\end_inset
-
- with linear minimum degree.
-\end_layout
-
-\begin_layout Proof
-So, let 
-\begin_inset Formula $a_{1},\dots,a_{n/3},b_{n/3+1},\dots,b_{n}$
-\end_inset
-
- be a uniformly random ordering of 
-\begin_inset Formula $V\left(H\right)$
-\end_inset
-
-.
- Let 
+), then there is a set 
 \begin_inset Formula $A$
 \end_inset
 
- contain the first 
-\begin_inset Formula $n/3$
-\end_inset
-
- vertices, let 
-\begin_inset Formula $B_{0}=V\left(H\right)\backslash A$
-\end_inset
-
- and let 
+ and a perfect matching (respectively, loose Hamilton cycle) 
 \begin_inset Formula $B$
-\end_inset
-
- be the set of pairs 
-\begin_inset Formula $\left\{ b_{2i-1},b_{2i}\right\} $
-\end_inset
-
-.
- Let 
-\begin_inset Formula $\Gamma\left(v,w\right)$
-\end_inset
-
- (respectively 
-\begin_inset Formula $\Gamma\left(v\right)$
-\end_inset
-
-) be the set of all vertices 
-\begin_inset Formula $u$
-\end_inset
-
- (respectively, all pairs of vertices 
-\begin_inset Formula $\left\{ w,u\right\} $
-\end_inset
-
-) such that 
-\begin_inset Formula $\left\{ v,w,u\right\} $
-\end_inset
-
- is a hyperedge of 
-\begin_inset Formula $H$
-\end_inset
-
-.
- We will first prove that each 
-\begin_inset Formula $\Gamma\left(v,w\right)$
-\end_inset
-
- is a.a.s.
- almost evenly distributed between 
-\begin_inset Formula $A$
-\end_inset
-
- and 
-\begin_inset Formula $B_{0}$
-\end_inset
-
-.
- So, let 
-\begin_inset Formula $\varepsilon>0$
-\end_inset
-
- be a small constant (depending on 
-\begin_inset Formula $\alpha$
-\end_inset
-
-), and fix distinct vertices 
-\begin_inset Formula $v,w$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Proof
-There are at least 
-\begin_inset Formula $\alpha n$
-\end_inset
-
- vertices 
-\begin_inset Formula $u$
 \end_inset
 
  such that 
-\begin_inset Formula $\left\{ u,v,w\right\} $
+\begin_inset Formula $G_{A,B}\left(H\right)$
 \end_inset
 
- is a hyperedge in 
-\begin_inset Formula $H$
+ has a large matching.
+\end_layout
+
+\begin_layout Standard
+By the symmetry of the distribution of 
+\begin_inset Formula $R$
 \end_inset
 
-.
- Let 
-\begin_inset Formula $X_{i}^{v,w}$
-\end_inset
-
- be the indicator for the event that the 
-\begin_inset Formula $i$
-\end_inset
-
-th vertex of our random ordering is in 
-\begin_inset Formula $\Gamma\left(v,w\right)$
-\end_inset
-
-.
- By 
-\begin_inset CommandInset citation
-LatexCommand cite
-after "Application 3.1(c)"
-key "JDP83"
-
-\end_inset
-
-, 
-\begin_inset Formula $\left\{ X_{i}^{v,w}\right\} _{i=1}^{n}$
-\end_inset
-
- is a set of negatively associated random variables.
- Let 
-\begin_inset Formula $X_{A}=\sum_{i=1}^{n/3}X_{i}^{v,w}=\left|A\cap\Gamma\left(v,w\right)\right|$
-\end_inset
-
- and 
-\begin_inset Formula $X_{B}=\sum_{i=n/3+1}^{n}X_{i}^{v,w}=\left|B_{0}\cap\Gamma\left(v,w\right)\right|$
-\end_inset
-
-, so that a Chernoff bound gives
-\begin_inset Formula 
-\[
-\Pr\left(\left|A\cap\Gamma\left(v,w\right)\right|<\left(\alpha/3-\varepsilon\right)n\right)\le\Pr\left(X_{A}-\E X_{A}<\varepsilon n\right)\le e^{-\Omega\left(n\right)}.
-\]
-
-\end_inset
-
-Similarly, 
-\begin_inset Formula $\Pr\left(\left|B_{0}\cap\Gamma\left(v,w\right)\right|<\left(2\alpha/3-\varepsilon\right)n\right)\le e^{-\Omega\left(n\right)}$
-\end_inset
-
-.
- By a union bound, a.a.s.
- every pair of vertices 
-\begin_inset Formula $v,w$
-\end_inset
-
- has at least 
-\begin_inset Formula $\left(\alpha/3-\varepsilon\right)n$
-\end_inset
-
- neighbours in 
+, we can assume 
 \begin_inset Formula $A$
 \end_inset
 
- and at least 
-\begin_inset Formula $\left(2\alpha/3-\varepsilon\right)n$
+ and 
+\begin_inset Formula $B$
 \end_inset
 
- neighbours in 
-\begin_inset Formula $B_{0}$
+ are uniformly random.
+ We give one final pair of lemmas, ensuring that the linear minimum 
+\begin_inset Formula $\left(k-1\right)$
+\end_inset
+
+-degree of 
+\begin_inset Formula $H$
+\end_inset
+
+ corresponds a.a.s.
+ to linear minimum degree in 
+\begin_inset Formula $G_{A,B}\left(H\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:matching-degree-transfer"
+
+\end_inset
+
+There is 
+\begin_inset Formula $\eta\left(\alpha\right)>0$
+\end_inset
+
+ such that the following holds.
+ Let 
+\begin_inset Formula $H$
+\end_inset
+
+ satisfy the conditions of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:hypergraph-perfect-matching"
+
+\end_inset
+
+, let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a uniformly random set of 
+\begin_inset Formula $n$
+\end_inset
+
+ vertices, and let 
+\begin_inset Formula $B$
+\end_inset
+
+ be a uniformly random perfect matching on 
+\begin_inset Formula $V\left(H\right)\backslash A$
+\end_inset
+
+.
+ Then a.a.s.
+ 
+\begin_inset Formula $G_{A,B}\left(H\right)$
+\end_inset
+
+ has minimum degree 
+\begin_inset Formula $\eta\left(\alpha\right)n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:hamilton-degree-transfer"
+
+\end_inset
+
+There is 
+\begin_inset Formula $\zeta\left(\alpha\right)>0$
+\end_inset
+
+ such that the following holds.
+ Let 
+\begin_inset Formula $H$
+\end_inset
+
+ satisfy the conditions of Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:hypergraph-hamiltonian"
+
+\end_inset
+
+, let 
+\begin_inset Formula $A$
+\end_inset
+
+ be a uniformly random set of 
+\begin_inset Formula $n$
+\end_inset
+
+ vertices, and let 
+\begin_inset Formula $B$
+\end_inset
+
+ be a uniformly random loose Hamilton cycle on 
+\begin_inset Formula $V\left(H\right)\backslash A$
+\end_inset
+
+.
+ Then a.a.s.
+ 
+\begin_inset Formula $G_{A,B}\left(H\right)$
+\end_inset
+
+ has minimum degree 
+\begin_inset Formula $\zeta\left(\alpha\right)n$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Proof
-The degree of each 
-\begin_inset Formula $\left\{ b_{2i-1},b_{2i}\right\} \in B$
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Proof of Lemma 
+\backslash
+ref{lem:matching-degree-transfer}]
+\end_layout
+
 \end_inset
 
- in 
-\begin_inset Formula $G$
-\end_inset
-
- is 
-\begin_inset Formula $\left|N\left(b_{2i-1},b_{2i}\right)\cap A\right|$
-\end_inset
-
-, which we have just shown is uniformly
-\begin_inset Formula $\Omega\left(n\right)$
-\end_inset
-
-.
- It remains to show that the degree of each 
-\begin_inset Formula $a\in A$
-\end_inset
-
- in 
-\begin_inset Formula $G$
-\end_inset
-
- is 
-\begin_inset Formula $\Omega\left(n\right)$
-\end_inset
-
-.
- So, fix 
-\begin_inset Formula $a\in A$
-\end_inset
-
-.
- For each 
-\begin_inset Formula $b$
-\end_inset
-
-, 
-\begin_inset Formula $\left|\Gamma\left(a,b\right)\cap B_{0}\right|\ge\left(2\alpha/3-\varepsilon\right)n$
-\end_inset
-
-, so 
-\begin_inset Formula $\Gamma\left(a\right)\ge\left(2\alpha/3-\varepsilon\right)\left|B_{0}\right|n/2$
-\end_inset
-
-.
- The probability that 
-\begin_inset Formula $\left\{ a,b_{1},b_{2}\right\} $
-\end_inset
-
- is a hyperedge in 
-\begin_inset Formula $H$
-\end_inset
-
- is therefore (for large 
-\begin_inset Formula $n$
-\end_inset
-
-) at least
+It is helpful to conceptualize the randomness in a certain way.
+ Let 
 \begin_inset Formula 
 \[
-\left|\Gamma\left(a\right)\right|/{\left|B_{0}\right| \choose 2}\ge\alpha-2\varepsilon.
+a_{1},\dots,a_{n},\, b_{1}^{1},\dots,b_{k}^{1},\, b_{1}^{2},\dots,b_{k}^{n}
 \]
 
 \end_inset
 
-Now, condition on 
-\begin_inset Formula $b_{1},\dots,b_{2i}$
+be a uniformly random ordering of 
+\begin_inset Formula $V\left(H\right)$
 \end_inset
 
 .
- The probability that 
-\begin_inset Formula $\left\{ a,b_{2i+1},b_{2i+2}\right\} $
-\end_inset
-
- is in 
-\begin_inset Formula $H$
-\end_inset
-
- is (for large 
-\begin_inset Formula $n$
-\end_inset
-
-) at least 
-\begin_inset Formula 
-\[
-\left|\Gamma\left(a\right)\right|-2i\left|B_{0}\right|/{\left|B_{0}\right| \choose 2}\ge\left(\alpha-2\varepsilon-6i/n\right)n,
-\]
-
-\end_inset
-
-which is at least 
-\begin_inset Formula $\alpha/2$
-\end_inset
-
- for 
-\begin_inset Formula $i\le\left(\alpha/12-\varepsilon/3\right)n=\Omega\left(n\right)$
-\end_inset
-
-.
- For such 
-\begin_inset Formula $i$
+ Let 
+\begin_inset Formula $A=\left\{ a_{1},\dots,a_{n}\right\} $
 \end_inset
 
 , let 
-\begin_inset Formula $X_{i}$
+\begin_inset Formula $b^{i}=\left\{ b_{1}^{i},\dots,b_{k}^{i}\right\} $
 \end_inset
 
- be independently distributed as 
-\begin_inset Formula $\Ber\left(\alpha/2\right)$
+ and let 
+\begin_inset Formula $B=\left\{ b^{1},\dots,b^{n}\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+First, condition on some 
+\begin_inset Formula $b=b^{i}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\Pr\left(b\cup\left\{ a_{1}\right\} \in E\left(H\right)\right)\ge\delta_{k-1}\left(H\right)/n$
+\end_inset
+
+ and more generally
+\begin_inset Formula 
+\[
+\Pr\left(b\cup\left\{ a_{j}\right\} \in E\left(H\right)\mid a_{1},\dots,a_{j}\right)\ge\left(\delta_{k-1}\left(H\right)-j\right)/n\ge\alpha/2
+\]
+
+\end_inset
+
+for 
+\begin_inset Formula $j\le\alpha n/2$
 \end_inset
 
 .
  By a Chernoff bound, 
-\begin_inset Formula $\sum_{i=1}^{\Omega\left(n\right)}X_{i}$
-\end_inset
-
- (and therefore 
-\begin_inset Formula $\left|N_{G}\left(a\right)\right|$
-\end_inset
-
-) is 
-\begin_inset Formula $\Omega\left(n\right)$
+\begin_inset Formula $d_{G_{H}}\left(b\right)\ge\alpha^{2}n/8$
 \end_inset
 
  with probability 
-\begin_inset Formula $e^{-\Omega\left(n\right)}$
+\begin_inset Formula $1-e^{-\Omega\left(n\right)}$
 \end_inset
 
 .
- By a union bound, it follows that a.a.s.
+ With a union bound, this a.a.s.
+ holds for all 
+\begin_inset Formula $b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Now, recall from Remark 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "rem:large-degrees-all-orders"
+
+\end_inset
+
+ that 
+\begin_inset Formula $\delta_{1}\left(H\right)\ge\alpha'n^{k-1}$
+\end_inset
+
+ for some 
+\begin_inset Formula $\alpha'$
+\end_inset
+
+ depending on 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ Condition on some 
+\begin_inset Formula $a=a_{i}$
+\end_inset
+
+.
+ Each 
+\begin_inset Formula $b_{j}^{i}$
+\end_inset
+
+ shares at most 
+\begin_inset Formula ${n \choose k-2}$
+\end_inset
+
+ hyperedges with 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+, so if 
+\begin_inset Formula $j\le2\sqrt{\eta\left(\alpha\right)}n$
+\end_inset
+
+ for sufficently small 
+\begin_inset Formula $\eta\left(\alpha\right)$
+\end_inset
+
+ and large 
+\begin_inset Formula $n$
+\end_inset
+
+, then 
+\begin_inset Formula 
+\[
+\Pr\left(\left\{ a\right\} \cup b^{j+1}\in E\left(H\right)\mid b^{1},\dots,b^{j}\right)\ge\left(\delta_{1}\left(H\right)-kj{n \choose k-2}\right)\left.\vphantom{\sum}\right/{n \choose k-1}\ge\sqrt{\eta\left(\alpha\right)}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+By a Chernoff bound and a union bound, a.a.s.
+ each 
+\begin_inset Formula $d_{G_{H}}\left(a\right)\ge\eta\left(\alpha\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+[Proof of Lemma 
+\backslash
+ref{lem:hamilton-degree-transfer}]
+\end_layout
+
+\end_inset
+
+We give essentially the same proof as for Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:matching-degree-transfer"
+
+\end_inset
+
+.
+ Let 
+\begin_inset Formula 
+\[
+a_{1},\dots,a_{n},b_{0},\dots,b_{\left(k-2\right)n-1}
+\]
+
+\end_inset
+
+be a uniformly random ordering of 
+\begin_inset Formula $V\left(H\right)$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $A=\left\{ a_{1},\dots,a_{n}\right\} $
+\end_inset
+
+, let 
+\begin_inset Formula $b^{i}=\left\{ b_{\left(k-2\right)i},b_{\left(k-2\right)i+1},\dots,b_{\left(k-2\right)\left(i+1\right)}\right\} $
+\end_inset
+
+ (where the subscripts are interpreted modulo 
+\begin_inset Formula $\left(k-2\right)n$
+\end_inset
+
+), and let 
+\begin_inset Formula $B=\left\{ b^{1},\dots,b^{n}\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+With exactly the same proof as for 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:matching-degree-transfer"
+
+\end_inset
+
+, there is small 
+\begin_inset Formula $\zeta\left(\alpha\right)$
+\end_inset
+
+ such that a.a.s.
  
-\begin_inset Formula $\delta_{G}\left(a\right)=\Omega\left(n\right)$
+\begin_inset Formula $d_{G_{H}}\left(b\right)\ge\zeta\left(\alpha\right)n$
+\end_inset
+
+ for all 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ Next, condition on some 
+\begin_inset Formula $a=a_{i}$
+\end_inset
+
+.
+ For small 
+\begin_inset Formula $\zeta\left(\alpha\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $j\le2\sqrt{\zeta\left(\alpha\right)}n$
+\end_inset
+
+, 
+\begin_inset Formula 
+\[
+\Pr\left(\left\{ a\right\} \cup b^{j}\in E\left(H\right)\mid b^{0},\dots,b^{j-1}\right)\ge\left(\delta_{2}\left(H\right)-\left(k-2\right)j{n \choose k-3}\right)\left.\vphantom{\sum}\right/{n \choose k-2}\ge\sqrt{\zeta\left(\alpha\right)},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+so a.a.s.
+ each 
+\begin_inset Formula $d_{G_{H}}\left(a\right)\ge\zeta\left(\alpha\right)n$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We have established that 
+\begin_inset Formula $G_{A,B}\left(H\right)$
+\end_inset
+
+ is a bipartite graph with linear minimum degree.
+ If we condition on 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+, then 
+\begin_inset Formula $G_{A,B}\left(R\right)$
+\end_inset
+
+ a.a.s.
+ provides a uniformly random large matching between 
+\begin_inset Formula $A$
+\end_inset
+
+ and 
+\begin_inset Formula $B$
+\end_inset
+
+, so Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:bipartite-plus-big-matching-perfect"
+
+\end_inset
+
+ ensures the existence of a perfect matching in 
+\begin_inset Formula $G_{A,B}\left(H\cup R\right)$
+\end_inset
+
+, corresponding to a perfect matching or loose Hamilton cycle in 
+\begin_inset Formula $H\cup R$
 \end_inset
 
 .

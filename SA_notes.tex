@@ -27,10 +27,10 @@
 \newtheorem{thm}{\protect\theoremname}[section]
   \theoremstyle{definition}
   \newtheorem{defn}[thm]{\protect\definitionname}
-  \theoremstyle{plain}
-  \newtheorem{lem}[thm]{\protect\lemmaname}
   \theoremstyle{remark}
   \newtheorem{rem}[thm]{\protect\remarkname}
+  \theoremstyle{plain}
+  \newtheorem{lem}[thm]{\protect\lemmaname}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 \let\originalleft\left
@@ -234,25 +234,149 @@
 
 
 
-\section{Perfect Matching in Hypergraphs}
-\begin{defn}
-The 2-degree of a pair of vertices $v,w$ is the number of hyperedges
-containing both $v$ and $w$.
-\end{defn}
+\section{Perfect Matchings and Hamilton Cycles in Hypergraphs}
 
+For hypergraphs, there is no single most natural notion of ``minimum
+degree''.
 \begin{defn}
-Let $\HH\left(n,m\right)$ be the random 3-uniform hypergraph on the
-vertex set $\left[n\right]$ chosen uniformly from all 3-uniform hypergraphs
-with $m$ hyperedges.\end{defn}
+Let $H$ be a $k$-uniform hypergraph. The \emph{degree} of a set
+of vertices $s\subseteq V\left(H\right)$ is the number of hyperedges
+that include $s$. The \emph{minimum $q$-degree} $\delta_{q}\left(H\right)$
+of $H$ is the minimum degree among all $s\subseteq V\left(H\right)$
+with $\left|s\right|=q$.\end{defn}
+\begin{rem}
+\label{rem:hypergraph-degree-transfer}We say graphs are dense if
+they have many edges (have large $\delta_{0}$), or more strongly
+if they have large minimum degree (have large $\delta_{1}$). The
+idea of minimum $q$-degree generalizes this for hypergraphs. Indeed,
+for a $k$-regular hypergraph $H$, a double-counting argument shows
+that if $q\le p$ then 
+\[
+\delta_{q}\left(H\right)\ge\delta_{p}\left(H\right){n-q \choose p-q}\left.\vphantom{\sum}\right/{k-q \choose p-q}.
+\]
+So, imposing that a $k$-uniform hypergraph has large $\left(k-1\right)$-degree
+ensures that it has large $q$-degrees for all $q$.\end{rem}
+\begin{defn}
+Let $\HH_{k}\left(n,m\right)$ be the random $k$-uniform hypergraph
+on the vertex set $\left[n\right]$ chosen uniformly from all 3-uniform
+hypergraphs with $m$ hyperedges.
+\end{defn}
+The purpose of this section is to prove the following two theorems.
 \begin{thm}
-\label{thm:hypergraph-perfect-matching}There is $\beta\left(\alpha\right)$
-such that if $H$ is a 3-uniform hypergraph on $\left[n\right]$ with
-minimal 2-degree at least $\alpha n$ and $R\in\HH\left(n,\beta\left(\alpha\right)n\right)$,
+\label{thm:hypergraph-perfect-matching}There is $\beta_{k}\left(\alpha\right)$
+such that if $H$ is a $k$-uniform hypergraph on $\left[kn\right]$
+with $\delta_{k-1}\left(H\right)\ge\alpha n$, and $R\in\HH\left(kn,\beta_{k}\left(\alpha\right)n\right)$,
 then $H\cup R$ a.a.s. has a perfect matching.
 \end{thm}
-This theorem will follow from a lemma.
+
+\begin{thm}
+\label{thm:hypergraph-hamiltonian}There is $\gamma_{k}\left(\alpha\right)$
+such that if $H$ is a $k$-uniform hypergraph on $\left[\left(k-1\right)n\right]$with
+$\delta_{k-1}\left(H\right)\ge\alpha n$, and $R\in\HH\left(\left(k-1\right)n,\gamma_{k}\left(\alpha\right)n\right)$,
+then $H\cup R$ a.a.s. has a loose Hamilton cycle.\end{thm}
+\begin{rem}
+\label{rem:large-degrees-all-orders}By Remark \ref{rem:hypergraph-degree-transfer},
+our requirement $\delta_{k-1}\left(H\right)=\Omega\left(n\right)$
+actually implies $\delta_{q}\left(H\right)=\Omega\left(n^{k-q}\right)$
+for all $q$. We do not know whether such requirements on the $q$-degrees
+with $q<k-1$ suffice for the conclusions of our theorems. I NEED
+TO THINK ABOUT THIS.
+\end{rem}
+
+\subsection{Proofs of Theorems \ref{thm:hypergraph-perfect-matching} and \ref{thm:hypergraph-hamiltonian}}
+
+Our theorems will follow from a sequence of lemmas. The first step
+is to show that $R$ almost gives the structure of interest on its
+own. Let a\emph{ sub-cycle} be a hypergraph which can be extended
+to a loose Hamilton cycle by adding edges.
 \begin{lem}
-\label{lem:bipartite-plus-big-matching-perfect}There is $\xi\left(\alpha\right)$
+\label{lem:large-hypergraph-matching}For any $\varepsilon>0$, there
+is $\beta_{k}'\left(\varepsilon\right)$ such that a random hypergraph
+distributed as $\HH_{k}\left(kn,\beta_{k}'\left(\varepsilon\right)\right)$
+a.a.s. has a matching of size $\left(1-\varepsilon\right)n$.
+\end{lem}
+
+\begin{lem}
+\label{lem:large-hypergraph-subcycle}For any $\varepsilon>0$, there
+is $\gamma_{k}'\left(\varepsilon\right)$ such that a random hypergraph
+distributed as $\HH_{k}\left(\left(k-1\right)n,\gamma_{k}'\left(\varepsilon\right)\right)$
+a.a.s. has a sub-cycle of size $\left(1-\varepsilon\right)n$.\end{lem}
+\begin{proof}
+[Proof of Lemma \ref{lem:large-hypergraph-matching}]To realize the
+distribution $\HH_{k}\left(kn,\beta_{k}'\left(\varepsilon\right)n\right)$,
+imagine that independently uniformly random hyperedges are repeatedly
+dropping into $R$, until we have seen $\beta_{k}'\left(\varepsilon\right)$
+distinct hyperedges. We iteratively build a matching $M$ greedily.
+If a new hyperedge $e$ drops into $R$ which does not share any vertices
+with the hyperedges in $M$ so far, then add $e$ to $M$. If we have
+already added $i$ hyperedges to $M$, then the probability we will
+add the next random hyperedge is
+\[
+p_{i}={kn-ki \choose k}\left.\vphantom{\sum}\right/{kn \choose k}=\Omega\left(\left(\frac{n-i}{n}\right)^{k}\right).
+\]
+The number of random edges required to build a matching of size $\left(1-\varepsilon\right)n$
+therefore has the distribution of
+\[
+X=\sum_{i=1}^{\left(1-\varepsilon\right)n}X_{i},
+\]
+where each $X_{i}$ is independently geometrically distributed with
+success probability $p_{i}$. By Chebyshev's inequality or a Chernoff
+bound, $X$ is a.a.s. close to its expectation, which is at most 
+\[
+O\left(\sum_{i=1}^{\left(1-\varepsilon\right)n}n^{k}/\left(n-i\right)^{k}\right)=O\left(n^{k}\int_{\varepsilon n}^{\infty}\frac{1}{x^{k}}dx\right)=O\left(n\right).
+\]
+So, if $\beta_{k}'\left(\varepsilon\right)$ is large enough then
+a.a.s. $\left|M\right|\ge\left(1-\varepsilon\right)n$.
+\end{proof}
+
+\begin{proof}
+[Proof of Lemma \ref{lem:large-hypergraph-subcycle}]A sub-cycle is
+a loose Hamilton cycle or a disjoint union of loose paths, but a union
+of disjoint paths may not be a sub-cycle if it has so many paths that
+there are not enough vertices left to link them together. A union
+of $j$ paths (which have length greater than zero) with a total of
+$i$ hyperedges is a sub-cycle precisely when $i+j\le n$. Call such
+sub-cycles \emph{proper }sub-cycles.
+
+As in the proof of \ref{lem:large-hypergraph-matching}, imagine that
+independently uniformly random hyperedges are repeatedly dropping
+into $R$. We build a proper sub-cycle $S$ greedily. Suppose we are
+at a point where $S$ has $i$ hyperedges and $j$ paths, with $i\le\left(1-\varepsilon\right)n$.
+There are $\left(k-1\right)i+j\le\left(k-2\right)i+n$ vertices in
+the paths in $S$. 
+
+There are 3 kinds of hyperedges we can add to $S$: a hyperedge that
+starts a new loose path (``type 1''), a hyperedge that extends an
+existing path (``type 2''), or a hyperedge that joins two paths
+together (``type 3''). We can only add a type 1 hyperedge when $i+j\le n-2$,
+and can only add a type 2 hyperedge when $i+j\le n-1$.
+
+If $i+j\le n-2$ then there are at least 
+\[
+{\left(k-1\right)n-\left(\left(k-2\right)i+n\right) \choose k}={\left(k-2\right)\left(n-i\right) \choose k}=\Omega\left(\left(n-i\right)^{k}\right)
+\]
+type-1 hyperedges that could possibly be added. Otherwise, we must
+have $j>n-2-i\ge\varepsilon n-2$, so (identifying one vertex in an
+extremal hyperedge of each path as ``eligible to be joined''), there
+are at least 
+\[
+{j \choose 2}{\left(k-2\right)\left(n-i\right) \choose k-2}=\Omega\left(n^{2}\left(n-i\right)^{k-2}\right)=\Omega\left(\left(n-i\right)^{k}\right)
+\]
+type-3 hyperedges that could be added. Combining both cases, we can
+see that if $S$ has $i\le\left(1-\varepsilon\right)n$ hyperedges,
+then the next edge will be added with probability at least
+\[
+\Omega\left(\left(n-i\right)^{k}\right)\left.\vphantom{\sum}\right/{\left(k-1\right)n \choose k}=\Omega\left(\left(\frac{n-i}{n}\right)^{k}\right).
+\]
+We conclude with the same reasoning as the proof of Lemma \ref{lem:large-hypergraph-matching}.
+\end{proof}
+The second step to prove Theorems \ref{thm:hypergraph-perfect-matching}
+and \ref{thm:hypergraph-hamiltonian} is to show that a dense hypergraph
+plus a large partial structure a.a.s. gives the structure we are looking
+for. For both theorems, we will be able to reduce this step to the
+following lemma.
+\begin{lem}
+\label{lem:bipartite-plus-big-matching-perfect}There is $\xi\left(\alpha\right)>0$
 such that the following holds. Let $G$ be a bipartite graph with
 partitions $A,B$ of equal size $n$, and suppose $\delta\left(G\right)\ge\alpha n$.
 Let $M$ be a uniformly random matching with $\left(1-\xi\left(\alpha\right)\right)n$
@@ -266,9 +390,9 @@ The difficult case is where $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$
 It is relatively straightfoward to prove that for any individual such
 $W$, a.a.s. $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$.
 However the probability of failure is not small enough for a union
-bound over all choices of $W$. Our approach is to use Szemeredi's
+bound over all choices of $W$. Our approach is to use Szemer\'edi's
 regularity lemma on $G$ and to show that the random matching a.a.s.
-distributes evenly over the clusters. Then, $\varepsilon$-regularity
+distributes very evenly over the resulting clusters. Then, $\varepsilon$-regularity
 and the even distribution of the added edges are enough to ensure
 that $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$ for
 each $W$.
@@ -278,12 +402,12 @@ can be deduced from say \cite[Theorem 2.3]{Tao05} in a similar way
 to \cite[Theorem 1.10]{KS96}). Let $\alpha'=\alpha/2$ and let $\varepsilon>0$
 be a small constant depending on $\alpha$ that will be determined
 later (assume for now that $\varepsilon<\alpha/8$). There is a large
-constant $K$ depending only on $\alpha$ such that we can write $A=V_{0}^{1}\sqcup\dots\sqcup V_{k}^{1}$
-and $B=V_{0}^{2}\sqcup\dots\sqcup V_{k}^{2}$ with $k\le K$, in such
-a way that the following conditions are satisfied. The ``exceptional''
-clusters $V_{0}^{1}$ and $V_{0}^{2}$ both have fewer than $\varepsilon n$
-vertices, and the non-exceptional clusters in $A$ and $B$ have equal
-size: $\left|V_{1}^{1}\right|=\dots=\left|V_{k}^{\ell}\right|=an$
+constant $K$ depending only on $\alpha$ such that there exist partitions
+$A=V_{0}^{1}\cup\dots\cup V_{k}^{1}$ and $B=V_{0}^{2}\cup\dots\cup V_{k}^{2}$
+with $k\le K$, in such a way that the following conditions are satisfied.
+The ``exceptional'' clusters $V_{0}^{1}$ and $V_{0}^{2}$ both
+have fewer than $\varepsilon n$ vertices, and the non-exceptional
+clusters in $A$ and $B$ have equal size: $\left|V_{1}^{1}\right|=\dots=\left|V_{k}^{\ell}\right|=an$
 and $\left|V_{1}^{1}\right|=\dots=\left|V_{k}^{\ell}\right|=bn$.
 There is a subgraph $G'\subseteq G$ with minimum degree at least
 $\left(\alpha'+\varepsilon\right)n$ such that each pair of distinct
@@ -294,16 +418,18 @@ are the non-exceptional clusters $V_{i}^{\ell}$, and whose edges
 are the pairs of clusters between which there is nonzero density in
 $G'$.
 
-Fix some $V_{i}^{1}$ and $V_{j}^{2}$. The vertices of each $V_{i}^{1}$
-are matched by $M$ to at most $an$ vertices; conditioning on their
-number, they are uniformly randomly chosen from $B$. Let $X_{b}$
-be the indicator random variable for the event that the vertex $b\in B$
-is matched with a vertex in $V_{i}^{1}$. The random variables $X_{b}$
-are said to be \emph{negatively associated} (see \cite[Application 3.1(c)]{JDP83}).
-This means in particular that we can apply Chernoff bounds to $\sum_{b\in V_{j}^{2}}X_{b}$
+Fix some $V_{i}^{1}$ and $V_{j}^{2}$, with $i,j\ge1$. The vertices
+of each $V_{i}^{1}$ are matched by $M$ to at most $an$ vertices;
+conditioning on their number, they are uniformly randomly chosen from
+$B$. Let $X_{b}$ be the indicator random variable for the event
+that the vertex $b\in B$ is matched with a vertex in $V_{i}^{1}$.
+The random variables $X_{b}$ are said to be \emph{negatively associated}
+(see \cite[Application 3.1(c)]{JDP83}). This means in particular
+that we can apply Chernoff bounds to $\sum_{b\in V_{j}^{2}}X_{b}$
 even though the $X_{b}$ are not independent. By a union bound, a.a.s.
 there are at most $\left(ab+\xi\left(\alpha\right)\right)n$ edges
-of $M$ between every pair $V_{i}^{1}$, $V_{j}^{2}$.
+of $M$ between every pair $V_{i}^{1}$, $V_{j}^{2}$. We assume this
+holds for the remainder of the proof.
 
 Now, in $G'$ each $V_{i}^{\ell}$ has at least $\left(\alpha'+\varepsilon\right)n\left|V_{i}^{\ell}\right|$
 edges to other clusters. There are at most $\varepsilon n\left|V_{i}^{\ell}\right|$
@@ -314,31 +440,33 @@ and $\mathfrak{G}$ has minimum degree at least $\alpha'k$.
 Consider any $W\subset A$ with $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$.
 For each $i$ let $\pi_{i}=\left|V_{i}^{1}\cap W\right|/\left(an\right)$,
 and let $\mathfrak{H}$ be the set of clusters $V_{i}^{1}$ with $\pi_{i}\ge\varepsilon$.
-Now, if $V_{j}^{2}\in N_{\mathfrak{G}}\left(\mathfrak{H}\right)$
-then by $\varepsilon$-regularity there are edges in $G'$ from $W$
-to at least $\left(1-\varepsilon\right)bn$ vertices of $V_{j}^{2}$.
+If $\varepsilon$ is small, $\mathfrak{H}$ must be nonempty. Now,
+if $V_{j}^{2}\in N_{\mathfrak{G}}\left(\mathfrak{H}\right)$ then
+by $\varepsilon$-regularity there are edges in $G'$ from $W$ to
+at least $\left(1-\varepsilon\right)bn$ vertices of $V_{j}^{2}$.
 It follows that if $\left|N_{\mathfrak{G}}\left(\mathfrak{H}\right)\right|=k$
 (that is, every $V_{i}^{\ell}$ is a neighbour of $\mathfrak{H}$)
 then $\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G'}\left(W\right)\right|\ge\left(1-\varepsilon\right)\left(n-\left|V_{0}^{2}\right|\right)\ge\left|W\right|$
 for small $\varepsilon$, and we are done.
 
 Otherwise, choose $\mathfrak{S}\subseteq N\left(\mathfrak{H}\right)$
-with $\left|S\right|=\alpha'k$ and let $S$ be the vertices in the
-clusters of $\mathfrak{S}$. By the same $\varepsilon$-regularity
-argument, $\left|N_{G'}\left(W\right)\cap S\right|\ge\left(1-\varepsilon\right)\alpha'kbn\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
-There is $V_{j}^{2}$ outside $N_{\mathfrak{G}}\left(\mathfrak{H}\right)$
-which has $\alpha'k$ neighbours outside $\mathfrak{H}$ in $\mathfrak{G}$,
-so $\left|\mathfrak{H}\right|\le\left(1-\alpha'\right)k$. Each $V_{i}^{1}$
-has at least $\left(a-\xi\left(\alpha\right)\right)n$ neighbours
-in $M$, at most $\alpha'k\left(ab+\xi\left(\alpha\right)\right)n$
-of which are in $S$. So, 
+with $\left|\mathfrak{S}\right|=\alpha'k$ and let $S$ be the vertices
+in the clusters of $\mathfrak{S}$. By the same $\varepsilon$-regularity
+argument, $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'k\left(1-\varepsilon\right)bn\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
+We are assuming there is $V_{j}^{2}$ outside $N_{\mathfrak{G}}\left(\mathfrak{H}\right)$,
+and this $V_{j}^{2}$ must have $\alpha'k$ neighbours outside $\mathfrak{H}$
+in $\mathfrak{G}$, so $\left|\mathfrak{H}\right|\le\left(1-\alpha'\right)k$.
+Since $\left|M\right|=\left(1-\xi\left(\alpha\right)\right)n$, each
+$V_{i}^{1}\cap W$ has at least $\left(\pi_{i}a-\xi\left(\alpha\right)\right)n$
+neighbours in $M$, and at most $\alpha'k\left(ab+\xi\left(\alpha\right)\right)n$
+of these are in $S$. So, 
 \begin{align*}
-\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in\mathfrak{H}}\pi_{i}an-\left(\alpha'k\left(ab+\xi\left(\alpha\right)\right)+\xi\left(\alpha\right)\right)n\left|Q\right|-\xi\left(\alpha\right)\\
- & \ge\left|W\right|-\varepsilon n-\alpha'\left(1-\alpha'\right)\left(\left(1-\varepsilon\right)^{2}+k^{2}\xi\left(\alpha\right)\right)n-k\xi\left(\alpha\right)n,
+\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in\mathfrak{H}}\left(\pi_{i}a-\xi\left(\alpha\right)\right)n-\left|\mathfrak{H}\right|\left(\alpha'k\left(ab+\xi\left(\alpha\right)\right)\right)n\\
+ & \ge\left|W\right|-\varepsilon n-\left(1-\alpha'\right)\alpha'\left(1-\varepsilon\right)^{2}-k^{2}\xi\left(\alpha\right)n
 \end{align*}
 and
 \[
-\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|+\left(\alpha'\left(1-\varepsilon\right)^{2}-\varepsilon-\alpha'\left(1-\alpha'\right)\left(\left(1-\varepsilon\right)^{2}+k^{2}\xi\left(\alpha'\right)\right)-k\xi\left(\alpha'\right)\right)n.
+\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|+\left(\alpha'\left(1-\varepsilon\right)^{2}-\varepsilon-\left(1-\alpha'\right)\alpha'\left(1-\varepsilon\right)^{2}-k^{2}\xi\left(\alpha\right)\right)n.
 \]
 
 
@@ -346,109 +474,107 @@ If $\varepsilon$ is chosen to be small enough relative to $\alpha$
 and $\xi\left(\alpha\right)$ chosen to be small enough relative to
 $K$, then this gives $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$.
 \end{proof}
+Now we describe the reduction of Theorems \ref{thm:hypergraph-perfect-matching}
+and \ref{thm:hypergraph-hamiltonian} to Lemma \ref{lem:bipartite-plus-big-matching-perfect}.
+Consider a $k$-uniform hypergraph $H$. Suppose $A$ is a set of
+$n$ vertices and $B$ is a $\left(k-1\right)$-uniform hypergraph
+on the remaining vertices. Then we define a bipartite graph $G_{A,B}\left(H\right)$
+as follows. The vertices of $G_{A,B}\left(H\right)$ are the vertices
+in $A$, as well as the edges in $B$ (we abuse notation and identify
+the hypergraph $B$ with its edge set). We put an edge between $a\in A$
+and $\left\{ b_{1},\dots,b_{k-1}\right\} \in B$ if $\left\{ a,b_{1},\dots,b_{k-1}\right\} $
+is a hyperedge in $H$.
+
+The significance of $G_{A,B}\left(H\right)$ is that if $B$ is a
+perfect matching or loose Hamilton cycle on $V\left(H\right)\backslash A$,
+and if $G_{A,B}\left(H\right)$ has a large matching $M$, then the
+edges of $M$ correspond to a large matching (respectively, a large
+sub-cycle) in $H$. Conversely, if $H$ has a large matching or Hamilton
+cycle (as provided by Lemmas \ref{lem:large-hypergraph-matching}
+and \ref{lem:large-hypergraph-subcycle}), then there is a set $A$
+and a perfect matching (respectively, loose Hamilton cycle) $B$ such
+that $G_{A,B}\left(H\right)$ has a large matching.
+
+By the symmetry of the distribution of $R$, we can assume $A$ and
+$B$ are uniformly random. We give one final pair of lemmas, ensuring
+that the linear minimum $\left(k-1\right)$-degree of $H$ corresponds
+a.a.s. to linear minimum degree in $G_{A,B}\left(H\right)$.
+\begin{lem}
+\label{lem:matching-degree-transfer}There is $\eta\left(\alpha\right)>0$
+such that the following holds. Let $H$ satisfy the conditions of
+Theorem \ref{thm:hypergraph-perfect-matching}, let $A$ be a uniformly
+random set of $n$ vertices, and let $B$ be a uniformly random perfect
+matching on $V\left(H\right)\backslash A$. Then a.a.s. $G_{A,B}\left(H\right)$
+has minimum degree $\eta\left(\alpha\right)n$.
+\end{lem}
+
+\begin{lem}
+\label{lem:hamilton-degree-transfer}There is $\zeta\left(\alpha\right)>0$
+such that the following holds. Let $H$ satisfy the conditions of
+Theorem \ref{thm:hypergraph-hamiltonian}, let $A$ be a uniformly
+random set of $n$ vertices, and let $B$ be a uniformly random loose
+Hamilton cycle on $V\left(H\right)\backslash A$. Then a.a.s. $G_{A,B}\left(H\right)$
+has minimum degree $\zeta\left(\alpha\right)n$.\end{lem}
+\begin{proof}
+[Proof of Lemma \ref{lem:matching-degree-transfer}]It is helpful
+to conceptualize the randomness in a certain way. Let 
+\[
+a_{1},\dots,a_{n},\, b_{1}^{1},\dots,b_{k}^{1},\, b_{1}^{2},\dots,b_{k}^{n}
+\]
+be a uniformly random ordering of $V\left(H\right)$. Let $A=\left\{ a_{1},\dots,a_{n}\right\} $,
+let $b^{i}=\left\{ b_{1}^{i},\dots,b_{k}^{i}\right\} $ and let $B=\left\{ b^{1},\dots,b^{n}\right\} $.
+
+First, condition on some $b=b^{i}$. Note that $\Pr\left(b\cup\left\{ a_{1}\right\} \in E\left(H\right)\right)\ge\delta_{k-1}\left(H\right)/n$
+and more generally
+\[
+\Pr\left(b\cup\left\{ a_{j}\right\} \in E\left(H\right)\mid a_{1},\dots,a_{j}\right)\ge\left(\delta_{k-1}\left(H\right)-j\right)/n\ge\alpha/2
+\]
+for $j\le\alpha n/2$. By a Chernoff bound, $d_{G_{H}}\left(b\right)\ge\alpha^{2}n/8$
+with probability $1-e^{-\Omega\left(n\right)}$. With a union bound,
+this a.a.s. holds for all $b$.
+
+Now, recall from Remark \ref{rem:large-degrees-all-orders} that $\delta_{1}\left(H\right)\ge\alpha'n^{k-1}$
+for some $\alpha'$ depending on $\alpha$. Condition on some $a=a_{i}$.
+Each $b_{j}^{i}$ shares at most ${n \choose k-2}$ hyperedges with
+$a_{i}$, so if $j\le2\sqrt{\eta\left(\alpha\right)}n$ for sufficently
+small $\eta\left(\alpha\right)$ and large $n$, then 
+\[
+\Pr\left(\left\{ a\right\} \cup b^{j+1}\in E\left(H\right)\mid b^{1},\dots,b^{j}\right)\ge\left(\delta_{1}\left(H\right)-kj{n \choose k-2}\right)\left.\vphantom{\sum}\right/{n \choose k-1}\ge\sqrt{\eta\left(\alpha\right)}.
+\]
+
+
+By a Chernoff bound and a union bound, a.a.s. each $d_{G_{H}}\left(a\right)\ge\eta\left(\alpha\right)$.
+\end{proof}
 
 \begin{proof}
-[Proof of Theorem \ref{thm:hypergraph-perfect-matching}]The idea
-is to reduce this theorem to Lemma \ref{lem:bipartite-plus-big-matching-perfect}:
-roughly speaking, $H$ induces a bipartite graph, and $R$ provides
-a uniformly random large matching. First, uniformly randomly partition
-$V\left(H\right)$ into a set $A$ of $n/3$ vertices and a set $B_{0}$
-of $2n/3$ vertices. 
+[Proof of Lemma \ref{lem:hamilton-degree-transfer}]We give essentially
+the same proof as for Lemma \ref{lem:matching-degree-transfer}. Let
+\[
+a_{1},\dots,a_{n},b_{0},\dots,b_{\left(k-2\right)n-1}
+\]
+be a uniformly random ordering of $V\left(H\right)$. Let $A=\left\{ a_{1},\dots,a_{n}\right\} $,
+let $b^{i}=\left\{ b_{\left(k-2\right)i},b_{\left(k-2\right)i+1},\dots,b_{\left(k-2\right)\left(i+1\right)}\right\} $
+(where the subscripts are interpreted modulo $\left(k-2\right)n$),
+and let $B=\left\{ b^{1},\dots,b^{n}\right\} $.
 
-We can construct a random hypergraph distributed as $\HH\left(n,\beta\left(\alpha\right)n\right)$
-by repeatedly choosing random hyperedges with repetition, and stopping
-when we have seen $\beta\left(\alpha\right)n$ distinct hyperedges.
-We will show that for any $\varepsilon$ there is $\beta$ such that
-a.a.s. the first $\beta\left(\alpha\right)n$ random edges will contain
-a matching $M_{0}$ of $\left(1-\varepsilon\right)n/3$ hyperedges,
-each comprising a vertex of $A$ and two vertices of $B_{0}$. This
-matching can be chosen greedily: each new random hyperedge is immediately
-added to $M_{0}$ if it has one vertex in $A$ and two vertices in
-$B_{0}$, and does not conflict with any hyperedge added so far. If
-our matching-in-progress has $i$ hyperedges, the probability that
-the next random edge will be added is 
+With exactly the same proof as for \ref{lem:matching-degree-transfer},
+there is small $\zeta\left(\alpha\right)$ such that a.a.s. $d_{G_{H}}\left(b\right)\ge\zeta\left(\alpha\right)n$
+for all $b$. Next, condition on some $a=a_{i}$. For small $\zeta\left(\alpha\right)$
+and $j\le2\sqrt{\zeta\left(\alpha\right)}n$, 
 \[
-p_{i}=\left(n/3-i\right)\left.{2n/3-2i \choose 2}\right/{n \choose 3}=\Omega\left(\left(\frac{n-i}{n}\right)^{3}\right).
-\]
-The number of random edges required to build a matching of size $\left(1-\varepsilon\right)n/3$
-therefore has the distribution of
-\[
-X=\sum_{i=1}^{\left(1-\varepsilon\right)n/3}X_{i},
-\]
-where each $X_{i}$ is independently geometrically distributed with
-success probability $p_{i}$. By Chebyshev's inequality or a Chernoff
-bound, $X$ is a.a.s. close to its expectation, which is at most 
-\[
-O\left(\sum_{i=1}^{\left(1-\varepsilon\right)n/3}n^{3}/\left(n-i\right)^{3}\right)=O\left(n^{3}\int_{\varepsilon n/3}^{\infty}\frac{1}{x^{3}}dx\right)=O\left(n\right).
+\Pr\left(\left\{ a\right\} \cup b^{j}\in E\left(H\right)\mid b^{0},\dots,b^{j-1}\right)\ge\left(\delta_{2}\left(H\right)-\left(k-2\right)j{n \choose k-3}\right)\left.\vphantom{\sum}\right/{n \choose k-2}\ge\sqrt{\zeta\left(\alpha\right)},
 \]
 
 
-Our chosen matching $M_{0}$ can be used to give a uniformly random
-partition of $B_{0}$ into pairs of vertices: for every $\left\{ a,b,b'\right\} \in M_{0}$,
-pair up $b$ and $b'$, and partition the remaining $2\varepsilon n/3$
-elements of $B_{0}$ into pairs uniformly at random. Let $B$ be the
-resulting set of pairs of elements of $B_{0}$. Conditioning on $A$
-and $B$, $M_{0}$ is distributed uniformly at random among all matchings
-consisting of $\left(1-\varepsilon\right)n/3$ hyperedges between
-a pair of $B$ and a vertex of $A$.
-
-We consider only the hyperedges in $H\cup R$ between a vertex of
-$A$ and a pair of $B$. Each of these hyperedges can be viewed as
-an edge in the bipartite graph with partitions $A$ and $B$. The
-theorem will follow from Lemma \ref{lem:bipartite-plus-big-matching-perfect}
-if we can show that with a uniformly random choice of $A$ and $B$,
-$H$ induces a bipartite graph $G$ with linear minimum degree.
-
-So, let $a_{1},\dots,a_{n/3},b_{n/3+1},\dots,b_{n}$ be a uniformly
-random ordering of $V\left(H\right)$. Let $A$ contain the first
-$n/3$ vertices, let $B_{0}=V\left(H\right)\backslash A$ and let
-$B$ be the set of pairs $\left\{ b_{2i-1},b_{2i}\right\} $. Let
-$\Gamma\left(v,w\right)$ (respectively $\Gamma\left(v\right)$) be
-the set of all vertices $u$ (respectively, all pairs of vertices
-$\left\{ w,u\right\} $) such that $\left\{ v,w,u\right\} $ is a
-hyperedge of $H$. We will first prove that each $\Gamma\left(v,w\right)$
-is a.a.s. almost evenly distributed between $A$ and $B_{0}$. So,
-let $\varepsilon>0$ be a small constant (depending on $\alpha$),
-and fix distinct vertices $v,w$.
-
-There are at least $\alpha n$ vertices $u$ such that $\left\{ u,v,w\right\} $
-is a hyperedge in $H$. Let $X_{i}^{v,w}$ be the indicator for the
-event that the $i$th vertex of our random ordering is in $\Gamma\left(v,w\right)$.
-By \cite[Application 3.1(c)]{JDP83}, $\left\{ X_{i}^{v,w}\right\} _{i=1}^{n}$
-is a set of negatively associated random variables. Let $X_{A}=\sum_{i=1}^{n/3}X_{i}^{v,w}=\left|A\cap\Gamma\left(v,w\right)\right|$
-and $X_{B}=\sum_{i=n/3+1}^{n}X_{i}^{v,w}=\left|B_{0}\cap\Gamma\left(v,w\right)\right|$,
-so that a Chernoff bound gives
-\[
-\Pr\left(\left|A\cap\Gamma\left(v,w\right)\right|<\left(\alpha/3-\varepsilon\right)n\right)\le\Pr\left(X_{A}-\E X_{A}<\varepsilon n\right)\le e^{-\Omega\left(n\right)}.
-\]
-Similarly, $\Pr\left(\left|B_{0}\cap\Gamma\left(v,w\right)\right|<\left(2\alpha/3-\varepsilon\right)n\right)\le e^{-\Omega\left(n\right)}$.
-By a union bound, a.a.s. every pair of vertices $v,w$ has at least
-$\left(\alpha/3-\varepsilon\right)n$ neighbours in $A$ and at least
-$\left(2\alpha/3-\varepsilon\right)n$ neighbours in $B_{0}$.
-
-The degree of each $\left\{ b_{2i-1},b_{2i}\right\} \in B$ in $G$
-is $\left|N\left(b_{2i-1},b_{2i}\right)\cap A\right|$, which we have
-just shown is uniformly$\Omega\left(n\right)$. It remains to show
-that the degree of each $a\in A$ in $G$ is $\Omega\left(n\right)$.
-So, fix $a\in A$. For each $b$, $\left|\Gamma\left(a,b\right)\cap B_{0}\right|\ge\left(2\alpha/3-\varepsilon\right)n$,
-so $\Gamma\left(a\right)\ge\left(2\alpha/3-\varepsilon\right)\left|B_{0}\right|n/2$.
-The probability that $\left\{ a,b_{1},b_{2}\right\} $ is a hyperedge
-in $H$ is therefore (for large $n$) at least
-\[
-\left|\Gamma\left(a\right)\right|/{\left|B_{0}\right| \choose 2}\ge\alpha-2\varepsilon.
-\]
-Now, condition on $b_{1},\dots,b_{2i}$. The probability that $\left\{ a,b_{2i+1},b_{2i+2}\right\} $
-is in $H$ is (for large $n$) at least 
-\[
-\left|\Gamma\left(a\right)\right|-2i\left|B_{0}\right|/{\left|B_{0}\right| \choose 2}\ge\left(\alpha-2\varepsilon-6i/n\right)n,
-\]
-which is at least $\alpha/2$ for $i\le\left(\alpha/12-\varepsilon/3\right)n=\Omega\left(n\right)$.
-For such $i$, let $X_{i}$ be independently distributed as $\Ber\left(\alpha/2\right)$.
-By a Chernoff bound, $\sum_{i=1}^{\Omega\left(n\right)}X_{i}$ (and
-therefore $\left|N_{G}\left(a\right)\right|$) is $\Omega\left(n\right)$
-with probability $e^{-\Omega\left(n\right)}$. By a union bound, it
-follows that a.a.s. $\delta_{G}\left(a\right)=\Omega\left(n\right)$.
+so a.a.s. each $d_{G_{H}}\left(a\right)\ge\zeta\left(\alpha\right)n$.
 \end{proof}
+We have established that $G_{A,B}\left(H\right)$ is a bipartite graph
+with linear minimum degree. If we condition on $A$ and $B$, then
+$G_{A,B}\left(R\right)$ a.a.s. provides a uniformly random large
+matching between $A$ and $B$, so Lemma \ref{lem:bipartite-plus-big-matching-perfect}
+ensures the existence of a perfect matching in $G_{A,B}\left(H\cup R\right)$,
+corresponding to a perfect matching or loose Hamilton cycle in $H\cup R$.
+
 
 \section{Hamiltonicity in dense digraphs}
 
