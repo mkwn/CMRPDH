@@ -15,7 +15,9 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{setspace}
 \usepackage{esint}
+\setstretch{0.98}
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
  breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
@@ -333,8 +335,8 @@ by Karp \cite{Kar72}, it has become a canonical NP-complete problem
 to determine whether an arbitrary graph is Hamiltonian. There are
 nevertheless a variety of easily-checkable conditions that guarantee
 Hamiltonicity. The most famous of these is given by a classical theorem
-of Dirac \cite[Theorem~3]{Dir52}, which states that any $n$-vertex
-graph with minimum degree at least $n/2$ is Hamiltonian.
+of Dirac \cite{Dir52}, which states that any $n$-vertex graph with
+minimum degree at least $n/2$ is Hamiltonian.
 
 Dirac's theorem requires a very strong density condition, but in a
 certain asymptotic sense ``almost all'' dense graphs are Hamiltonian.
@@ -343,7 +345,7 @@ the (labelled) graphs with $n$ vertices and $\alpha{n \choose 2}$
 edges, then the degrees will probably each be about $\alpha n$. Such
 a random graph is Hamiltonian with probability $1-o\left(1\right)$
 (we say it is Hamiltonian \emph{asymptotically almost surely}, or
-\emph{a.a.s.}). This follows from a stronger result (\cite[Theorem~3]{Pos76})
+\emph{a.a.s.}). This follows from a stronger result \cite{Pos76}
 that gives a \emph{threshold} for Hamiltonicity: a random $n$-vertex,
 $m$-edge graph is Hamiltonian a.a.s. if $m\gg n\log n$, and fails
 to be Hamiltonian a.a.s. if $m\ll n\log n$. Here and from now on,
@@ -363,24 +365,24 @@ random edges, then the resulting graph will a.a.s. be Hamiltonian.
 Note that some dense graphs require a linear number of extra edges
 to become Hamiltonian (consider the complete bipartite graph with
 partition sizes $n/3$ and $2n/3$), so this result is asymptotically
-tight. We can interpret \cite[Theorem~1]{BFM03} as quantifying the
-``fragility'' of the few dense graphs that are not Hamiltonian,
-by determining the amount of random perturbation that is necessary
-to make a dense graph Hamiltonian. A comparison can be drawn to the
-notion of \emph{smoothed analysis} of algorithms introduced in \cite{ST04},
-which involves studying the performance of algorithms on randomly
-perturbed inputs.
+tight. We can interpret this theorem as quantifying the ``fragility''
+of the few dense graphs that are not Hamiltonian, by determining the
+amount of random perturbation that is necessary to make a dense graph
+Hamiltonian. A comparison can be drawn to the notion of \emph{smoothed
+analysis} of algorithms introduced in \cite{ST04}, which involves
+studying the performance of algorithms on randomly perturbed inputs.
 
-Our first contribution in this paper is to generalize \cite[Theorem~1]{BFM03}
-to hypergraphs (and to give a corresponding result for perfect matchings,
-which is nontrivial in the hypergraph setting). Unfortunately, there
-is no single most natural notion of a cycle or of minimum degree in
-hypergraphs. A $k$-uniform \emph{loose} cycle is a $k$-uniform hypergraph
-with a cyclic ordering on its vertices such that every edge consists
-of $k$ consecutive vertices and every pair of consecutive edges intersects
-in exactly one vertex. The degree of a set of vertices is the number
-of edges that include that set, and the \emph{minimum $\left(k-1\right)$-degree
-}$\delta_{k-1}$ is the minimum degree among sets of $k-1$ vertices.
+Our first contribution in this paper is to generalize the aforementioned
+theorem to hypergraphs (and to give a corresponding result for perfect
+matchings, which is nontrivial in the hypergraph setting). Unfortunately,
+there is no single most natural notion of a cycle or of minimum degree
+in hypergraphs. A $k$-uniform \emph{loose} cycle is a $k$-uniform
+hypergraph with a cyclic ordering on its vertices such that every
+edge consists of $k$ consecutive vertices and every pair of consecutive
+edges intersects in exactly one vertex. The degree of a set of vertices
+is the number of edges that include that set, and the \emph{minimum
+$\left(k-1\right)$-degree }$\delta_{k-1}$ is the minimum degree
+among sets of $k-1$ vertices.
 \begin{thm}
 \label{thm:hypergraph-theorems}Let $\HH_{k}\left(n,m\right)$ be
 the uniform distribution on $m$-edge $k$-uniform hypergraphs on
@@ -400,32 +402,30 @@ then $H\cup R$ a.a.s. has a loose Hamilton cycle.}
 
 \end{enumerate}
 \end{thm}
-We can motivate our \ref{thm:hypergraph-theorems} in exactly the
-same way as \cite[Theorem~1]{BFM03}. There is a corresponding Dirac-type
-theorem for loose Hamilton cycles in dense hypergraphs (see \cite{KKMO11}),
-and the threshold for both perfect matchings and loose Hamilton cycles
-is $n^{k-1}\log n$ random edges (see \cite{DF11} and \cite[Corollary~2.6]{JKV08}),
-so ``almost all'' dense hypergraphs have Hamilton cycles and perfect
-matchings. However, for hypergraphs with large uniformity our conclusion
-is much more extreme than that of \cite[Theorem~1]{BFM03}: starting
-from a dense hypergraph only $O\left(n\right)$ extra edges are requred
-to ensure Hamiltonicity, which is far fewer than the $\Omega\left(n^{k-1}\log n\right)$
-edges required to reach Hamiltonicity from scratch.
+There is a corresponding Dirac-type theorem for loose Hamilton cycles
+in dense hypergraphs (see \cite{KKMO11}), and the threshold for both
+perfect matchings and loose Hamilton cycles is $n^{k-1}\log n$ random
+edges (see \cite{DF11} and \cite[Corollary~2.6]{JKV08}), so ``almost
+all'' dense hypergraphs have Hamilton cycles and perfect matchings.
+However, for hypergraphs with large uniformity our conclusion is much
+more extreme than for graphs: starting from a dense hypergraph only
+$O\left(n\right)$ extra edges are requred to ensure Hamiltonicity,
+which is far fewer than the $\Omega\left(n^{k-1}\log n\right)$ edges
+required to reach Hamiltonicity from scratch.
 
 We will prove \ref{thm:hypergraph-theorems}, and show that it is
 tight, in \ref{sec:hypergraphs}. The methods usually employed to
 study Hamilton cycles and perfect matchings in random graphs are largely
-ineffective in the hypergraph setting, so our proof is very different
-to the proofs found in \cite{BFM03}. In particular, we cannot easily
-manipulate paths for P\'osa-type arguments, and we do not have an
-analogue of Hall's marriage theorem allowing us to deduce the existence
-of a perfect matching from an expansion property. Our proof involves
-reducing the theorem to the existence of a perfect matching in a certain
-randomly perturbed bipartite graph. The ``reason'' for a perfect
-matching in this perturbed graph seems to be quite different depending
-on the structure of the initial bipartite graph, so we make critical
-use of the structural description given by Szemer\'edi's regularity
-lemma.
+ineffective in the hypergraph setting, so we need a very different
+proof. In particular, we cannot easily manipulate paths for P\'osa-type
+arguments, and we do not have an analogue of Hall's marriage theorem
+allowing us to deduce the existence of a perfect matching from an
+expansion property. Our proof involves reducing the theorem to the
+existence of a perfect matching in a certain randomly perturbed bipartite
+graph. The ``reason'' for a perfect matching in this perturbed graph
+seems to be quite different depending on the structure of the initial
+bipartite graph, so we make critical use of the structural description
+given by Szemer\'edi's regularity lemma.
 
 Our second contribution in this paper is a theorem giving a general
 expansion condition for\emph{ pancyclicity}. We say an $n$-vertex
@@ -440,10 +440,10 @@ there is an arc from $A$ to $B$. Then $D$ is pancyclic.
 We hope this theorem could be of general interest, but our particular
 motivation is that it implies a number of results about randomly perturbed
 graphs and digraphs. In particular it provides very simple proofs
-of \cite[Theorem~1]{BFM03}, the corresponding result for digraphs
-(\cite[Theorem~3]{BFM03}), and the analogous results for pancyclicity.
-We will prove \ref{lem:pseudorandom-pancyclic} and its corollaries
-in \ref{sec:digraphs}.
+of the theorems in \cite{BFM03} concerning Hamiltonicity in randomly
+perturbed graphs and digraphs, and allows us to extend these theorems
+to pancyclicity. We will prove \ref{lem:pseudorandom-pancyclic} and
+its corollaries in \ref{sec:digraphs}.
 
 Our final theorem concerns randomly perturbed tournaments. The model
 that starts with a fixed \mbox{(di-/hyper-)}graph and adds random
@@ -689,20 +689,15 @@ that the edges of $M$ a.a.s. ``spread out evenly'' between the
 $O\left(1\right)$ clusters. Fix some $V_{i}^{1}$ and $V_{j}^{2}$,
 with $i,j\ge1$. The vertices of each $V_{i}^{1}$ are matched by
 $M$ to at most $an$ vertices; conditioning on their number, these
-are uniformly randomly chosen from $B$. Let $X_{b}$ be the indicator
-random variable for the event that the vertex $b\in B$ is matched
-with a vertex in $V_{i}^{1}$. The random variables $X_{b}$ are said
-to be \emph{negatively associated} (see \cite[Application~3.1(c)]{JDP83}).
-This means in particular that we can apply Chernoff bounds to $\sum_{b\in V_{j}^{2}}X_{b}$
-even though the $X_{b}$ are not independent, so with probability
-$1-e^{\Omega\left(n\right)}$ there are at least $\left(ab+\xi\left(\alpha\right)\right)n$
-edges of $M$ between $V_{i}^{1}$ and $V_{j}^{2}$. (We could avoid
-the use of negative association with the argument we will use to prove
-\ref{lem:hypergraph-bipartite-degree-transfer}). By a union bound,
-a.a.s. there are at most $\left(ab+\xi\left(\alpha\right)\right)n$
-edges of $M$ between every pair $V_{i}^{1}$, $V_{j}^{2}$. That
-is, $M$ spreads out evenly between the clusters. We assume this holds
-for the remainder of the proof.
+are uniformly randomly chosen from $B$. The number of such vertices
+in $V_{j}^{2}$ is then hypergeometrically distributed, so with probability
+$1-e^{\Omega\left(n\right)}$ (see for example \cite[Theorem 2.10]{JLR00})
+there are at least $\left(ab+\xi\left(\alpha\right)\right)n$ edges
+of $M$ between $V_{i}^{1}$ and $V_{j}^{2}$. By a union bound, a.a.s.
+there are at most $\left(ab+\xi\left(\alpha\right)\right)n$ edges
+of $M$ between every pair $V_{i}^{1}$, $V_{j}^{2}$. That is, $M$
+spreads out evenly between the clusters. We assume this holds for
+the remainder of the proof.
 
 Consider any $W\subset A$ with $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$.
 For each $i$ let $\pi_{i}=\left|V_{i}^{1}\cap W\right|/\left(an\right)$,
@@ -806,7 +801,7 @@ then
 \]
 
 
-By a Chernoff bound and a union bound, a.a.s. each $d_{G_{H}}\left(a\right)\ge\amat\left(\alpha\right)$.
+By a Chernoff bound and a union bound, a.a.s. each $d_{G_{H}}\left(a\right)\ge\amat\left(\alpha\right)n$.
 \end{proof}
 
 \begin{proof}
@@ -842,8 +837,7 @@ corresponding to a perfect matching or loose Hamilton cycle in $H\cup R$.
 \section{\label{sec:digraphs}Pancyclicity in dense digraphs}
 
 In this section we prove \ref{lem:pseudorandom-pancyclic}, and as
-a corollary we also prove the following theorem extending \cite[Theorem~3]{BFM03}
-to pancyclicity.
+a corollary we also prove the following theorem.
 \begin{thm}
 \label{thm:smoothed-pancyclic}Let $\DD\left(n,m\right)$ be the uniform
 distribution on (not necessarily oriented) $n$-vertex, $m$-arc digraphs.
@@ -855,9 +849,9 @@ is a.a.s. pancyclic.
 One motivation for this theorem is an observation by Bondy (see \cite{Bon75}),
 that almost all known non-trivial conditions that ensure Hamiltonicity
 also ensure pancyclicity. He made an informal ``metaconjecture''
-that this was always the case, which we have verified for \cite[Theorems~1 and~3]{BFM03}
-(note that \ref{thm:smoothed-pancyclic} immediately implies the corresponding
-theorem for undirected graphs).
+that this was always the case; our \ref{thm:smoothed-pancyclic} verifies
+his metaconjecture in the setting of randomly perturbed dense graphs
+and digraphs.
 
 \ref{thm:smoothed-pancyclic} obviously implies \cite[Theorems~1 and~3]{BFM03}.
 We do not fight very hard to optimize constants, but we note that
@@ -1318,18 +1312,21 @@ highly connected digraphs, and demonstrated an interesting application
 of the Szemer\'edi regularity lemma. There are a few important questions
 this paper leaves open.
 
-In particular, we have only studied loose Hamiltonicity in $\left(k-1\right)$-dense
-hypergraphs. The other most popular notion of a hypergraph cycle is
-a \emph{tight} cycle, in which every consecutive pair of edges in
-the cycle intersects in $k-1$ vertices. There are a large variety
-of Dirac-type theorems for different types of minimum degree and different
-types of cycles (see \cite{RR10} for a survey), which would suggest
-that similar random perturbation results are possible in these settings.
-In addition, it is possible that our use of Szemer\'edi's regularity
-lemma could be avoided, thereby drastically improving the constants
-$\chypham\left(\alpha\right)$ and $\chypmat\left(\alpha\right)$.
+First, we have only studied loose Hamiltonicity. The other most popular
+notion of a hypergraph cycle is a \emph{tight} cycle, in which every
+consecutive pair of edges in the cycle intersects in $k-1$ vertices.
+More generally, an $\ell$-cycle has consecutive edges intersecting
+in $k-\ell$ vertices. Also, we have only studied hypergraphs with
+high $\left(k-1\right)$-degree, which is the strongest density assumption
+we could make. There are a large variety of Dirac-type theorems for
+different types of minimum degree and different types of cycles (see
+\cite{RR10} for a survey), which would suggest that similar random
+perturbation results are possible in these settings. In addition,
+it is possible that our use of Szemer\'edi's regularity lemma could
+be avoided, thereby drastically improving the constants $\chypham\left(\alpha\right)$
+and $\chypmat\left(\alpha\right)$.
 
-\bibliographystyle{amsalpha}
+\bibliographystyle{amsplain}
 \bibliography{references}
 
 \end{document}

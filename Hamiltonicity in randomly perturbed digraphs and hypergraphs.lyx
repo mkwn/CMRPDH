@@ -110,7 +110,7 @@ theorems-ams
 \bibtex_command default
 \index_command default
 \paperfontsize 11
-\spacing single
+\spacing other 0.98
 \use_hyperref true
 \pdf_bookmarks true
 \pdf_bookmarksnumbered false
@@ -753,7 +753,6 @@ key "Kar72"
  The most famous of these is given by a classical theorem of Dirac 
 \begin_inset CommandInset citation
 LatexCommand cite
-after "Theorem~3"
 key "Dir52"
 
 \end_inset
@@ -811,15 +810,14 @@ asymptotically almost surely
 a.a.s.
 \emph default
 ).
- This follows from a stronger result (
+ This follows from a stronger result 
 \begin_inset CommandInset citation
 LatexCommand cite
-after "Theorem~3"
 key "Pos76"
 
 \end_inset
 
-) that gives a 
+ that gives a 
 \emph on
 threshold
 \emph default
@@ -914,15 +912,7 @@ key "BFM03"
 \end_inset
 
 ), so this result is asymptotically tight.
- We can interpret 
-\begin_inset CommandInset citation
-LatexCommand cite
-after "Theorem~1"
-key "BFM03"
-
-\end_inset
-
- as quantifying the 
+ We can interpret this theorem as quantifying the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -948,16 +938,9 @@ key "ST04"
 \end_layout
 
 \begin_layout Standard
-Our first contribution in this paper is to generalize 
-\begin_inset CommandInset citation
-LatexCommand cite
-after "Theorem~1"
-key "BFM03"
-
-\end_inset
-
- to hypergraphs (and to give a corresponding result for perfect matchings,
- which is nontrivial in the hypergraph setting).
+Our first contribution in this paper is to generalize the aforementioned
+ theorem to hypergraphs (and to give a corresponding result for perfect
+ matchings, which is nontrivial in the hypergraph setting).
  Unfortunately, there is no single most natural notion of a cycle or of
  minimum degree in hypergraphs.
  A 
@@ -1172,23 +1155,7 @@ end{enumerate}
 \end_layout
 
 \begin_layout Standard
-We can motivate our 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "thm:hypergraph-theorems"
-
-\end_inset
-
- in exactly the same way as 
-\begin_inset CommandInset citation
-LatexCommand cite
-after "Theorem~1"
-key "BFM03"
-
-\end_inset
-
-.
- There is a corresponding Dirac-type theorem for loose Hamilton cycles in
+There is a corresponding Dirac-type theorem for loose Hamilton cycles in
  dense hypergraphs (see 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1226,15 +1193,7 @@ almost all
 
  dense hypergraphs have Hamilton cycles and perfect matchings.
  However, for hypergraphs with large uniformity our conclusion is much more
- extreme than that of 
-\begin_inset CommandInset citation
-LatexCommand cite
-after "Theorem~1"
-key "BFM03"
-
-\end_inset
-
-: starting from a dense hypergraph only 
+ extreme than for graphs: starting from a dense hypergraph only 
 \begin_inset Formula $O\left(n\right)$
 \end_inset
 
@@ -1264,14 +1223,7 @@ reference "sec:hypergraphs"
 .
  The methods usually employed to study Hamilton cycles and perfect matchings
  in random graphs are largely ineffective in the hypergraph setting, so
- our proof is very different to the proofs found in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "BFM03"
-
-\end_inset
-
-.
+ we need a very different proof.
  In particular, we cannot easily manipulate paths for P
 \begin_inset ERT
 status open
@@ -1406,23 +1358,15 @@ Let
 We hope this theorem could be of general interest, but our particular motivation
  is that it implies a number of results about randomly perturbed graphs
  and digraphs.
- In particular it provides very simple proofs of 
+ In particular it provides very simple proofs of the theorems in 
 \begin_inset CommandInset citation
 LatexCommand cite
-after "Theorem~1"
 key "BFM03"
 
 \end_inset
 
-, the corresponding result for digraphs (
-\begin_inset CommandInset citation
-LatexCommand cite
-after "Theorem~3"
-key "BFM03"
-
-\end_inset
-
-), and the analogous results for pancyclicity.
+ concerning Hamiltonicity in randomly perturbed graphs and digraphs, and
+ allows us to extend these theorems to pancyclicity.
  We will prove 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2795,49 +2739,23 @@ spread out evenly
 \end_inset
 
 .
- Let 
-\begin_inset Formula $X_{b}$
+ The number of such vertices in 
+\begin_inset Formula $V_{j}^{2}$
 \end_inset
 
- be the indicator random variable for the event that the vertex 
-\begin_inset Formula $b\in B$
-\end_inset
-
- is matched with a vertex in 
-\begin_inset Formula $V_{i}^{1}$
-\end_inset
-
-.
- The random variables 
-\begin_inset Formula $X_{b}$
-\end_inset
-
- are said to be 
-\emph on
-negatively associated
-\emph default
- (see 
-\begin_inset CommandInset citation
-LatexCommand cite
-after "Application~3.1(c)"
-key "JDP83"
-
-\end_inset
-
-).
- This means in particular that we can apply Chernoff bounds to 
-\begin_inset Formula $\sum_{b\in V_{j}^{2}}X_{b}$
-\end_inset
-
- even though the 
-\begin_inset Formula $X_{b}$
-\end_inset
-
- are not independent, so with probability 
+ is then hypergeometrically distributed, so with probability 
 \begin_inset Formula $1-e^{\Omega\left(n\right)}$
 \end_inset
 
- there are at least 
+ (see for example 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "Theorem 2.10"
+key "JLR00"
+
+\end_inset
+
+) there are at least 
 \begin_inset Formula $\left(ab+\xi\left(\alpha\right)\right)n$
 \end_inset
 
@@ -2854,15 +2772,6 @@ key "JDP83"
 \end_inset
 
 .
- (We could avoid the use of negative association with the argument we will
- use to prove 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "lem:hypergraph-bipartite-degree-transfer"
-
-\end_inset
-
-).
  By a union bound, a.a.s.
  there are at most 
 \begin_inset Formula $\left(ab+\xi\left(\alpha\right)\right)n$
@@ -3592,7 +3501,7 @@ Now,
 \begin_layout Proof
 By a Chernoff bound and a union bound, a.a.s.
  each 
-\begin_inset Formula $d_{G_{H}}\left(a\right)\ge\amat\left(\alpha\right)$
+\begin_inset Formula $d_{G_{H}}\left(a\right)\ge\amat\left(\alpha\right)n$
 \end_inset
 
 .
@@ -3781,15 +3690,7 @@ reference "lem:pseudorandom-pancyclic"
 
 \end_inset
 
-, and as a corollary we also prove the following theorem extending 
-\begin_inset CommandInset citation
-LatexCommand cite
-after "Theorem~3"
-key "BFM03"
-
-\end_inset
-
- to pancyclicity.
+, and as a corollary we also prove the following theorem.
 \end_layout
 
 \begin_layout Theorem
@@ -3858,22 +3759,15 @@ metaconjecture
 \begin_inset Quotes erd
 \end_inset
 
- that this was always the case, which we have verified for 
-\begin_inset CommandInset citation
-LatexCommand cite
-after "Theorems~1 and~3"
-key "BFM03"
-
-\end_inset
-
- (note that 
+ that this was always the case; our 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "thm:smoothed-pancyclic"
 
 \end_inset
 
- immediately implies the corresponding theorem for undirected graphs).
+ verifies his metaconjecture in the setting of randomly perturbed dense
+ graphs and digraphs.
 \end_layout
 
 \begin_layout Standard
@@ -6882,11 +6776,7 @@ edi regularity lemma.
 \end_layout
 
 \begin_layout Standard
-In particular, we have only studied loose Hamiltonicity in 
-\begin_inset Formula $\left(k-1\right)$
-\end_inset
-
--dense hypergraphs.
+First, we have only studied loose Hamiltonicity.
  The other most popular notion of a hypergraph cycle is a 
 \emph on
 tight
@@ -6897,6 +6787,20 @@ tight
 \end_inset
 
  vertices.
+ More generally, an 
+\begin_inset Formula $\ell$
+\end_inset
+
+-cycle has consecutive edges intersecting in 
+\begin_inset Formula $k-\ell$
+\end_inset
+
+ vertices.
+ Also, we have only studied hypergraphs with high 
+\begin_inset Formula $\left(k-1\right)$
+\end_inset
+
+-degree, which is the strongest density assumption we could make.
  There are a large variety of Dirac-type theorems for different types of
  minimum degree and different types of cycles (see 
 \begin_inset CommandInset citation
@@ -6936,7 +6840,7 @@ di's regularity lemma could be avoided, thereby drastically improving the
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "references"
-options "amsalpha"
+options "amsplain"
 
 \end_inset
 
