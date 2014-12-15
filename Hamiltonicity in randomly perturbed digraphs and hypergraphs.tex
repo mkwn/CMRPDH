@@ -1,5 +1,3 @@
-%% LyX 2.1.2 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
 \documentclass[11pt,english]{article}
 \renewcommand{\rmdefault}{cmr}
 \renewcommand{\sfdefault}{cmss}
@@ -23,62 +21,30 @@
  breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
  {hyperref}
 
-\makeatletter
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
-\theoremstyle{plain}
-\newtheorem{thm}{\protect\theoremname}
-  \theoremstyle{plain}
-  \newtheorem{cor}[thm]{\protect\corollaryname}
-  \theoremstyle{plain}
-  \newtheorem{lem}[thm]{\protect\lemmaname}
-  \theoremstyle{plain}
-  \newtheorem{prop}[thm]{\protect\propositionname}
-  \theoremstyle{plain}
-  \newtheorem{conjecture}[thm]{\protect\conjecturename}
-  \theoremstyle{definition}
-  \newtheorem{defn}[thm]{\protect\definitionname}
-  \theoremstyle{definition}
-  \newtheorem{example}[thm]{\protect\examplename}
-  \theoremstyle{remark}
-  \newtheorem{rem}[thm]{\protect\remarkname}
-  \theoremstyle{remark}
-  \newtheorem{claim}[thm]{\protect\claimname}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
 % cleveref allows \ref{thm:asdf} instead of Theorem~\ref{thm:asdf}
 \usepackage[nameinlink,capitalise,noabbrev]{cleveref}
 \AtBeginDocument{\renewcommand{\ref}[1]{\cref{#1}}}
 
-% LyX won't let me include cleveref before theorem declarations so I need to redefine everything as a hack
 \theoremstyle{plain}
-\newtheorem{mythm}{\protect\theoremname}
-\renewenvironment{thm}{\begin{mythm}}{\end{mythm}}
-\crefname{mythm}{Theorem}{Theorems}
+\newtheorem{thm}{\protect\theoremname}
+\crefname{thm}{Theorem}{Theorems}
 \theoremstyle{definition}
-\newtheorem{mydefn}[mythm]{\protect\definitionname}
-\renewenvironment{defn}{\begin{mydefn}}{\end{mydefn}}
+\newtheorem{defn}[thm]{\protect\definitionname}
 \theoremstyle{definition}
-\newtheorem{myexample}[mythm]{\protect\examplename}
-\renewenvironment{example}{\begin{myexample}}{\end{myexample}}
+\newtheorem{example}[thm]{\protect\examplename}
 \theoremstyle{plain}
-\newtheorem{myprop}[mythm]{\protect\propositionname}
-\renewenvironment{prop}{\begin{myprop}}{\end{myprop}}
+\newtheorem{prop}[thm]{\protect\propositionname}
 \theoremstyle{plain}
-\newtheorem{mycor}[mythm]{\protect\corollaryname}
-\renewenvironment{cor}{\begin{mycor}}{\end{mycor}}
+\newtheorem{cor}[thm]{\protect\corollaryname}
 \theoremstyle{plain}
-\newtheorem{mylem}[mythm]{\protect\lemmaname}
-\renewenvironment{lem}{\begin{mylem}}{\end{mylem}}
-\crefname{mylem}{Lemma}{Lemmas}
+\newtheorem{lem}[thm]{\protect\lemmaname}
+\crefname{lem}{Lemma}{Lemmas}
 \theoremstyle{plain}
-\newtheorem{myconjecture}[mythm]{\protect\conjecturename}
-\renewenvironment{conjecture}{\begin{myconjecture}}{\end{myconjecture}}
+\newtheorem{conjecture}[thm]{\protect\conjecturename}
 \theoremstyle{remark}
-\newtheorem{myrem}[mythm]{\protect\remarkname}
-\renewenvironment{rem}{\begin{myrem}}{\end{myrem}}
+\newtheorem{rem}[thm]{\protect\remarkname}
 \theoremstyle{remark}
-\newtheorem{myclaim}[mythm]{\protect\claimname}
-\renewenvironment{claim}{\begin{myclaim}}{\end{myclaim}}
+\newtheorem{claim}[thm]{\protect\claimname}
 
 % equation cref format
 \crefformat{equation}{#2(#1)#3}
@@ -107,10 +73,10 @@
 
 %graph drawing
 \usepackage{tikz}
-\usetikzlibrary{external}
+%\usetikzlibrary{external}
 \usetikzlibrary{decorations.markings}
 \usetikzlibrary{arrows.meta}
-\tikzexternalize
+%\tikzexternalize
 \tikzstyle{vertex}=[circle,draw=black,fill=black,inner sep=0,minimum size=0.2cm,text=white,font=\footnotesize]
 \tikzset{arc/.style={
         decoration={markings,
@@ -147,149 +113,53 @@
 
 \maketitle
 \global\long\def\RR{\mathbb{R}}
-
-
 \global\long\def\QQ{\mathbb{Q}}
-
-
 \global\long\def\HH{\mathbb{H}}
-
-
 \global\long\def\E{\mathbb{E}}
-
-
 \global\long\def\Var{\operatorname{Var}}
-
-
 \global\long\def\CC{\mathbb{C}}
-
-
 \global\long\def\NN{\mathbb{N}}
-
-
 \global\long\def\ZZ{\mathbb{Z}}
-
-
 \global\long\def\GG{\mathbb{G}}
-
-
 \global\long\def\BB{\mathbb{B}}
-
-
 \global\long\def\DD{\mathbb{D}}
-
-
 \global\long\def\cL{\mathcal{L}}
-
-
 \global\long\def\supp{\operatorname{supp}}
-
-
 \global\long\def\one{\boldsymbol{1}}
-
-
 \global\long\def\range#1{\left[#1\right]}
-
-
 \global\long\def\d{\operatorname{d}}
-
-
 \global\long\def\falling#1#2{\left(#1\right)_{#2}}
-
-
 \global\long\def\f{\mathbf{f}}
-
-
 \global\long\def\im{\operatorname{im}}
-
-
 \global\long\def\sp{\operatorname{span}}
-
-
 \global\long\def\sign{\operatorname{sign}}
-
-
 \global\long\def\mod{\operatorname{mod}}
-
-
 \global\long\def\id{\operatorname{id}}
-
-
 \global\long\def\disc{\operatorname{disc}}
-
-
 \global\long\def\lindisc{\operatorname{lindisc}}
-
-
 \global\long\def\tr{\operatorname{tr}}
-
-
 \global\long\def\adj{\operatorname{adj}}
-
-
 \global\long\def\Unif{\operatorname{Unif}}
-
-
 \global\long\def\Po{\operatorname{Po}}
-
-
 \global\long\def\Bin{\operatorname{Bin}}
-
-
 \global\long\def\Ber{\operatorname{Ber}}
-
-
 \global\long\def\Geom{\operatorname{Geom}}
-
-
 \global\long\def\Hom{\operatorname{Hom}}
-
-
 \global\long\def\floor#1{\left\lfloor #1\right\rfloor }
-
-
 \global\long\def\ceil#1{\left\lceil #1\right\rceil }
-
-
 \global\long\def\T{\mathbf{T}}
-
-
 \global\long\def\N{\mathbf{N}}
-
-
 \global\long\def\B{\mathbf{B}}
-
-
 \global\long\def\a{\boldsymbol{\alpha}}
-
-
 \global\long\def\b{\boldsymbol{\beta}}
-
-
 \global\long\def\x{\mathbf{x}}
-
-
 \global\long\def\y{\mathbf{y}}
-
-
 \global\long\def\o{\boldsymbol{\omega}}
-
-
 \global\long\def\cdi{c}
-
-
 \global\long\def\chypham{c_{k}^{\mathrm{H}}}
-
-
 \global\long\def\chypmat{c_{k}^{\mathrm{M}}}
-
-
 \global\long\def\cto{c^{\mathrm{T}}}
-
-
 \global\long\def\amat{\beta^{\mathrm{M}}}
-
-
 \global\long\def\aham{\beta^{\mathrm{H}}}
 
 \begin{abstract}
@@ -305,27 +175,6 @@ show that perturbing a certain (minimum-degree-dependent) number of
 random edges in a tournament ensures the existence of multiple edge-disjoint
 Hamilton cycles. All our results are tight.
 \end{abstract}
-\begin{comment}
-\begin{thm}
-t\end{thm}
-\begin{cor}
-c\end{cor}
-\begin{lem}
-l\end{lem}
-\begin{prop}
-p\end{prop}
-\begin{conjecture}
-c\end{conjecture}
-\begin{defn}
-d\end{defn}
-\begin{example}
-e\end{example}
-\begin{rem}
-r\end{rem}
-\begin{claim}
-c
-\end{claim}
-\end{comment}
 
 We say that a graph is \emph{Hamiltonian} if it has a \emph{Hamilton
 cycle}: a simple cycle containing every vertex in the graph. Hamiltonicity
@@ -949,8 +798,6 @@ for an illustration.
 \draw[arc] (u2m)  to [bend right] (u);
 \draw[arc] (w1) to [bend right] (u2);
 
-%\draw[line width=5, opacity=0.3, blue] (u) to (w1) to [bend right] (u2) to (w) to [bend right] (w1p) to (u2m) to [bend right] (u);
-
 \node at (4.6,-0.5){$w_1^{\phantom+}$};
 \node at (5.1,0.5){$w_1^+$};
 \node at (10.1,0.5){$u_2^-$};
@@ -1029,8 +876,6 @@ is a shortcut back to $u_{11}$. See Figure \ref{fig:pseudorandom-hamiltonian-cas
 \draw[arc] (w21) to [bend right] (w22p);
 \draw[arc] (w) to [bend right] (w21p);
 \draw[arc] (w22) to [bend right] (u11);
-
-%\draw[line width=5, opacity=0.3, blue] (u) to (w1) to [bend right] (u2) to (w) to [bend right] (w1p) to (u2m) to [bend right] (u);
 
 \node at (0,-0.5){$u$};
 \node at (3.1,-0.5){$u_{11}^-$};
@@ -1327,6 +1172,123 @@ be avoided, thereby drastically improving the constants $\chypham\left(\alpha\ri
 and $\chypmat\left(\alpha\right)$.
 
 \bibliographystyle{amsplain}
-\bibliography{references}
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{10}
+
+\bibitem{BHM04}
+Tom Bohman, Alan Frieze, Michael Krivelevich, and Ryan Martin, \emph{Adding
+  random edges to dense graphs}, Random Structures \& Algorithms \textbf{24}
+  (2004), no.~2, 105--117.
+
+\bibitem{BFM03}
+Tom Bohman, Alan Frieze, and Ryan Martin, \emph{How many random edges make a
+  dense graph {H}amiltonian?}, Random Structures \& Algorithms \textbf{22}
+  (2003), no.~1, 33--42.
+
+\bibitem{Bon75}
+JA~Bondy, \emph{Pancyclic graphs: Recent results}, Infinite and finite sets: to
+  {P}aul {E}rd\H{o}s on his 60th birthday, Volume 1 (A~Hajnal, R~Rado, and
+  Vera~T Sos, eds.), Colloquia mathematica Societatis J\'anos Bolyai, vol.~10,
+  North-Holland Publishing Company, Amsterdam-London, 1975, pp.~181--187.
+
+\bibitem{Dir52}
+Gabriel~Andrew Dirac, \emph{Some theorems on abstract graphs}, Proceedings of
+  the London Mathematical Society \textbf{3} (1952), no.~1, 69--81.
+
+\bibitem{DF11}
+Andrzej Dudek and Alan Frieze, \emph{Loose {H}amilton cycles in random uniform
+  hypergraphs}, Electronic Journal of Combinatorics \textbf{18} (2011), no.~1,
+  Paper 48.
+
+\bibitem{FK05}
+Alan Frieze and Michael Krivelevich, \emph{On packing {H}amilton cycles in
+  $\varepsilon$-regular graphs}, Journal of Combinatorial Theory, Series B
+  \textbf{94} (2005), no.~1, 159--172.
+
+\bibitem{JLR00}
+Svante Janson, Tomasz {\L{}}uczak, and Andrzej Ruci{\'n}ski, \emph{Random
+  graphs}, Cambridge University Press, 2000.
+
+\bibitem{JKV08}
+Anders Johansson, Jeff Kahn, and Van Vu, \emph{Factors in random graphs},
+  Random Structures \& Algorithms \textbf{33} (2008), no.~1, 1--28.
+
+\bibitem{Kar72}
+R~M Karp, \emph{Reducibility among combinatorial problems}, Complexity of
+  Computer Computations (R~E Miller and J~W Thatcher, eds.), vol.~10, Plenum,
+  New York, 1972, pp.~85--104.
+
+\bibitem{KKMO11}
+Peter Keevash, Daniela K{\"u}hn, Richard Mycroft, and Deryk Osthus, \emph{Loose
+  {H}amilton cycles in hypergraphs}, Discrete Mathematics \textbf{311} (2011),
+  no.~7, 544--559.
+
+\bibitem{KS96}
+J~Koml\'os and M~Simonovits, \emph{Szemer\'edi's regularity lemma and its
+  applications in graph theory}, Combinatorics, {P}aul {E}rd\H{o}s is eighty
+  (D~Mikl\'os, VT~Sos, and T~Szonyi, eds.), Bolyai society mathematical
+  studies, vol.~2, J\'anos {B}olyai Mathematical Society, Budapest, 1996,
+  pp.~295--352.
+
+\bibitem{KST06}
+Michael Krivelevich, Benny Sudakov, and Prasad Tetali, \emph{On smoothed
+  analysis in dense graphs and formulas}, Random Structures \& Algorithms
+  \textbf{29} (2006), no.~2, 180--193.
+
+\bibitem{KLOP14}
+Daniela K{\"u}hn, John Lapinskas, Deryk Osthus, and Viresh Patel, \emph{Proof
+  of a conjecture of {T}homassen on {H}amilton cycles in highly connected
+  tournaments}, Proceedings of the London Mathematical Society (2014), pdu019.
+
+\bibitem{LRG96}
+Tomasz {\L}uczak, Andrzej Ruci{\'n}ski, and Jacek Gruszka, \emph{On the
+  evolution of a random tournament}, Discrete Mathematics \textbf{148} (1996),
+  no.~1, 311--316.
+
+\bibitem{Moo68}
+JW~Moon, \emph{Topics on tournaments}, Holt, Rinehart and Winston, 1968.
+
+\bibitem{MM62}
+JW~Moon and L~Moser, \emph{Almost all tournaments are irreducible}, Canadian
+  Mathematical Bulletin \textbf{5} (1962), 61--65.
+
+\bibitem{Pok14}
+Alexey Pokrovskiy, \emph{Edge disjoint {H}amiltonian cycles in highly connected
+  tournaments}, arXiv preprint arXiv:1406.7556 (2014).
+
+\bibitem{Pos76}
+L~P{\'o}sa, \emph{{H}amiltonian circuits in random graphs}, Discrete
+  Mathematics \textbf{14} (1976), no.~4, 359--364.
+
+\bibitem{RR10}
+Vojtech R{\"o}dl and Andrzej Ruci{\'n}ski, \emph{Dirac-type questions for
+  hypergraphs -- a survey (or more problems for {E}ndre to solve)}, An
+  Irregular Mind: Szemer\'edi is 70 (Imre B\'arany and J\'ozsef Solymosi,
+  eds.), Bolyai Society Mathematical Studies, vol.~21, Springer and J\'anos
+  Bolyai Mathematical Society, New York and Budapest, 2010, pp.~561--590.
+
+\bibitem{ST03}
+Daniel~A Spielman and Shang-Hua Teng, \emph{Smoothed analysis: Motivation and
+  discrete models}, Algorithms and data structures: 8th International Workshop,
+  WADS 2003, Ottawa, Ontario, Canada, July 30 - August 1, 2003, Proceedings
+  (Frank Dehne, J{\"o}rg~R{\"u}diger Sack, and Michie Smid, eds.), Lecture
+  Notes in Computer Science, vol. 2748, Springer, 2003, pp.~256--270.
+
+\bibitem{ST04}
+\bysame, \emph{Smoothed analysis of algorithms: Why the simplex algorithm
+  usually takes polynomial time}, Journal of the ACM \textbf{51} (2004), no.~3,
+  385--463.
+
+\bibitem{Tao05}
+Terence Tao, \emph{Szemer\'edi's regularity lemma revisited}, Contributions to
+  Discrete Mathematics \textbf{1} (2006), no.~1, 8--28.
+
+\end{thebibliography}
 
 \end{document}
