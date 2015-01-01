@@ -13,9 +13,9 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{setspace}
+%\usepackage{setspace}
 \usepackage{esint}
-\setstretch{0.98}
+%\setstretch{0.98}
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
  breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
@@ -76,7 +76,7 @@
 \usetikzlibrary{external}
 \usetikzlibrary{decorations.markings}
 %\usetikzlibrary{arrows.meta}
-%\tikzexternalize
+\tikzexternalize
 \tikzstyle{vertex}=[circle,draw=black,fill=black,inner sep=0,minimum size=0.2cm,text=white,font=\footnotesize]
 \tikzset{arc/.style={
         decoration={markings,
@@ -106,10 +106,16 @@
 
 \begin{document}
 
-\title{Hamiltonicity in randomly perturbed digraphs and hypergraphs}
+\title{Cycles and matchings in randomly perturbed digraphs and hypergraphs}
 
 
-\author{Michael Krivelevich, Matthew Kwan, Benny Sudakov}
+\author{Michael Krivelevich
+\thanks{School of Mathematical Sciences, Raymond and Beverly Sackler Faculty of Exact Sciences, Tel Aviv University, 6997801, Israel. Email: \href{mailto:krivelev@post.tau.ac.il}
+{\nolinkurl{krivelev@post.tau.ac.il}}. Research supported in part by USA-Israel BSF Grant 2010115 and
+by grant 912/12 from the Israel Science Foundation.}\and
+Matthew Kwan\thanks{Department of Mathematics, ETH, 8092 Zurich. Email: \href{mailto:matthew.kwan@math.ethz.ch}
+{\nolinkurl{matthew.kwan@math.ethz.ch}}}\and
+Benny Sudakov\thanks{Department of Mathematics, ETH, 8092 Zurich. Email: \href{mailto:benjamin.sudakov@math.ethz.ch}{\nolinkurl{benjamin.sudakov@math.ethz.ch}}. Research supported in part by SNSF grant 200021-149111 and by a USA-Israel BSF grant.}}
 
 \maketitle
 \global\long\def\RR{\mathbb{R}}
@@ -159,14 +165,17 @@
 \global\long\def\chypham{c_{k}^{\mathrm{H}}}
 \global\long\def\chypmat{c_{k}^{\mathrm{M}}}
 \global\long\def\cto{c^{\mathrm{T}}}
-\global\long\def\amat{\beta^{\mathrm{M}}}
-\global\long\def\aham{\beta^{\mathrm{H}}}
+\global\long\def\a{\beta}
+%\global\long\def\amat{\beta^{\mathrm{M}}}
+\global\long\def\amat{\a}
+%\global\long\def\aham{\beta^{\mathrm{H}}}
+\global\long\def\aham{\a}
 
 \begin{abstract}
 We give several results showing that different discrete structures
-become Hamiltonian after a modest random perturbation. First, we show
+gain certain spanning structures (in particular, Hamilton cycles) after a modest random perturbation. First, we show
 that adding linearly many random edges to a dense $k$-uniform hypergraph ensures
-the (asymptotically almost sure) existence of a matching or a loose
+the (asymptotically almost sure) existence of a perfect matching or a loose
 Hamilton cycle. This involves a nonstandard application of Szemer\'edi's
 Regularity Lemma. We next show that digraphs with certain strong expansion
 properties are pancyclic, and use this to show that adding a linear
@@ -176,6 +185,8 @@ random edges in a tournament typically ensures the existence of multiple edge-di
 Hamilton cycles. All our results are tight.
 \end{abstract}
 
+\section{Introduction and Results}
+
 We say that a graph is \emph{Hamiltonian} if it has a \emph{Hamilton
 cycle}: a simple cycle containing every vertex in the graph. Hamiltonicity
 is a central notion in graph theory and has been extensively studied
@@ -184,7 +195,7 @@ by Karp \cite{Kar72}, it has become a canonical NP-complete problem
 to determine whether an arbitrary graph is Hamiltonian. There are
 nevertheless a variety of easily-checkable conditions that guarantee
 Hamiltonicity. The most famous of these is given by a classical theorem
-of Dirac \cite{Dir52}, which states that any $n$-vertex graph, $n\ge 3$, with
+of Dirac \cite{Dir52}, which states that any $n$-vertex graph ($n\ge 3$) with
 minimum degree at least $n/2$ is Hamiltonian.
 
 Dirac's theorem requires a very strong density condition, but in a
@@ -213,8 +224,7 @@ minimum degree at least $\alpha n$ and add $\cdi\left(\alpha\right)n$
 random edges, then the resulting graph will a.a.s. be Hamiltonian.
 Note that some dense graphs require a linear number of extra edges
 to become Hamiltonian (consider the complete bipartite graph with
-partition sizes $n/3$ and $2n/3$), so this result is asymptotically
-tight (in the order of magnitude). We can interpret this theorem as quantifying the ``fragility''
+partition sizes $n/3$ and $2n/3$), so the order of magnitude of this result is tight. We can interpret this theorem as quantifying the ``fragility''
 of the few dense graphs that are not Hamiltonian, by determining the
 amount of random perturbation that is necessary to make a dense graph
 Hamiltonian. A comparison can be drawn to the notion of \emph{smoothed
@@ -251,16 +261,9 @@ then $H\cup R$ a.a.s. has a loose Hamilton cycle.}
 
 \end{enumerate}
 \end{thm}
-There is a corresponding Dirac-type theorem for loose Hamilton cycles
-in dense hypergraphs (see \cite{KKMO11}), and the threshold for both
-perfect matchings and loose Hamilton cycles is $n^{k-1}\log n$ random
+All the motivation for graphs is still relevant in the hypergraph setting. Dirac's theorem approximately generalizes to hypergraphs (see \cite{KKMO11}): for small $\varepsilon$ and large $n$, if the minimum $\left(k-1\right)$-degree of an $n$-vertex $k$-uniform hypergraph is greater than $\left(1/\left(2\left(k-1\right)\right)+\varepsilon\right)\,n$ then that hypergraph contains a loose Hamilton cycle. Just as for graphs, the threshold for both perfect matchings and loose Hamilton cycles in $k$-uniform hypergraphs is $n\log n$ random
 edges (see \cite{DF11} and \cite[Corollary~2.6]{JKV08}), so ``almost
 all'' dense hypergraphs have Hamilton cycles and perfect matchings.
-However, for hypergraphs with large uniformity our conclusion is much
-more extreme than for graphs: starting from a dense hypergraph only
-$O\left(n\right)$ extra edges are requred to ensure Hamiltonicity,
-which is far fewer than the $\Omega\left(n^{k-1}\log n\right)$ edges
-required to reach Hamiltonicity from scratch.
 
 We will prove \ref{thm:hypergraph-theorems}, and show that it is
 tight, in \ref{sec:hypergraphs}. The methods usually employed to
@@ -372,12 +375,12 @@ actually implies $\delta_{q}\left(H\right)=\Omega\left(n^{k-q}\right)$
 for all $q$.
 
 Next, note that \ref{thm:hypergraph-theorems} is tight for essentially
-the same reason as \cite[Theorem~1]{BFM03}: consider the ``complete
+the same reason as its corresponding theorem for graphs. Consider the dense ``complete
 bipartite hypergraph'' which has two parts of sizes $n$ and
 $2kn$, and has all possible $k$-edges that contain at least one
 vertex from each part. Only $2n$ of these edges can contribute
 to a loose Hamilton cycle, so a linear number must be added to complete
-the necessary $\left(2k+1\right)n/\left(k-1\right)$ edges.
+the necessary $\left(2k+1\right)n/\left(k-1\right)$ edges. Similarly, this graph contains only $n$ out ouf the $\left(2k+1\right)n/k$ required edges in a perfect matching.
 
 Now we proceed to the proof of \ref{thm:hypergraph-theorems}, which
 will follow from a sequence of lemmas. The first step is to show that
@@ -471,15 +474,13 @@ hypergraph plus a large partial structure a.a.s. gives the structure
 we are looking for. For both theorems, we will be able to reduce this
 step to the following lemma.
 \begin{lem}
-\label{lem:bipartite-plus-big-matching-perfect}There is $\xi\left(\alpha\right)>0$
+\label{lem:bipartite-plus-big-matching-perfect}There is $\xi\left(\alpha\right)>0$ 
 such that the following holds. Let $G$ be a bipartite graph with
 parts $A,B$ of equal size $n$, and suppose $\delta\left(G\right)\ge\alpha n$.
 Let $M$ be a uniformly random matching with $\left(1-\xi\left(\alpha\right)\right)n$
-edges between $A$ and $B$. Then $G\cup M$ has a.a.s. a perfect matching.
+edges between $A$ and $B$. Then a.a.s. $G\cup M$ has a perfect matching.
 \end{lem}
-The immediate na\"ive approach to prove this lemma would be to apply
-Hall's marriage theorem, by showing that each set of vertices expands
-with high probability and then by applying the union bound. However, the
+The immediate na\"ive approach to prove this lemma would be to show each set of vertices expands, and then to apply the union bound and Hall's marriage theorem. However, the
 probability of failure to expand is not small enough for this to work.
 We can gain some insight into the problem by considering two ``extremal''
 cases for $G$. First, consider the case where the edges of $G$ are
@@ -499,6 +500,13 @@ matching on its own! In order to apply these ideas to prove the lemma
 for an arbitrary graph $G$, we use the structural description of
 $G$ provided by Szemer\'edi's regularity lemma.
 
+For a disjoint pair of vertex sets $\left(X,Y\right)$ in a graph,
+let its \emph{density} $d\left(X,Y\right)$ be the number of edges
+between $X$ and $Y$, divided by $\left|X\right|\left|Y\right|$.
+A pair of vertex sets $\left(V^{1},V^{2}\right)$ is said to be \emph{$\varepsilon$-regular}
+if for any $U^{1},U^{2}$ with $U^{\ell}\subseteq V^{\ell}$ and $\left|U^{\ell}\right|\ge\varepsilon\left|V^{\ell}\right|$,
+we have $\left|d\left(U^{1},U^{2}\right)-d\left(V^{1},V^{2}\right)\right|\le\varepsilon$.
+
 We will use a bipartite version of the regularity lemma (which can
 be deduced from say \cite[Theorem~2.3]{Tao05} in a similar way to
 \cite[Theorem~1.10]{KS96}). Let $\alpha'=\alpha/2$ and let $\varepsilon>0$
@@ -509,8 +517,7 @@ $A=V_{0}^{1}\cup\dots\cup V_{k}^{1}$ and $B=V_{0}^{2}\cup\dots\cup V_{k}^{2}$
 with $k\le K$, in such a way that the following conditions are satisfied.
 The ``exceptional'' clusters $V_{0}^{1}$ and $V_{0}^{2}$ both
 have fewer than $\varepsilon n$ vertices, and the non-exceptional
-clusters in $A$ and $B$ have equal size: $\left|V_{1}^{1}\right|=\dots=\left|V_{k}^{\ell}\right|=an$
-and $\left|V_{1}^{1}\right|=\dots=\left|V_{k}^{\ell}\right|=bn$.
+clusters in $A$ and $B$ have equal size: $\left|V_{i}^{\ell}\right|=vn$.
 There is a subgraph $G'\subseteq G$ with minimum degree at least
 $\left(\alpha'+\varepsilon\right)n$ such that each pair of distinct
 clusters $V_{i}^{1},V_{j}^{2}$ ($i,j\ge1$) is $\varepsilon$-regular
@@ -522,8 +529,8 @@ are the pairs of clusters between which there is nonzero density in
 $G'$. The fact that $G$ is dense implies that $C$ is dense as well:
 note that in $G'$ each $V_{i}^{\ell}$ has at least $\left(\alpha'+\varepsilon\right)n\left|V_{i}^{\ell}\right|$
 edges to other clusters. There are at most $\varepsilon n\left|V_{i}^{\ell}\right|$
-edges to the exceptional cluster $V_{0}$ and at most $\left|V_{i}^{\ell}\right|^{2}$
-edges to each other cluster. So, $d_{C}\left(V_{i}^{\ell}\right)\ge\left(\left(\alpha'+\varepsilon\right)n\left|V_{i}^{\ell}\right|-\varepsilon n\left|V_{i}^{\ell}\right|\right)/\left|V_{i}^{\ell}\right|^{2}\ge\alpha'k$
+edges to the exceptional cluster $V_{0}$ and at most $\left|V_{i}^{1}\right|\left|V_{i}^{2}\right|$
+edges to each other cluster. So, $d_{C}\left(V_{i}^{\ell}\right)\ge\left(\left(\alpha'+\varepsilon\right)n-\varepsilon n\right)vn/\left(vn\right)^{2}\ge\alpha'k$
 and $C$ has minimum degree at least $\alpha'k$.
 \begin{proof}
 [Proof of \ref{lem:bipartite-plus-big-matching-perfect}]We use Hall's
@@ -531,53 +538,52 @@ marriage theorem: we need to show that a.a.s. $\left|N_{G\cup M}\left(W\right)\r
 for all $W\subseteq A$. If $\left|W\right|\le\alpha n$, then $\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G}\left(W\right)\right|\ge\alpha n\ge\left|W\right|$
 by the degree condition on $G$. Similarly, if $\left|W\right|\ge\left(1-\alpha\right)n$
 then every $b\in B$ has an edge to $W$ in $G$, so $\left|N_{G\cup M}\left(W\right)\right|=\left|B\right|\ge\left|W\right|$.
-The difficult case is where $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$.
+The difficult case is where $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$. 
 
 Apply our version of the regularity lemma. We first want to prove
 that the edges of $M$ a.a.s. ``spread out evenly'' between the
 $O\left(1\right)$ clusters. Fix some $V_{i}^{1}$ and $V_{j}^{2}$,
 with $i,j\ge1$. The vertices of each $V_{i}^{1}$ are matched by
-$M$ to at most $an$ vertices; conditioning on their number, these
+$M$ to at most $vn$ vertices; conditioning on their number, these
 are uniformly randomly chosen from $B$. The number of such vertices
 in $V_{j}^{2}$ is then hypergeometrically distributed, so with probability
 $1-e^{\Omega\left(n\right)}$ (see for example \cite[Theorem 2.10]{JLR00})
-there are at least $\left(ab+\xi\left(\alpha\right)\right)n$ edges
+there are at most $\left(v^{2}+\varepsilon\right)n$ edges
 of $M$ between $V_{i}^{1}$ and $V_{j}^{2}$. By the union bound, a.a.s.
-there are at most $\left(ab+\xi\left(\alpha\right)\right)n$ edges
-of $M$ between every pair $V_{i}^{1}$, $V_{j}^{2}$. That is, $M$ typically 
+there are at most $\left(v^{2}+\varepsilon\right)n$ edges
+of $M$ between every pair $V_{i}^{1}$, $V_{j}^{2}$. That is, $M$ typically
 spreads out evenly between the clusters. We assume this holds for
 the remainder of the proof.
 
 Consider any $W\subset A$ with $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$.
-For each $i$ let $\pi_{i}=\left|V_{i}^{1}\cap W\right|/\left(an\right)$,
+For each $i$ let $\pi_{i}=\left|V_{i}^{1}\cap W\right|/\left(vn\right)$,
 and let $D$ be the set of clusters $V_{i}^{1}$ with $\pi_{i}\ge\varepsilon$.
 If $\varepsilon$ is small, $D$ must be nonempty. Now, if $V_{j}^{2}\in N_{C}\left(D\right)$
 then by $\varepsilon$-regularity there are edges in $G'$ from $W$
-to at least $\left(1-\varepsilon\right)bn$ vertices of $V_{j}^{2}$.
+to at least $\left(1-\varepsilon\right)vn$ vertices of $V_{j}^{2}$.
 It follows that if $\left|N_{C}\left(D\right)\right|=k$ (as would
 occur if $G$ was well-distributed) then $\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G'}\left(W\right)\right|\ge\left(1-\varepsilon\right)\left(n-\left|V_{0}^{2}\right|\right)\ge\left|W\right|$
 for small $\varepsilon$, and we are done.
 
-Otherwise, choose $E\subseteq N\left(D\right)$ with $\left|E\right|=\alpha'k$
-and let $S$ contain the vertices in the clusters of $E$. By the
-same $\varepsilon$-regularity argument, $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'k\left(1-\varepsilon\right)bn\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
+Otherwise, choose $F\subseteq N\left(D\right)$ with $\left|F\right|=\alpha'k$
+and let $S$ contain the vertices in the clusters of $F$. By the
+same $\varepsilon$-regularity argument, $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'k\left(1-\varepsilon\right)vn\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
+Since $\left|M\right|=\left(1-\xi\left(\alpha\right)\right)n$, each
+$V_{i}^{1}\cap W$ has at least $\left(\pi_{i}v-\xi\left(\alpha\right)\right)n$
+neighbours in $M$, and at most $\alpha'k\left(v^{2}+\varepsilon\right)n$
+of these are in $S$. So, 
+\begin{align*}
+\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in D}\left(\pi_{i}v-\xi\left(\alpha\right)-\alpha'k\left(v^{2}+\varepsilon\right)\right)n\\
+ & \ge\left|W\right|-\varepsilon n-\left|D\right|\left(\xi\left(\alpha\right)+\alpha'k\left(v^{2}+\varepsilon\right)\right)n.
+\end{align*}
 Since $\left|N_{C}\left(D\right)\right|<k$, there is $V_{j}^{2}$
 outside $N_{C}\left(D\right)$, and this $V_{j}^{2}$ must have $\alpha'k$
-neighbours outside $D$ in $C$, so $\left|D\right|\le\left(1-\alpha'\right)k$.
-Since $\left|M\right|=\left(1-\xi\left(\alpha\right)\right)n$, each
-$V_{i}^{1}\cap W$ has at least $\left(\pi_{i}a-\xi\left(\alpha\right)\right)n$
-neighbours in $M$, and at most $\alpha'k\left(ab+\xi\left(\alpha\right)\right)n$
-of these are in $S$. So,
+neighbours outside $D$ in $C$, so $\left|D\right|\le\left(1-\alpha'\right)k$
+and therefore $\left|D\right|\alpha'kv^{2}\le\left(1-\alpha'\right)\alpha'$. Since $k=O\left(1\right)$, it follows that
 \begin{align*}
-\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in D}\left(\pi_{i}a-\xi\left(\alpha\right)\right)n-\left|D\right|\left(\alpha'k\left(ab+\xi\left(\alpha\right)\right)\right)n\\
- & \ge\left|W\right|-\varepsilon n-\left(1-\alpha'\right)\alpha'\left(1-\varepsilon\right)^{2}-k^{2}\xi\left(\alpha\right)n
+\left|N_{G\cup M}\left(W\right)\right| & \ge\left|N_{G'}\left(W\right)\cap S\right|+\left|N_{M}\left(W\right)\backslash S\right|\\
+ & \ge\alpha'n+\left|W\right|-\left(1-\alpha'\right)\alpha' n+O\left(\varepsilon+\varepsilon^{2}+\xi\left(\alpha\right)\right)n.
 \end{align*}
-and
-\[
-\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|+\left(\alpha'\left(1-\varepsilon\right)^{2}-\varepsilon-\left(1-\alpha'\right)\alpha'\left(1-\varepsilon\right)^{2}-k^{2}\xi\left(\alpha\right)\right)n.
-\]
-
-
 If $\varepsilon$ is chosen to be small enough relative to $\alpha$
 and $\xi\left(\alpha\right)$ chosen to be small enough relative to
 $K$, then this gives $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$.
@@ -592,31 +598,31 @@ the hypergraph $B$ with its edge set). We put an edge between $a\in A$
 and $\left\{ b_{1},\dots,b_{k-1}\right\} \in B$ if $\left\{ a,b_{1},\dots,b_{k-1}\right\} $
 is an edge in $H$.
 
-The significance of $G_{A,B}\left(H\right)$ is that if $B$ is a
-perfect matching or loose Hamilton cycle on $V\left(H\right)\backslash A$,
-and if $G_{A,B}\left(H\right)$ has a large matching $M$, then the
-edges of $M$ correspond to a large matching (respectively, a large
-sub-cycle) in $H$. Conversely, if $H$ has a large matching or Hamilton
-cycle (as provided by \ref{lem:hypergraph-almost-object}), then there
+Each edge in $G_{A,B}\left(H\right)$ corresponds to an edge of $H$. The significance of our definition of $G_{A,B}\left(H\right)$ is that if the hypergraph $B$ is chosen to be a perfect matching (respectively, loose Hamilton cycle) on its vertex set $V\left(H\right)\backslash A$, and if $G_{A,B}\left(H\right)$ has a large matching $M$, then the edges of $M$ correspond to a large matching (respectively, large sub-cycle) in $H$.
+Conversely, if $H$ has a large matching or sub-cycle, then there
 is a set $A$ and a perfect matching (respectively, loose Hamilton
 cycle) $B$ such that $G_{A,B}\left(H\right)$ has a large matching.
 
-By the symmetry of the distribution of $R$, we can assume $A$ and
-$B$ are uniformly random. We give one final lemma, establishing that
-the density of $H$ corresponds a.a.s. to the density of $G_{A,B}\left(H\right)$.
+For any $\varepsilon>0$, if $\chypmat\left(\alpha\right)$ or $\chypham\left(\alpha\right)$
+is large enough, \ref{lem:hypergraph-almost-object} ensures the a.a.s.
+existence of a matching or sub-cycle of size $\left(1-\varepsilon\right)n$
+in $R$, which means there is an $n$-vertex set $A$ and a perfect matching
+or loose Hamilton cycle $B$ on $V\left(A\right)\backslash H$ such that $G_{A,B}\left(R\right)$ contains
+a matching of size $\left(1-\varepsilon\right)n$. If there are multiple possible choices for $A$ and $B$, choose one uniformly at random. Since the distribution of $R$ is symmetric with respect to permutations of the vertex set, $A$ is a uniformly random $n$-vertex set and $B$ is a uniformly random perfect matching or Hamilton cycle on the remaining vertices.
+
+We give one final lemma, establishing that $G_{A,B}\left(H\right)$ is a.a.s. dense if $H$ is.
 \begin{lem}
-\label{lem:hypergraph-bipartite-degree-transfer}$ $
+\label{lem:hypergraph-bipartite-degree-transfer}There is $\a\left(\alpha\right)>0$ such that the following
+holds.
 
 \begin{enumerate}[topsep=0px,label=(\alph*)]
 
-\item{There is $\amat\left(\alpha\right)>0$ such that the following
-holds. Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}(a),
+\item{Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}(a),
 let $A$ be a uniformly random set of $n$ vertices, and let $B$
 be a uniformly random perfect matching on $V\left(H\right)\backslash A$.
 Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree $\amat\left(\alpha\right)n$.}
 
-\item{There is $\aham\left(\alpha\right)>0$ such that the following
-holds. Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}(b),
+\item{Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}(b),
 let $A$ be a uniformly random set of $n$ vertices, and let $B$
 be a uniformly random loose Hamilton cycle on $V\left(H\right)\backslash A$.
 Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree $\aham\left(\alpha\right)n$.}
@@ -624,29 +630,29 @@ Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree $\aham\left(\alpha\right)
 \end{enumerate}\end{lem}
 \begin{proof}
 [Proof of \ref{lem:hypergraph-bipartite-degree-transfer}(a)]It is
-helpful to conceptualize the randomness in a certain way. Let
+helpful to realize the uniform distribution of $A$ and $B$ in a certain way. Let
 \[
-a_{1},\dots,a_{n},\, b_{1}^{1},\dots,b_{k}^{1},\, b_{1}^{2},\dots,b_{k}^{n}
+a_{1},\dots,a_{n},\, b_{1}^{1},\dots,b_{k-1}^{1},\, b_{1}^{2},\dots,b_{k-1}^{n}
 \]
 be a uniformly random ordering of $V\left(H\right)$. Let $A=\left\{ a_{1},\dots,a_{n}\right\} $,
 let $b^{i}=\left\{ b_{1}^{i},\dots,b_{k}^{i}\right\} $ and let $B=\left\{ b^{1},\dots,b^{n}\right\} $.
 
-First, condition on some $b=b^{i}$. Note that $\Pr\left(b\cup\left\{ a_{1}\right\} \in E\left(H\right)\right)\ge\delta_{k-1}\left(H\right)/n$
+First, condition on some $b\in B$. Note that $\Pr\left(b\cup\left\{ a_{1}\right\} \in E\left(H\right)\right)\ge\delta_{k-1}\left(H\right)/n$
 and more generally
 \[
-\Pr\left(b\cup\left\{ a_{j}\right\} \in E\left(H\right)\mid a_{1},\dots,a_{j}\right)\ge\left(\delta_{k-1}\left(H\right)-j\right)/n\ge\alpha/2
+\Pr\left(b\cup\left\{ a_{j+1}\right\} \in E\left(H\right)\mid a_{1},\dots,a_{j}\right)\ge\left(\delta_{k-1}\left(H\right)-j\right)/n\ge\alpha/2
 \]
 for $j\le\alpha n/2$. By a Chernoff bound, $d_{G_{H}}\left(b\right)\ge\alpha^{2}n/8$
 with probability $1-e^{-\Omega\left(n\right)}$. With the union bound,
 this a.a.s. holds for all $b$.
 
 Now, $\delta_{1}\left(H\right)\ge\alpha'n^{k-1}$ for some $\alpha'>0$
-depending on $\alpha$. Condition on some $a=a_{i}$. Each $b_{j}^{i}$
-shares at most ${n \choose k-2}$ edges with $a_{i}$, so if $j\le2\sqrt{\amat\left(\alpha\right)}n$
+depending on $\alpha$. Condition on some $a\in A$. Each $b_{j}^{i}$
+shares at most ${kn \choose k-2}$ edges with $a_{i}$, so if $j\le2\sqrt{\amat\left(\alpha\right)}n$
 for sufficently small $\amat\left(\alpha\right)$ and large $n$,
 then
 \[
-\Pr\left(\left\{ a\right\} \cup b^{j+1}\in E\left(H\right)\mid b^{1},\dots,b^{j}\right)\ge\left(\delta_{1}\left(H\right)-kj{n \choose k-2}\right)\left.\vphantom{\sum}\right/{n \choose k-1}\ge\sqrt{\amat\left(\alpha\right)}.
+\Pr\left(\left\{ a\right\} \cup b^{j+1}\in E\left(H\right)\mid b^{1},\dots,b^{j}\right)\ge\left(\delta_{1}\left(H\right)-\left(k-1\right)j{kn \choose k-2}\right)\left.\vphantom{\sum}\right/{kn \choose k-1}\ge\sqrt{\amat\left(\alpha\right)}.
 \]
 
 
@@ -666,21 +672,18 @@ and let $B=\left\{ b^{1},\dots,b^{n}\right\} $.
 
 With exactly the same proof as for \ref{lem:hypergraph-bipartite-degree-transfer}(a),
 there is small $\aham\left(\alpha\right)$ such that a.a.s. $d_{G_{H}}\left(b\right)\ge\aham\left(\alpha\right)n$
-for all $b$. Next, condition on some $a=a_{i}$. For small $\zeta\left(\alpha\right)$
+for all $b\in B$. Next, condition on some $a\in A$. For small $\zeta\left(\alpha\right)$
 and $j\le2\sqrt{\aham\left(\alpha\right)}n$,
 \[
-\Pr\left(\left\{ a\right\} \cup b^{j}\in E\left(H\right)\mid b^{0},\dots,b^{j-1}\right)\ge\left(\delta_{2}\left(H\right)-\left(k-2\right)j{n \choose k-3}\right)\left.\vphantom{\sum}\right/{n \choose k-2}\ge\sqrt{\aham\left(\alpha\right)},
+\Pr\left(\left\{ a\right\} \cup b^{j}\in E\left(H\right)\mid b^{0},\dots,b^{j-1}\right)\ge\left(\delta_{2}\left(H\right)-\left(k-2\right)j{\left(k-1\right)n \choose k-3}\right)\left.\vphantom{\sum}\right/{ \left(k-1\right)n \choose k-2}\ge\sqrt{\aham\left(\alpha\right)},
 \]
-
+\
 
 so a.a.s. each $d_{G_{H}}\left(a\right)\ge\aham\left(\alpha\right)n$.
 \end{proof}
-We have established that $G_{A,B}\left(H\right)$ is a bipartite graph
-with linear minimum degree. If we condition on $A$ and $B$, then
-$G_{A,B}\left(R\right)$ a.a.s. provides a uniformly random large
-matching between $A$ and $B$, so \ref{lem:bipartite-plus-big-matching-perfect}
-ensures the existence of a perfect matching in $G_{A,B}\left(H\cup R\right)$,
-corresponding to a perfect matching or loose Hamilton cycle in $H\cup R$.
+We have established that if $\chypmat\left(\alpha\right)$ or $\chypham\left(\alpha\right)$
+is large enough then $G_{A,B}\left(H\right)$ is a.a.s. a bipartite graph with minimum degree $\a\left(\alpha\right)n$, and $G_{A,B}\left(H\right)$ a.a.s. has a matching $M$ of size $\left(1-\xi\left(\a\left(\alpha\right)\right)\right)n$. If there are multiple possible choices of $M$, choose one uniformly at random. If we condition on $A$ and $B$, then by symmetry $M$ is a uniformly random $\left(1-\xi\left(\a\left(\alpha\right)\right)\right)n$-vertex matching between $A$ and $B$. Then \ref{lem:bipartite-plus-big-matching-perfect}
+ensures the existence of a perfect matching in $G_{A,B}\left(H\cup R\right)$. This corresponds to a perfect matching or loose Hamilton cycle in $H\cup R$.
 
 
 \section{\label{sec:digraphs}Pancyclicity in dense digraphs}
@@ -1151,7 +1154,7 @@ proved that $P$ has diameter at most 8).
 \section{Concluding Remarks}
 
 We have determined the amount of random perturbation required to make
-a tournament, dense digraph or uniform hypergraph Hamiltonian. In
+a tournament, dense digraph or dense uniform hypergraph Hamiltonian. In
 the process, we have proved a general lemma about pancyclicity in
 highly connected digraphs, and demonstrated an interesting application
 of the Szemer\'edi regularity lemma. There are a few important questions
