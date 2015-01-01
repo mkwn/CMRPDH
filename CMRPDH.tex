@@ -45,6 +45,7 @@
 \newtheorem{rem}[thm]{\protect\remarkname}
 \theoremstyle{remark}
 \newtheorem{claim}[thm]{\protect\claimname}
+\crefname{enumi}{Part}{Parts}
 
 % equation cref format
 \crefformat{equation}{#2(#1)#3}
@@ -393,49 +394,79 @@ cycle by adding edges.
 \begin{enumerate}[topsep=0px,label=(\alph*)]
 
 \item{\label{itm:hypergraph-large-matching}There is $b_{k}^{\mathrm{M}}\left(\varepsilon\right)$ such
-that $R\in\HH_{k}\left(kn,b_{k}^{\mathrm{M}}\left(\varepsilon\right)n\right)$
+that $R^{\mathrm{M}}\in\HH_{k}\left(kn,b_{k}^{\mathrm{M}}\left(\varepsilon\right)n\right)$
 a.a.s. has a matching of $\left(1-\varepsilon\right)n$ edges.}
 
 \item{\label{itm:hypergraph-large-subcycle}For any $\varepsilon>0$, there is $b_{k}^{\mathrm{H}}\left(\varepsilon\right)$
-such that $R\in\HH_{k}\left(\left(k-1\right)n,b_{k}^{\mathrm{H}}\left(\varepsilon\right)n\right)$
+such that $R^{\mathrm{H}}\in\HH_{k}\left(\left(k-1\right)n,b_{k}^{\mathrm{H}}\left(\varepsilon\right)n\right)$
 a.a.s. has a sub-cycle with $\left(1-\varepsilon\right)n$ edges.}
 
 \end{enumerate}\end{lem}
-\begin{proof}[Proof of \ref{lem:hypergraph-almost-object}\oldref{itm:hypergraph-large-matching}]
-Consider a matching of maximum size. There can be no edge between
-two unmatched vertices because this would allow us to extend the matching,
-contradicting maximality. It suffices to prove that a.a.s. every set
-of $2\varepsilon n$ vertices spans at least one edge in $R$, because
-this would prove there are fewer than $2\varepsilon n$ vertices unmatched
-after our maximum matching, hence our matching has at least $\left(1-\varepsilon\right)n$
-edges.
-
-As per the discussion in the introduction, it is equivalent to consider
-the model for $R$ where each edge is independently present with probability
-$p=b_{k}^{\mathrm{M}}\left(\varepsilon\right)n/{kn \choose k}$. In
-a particular set of $2\varepsilon n$ vertices the probability no
-edges are present is 
-\[
-\left(1-p\right)^{{2\varepsilon n \choose k}}\le\exp\left(-p{2\varepsilon n \choose k}\right)=o\left({kn \choose 2\varepsilon n}\right)
-\]
-for large $b_{k}^{\mathrm{M}}\left(\varepsilon\right)$. So, by the
-union bound a.a.s. every set of $2\varepsilon n$ vertices spans an
-edge, as required.
-\end{proof}
-
-\begin{proof}[Proof of \ref{lem:hypergraph-almost-object}\oldref{itm:hypergraph-large-subcycle}]
+\begin{proof}
 First we define a \emph{loose path} by analogy with loose cycles:
 a $k$-uniform loose path is a hypergraph with a vertex ordering such
 that every edge consists of $k$ consecutive vertices and every pair
-of consecutive edges intersects in exactly one vertex. A sub-cycle
-is a loose Hamilton cycle or a disjoint union of loose paths, but
-a union of disjoint loose paths may not be a sub-cycle if it has so
-many paths that there are not enough vertices left to link them together.
+of consecutive edges intersects in exactly one vertex. A matching
+is a collection of loose paths of length 1, and a sub-cycle is any
+collection of loose paths with enough vertices left over to link them
+together into a cycle.
 
-It takes $\left(k-2\right)q$ additional vertices to link $q$ loose
-paths together into a loose cycle, and a union of $q$ disjoint loose
-paths of length $\ell\ge1$ has $\left(\ell\left(k-1\right)+1\right)q$
-vertices. So, such a union of paths is a sub-cycle precisely when
+We will first prove that for any $\ell\ge1$ and $\zeta>0$, there
+is $b\left(\ell,\zeta\right)$ such that the following holds. In a
+random hypergraph $R\in\HH_{k}\left(kn,b\left(\ell,\zeta\right)n\right)$,
+a.a.s. every set of $\zeta N$ vertices contains a loose path of length
+$\ell$. Parts \oldref{itm:hypergraph-large-matching} and \oldref{itm:hypergraph-large-subcycle} of the Lemma will follow from this fact.
+
+The probability that a uniformly random pair of $k$-edges both include
+a particular pair of vertices is 
+\[
+O\left(\left(\left.{kn \choose k-2}\right/{kn \choose k}\right)^{2}\right)=O\left(n^{-4}\right).
+\]
+There are $O\left(n^{2}\right)$ pairs of edges and $O\left(n^{2}\right)$
+pairs of vertices in $R$, so the expected number of pairs of vertices
+which are contained in more than one edge (have degree more than one)
+is $O\left(1\right)$. By Markov's inequality, there are a.a.s. less
+than $\sqrt{\zeta n/2}$ such pairs of vertices. So if we delete a
+set $D$ of $\zeta n/2$ vertices then every pair of vertices has
+degree at most one.
+
+As per the discussion in the introduction, it is equivalent to consider
+the model for $R$ where each edge is independently present with probability
+$p=b\left(\ell,\zeta\right)n/{kn \choose k}$. Let $d=k\ell$. For
+large $b\left(\ell,\zeta\right)$, by the Chernoff bound then a union
+bound, a.a.s. every set of $\zeta n/2$ vertices spans at least $d\zeta n/2$
+edges, which is to say that the average 1-degree in the induced subhypergraph
+is at least $kd$. We assume this holds for the remainder of the proof.
+
+Every set $S$ of $\zeta n$ vertices includes a set of $\zeta n/2$
+vertices disjoint from $D$, which has average 1-degree at least $kd$.
+Deleting a vertex of degree less than $d$ increases the average degree
+of the induced subhypergraph, so $S\backslash D$ includes a set of
+vertices spanning a subhypergraph $Q$ of $R$ with minimum degree
+at least $d$. Let $P$ be a longest loose path in $Q$ and let $v$
+be a vertex in one of the extremal edges of $P$. Since $P$ cannot
+be extended to a longer path, each of the (at least $d$) edges containing
+$v$ also contains another vertex $u$ of $P$. But because $Q$ contains
+no vertices from $D$, there is at most
+one edge containing both $v$ and $u$, so $P$ must have at least
+$d$ vertices and therefore have length at least $\ell$. This proves
+our claim.
+
+We now prove \ref{itm:hypergraph-large-matching}. Consider a matching of maximum size in $R^{\mathrm{M}}$.
+There can be no edge between two unmatched vertices because this would
+allow us to extend the matching, contradicting maximality. Applying
+our claim with $\zeta=2\varepsilon$ and $\ell=1$, we can see that
+if $b_{k}^{\mathrm{M}}\left(\varepsilon\right)$ is large enough then
+a.a.s. every set of $2\varepsilon n$ vertices spans at least one
+edge in $R$. This proves there are fewer than \emph{$2\varepsilon n$}
+vertices unmatched after our maximum matching, hence our matching
+has at least $\left(1-\varepsilon\right)n$ edges.
+
+Finally we prove \ref{itm:hypergraph-large-subcycle}, using roughly the same idea. It takes $\left(k-2\right)q$ additional
+vertices to link $q$ loose paths together into a loose cycle, and
+a union of $q$ disjoint loose paths of length $\ell\ge1$ has $\left(\ell\left(k-1\right)+1\right)q$
+vertices. So, such a union of paths is a sub-cycle in $R^{\mathrm{H}}$
+precisely when 
 \[
 \left(k-2\right)q+\left(\ell\left(k-1\right)+1\right)q\le\left(k-1\right)n,
 \]
@@ -444,42 +475,12 @@ for large $\ell\left(\varepsilon\right)$, a union of $n/\left(\ell\left(\varepsi
 length-$\ell\left(\varepsilon\right)$ loose paths is a sub-cycle
 with more than $\left(1-\varepsilon\right)n$ edges.
 
-The rest of the proof will proceed in roughly the same way as for \ref{lem:hypergraph-almost-object}\oldref{itm:hypergraph-large-matching}. We will prove that every set of $\left(k-1\right)\varepsilon n$
-vertices contains a loose path of length $\ell\left(\varepsilon\right)$, so a maximum-size collection of disjoint $\ell\left(\varepsilon\right)$-length
-loose paths in $R$ has at least $\left(1-\varepsilon\right)n$
-edges. By the discussion above, that means it includes a sub-cycle with at least $\left(1-\varepsilon\right)n$ edges.
-
-Let $n'=\left(k-1\right)\varepsilon n/2$. The probability that a
-uniformly random pair of $k$-edges both include a particular pair
-of vertices is
-\[
-O\left(\left({\left(k-1\right)n \choose k-2}/{\left(k-1\right)n \choose k}\right)^{2}\right)=O\left(n^{-4}\right).
-\]
-There are $O\left(n^{2}\right)$ pairs of edges and $O\left(n^{2}\right)$
-pairs of vertices, so the expected number of pairs of vertices which
-are contained in more than one edge (have degree more than one) is
-$O\left(1\right)$. By Markov's inequality, there are a.a.s. less
-than $\sqrt{n'}$ such pairs of vertices. So if we delete a set $D$
-of $n'$ vertices then every pair of vertices has degree at most one.
-
-As in the proof of \ref{lem:hypergraph-almost-object}\oldref{itm:hypergraph-large-matching}, we can assume that each edge of $R$ is independently present with probability
-$p=b_{k}^{\mathrm{H}}\left(\varepsilon\right)n/{\left(k-1\right)n \choose k}$.
-Let $d=k\ell\left(\varepsilon\right)$. For large $b_{k}^{\mathrm{H}}\left(\varepsilon\right)$,
-by the Chernoff bound then the union bound, a.a.s. every set of $n'$ vertices spans at
-least $dn'$ edges, which is to say that the average 1-degree in every induced $n'$-vertex subhypergraph is at least $kd$. We assume this holds for
-the remainder of the proof.
-
-Every set $S$ of $\left(k-1\right)\varepsilon n$ vertices includes
-a set of $n'$ vertices disjoint from $D$, which has average 1-degree
-at least $kd$. Deleting a vertex of degree less than $d$ increases
-the average degree of the induced subhypergraph, so $S\backslash D$
-includes a set of vertices spanning a subhypergraph $Q$ of $R$ with
-minimum degree at least $d$. Let $P$ be a longest loose path in
-$Q$ and let $v$ be a vertex in one of the extremal edges of $P$.
-Since $P$ cannot be extended to a longer path, each of the (at least $d$) edges
-containing $v$ also contains another vertex of $P$. But because $Q$ has no vertices from $D$, for each vertex $p$ of $P$ there is at
-most one edge containing both $v$ and $p$, so $P$ must have at
-least $d$ vertices and therefore have length at least $\ell\left(\varepsilon\right)$.
+Consider a maximum-size collection of disjoint length-$\ell\left(\varepsilon\right)$
+loose paths in $R^{\mathrm{H}}$. With $\zeta=\left(k-2\right)\varepsilon$ and
+$\ell=\ell\left(\varepsilon\right)$, our claim proves that if $b_{k}^{\mathrm{M}}\left(\varepsilon\right)$ is large enough then our maximal
+collection of loose paths has at least $\left(1-\varepsilon\right)n$
+edges, which means it includes a sub-cycle with at least $\left(1-\varepsilon\right)n$
+edges.
 \end{proof}
 The second step to prove \ref{thm:hypergraph-theorems} is to show that a dense
 hypergraph plus a large partial structure a.a.s. gives the structure
