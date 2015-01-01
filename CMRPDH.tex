@@ -23,7 +23,7 @@
 
 % cleveref allows \ref{thm:asdf} instead of Theorem~\ref{thm:asdf}
 \usepackage[nameinlink,capitalise,noabbrev]{cleveref}
-\AtBeginDocument{\renewcommand{\ref}[1]{\cref{#1}}}
+\AtBeginDocument{\let\oldref\ref \renewcommand{\ref}[1]{\cref{#1}}}
 
 \theoremstyle{plain}
 \newtheorem{thm}{\protect\theoremname}
@@ -115,7 +115,7 @@
 by grant 912/12 from the Israel Science Foundation.}\and
 Matthew Kwan\thanks{Department of Mathematics, ETH, 8092 Zurich. Email: \href{mailto:matthew.kwan@math.ethz.ch}
 {\nolinkurl{matthew.kwan@math.ethz.ch}}}\and
-Benny Sudakov\thanks{Department of Mathematics, ETH, 8092 Zurich. Email: \href{mailto:benjamin.sudakov@math.ethz.ch}{\nolinkurl{benjamin.sudakov@math.ethz.ch}}. Research supported in part by SNSF grant 200021-149111 and by a USA-Israel BSF grant.}}
+Benny Sudakov\thanks{Department of Mathematics, ETH, 8092 Zurich. Email: \href{mailto:benjamin.sudakov@math.ethz.ch}{\nolinkurl{benjamin.sudakov@math.ethz.ch}}. Research supported in part by SNSF grant 200021-149111.}}
 
 \maketitle
 \global\long\def\RR{\mathbb{R}}
@@ -249,12 +249,12 @@ the vertex set $\range n$.
 
 \begin{enumerate}[topsep=0px,label=(\alph*)]
 
-\item{There is $\chypmat\left(\alpha\right)$ such that if $H$ is
+\item{\label{itm:hypergraph-matching-theorem}There is $\chypmat\left(\alpha\right)$ such that if $H$ is
 a $k$-uniform hypergraph on $\left[kn\right]$ with $\delta_{k-1}\left(H\right)\ge\alpha n$,
 and $R\in\HH_{k}\left(kn,\chypmat\left(\alpha\right)n\right)$, then
 $H\cup R$ a.a.s. has a perfect matching.}
 
-\item{There is $\chypham\left(\alpha\right)$ such that if $H$ is
+\item{\label{itm:hypergraph-cycle-theorem}There is $\chypham\left(\alpha\right)$ such that if $H$ is
 a $k$-uniform hypergraph on $\left[\left(k-1\right)n\right]$with
 $\delta_{k-1}\left(H\right)\ge\alpha n$, and $R\in\HH\left(\left(k-1\right)n,\chypham\left(\alpha\right)n\right)$,
 then $H\cup R$ a.a.s. has a loose Hamilton cycle.}
@@ -380,7 +380,7 @@ bipartite hypergraph'' which has two parts of sizes $n$ and
 $2kn$, and has all possible $k$-edges that contain at least one
 vertex from each part. Only $2n$ of these edges can contribute
 to a loose Hamilton cycle, so a linear number must be added to complete
-the necessary $\left(2k+1\right)n/\left(k-1\right)$ edges. Similarly, this graph contains only $n$ out ouf the $\left(2k+1\right)n/k$ required edges in a perfect matching.
+the necessary $\left(2k+1\right)n/\left(k-1\right)$ edges. Similarly, this graph contains only $n$ out of the $\left(2k+1\right)n/k$ required edges in a perfect matching.
 
 Now we proceed to the proof of \ref{thm:hypergraph-theorems}, which
 will follow from a sequence of lemmas. The first step is to show that
@@ -392,82 +392,94 @@ cycle by adding edges.
 
 \begin{enumerate}[topsep=0px,label=(\alph*)]
 
-\item{There is $b_{k}^{\mathrm{M}}\left(\varepsilon\right)$ such
+\item{\label{itm:hypergraph-large-matching}There is $b_{k}^{\mathrm{M}}\left(\varepsilon\right)$ such
 that $R\in\HH_{k}\left(kn,b_{k}^{\mathrm{M}}\left(\varepsilon\right)n\right)$
-a.a.s. has a matching of size $\left(1-\varepsilon\right)n$.}
+a.a.s. has a matching of $\left(1-\varepsilon\right)n$ edges.}
 
-\item{For any $\varepsilon>0$, there is $b_{k}^{\mathrm{H}}\left(\varepsilon\right)$
+\item{\label{itm:hypergraph-large-subcycle}For any $\varepsilon>0$, there is $b_{k}^{\mathrm{H}}\left(\varepsilon\right)$
 such that $R\in\HH_{k}\left(\left(k-1\right)n,b_{k}^{\mathrm{H}}\left(\varepsilon\right)n\right)$
-a.a.s. has a sub-cycle of size $\left(1-\varepsilon\right)n$.}
+a.a.s. has a sub-cycle with $\left(1-\varepsilon\right)n$ edges.}
 
 \end{enumerate}\end{lem}
-\begin{proof}
-[Proof of \ref{lem:hypergraph-almost-object}(a)]To realize the distribution
-$\HH_{k}\left(kn,\beta_{k}'\left(\varepsilon\right)n\right)$, imagine
-that independently uniformly random edges are repeatedly dropping
-into $R$, until we have seen $b_{k}^{\mathrm{M}}\left(\varepsilon\right)$
-distinct edges. We iteratively build a matching $M$ greedily. If
-a new edge $e$ drops into $R$ which does not share any vertices
-with the edges in $M$ so far, then add $e$ to $M$. If we have already
-added $i$ edges to $M$, then the probability we will add the next
-random edge is
+\begin{proof}[Proof of \ref{lem:hypergraph-almost-object}\oldref{itm:hypergraph-large-matching}]
+Consider a matching of maximum size. There can be no edge between
+two unmatched vertices because this would allow us to extend the matching,
+contradicting maximality. It suffices to prove that a.a.s. every set
+of $2\varepsilon n$ vertices spans at least one edge in $R$, because
+this would prove there are fewer than $2\varepsilon n$ vertices unmatched
+after our maximum matching, hence our matching has at least $\left(1-\varepsilon\right)n$
+edges.
+
+As per the discussion in the introduction, it is equivalent to consider
+the model for $R$ where each edge is independently present with probability
+$p=b_{k}^{\mathrm{M}}\left(\varepsilon\right)n/{kn \choose k}$. In
+a particular set of $2\varepsilon n$ vertices the probability no
+edges are present is 
 \[
-p_{i}={kn-ki \choose k}\left.\vphantom{\sum}\right/{kn \choose k}=\Omega\left(\left(\frac{n-i}{n}\right)^{k}\right).
+\left(1-p\right)^{{2\varepsilon n \choose k}}\le\exp\left(-p{2\varepsilon n \choose k}\right)=o\left({kn \choose 2\varepsilon n}\right)
 \]
-The number of random edges required to build a matching of size $\left(1-\varepsilon\right)n$
-therefore has the distribution of
-\[
-X=\sum_{i=1}^{\left(1-\varepsilon\right)n}X_{i},
-\]
-where each $X_{i}$ is independently geometrically distributed with
-success probability $p_{i}$. By Chebyshev's inequality or a Chernoff
-bound, $X$ is a.a.s. close to its expectation, which is at most
-\[
-O\left(\sum_{i=1}^{\left(1-\varepsilon\right)n}n^{k}/\left(n-i\right)^{k}\right)=O\left(n^{k}\int_{\varepsilon n}^{\infty}\frac{1}{x^{k}}dx\right)=O\left(n\right).
-\]
-So, if $b_{k}^{\mathrm{M}}\left(\varepsilon\right)$ is large enough
-then a.a.s. $\left|M\right|\ge\left(1-\varepsilon\right)n$.
+for large $b_{k}^{\mathrm{M}}\left(\varepsilon\right)$. So, by the
+union bound a.a.s. every set of $2\varepsilon n$ vertices spans an
+edge, as required.
 \end{proof}
 
-\begin{proof}
-[Proof of \ref{lem:hypergraph-almost-object}(b)]A sub-cycle is a
-loose Hamilton cycle or a disjoint union of ``loose paths'', but
-a union of disjoint paths may not be a sub-cycle if it has so many
-paths that there are not enough vertices left to link them together.
-A union of $j$ paths (which have length greater than zero) with a
-total of $i$ edges is a sub-cycle precisely when $i+j\le n$. Call
-such sub-cycles \emph{proper }sub-cycles.
+\begin{proof}[Proof of \ref{lem:hypergraph-almost-object}\oldref{itm:hypergraph-large-subcycle}]
+First we define a \emph{loose path} by analogy with loose cycles:
+a $k$-uniform loose path is a hypergraph with a vertex ordering such
+that every edge consists of $k$ consecutive vertices and every pair
+of consecutive edges intersects in exactly one vertex. A sub-cycle
+is a loose Hamilton cycle or a disjoint union of loose paths, but
+a union of disjoint loose paths may not be a sub-cycle if it has so
+many paths that there are not enough vertices left to link them together.
 
-As in the proof of \ref{lem:hypergraph-almost-object}, imagine that
-independently uniformly random edges are repeatedly dropping into
-$R$. We build a proper sub-cycle $S$ greedily. Suppose we are at
-a point where $S$ has $i$ edges and $j$ paths, with $i\le\left(1-\varepsilon\right)n$.
-There are $\left(k-1\right)i+j\le\left(k-2\right)i+n$ vertices in
-the paths in $S$.
+It takes $\left(k-2\right)q$ additional vertices to link $q$ loose
+paths together into a loose cycle, and a union of $q$ disjoint loose
+paths of length $\ell\ge1$ has $\left(\ell\left(k-1\right)+1\right)q$
+vertices. So, such a union of paths is a sub-cycle precisely when
+\[
+\left(k-2\right)q+\left(\ell\left(k-1\right)+1\right)q\le\left(k-1\right)n,
+\]
+which simplifies to the condition $q\left(\ell+1\right)=n$. In particular,
+for large $\ell\left(\varepsilon\right)$, a union of $n/\left(\ell\left(\varepsilon\right)+1\right)$
+length-$\ell\left(\varepsilon\right)$ loose paths is a sub-cycle
+with more than $\left(1-\varepsilon\right)n$ edges.
 
-There are 3 kinds of edges we can add to $S$: an edge that starts
-a new loose path (``type 1''), an edge that extends an existing
-path (``type 2''), or an edge that joins two paths together (``type
-3''). We can only add a type 1 edge when $i+j\le n-2$, and can only
-add a type 2 edge when $i+j\le n-1$.
+The rest of the proof will proceed in roughly the same way as for \ref{lem:hypergraph-almost-object}\oldref{itm:hypergraph-large-matching}. We will prove that every set of $\left(k-1\right)\varepsilon n$
+vertices contains a loose path of length $\ell\left(\varepsilon\right)$, so a maximum-size collection of disjoint $\ell\left(\varepsilon\right)$-length
+loose paths in $R$ has at least $\left(1-\varepsilon\right)n$
+edges. By the discussion above, that means it includes a sub-cycle with at least $\left(1-\varepsilon\right)n$ edges.
 
-If $i+j\le n-2$ then there are at least
+Let $n'=\left(k-1\right)\varepsilon n/2$. The probability that a
+uniformly random pair of $k$-edges both include a particular pair
+of vertices is
 \[
-{\left(k-1\right)n-\left(\left(k-2\right)i+n\right) \choose k}={\left(k-2\right)\left(n-i\right) \choose k}=\Omega\left(\left(n-i\right)^{k}\right)
+O\left(\left({\left(k-1\right)n \choose k-2}/{\left(k-1\right)n \choose k}\right)^{2}\right)=O\left(n^{-4}\right).
 \]
-type-1 edges that could possibly be added. Otherwise, we must have
-$j>n-2-i\ge\varepsilon n-2$, so (identifying one vertex in an extremal
-edge of each path as ``eligible to be joined''), there are at least
-\[
-{j \choose 2}{\left(k-2\right)\left(n-i\right) \choose k-2}=\Omega\left(n^{2}\left(n-i\right)^{k-2}\right)=\Omega\left(\left(n-i\right)^{k}\right)
-\]
-type-3 edges that could be added. Combining both cases, we can see
-that if $S$ has $i\le\left(1-\varepsilon\right)n$ edges, then the
-next edge will be added with probability at least
-\[
-\Omega\left(\left(n-i\right)^{k}\right)\left.\vphantom{\sum}\right/{\left(k-1\right)n \choose k}=\Omega\left(\left(\frac{n-i}{n}\right)^{k}\right).
-\]
-We conclude with the same reasoning as the proof of \ref{lem:hypergraph-almost-object}(a).
+There are $O\left(n^{2}\right)$ pairs of edges and $O\left(n^{2}\right)$
+pairs of vertices, so the expected number of pairs of vertices which
+are contained in more than one edge (have degree more than one) is
+$O\left(1\right)$. By Markov's inequality, there are a.a.s. less
+than $\sqrt{n'}$ such pairs of vertices. So if we delete a set $D$
+of $n'$ vertices then every pair of vertices has degree at most one.
+
+As in the proof of \ref{lem:hypergraph-almost-object}\oldref{itm:hypergraph-large-matching}, we can assume that each edge of $R$ is independently present with probability
+$p=b_{k}^{\mathrm{H}}\left(\varepsilon\right)n/{\left(k-1\right)n \choose k}$.
+Let $d=k\ell\left(\varepsilon\right)$. For large $b_{k}^{\mathrm{H}}\left(\varepsilon\right)$,
+by the Chernoff bound then the union bound, a.a.s. every set of $n'$ vertices spans at
+least $dn'$ edges, which is to say that the average 1-degree in every induced $n'$-vertex subhypergraph is at least $kd$. We assume this holds for
+the remainder of the proof.
+
+Every set $S$ of $\left(k-1\right)\varepsilon n$ vertices includes
+a set of $n'$ vertices disjoint from $D$, which has average 1-degree
+at least $kd$. Deleting a vertex of degree less than $d$ increases
+the average degree of the induced subhypergraph, so $S\backslash D$
+includes a set of vertices spanning a subhypergraph $Q$ of $R$ with
+minimum degree at least $d$. Let $P$ be a longest loose path in
+$Q$ and let $v$ be a vertex in one of the extremal edges of $P$.
+Since $P$ cannot be extended to a longer path, each of the (at least $d$) edges
+containing $v$ also contains another vertex of $P$. But because $Q$ has no vertices from $D$, for each vertex $p$ of $P$ there is at
+most one edge containing both $v$ and $p$, so $P$ must have at
+least $d$ vertices and therefore have length at least $\ell\left(\varepsilon\right)$.
 \end{proof}
 The second step to prove \ref{thm:hypergraph-theorems} is to show that a dense
 hypergraph plus a large partial structure a.a.s. gives the structure
@@ -507,6 +519,8 @@ A pair of vertex sets $\left(V^{1},V^{2}\right)$ is said to be \emph{$\varepsilo
 if for any $U^{1},U^{2}$ with $U^{\ell}\subseteq V^{\ell}$ and $\left|U^{\ell}\right|\ge\varepsilon\left|V^{\ell}\right|$,
 we have $\left|d\left(U^{1},U^{2}\right)-d\left(V^{1},V^{2}\right)\right|\le\varepsilon$.
 
+\global\long\def\s{s}
+
 We will use a bipartite version of the regularity lemma (which can
 be deduced from say \cite[Theorem~2.3]{Tao05} in a similar way to
 \cite[Theorem~1.10]{KS96}). Let $\alpha'=\alpha/2$ and let $\varepsilon>0$
@@ -517,7 +531,7 @@ $A=V_{0}^{1}\cup\dots\cup V_{k}^{1}$ and $B=V_{0}^{2}\cup\dots\cup V_{k}^{2}$
 with $k\le K$, in such a way that the following conditions are satisfied.
 The ``exceptional'' clusters $V_{0}^{1}$ and $V_{0}^{2}$ both
 have fewer than $\varepsilon n$ vertices, and the non-exceptional
-clusters in $A$ and $B$ have equal size: $\left|V_{i}^{\ell}\right|=vn$.
+clusters in $A$ and $B$ have equal size: $\left|V_{i}^{\ell}\right|=\s n$.
 There is a subgraph $G'\subseteq G$ with minimum degree at least
 $\left(\alpha'+\varepsilon\right)n$ such that each pair of distinct
 clusters $V_{i}^{1},V_{j}^{2}$ ($i,j\ge1$) is $\varepsilon$-regular
@@ -528,9 +542,9 @@ are the non-exceptional clusters $V_{i}^{\ell}$, and whose edges
 are the pairs of clusters between which there is nonzero density in
 $G'$. The fact that $G$ is dense implies that $C$ is dense as well:
 note that in $G'$ each $V_{i}^{\ell}$ has at least $\left(\alpha'+\varepsilon\right)n\left|V_{i}^{\ell}\right|$
-edges to other clusters. There are at most $\varepsilon n\left|V_{i}^{\ell}\right|$
-edges to the exceptional cluster $V_{0}$ and at most $\left|V_{i}^{1}\right|\left|V_{i}^{2}\right|$
-edges to each other cluster. So, $d_{C}\left(V_{i}^{\ell}\right)\ge\left(\left(\alpha'+\varepsilon\right)n-\varepsilon n\right)vn/\left(vn\right)^{2}\ge\alpha'k$
+edges to other clusters. There are at most $\left(\varepsilon n\right)\left(\s n\right)$
+edges to the exceptional cluster $V_{0}$ and at most $\left(\s n\right)^{2}$
+edges to each other cluster. So, $d_{C}\left(V_{i}^{\ell}\right)\ge\left(\left(\alpha'+\varepsilon\right)n-\varepsilon n\right)\s n/\left(\s n\right)^{2}\ge\alpha'k$
 and $C$ has minimum degree at least $\alpha'k$.
 \begin{proof}
 [Proof of \ref{lem:bipartite-plus-big-matching-perfect}]We use Hall's
@@ -544,42 +558,42 @@ Apply our version of the regularity lemma. We first want to prove
 that the edges of $M$ a.a.s. ``spread out evenly'' between the
 $O\left(1\right)$ clusters. Fix some $V_{i}^{1}$ and $V_{j}^{2}$,
 with $i,j\ge1$. The vertices of each $V_{i}^{1}$ are matched by
-$M$ to at most $vn$ vertices; conditioning on their number, these
+$M$ to at most $\s n$ vertices; conditioning on their number, these
 are uniformly randomly chosen from $B$. The number of such vertices
 in $V_{j}^{2}$ is then hypergeometrically distributed, so with probability
 $1-e^{\Omega\left(n\right)}$ (see for example \cite[Theorem 2.10]{JLR00})
-there are at most $\left(v^{2}+\varepsilon\right)n$ edges
+there are at most $\left(\s^{2}+\varepsilon\right)n$ edges
 of $M$ between $V_{i}^{1}$ and $V_{j}^{2}$. By the union bound, a.a.s.
-there are at most $\left(v^{2}+\varepsilon\right)n$ edges
+there are at most $\left(\s^{2}+\varepsilon\right)n$ edges
 of $M$ between every pair $V_{i}^{1}$, $V_{j}^{2}$. That is, $M$ typically
 spreads out evenly between the clusters. We assume this holds for
 the remainder of the proof.
 
 Consider any $W\subset A$ with $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$.
-For each $i$ let $\pi_{i}=\left|V_{i}^{1}\cap W\right|/\left(vn\right)$,
+For each $i$ let $\pi_{i}=\left|V_{i}^{1}\cap W\right|/\left(\s n\right)$,
 and let $D$ be the set of clusters $V_{i}^{1}$ with $\pi_{i}\ge\varepsilon$.
 If $\varepsilon$ is small, $D$ must be nonempty. Now, if $V_{j}^{2}\in N_{C}\left(D\right)$
 then by $\varepsilon$-regularity there are edges in $G'$ from $W$
-to at least $\left(1-\varepsilon\right)vn$ vertices of $V_{j}^{2}$.
+to at least $\left(1-\varepsilon\right)\s n$ vertices of $V_{j}^{2}$.
 It follows that if $\left|N_{C}\left(D\right)\right|=k$ (as would
 occur if $G$ was well-distributed) then $\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G'}\left(W\right)\right|\ge\left(1-\varepsilon\right)\left(n-\left|V_{0}^{2}\right|\right)\ge\left|W\right|$
 for small $\varepsilon$, and we are done.
 
 Otherwise, choose $F\subseteq N\left(D\right)$ with $\left|F\right|=\alpha'k$
 and let $S$ contain the vertices in the clusters of $F$. By the
-same $\varepsilon$-regularity argument, $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'k\left(1-\varepsilon\right)vn\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
+same $\varepsilon$-regularity argument, $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'k\left(1-\varepsilon\right)\s n\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
 Since $\left|M\right|=\left(1-\xi\left(\alpha\right)\right)n$, each
-$V_{i}^{1}\cap W$ has at least $\left(\pi_{i}v-\xi\left(\alpha\right)\right)n$
-neighbours in $M$, and at most $\alpha'k\left(v^{2}+\varepsilon\right)n$
+$V_{i}^{1}\cap W$ has at least $\left(\pi_{i}s-\xi\left(\alpha\right)\right)n$
+neighbours in $M$, and at most $\alpha'k\left(\s^{2}+\varepsilon\right)n$
 of these are in $S$. So, 
 \begin{align*}
-\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in D}\left(\pi_{i}v-\xi\left(\alpha\right)-\alpha'k\left(v^{2}+\varepsilon\right)\right)n\\
- & \ge\left|W\right|-\varepsilon n-\left|D\right|\left(\xi\left(\alpha\right)+\alpha'k\left(v^{2}+\varepsilon\right)\right)n.
+\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in D}\left(\pi_{i}v-\xi\left(\alpha\right)-\alpha'k\left(\s^{2}+\varepsilon\right)\right)n\\
+ & \ge\left|W\right|-\varepsilon n-\left|D\right|\left(\xi\left(\alpha\right)+\alpha'k\left(\s^{2}+\varepsilon\right)\right)n.
 \end{align*}
 Since $\left|N_{C}\left(D\right)\right|<k$, there is $V_{j}^{2}$
 outside $N_{C}\left(D\right)$, and this $V_{j}^{2}$ must have $\alpha'k$
 neighbours outside $D$ in $C$, so $\left|D\right|\le\left(1-\alpha'\right)k$
-and therefore $\left|D\right|\alpha'kv^{2}\le\left(1-\alpha'\right)\alpha'$. Since $k=O\left(1\right)$, it follows that
+and therefore $\left|D\right|\alpha'k\s^{2}\le\left(1-\alpha'\right)\alpha'$. Since $k=O\left(1\right)$, it follows that
 \begin{align*}
 \left|N_{G\cup M}\left(W\right)\right| & \ge\left|N_{G'}\left(W\right)\cap S\right|+\left|N_{M}\left(W\right)\backslash S\right|\\
  & \ge\alpha'n+\left|W\right|-\left(1-\alpha'\right)\alpha' n+O\left(\varepsilon+\varepsilon^{2}+\xi\left(\alpha\right)\right)n.
@@ -617,19 +631,19 @@ holds.
 
 \begin{enumerate}[topsep=0px,label=(\alph*)]
 
-\item{Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}(a),
+\item{\label{itm:hypergraph-bipartite-matching-degree-transfer}Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}\oldref{itm:hypergraph-matching-theorem},
 let $A$ be a uniformly random set of $n$ vertices, and let $B$
 be a uniformly random perfect matching on $V\left(H\right)\backslash A$.
 Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree $\amat\left(\alpha\right)n$.}
 
-\item{Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}(b),
+\item{\label{itm:hypergraph-bipartite-cycle-degree-transfer}Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}\oldref{itm:hypergraph-cycle-theorem},
 let $A$ be a uniformly random set of $n$ vertices, and let $B$
 be a uniformly random loose Hamilton cycle on $V\left(H\right)\backslash A$.
 Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree $\aham\left(\alpha\right)n$.}
 
 \end{enumerate}\end{lem}
 \begin{proof}
-[Proof of \ref{lem:hypergraph-bipartite-degree-transfer}(a)]It is
+[Proof of \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-matching-degree-transfer}]It is
 helpful to realize the uniform distribution of $A$ and $B$ in a certain way. Let
 \[
 a_{1},\dots,a_{n},\, b_{1}^{1},\dots,b_{k-1}^{1},\, b_{1}^{2},\dots,b_{k-1}^{n}
@@ -660,8 +674,8 @@ By the Chernoff bound and the union bound, a.a.s. each $d_{G_{H}}\left(a\right)\
 \end{proof}
 
 \begin{proof}
-[Proof of \ref{lem:hypergraph-bipartite-degree-transfer}(b)]We give
-essentially the same proof as for \ref{lem:hypergraph-bipartite-degree-transfer}(a).
+[Proof of \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-cycle-degree-transfer}]We give
+essentially the same proof as for \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-matching-degree-transfer}.
 Choose a uniformly random ordering of $V\left(H\right)$:
 \[
 a_{1},\dots,a_{n},b_{0},\dots,b_{\left(k-2\right)n-1}.
@@ -670,7 +684,7 @@ Let $A=\left\{ a_{1},\dots,a_{n}\right\} $, let $b^{i}=\left\{ b_{\left(k-2\righ
 (where the subscripts are interpreted modulo $\left(k-2\right)n$),
 and let $B=\left\{ b^{1},\dots,b^{n}\right\} $.
 
-With exactly the same proof as for \ref{lem:hypergraph-bipartite-degree-transfer}(a),
+With exactly the same proof as for \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-matching-degree-transfer},
 there is small $\aham\left(\alpha\right)$ such that a.a.s. $d_{G_{H}}\left(b\right)\ge\aham\left(\alpha\right)n$
 for all $b\in B$. Next, condition on some $a\in A$. For small $\zeta\left(\alpha\right)$
 and $j\le2\sqrt{\aham\left(\alpha\right)}n$,
