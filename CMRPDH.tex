@@ -157,16 +157,14 @@ Benny Sudakov\thanks{Department of Mathematics, ETH, 8092 Zurich. Email: \href{m
 \global\long\def\T{\mathbf{T}}
 \global\long\def\N{\mathbf{N}}
 \global\long\def\B{\mathbf{B}}
-\global\long\def\a{\boldsymbol{\alpha}}
-\global\long\def\b{\boldsymbol{\beta}}
-\global\long\def\x{\mathbf{x}}
-\global\long\def\y{\mathbf{y}}
-\global\long\def\o{\boldsymbol{\omega}}
 \global\long\def\cdi{c}
-\global\long\def\chypham{c_{k}^{\mathrm{H}}}
-\global\long\def\chypmat{c_{k}^{\mathrm{M}}}
+\global\long\def\chyp{c_{k}}
+%\global\long\def\chypham{\chyp^{\mathrm{H}}}
+\global\long\def\chypham{\chyp}
+%\global\long\def\chypmat{\chyp^{\mathrm{M}}}
+\global\long\def\chypmat{\chyp}
 \global\long\def\cto{c^{\mathrm{T}}}
-\global\long\def\a{\beta}
+\global\long\def\a{\beta_k}
 %\global\long\def\amat{\beta^{\mathrm{M}}}
 \global\long\def\amat{\a}
 %\global\long\def\aham{\beta^{\mathrm{H}}}
@@ -220,8 +218,8 @@ since been studied in a number of other contexts; see for example
 model we only need $m$ to be linear, saving a logarithmic factor
 over the standard model where we start with nothing. To be precise,
 \cite[Theorem~1]{BFM03} says that for every $\alpha>0$ there is
-$\cdi\left(\alpha\right)$ such that if we start with a graph with
-minimum degree at least $\alpha n$ and add $\cdi\left(\alpha\right)n$
+$\cdi=\cdi\left(\alpha\right)$ such that if we start with a graph with
+minimum degree at least $\alpha n$ and add $\cdi n$
 random edges, then the resulting graph will a.a.s. be Hamiltonian.
 Note that some dense graphs require a linear number of extra edges
 to become Hamiltonian (consider the complete bipartite graph with
@@ -246,18 +244,18 @@ among sets of $k-1$ vertices.
 \begin{thm}
 \label{thm:hypergraph-theorems}Let $\HH_{k}\left(n,m\right)$ be
 the uniform distribution on $m$-edge $k$-uniform hypergraphs on
-the vertex set $\range n$.
+the vertex set $\range n$. For each $\alpha>0$ there is $\chyp=\chyp\left(\alpha\right)$ such that:
 
 \begin{enumerate}[topsep=0px,label=(\alph*)]
 
-\item{\label{itm:hypergraph-matching-theorem}There is $\chypmat\left(\alpha\right)$ such that if $H$ is
+\item{\label{itm:hypergraph-matching-theorem}If $H$ is
 a $k$-uniform hypergraph on $\left[kn\right]$ with $\delta_{k-1}\left(H\right)\ge\alpha n$,
-and $R\in\HH_{k}\left(kn,\chypmat\left(\alpha\right)n\right)$, then
+and $R\in\HH_{k}\left(kn,\chypmat n\right)$, then
 $H\cup R$ a.a.s. has a perfect matching.}
 
-\item{\label{itm:hypergraph-cycle-theorem}There is $\chypham\left(\alpha\right)$ such that if $H$ is
+\item{\label{itm:hypergraph-cycle-theorem}If $H$ is
 a $k$-uniform hypergraph on $\left[\left(k-1\right)n\right]$with
-$\delta_{k-1}\left(H\right)\ge\alpha n$, and $R\in\HH\left(\left(k-1\right)n,\chypham\left(\alpha\right)n\right)$,
+$\delta_{k-1}\left(H\right)\ge\alpha n$, and $R\in\HH\left(\left(k-1\right)n,\chypham n\right)$,
 then $H\cup R$ a.a.s. has a loose Hamilton cycle.}
 
 \end{enumerate}
@@ -385,21 +383,27 @@ the necessary $\left(2k+1\right)n/\left(k-1\right)$ edges. Similarly, this graph
 
 Now we proceed to the proof of \ref{thm:hypergraph-theorems}, which
 will follow from a sequence of lemmas. The first step is to show that
-$R$ almost gives the structure of interest on its own. Let a\emph{
-sub-cycle} be a hypergraph which can be extended to a loose Hamilton
+$R$ almost gives the structure of interest on its own. Let a \emph{
+partial-cycle} be a hypergraph which can be extended to a loose Hamilton
 cycle by adding edges.
+
+\global\long\def\b{\chyp}
+%\global\long\def\bmat{\b^{\mathrm{M}}}
+\global\long\def\bmat{\b}
+%\global\long\def\bham{\b^{\mathrm{H}}}
+\global\long\def\bham{\b}
+\global\long\def\patheps{\gamma}
+
 \begin{lem}
-\label{lem:hypergraph-almost-object}For any $\varepsilon>0$:
+\label{lem:hypergraph-almost-object}For any $\varepsilon=\varepsilon\left(\alpha\right)>0$, there is $\b=\b\left(\alpha\right)$ such that:
 
 \begin{enumerate}[topsep=0px,label=(\alph*)]
 
-\item{\label{itm:hypergraph-large-matching}There is $b_{k}^{\mathrm{M}}\left(\varepsilon\right)$ such
-that $R^{\mathrm{M}}\in\HH_{k}\left(kn,b_{k}^{\mathrm{M}}\left(\varepsilon\right)n\right)$
+\item{\label{itm:hypergraph-large-matching}$R^{\mathrm{M}}\in\HH_{k}\left(kn,\bmat n\right)$
 a.a.s. has a matching of $\left(1-\varepsilon\right)n$ edges.}
 
-\item{\label{itm:hypergraph-large-subcycle}For any $\varepsilon>0$, there is $b_{k}^{\mathrm{H}}\left(\varepsilon\right)$
-such that $R^{\mathrm{H}}\in\HH_{k}\left(\left(k-1\right)n,b_{k}^{\mathrm{H}}\left(\varepsilon\right)n\right)$
-a.a.s. has a sub-cycle with $\left(1-\varepsilon\right)n$ edges.}
+\item{\label{itm:hypergraph-large-subcycle}$R^{\mathrm{H}}\in\HH_{k}\left(\left(k-1\right)n,\bham n\right)$
+a.a.s. has a partial-cycle with $\left(1-\varepsilon\right)n$ edges.}
 
 \end{enumerate}\end{lem}
 \begin{proof}
@@ -407,38 +411,36 @@ First we define a \emph{loose path} by analogy with loose cycles:
 a $k$-uniform loose path is a hypergraph with a vertex ordering such
 that every edge consists of $k$ consecutive vertices and every pair
 of consecutive edges intersects in exactly one vertex. A matching
-is a collection of loose paths of length 1, and a sub-cycle is any
+is a collection of loose paths of length 1, and a partial-cycle is any
 collection of loose paths with enough vertices left over to link them
 together into a cycle.
 
-We will first prove that for any $\ell\ge1$ and $\zeta>0$, there
-is $b\left(\ell,\zeta\right)$ such that the following holds. In a
-random hypergraph $R\in\HH_{k}\left(kn,b\left(\ell,\zeta\right)n\right)$,
-a.a.s. every set of $\zeta N$ vertices contains a loose path of length
+We will first prove that for any $\ell\ge1$ and $\patheps>0$, there
+is $h=h\left(\ell,\patheps\right)$ such that the following holds. In a
+random hypergraph $R\in\HH_{k}\left(kn,hn\right)$,
+a.a.s. every set of $\patheps n$ vertices contains a loose path of length
 $\ell$. Parts \oldref{itm:hypergraph-large-matching} and \oldref{itm:hypergraph-large-subcycle} of the Lemma will follow from this fact.
-
-The probability that a uniformly random pair of $k$-edges both include
-a particular pair of vertices is 
-\[
-O\left(\left(\left.{kn \choose k-2}\right/{kn \choose k}\right)^{2}\right)=O\left(n^{-4}\right).
-\]
-There are $O\left(n^{2}\right)$ pairs of edges and $O\left(n^{2}\right)$
-pairs of vertices in $R$, so the expected number of pairs of vertices
-which are contained in more than one edge (have degree more than one)
-is $O\left(1\right)$. By Markov's inequality, there are a.a.s. less
-than $\sqrt{\zeta n/2}$ such pairs of vertices. So if we delete a
-set $D$ of $\zeta n/2$ vertices then every pair of vertices has
-degree at most one.
 
 As per the discussion in the introduction, it is equivalent to consider
 the model for $R$ where each edge is independently present with probability
-$p=b\left(\ell,\zeta\right)n/{kn \choose k}$. Let $d=k\ell$. For
-large $b\left(\ell,\zeta\right)$, by the Chernoff bound then a union
-bound, a.a.s. every set of $\zeta n/2$ vertices spans at least $d\zeta n/2$
+$p=hn/{kn \choose k}=O\left(n^{1-k}\right)$.
+
+The probability a particular pair of edges is present in $R$ is $p^2$. There are $n^2$ pairs of vertices and for each there are $
+{n-2\choose 2\left(k-2\right)}{2\left(k-2\right) \choose k-2}=
+O\left(n^{2\left(k-2\right)}\right)$ pairs of edges containing both those vertices. So, the expected number of pairs of vertices
+which are contained in more than one edge (have degree more than one)
+is $O\left(n^2n^{2\left(k-2\right)}p^2\right)=O\left(1\right)$. By Markov's inequality, there are a.a.s. less
+than $\sqrt{\patheps n/2}$ such pairs of vertices. So if we delete a
+set $D$ of $\patheps n/2$ vertices then every pair of vertices has
+degree at most one.
+
+Let $d=k\ell$. For
+large $h$, by the Chernoff bound then a union
+bound, a.a.s. every set of $\patheps n/2$ vertices spans at least $d\patheps n/2$
 edges, which is to say that the average 1-degree in the induced subhypergraph
 is at least $kd$. We assume this holds for the remainder of the proof.
 
-Every set $S$ of $\zeta n$ vertices includes a set of $\zeta n/2$
+Every set $S$ of $\patheps n$ vertices includes a set of $\patheps n/2$
 vertices disjoint from $D$, which has average 1-degree at least $kd$.
 Deleting a vertex of degree less than $d$ increases the average degree
 of the induced subhypergraph, so $S\backslash D$ includes a set of
@@ -455,8 +457,8 @@ our claim.
 We now prove \ref{itm:hypergraph-large-matching}. Consider a matching of maximum size in $R^{\mathrm{M}}$.
 There can be no edge between two unmatched vertices because this would
 allow us to extend the matching, contradicting maximality. Applying
-our claim with $\zeta=2\varepsilon$ and $\ell=1$, we can see that
-if $b_{k}^{\mathrm{M}}\left(\varepsilon\right)$ is large enough then
+our claim with $\patheps=2\varepsilon$ and $\ell=1$, we can see that
+if $\bmat$ is large enough then
 a.a.s. every set of $2\varepsilon n$ vertices spans at least one
 edge in $R$. This proves there are fewer than \emph{$2\varepsilon n$}
 vertices unmatched after our maximum matching, hence our matching
@@ -465,21 +467,21 @@ has at least $\left(1-\varepsilon\right)n$ edges.
 Finally we prove \ref{itm:hypergraph-large-subcycle}, using roughly the same idea. It takes $\left(k-2\right)q$ additional
 vertices to link $q$ loose paths together into a loose cycle, and
 a union of $q$ disjoint loose paths of length $\ell\ge1$ has $\left(\ell\left(k-1\right)+1\right)q$
-vertices. So, such a union of paths is a sub-cycle in $R^{\mathrm{H}}$
+vertices. So, such a union of paths is a partial-cycle in $R^{\mathrm{H}}$
 precisely when 
 \[
 \left(k-2\right)q+\left(\ell\left(k-1\right)+1\right)q\le\left(k-1\right)n,
 \]
 which simplifies to the condition $q\left(\ell+1\right)=n$. In particular,
 for large $\ell\left(\varepsilon\right)$, a union of $n/\left(\ell\left(\varepsilon\right)+1\right)$
-length-$\ell\left(\varepsilon\right)$ loose paths is a sub-cycle
+length-$\ell\left(\varepsilon\right)$ loose paths is a partial-cycle
 with more than $\left(1-\varepsilon\right)n$ edges.
 
 Consider a maximum-size collection of disjoint length-$\ell\left(\varepsilon\right)$
-loose paths in $R^{\mathrm{H}}$. With $\zeta=\left(k-2\right)\varepsilon$ and
-$\ell=\ell\left(\varepsilon\right)$, our claim proves that if $b_{k}^{\mathrm{M}}\left(\varepsilon\right)$ is large enough then our maximal
+loose paths in $R^{\mathrm{H}}$. With $\patheps=\left(k-2\right)\varepsilon$ and
+$\ell=\ell\left(\varepsilon\right)$, our claim proves that if $\bmat$ is large enough then our maximal
 collection of loose paths has at least $\left(1-\varepsilon\right)n$
-edges, which means it includes a sub-cycle with at least $\left(1-\varepsilon\right)n$
+edges, which means it includes a partial-cycle with at least $\left(1-\varepsilon\right)n$
 edges.
 \end{proof}
 The second step to prove \ref{thm:hypergraph-theorems} is to show that a dense
@@ -487,11 +489,12 @@ hypergraph plus a large partial structure a.a.s. gives the structure
 we are looking for. For both theorems, we will be able to reduce this
 step to the following lemma.
 \begin{lem}
-\label{lem:bipartite-plus-big-matching-perfect}There is $\xi\left(\alpha\right)>0$ 
+\label{lem:bipartite-plus-big-matching-perfect}There is $\xi=\xi\left(\alpha\right)>0$ 
 such that the following holds. Let $G$ be a bipartite graph with
 parts $A,B$ of equal size $n$, and suppose $\delta\left(G\right)\ge\alpha n$.
-Let $M$ be a uniformly random matching with $\left(1-\xi\left(\alpha\right)\right)n$
-edges between $A$ and $B$. Then a.a.s. $G\cup M$ has a perfect matching.
+Let $\bar{M}$ be a uniformly random perfect matching between $A$
+and $B$ and let $M$ be a sub-matching of $\bar{M}$ with $\left(1-\xi\right) n$
+edges. Then a.a.s. $G\cup M$ has a perfect matching. 
 \end{lem}
 The immediate na\"ive approach to prove this lemma would be to show each set of vertices expands, and then to apply the union bound and Hall's marriage theorem. However, the
 probability of failure to expand is not small enough for this to work.
@@ -556,19 +559,18 @@ then every $b\in B$ has an edge to $W$ in $G$, so $\left|N_{G\cup M}\left(W\righ
 The difficult case is where $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$. 
 
 Apply our version of the regularity lemma. We first want to prove
-that the edges of $M$ a.a.s. ``spread out evenly'' between the
-$O\left(1\right)$ clusters. Fix some $V_{i}^{1}$ and $V_{j}^{2}$,
+that the edges of $\bar{M}$ a.a.s. ``spread out evenly'' between
+the $O\left(1\right)$ clusters. Fix some $V_{i}^{1}$ and $V_{j}^{2}$,
 with $i,j\ge1$. The vertices of each $V_{i}^{1}$ are matched by
-$M$ to at most $\s n$ vertices; conditioning on their number, these
-are uniformly randomly chosen from $B$. The number of such vertices
-in $V_{j}^{2}$ is then hypergeometrically distributed, so with probability
-$1-e^{\Omega\left(n\right)}$ (see for example \cite[Theorem 2.10]{JLR00})
-there are at most $\left(\s^{2}+\varepsilon\right)n$ edges
-of $M$ between $V_{i}^{1}$ and $V_{j}^{2}$. By the union bound, a.a.s.
-there are at most $\left(\s^{2}+\varepsilon\right)n$ edges
-of $M$ between every pair $V_{i}^{1}$, $V_{j}^{2}$. That is, $M$ typically
-spreads out evenly between the clusters. We assume this holds for
-the remainder of the proof.
+$\bar{M}$ to $\s n$ uniformly random vertices of $B$. The number
+of such vertices in $V_{j}^{2}$ is then hypergeometrically distributed,
+so with probability $1-e^{\Omega\left(n\right)}$ (see for example
+\cite[Theorem 2.10]{JLR00}) there are at most $\left(\s^{2}+\varepsilon\right)n$
+edges of $\bar{M}$ between $V_{i}^{1}$ and $V_{j}^{2}$. By the
+union bound, a.a.s. there are at most $\left(\s^{2}+\varepsilon\right)n$
+edges of $\bar{M}$ between every pair $V_{i}^{1}$, $V_{j}^{2}$.
+That is, $\bar{M}$ typically spreads out evenly between the clusters.
+We assume this holds for the remainder of the proof.
 
 Consider any $W\subset A$ with $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$.
 For each $i$ let $\pi_{i}=\left|V_{i}^{1}\cap W\right|/\left(\s n\right)$,
@@ -581,7 +583,7 @@ occur if $G$ was well-distributed) then $\left|N_{G\cup M}\left(W\right)\right|\
 for small $\varepsilon$, and we are done.
 
 Otherwise, choose $F\subseteq N\left(D\right)$ with $\left|F\right|=\alpha'k$
-and let $S$ contain the vertices in the clusters of $F$. By the
+and let $S$ contain the vertices of the clusters in $F$. By the
 same $\varepsilon$-regularity argument, $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'k\left(1-\varepsilon\right)\s n\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
 Since $\left|M\right|=\left(1-\xi\left(\alpha\right)\right)n$, each
 $V_{i}^{1}\cap W$ has at least $\left(\pi_{i}s-\xi\left(\alpha\right)\right)n$
@@ -603,31 +605,72 @@ If $\varepsilon$ is chosen to be small enough relative to $\alpha$
 and $\xi\left(\alpha\right)$ chosen to be small enough relative to
 $K$, then this gives $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$.
 \end{proof}
-Now we describe the reduction of \ref{thm:hypergraph-theorems} to \ref{lem:bipartite-plus-big-matching-perfect}.
-Consider a $k$-uniform hypergraph $H$. Suppose $A$ is a set of
-$n$ vertices and $B$ is a $\left(k-1\right)$-uniform hypergraph
-on the remaining vertices. Then we define a bipartite graph $G_{A,B}\left(H\right)$
-as follows. The vertices of $G_{A,B}\left(H\right)$ are the vertices
-in $A$, as well as the edges in $B$ (we abuse notation and identify
-the hypergraph $B$ with its edge set). We put an edge between $a\in A$
-and $\left\{ b_{1},\dots,b_{k-1}\right\} \in B$ if $\left\{ a,b_{1},\dots,b_{k-1}\right\} $
-is an edge in $H$.
+Now we describe the reduction of \ref{thm:hypergraph-theorems} to
+\ref{lem:bipartite-plus-big-matching-perfect}. Consider a $k$-uniform
+hypergraph $F$. Suppose $A$ is a set of $n$ vertices and $B$ is
+a $\left(k-1\right)$-uniform hypergraph on the remaining vertices.
+Then we define a bipartite graph $G_{A,B}\left(F\right)$ as follows.
+The vertices of $G_{A,B}\left(F\right)$ are the vertices in $A$,
+as well as the edges in $B$ (we abuse notation and identify the hypergraph
+$B$ with its edge set). We put an edge between $a\in A$ and $\left\{ b_{1},\dots,b_{k-1}\right\} \in B$
+if $\left\{ a,b_{1},\dots,b_{k-1}\right\} $ is an edge in $F$. Basically,
+the idea is that if $F$ has a large matching or partial-cycle, then there
+is $A$ and $B$ such that $G_{A,B}\left(F\right)$ has a large matching. Conversely,
+if $G_{A,B}\left(F\right)$ has a large matching for any for any $A$
+and $B$, then the edges of that matching correspond to a large matching or partial-cycle in $F$. \ref{lem:hypergraph-almost-object}
+will provide a large matching or partial-cycle in $R$, so there is $A$
+and $B$ such that $G_{A,B}\left(R\right)$ has a large matching.
+By \ref{lem:bipartite-plus-big-matching-perfect}, the addition of
+this large matching to $G_{A,B}\left(H\right)$ will give a perfect
+matching in $G_{A,B}\left(H\right)\cup G_{A,B}\left(R\right)=G_{A,B}\left(H\cup R\right)$,
+corresponding to a perfect matching or loose Hamilton cycle in $H\cup R$.
 
-Each edge in $G_{A,B}\left(H\right)$ corresponds to an edge of $H$. The significance of our definition of $G_{A,B}\left(H\right)$ is that if the hypergraph $B$ is chosen to be a perfect matching (respectively, loose Hamilton cycle) on its vertex set $V\left(H\right)\backslash A$, and if $G_{A,B}\left(H\right)$ has a large matching $M$, then the edges of $M$ correspond to a large matching (respectively, large sub-cycle) in $H$.
-Conversely, if $H$ has a large matching or sub-cycle, then there
-is a set $A$ and a perfect matching (respectively, loose Hamilton
-cycle) $B$ such that $G_{A,B}\left(H\right)$ has a large matching.
-
-For any $\varepsilon>0$, if $\chypmat\left(\alpha\right)$ or $\chypham\left(\alpha\right)$
+We make this precise as follows. For any $\varepsilon>0$, if $\chyp\left(\alpha\right)$
 is large enough, \ref{lem:hypergraph-almost-object} ensures the a.a.s.
-existence of a matching or sub-cycle of size $\left(1-\varepsilon\right)n$
-in $R$, which means there is an $n$-vertex set $A$ and a perfect matching
-or loose Hamilton cycle $B$ on $V\left(A\right)\backslash H$ such that $G_{A,B}\left(R\right)$ contains
-a matching of size $\left(1-\varepsilon\right)n$. If there are multiple possible choices for $A$ and $B$, choose one uniformly at random. Since the distribution of $R$ is symmetric with respect to permutations of the vertex set, $A$ is a uniformly random $n$-vertex set and $B$ is a uniformly random perfect matching or Hamilton cycle on the remaining vertices.
+existence of a matching or special partial-cycle $Q$ of size $\left(1-\varepsilon\right)n$
+in $R$. Extend this to a perfect matching or loose Hamilton cycle
+$\bar{Q}$ on $V\left(R\right)$. Note that the distribution of $R$
+is invariant under relabelling of its vertices so we can relabel its
+vertices uniformly at random to assume that $\bar{Q}$ is a uniformly
+random perfect matching or loose Hamilton cycle.
+
+We describe an alternative way to realize a uniformly random perfect
+matching or Hamilton cycle. In the perfect matching case, choose a
+uniformly random ordering of $V\left(R\right)$: 
+\[
+a^{1},\dots,a^{n},\, b_{1}^{1},\dots,b_{k-1}^{1},\, b_{1}^{2},\dots,b_{k-1}^{n}.
+\]
+Let $b^{i}=\left\{ b_{1}^{i},\dots b_{k-1}^{i}\right\}$, and let our perfect matching have edges of the form $\left\{a^{i}\right\}\cup b^i $.
+This gives a uniformly random perfect matching, so we can couple our
+random ordering with $R$ in such a way that the perfect matching
+defined by the ordering coincides with $\bar{Q}$. Then, let $A$
+consist of the vertices $a^{i}$ and let $B$ be the hypergraph with
+edges $b^i$.
+Note that $A$ is a uniformly random $n$-vertex set and $B$ is a
+uniformly random perfect matching on the remaining vertices. Also,
+if we condition on $A$ and $B$ then $G_{A,B}\left(\bar{Q}\right)$
+is a uniformly random perfect matching, and $G_{A,B}\left(Q\right)$
+is a sub-matching with $\left(1-\varepsilon\right)n$ of its edges.
+
+The Hamilton cycle case is extremely similar. Choose a uniformly random
+ordering of $V\left(R\right)$:
+\[
+a^{i},\dots,a^{i},b_{0},\dots,b_{\left(k-2\right)n-1},
+\]
+and let $b^{i}=\left\{ b_{\left(k-2\right)i},b_{\left(k-2\right)i+1},\dots,b_{\left(k-2\right)\left(i+1\right)}\right\} $
+(where the subscripts are interpreted modulo $\left(k-2\right)n$).
+Our loose Hamilton cycle has edges of the form $\left\{ a^{i}\right\} \cup b^{i}$,
+which we couple with $\bar{Q}$ in the same way as before. Let $A$ contain
+the vertices $a^{i}$ and let $B$ contain the
+edges $b^{i}$. Exactly the same considerations hold: $A$ is a uniformly
+random $n$-vertex set, $B$ is a uniformly random loose Hamilton
+cycle on the remaining vertices, and $G_{A,B}\left(Q\right)$ is a
+$\left(1-\varepsilon\right)n$-edge sub-matching of the uniformly random perfect
+matching $G_{A,B}\left(\bar{Q}\right)$.
 
 We give one final lemma, establishing that $G_{A,B}\left(H\right)$ is a.a.s. dense if $H$ is.
 \begin{lem}
-\label{lem:hypergraph-bipartite-degree-transfer}There is $\a\left(\alpha\right)>0$ such that the following
+\label{lem:hypergraph-bipartite-degree-transfer}There is $\a=\a\left(\alpha\right)>0$ such that the following
 holds.
 
 \begin{enumerate}[topsep=0px,label=(\alph*)]
@@ -635,69 +678,63 @@ holds.
 \item{\label{itm:hypergraph-bipartite-matching-degree-transfer}Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}\oldref{itm:hypergraph-matching-theorem},
 let $A$ be a uniformly random set of $n$ vertices, and let $B$
 be a uniformly random perfect matching on $V\left(H\right)\backslash A$.
-Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree $\amat\left(\alpha\right)n$.}
+Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree $\amat n$.}
 
 \item{\label{itm:hypergraph-bipartite-cycle-degree-transfer}Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}\oldref{itm:hypergraph-cycle-theorem},
 let $A$ be a uniformly random set of $n$ vertices, and let $B$
 be a uniformly random loose Hamilton cycle on $V\left(H\right)\backslash A$.
-Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree $\aham\left(\alpha\right)n$.}
+Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree $\aham n$.}
 
 \end{enumerate}\end{lem}
 \begin{proof}
-[Proof of \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-matching-degree-transfer}]It is
-helpful to realize the uniform distribution of $A$ and $B$ in a certain way. Let
+[Proof of \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-matching-degree-transfer}]As in the preceding discussion, it is convenient to realize the uniform
+distribution of $A$ and $B$ via a random ordering of $V\left(H\right)$.
+Let 
 \[
-a_{1},\dots,a_{n},\, b_{1}^{1},\dots,b_{k-1}^{1},\, b_{1}^{2},\dots,b_{k-1}^{n}
+a^{1},\dots,a^{n},\, b_{1}^{1},\dots,b_{k-1}^{1},\, b_{1}^{2},\dots,b_{k-1}^{n}.
 \]
-be a uniformly random ordering of $V\left(H\right)$. Let $A=\left\{ a_{1},\dots,a_{n}\right\} $,
-let $b^{i}=\left\{ b_{1}^{i},\dots,b_{k}^{i}\right\} $ and let $B=\left\{ b^{1},\dots,b^{n}\right\} $.
+be a uniformly random ordering of $V\left(H\right)$, with $A$, $b^i$ and
+$B$ defined as before.
 
-First, condition on some $b\in B$. Note that $\Pr\left(b\cup\left\{ a_{1}\right\} \in E\left(H\right)\right)\ge\delta_{k-1}\left(H\right)/n$
-and more generally
+First, condition on some $b\in B$. Note that $\Pr\left(b\cup\left\{ a^{1}\right\} \in E\left(H\right)\right)\ge\delta_{k-1}\left(H\right)/n$
+and more generally 
 \[
-\Pr\left(b\cup\left\{ a_{j+1}\right\} \in E\left(H\right)\mid a_{1},\dots,a_{j}\right)\ge\left(\delta_{k-1}\left(H\right)-j\right)/n\ge\alpha/2
+\Pr\left(b\cup\left\{ a^{i+1}\right\} \in E\left(H\right)\mid a^{1},\dots,a^{i}\right)\ge\left(\delta_{k-1}\left(H\right)-i\right)/n\ge\alpha/2
 \]
-for $j\le\alpha n/2$. By a Chernoff bound, $d_{G_{H}}\left(b\right)\ge\alpha^{2}n/8$
+for $i\le\alpha n/2$. By a Chernoff bound, $d_{G_{H}}\left(b\right)\ge\alpha^{2}n/8$
 with probability $1-e^{-\Omega\left(n\right)}$. With the union bound,
 this a.a.s. holds for all $b$.
 
 Now, $\delta_{1}\left(H\right)\ge\alpha'n^{k-1}$ for some $\alpha'>0$
 depending on $\alpha$. Condition on some $a\in A$. Each $b_{j}^{i}$
-shares at most ${kn \choose k-2}$ edges with $a_{i}$, so if $j\le2\sqrt{\amat\left(\alpha\right)}n$
-for sufficently small $\amat\left(\alpha\right)$ and large $n$,
+shares at most ${kn \choose k-2}$ edges with $a_{i}$, so if $j\le2\sqrt{\amat}n$
+for sufficently small $\amat$ and large $n$,
 then
 \[
-\Pr\left(\left\{ a\right\} \cup b^{j+1}\in E\left(H\right)\mid b^{1},\dots,b^{j}\right)\ge\left(\delta_{1}\left(H\right)-\left(k-1\right)j{kn \choose k-2}\right)\left.\vphantom{\sum}\right/{kn \choose k-1}\ge\sqrt{\amat\left(\alpha\right)}.
+\Pr\left(\left\{ a\right\} \cup b^{j+1}\in E\left(H\right)\mid b^{1},\dots,b^{j}\right)\ge\left(\delta_{1}\left(H\right)-\left(k-1\right)j{kn \choose k-2}\right)\left.\vphantom{\sum}\right/{kn \choose k-1}\ge\sqrt{\amat}.
 \]
-
-
-By the Chernoff bound and the union bound, a.a.s. each $d_{G_{H}}\left(a\right)\ge\amat\left(\alpha\right)n$.
+By the Chernoff bound and the union bound, a.a.s. each $d_{G_{H}}\left(a\right)\ge\amat n$.
 \end{proof}
 
 \begin{proof}
 [Proof of \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-cycle-degree-transfer}]We give
 essentially the same proof as for \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-matching-degree-transfer}.
-Choose a uniformly random ordering of $V\left(H\right)$:
 \[
-a_{1},\dots,a_{n},b_{0},\dots,b_{\left(k-2\right)n-1}.
+a^{i},\dots,a^{i},b_{0},\dots,b_{\left(k-2\right)n-1},
 \]
-Let $A=\left\{ a_{1},\dots,a_{n}\right\} $, let $b^{i}=\left\{ b_{\left(k-2\right)i},b_{\left(k-2\right)i+1},\dots,b_{\left(k-2\right)\left(i+1\right)}\right\} $
-(where the subscripts are interpreted modulo $\left(k-2\right)n$),
-and let $B=\left\{ b^{1},\dots,b^{n}\right\} $.
+and let $A$, $b^i$ and $B$ be defined as before.
 
 With exactly the same proof as for \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-matching-degree-transfer},
-there is small $\aham\left(\alpha\right)$ such that a.a.s. $d_{G_{H}}\left(b\right)\ge\aham\left(\alpha\right)n$
-for all $b\in B$. Next, condition on some $a\in A$. For small $\zeta\left(\alpha\right)$
-and $j\le2\sqrt{\aham\left(\alpha\right)}n$,
+there is small $\aham$ such that a.a.s. $d_{G_{H}}\left(b\right)\ge\aham n$
+for all $b\in B$. Next, condition on some $a\in A$. For small $\beta\left(\alpha\right)$
+and $j\le2\sqrt{\aham}n$,
 \[
-\Pr\left(\left\{ a\right\} \cup b^{j}\in E\left(H\right)\mid b^{0},\dots,b^{j-1}\right)\ge\left(\delta_{2}\left(H\right)-\left(k-2\right)j{\left(k-1\right)n \choose k-3}\right)\left.\vphantom{\sum}\right/{ \left(k-1\right)n \choose k-2}\ge\sqrt{\aham\left(\alpha\right)},
+\Pr\left(\left\{ a\right\} \cup b^{j}\in E\left(H\right)\mid b^{0},\dots,b^{j-1}\right)\ge\left(\delta_{2}\left(H\right)-\left(k-2\right)j{\left(k-1\right)n \choose k-3}\right)\left.\vphantom{\sum}\right/{ \left(k-1\right)n \choose k-2}\ge\sqrt{\aham},
 \]
-\
-
-so a.a.s. each $d_{G_{H}}\left(a\right)\ge\aham\left(\alpha\right)n$.
+so a.a.s. each $d_{G_{H}}\left(a\right)\ge\aham n$.
 \end{proof}
-We have established that if $\chypmat\left(\alpha\right)$ or $\chypham\left(\alpha\right)$
-is large enough then $G_{A,B}\left(H\right)$ is a.a.s. a bipartite graph with minimum degree $\a\left(\alpha\right)n$, and $G_{A,B}\left(H\right)$ a.a.s. has a matching $M$ of size $\left(1-\xi\left(\a\left(\alpha\right)\right)\right)n$. If there are multiple possible choices of $M$, choose one uniformly at random. If we condition on $A$ and $B$, then by symmetry $M$ is a uniformly random $\left(1-\xi\left(\a\left(\alpha\right)\right)\right)n$-vertex matching between $A$ and $B$. Then \ref{lem:bipartite-plus-big-matching-perfect}
+We have established that if $\chyp\left(\alpha\right)$ 
+is large enough then $G_{A,B}\left(H\right)$ is a.a.s. a bipartite graph with minimum degree $\a\left(\alpha\right)n$, and $G_{A,B}\left(R\right)$ contains a $\left(1-\xi\left(\a\left(\alpha\right)\right)\right)n$-edge sub-matching $G_{A,B}\left(Q\right)$ of the uniformly random perfect matching $G_{A,B}\left(\bar{Q}\right)$. \ref{lem:bipartite-plus-big-matching-perfect} then
 ensures the existence of a perfect matching in $G_{A,B}\left(H\cup R\right)$. This corresponds to a perfect matching or loose Hamilton cycle in $H\cup R$.
 
 
@@ -708,9 +745,9 @@ a corollary we also prove the following theorem.
 \begin{thm}
 \label{thm:smoothed-pancyclic}Let $\DD\left(n,m\right)$ be the uniform
 distribution on (not necessarily oriented) $n$-vertex, $m$-arc digraphs.
-For each $\alpha>0$, there is $\cdi\left(\alpha\right)$ such that
+For each $\alpha>0$, there is $\cdi=\cdi\left(\alpha\right)$ such that
 if $D$ is a digraph with all in- and out- degrees at least $\alpha n$,
-and $R\in\DD\left(n,\cdi\left(\alpha\right)n\right)$, then $D\cup R$
+and $R\in\DD\left(n,\cdi n\right)$, then $D\cup R$
 is a.a.s. pancyclic.
 \end{thm}
 One motivation for this theorem is an observation by Bondy (see \cite{Bon75}),
@@ -947,13 +984,13 @@ $D''$ has a Hamilton cycle, $D$ has a cycle of length $\ell$.
 \begin{proof}
 [Proof of \ref{thm:smoothed-pancyclic}]In view of the discussion
 in the introduction, we assume each possible arc is present in $R$
-with independent probability $p=2\cdi\left(\alpha\right)/n$.
+with independent probability $p=2\cdi/n$.
 
 If $A,B\subseteq V\left(D\right)$ are disjoint sets with $\left|A\right|=\left|B\right|=\alpha n/8$,
 the probability that there are no arcs from $A$ to $B$ in $D\cup R$
 is at most
 \[
-\left(1-p\right)^{\left(\alpha n/8\right)^{2}}\le e^{-p\alpha^{2}n^{2}/64}=e^{-\cdi\left(\alpha\right)\alpha^{2}n/32}.
+\left(1-p\right)^{\left(\alpha n/8\right)^{2}}\le e^{-p\alpha^{2}n^{2}/64}=e^{-\cdi\alpha^{2}n/32}.
 \]
 The number of choices of such pairs of disjoint sets $A,B$ is
 \[
@@ -964,9 +1001,9 @@ where $H\left(\alpha\right)=-\alpha\log\alpha-\left(1-\alpha\right)\log\left(1-\
 the probability that $D\cup R$ does not satisfy the condition of
 \ref{lem:pseudorandom-hamiltonian} is at most
 \[
-O\left(\frac{1}{\sqrt{n}}e^{n\left(H\left(\alpha/4\right)+\alpha H\left(1/2\right)/4-\cdi\left(\alpha\right)\alpha^{2}n/32+o\left(1\right)\right)}\right).
+O\left(\frac{1}{\sqrt{n}}e^{n\left(H\left(\alpha/4\right)+\alpha H\left(1/2\right)/4-\cdi\alpha^{2}n/32+o\left(1\right)\right)}\right).
 \]
-This converges to zero if $\cdi\left(\alpha\right)$ is chosen to
+This converges to zero if $\cdi$ is chosen to
 be sufficiently large.\end{proof}
 \begin{rem}
 If we are only interested in Hamiltonicity, we can use \ref{lem:pseudorandom-hamiltonian}
@@ -1186,8 +1223,7 @@ different types of minimum degree and different types of cycles (see
 \cite{RR10} for a survey), which would suggest that similar random
 perturbation results are possible in these settings. In addition,
 it is possible that our use of Szemer\'edi's regularity lemma could
-be avoided, thereby drastically improving the constants $\chypham\left(\alpha\right)$
-and $\chypmat\left(\alpha\right)$.
+be avoided, thereby drastically improving the constants $\chyp\left(\alpha\right)$.
 
 \bibliographystyle{amsplain}
 \providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
