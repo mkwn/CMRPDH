@@ -74,19 +74,42 @@
 
 %graph drawing
 \usepackage{tikz}
-\usetikzlibrary{external}
+%\usetikzlibrary{external}
 \usetikzlibrary{decorations.markings}
 %\usetikzlibrary{arrows.meta}
-\tikzexternalize
+%\tikzexternalize
 \tikzstyle{vertex}=[circle,draw=black,fill=black,inner sep=0,minimum size=0.2cm,text=white,font=\footnotesize]
 \tikzset{arc/.style={
-        decoration={markings,
-            mark= at position 0.5 with {\arrow{Latex[length=2mm,width=2mm]}} ,
-        },
-        postaction={decorate}
-    }
-}
+%  decoration={markings,
+%    mark=at position 0.5 with {\arrow{Latex[length=2mm,width=2mm]}}
+%  },
+  postaction={decorate}
+}}
 \tikzset{every loop/.style={min distance=50,in=50,out=130,looseness=7}}
+
+\usetikzlibrary{shapes.geometric}
+\tikzset{
+  larrow/.style={
+    shape border rotate=90,
+    regular polygon,
+    regular polygon sides=3,
+    fill=black,
+    %node distance=2mm,
+    inner sep=0,
+    minimum height=2.3mm
+  }
+}
+\tikzset{
+  rarrow/.style={
+    shape border rotate=-90,
+    regular polygon,
+    regular polygon sides=3,
+    fill=black,
+    %node distance=2mm,
+    inner sep=0,
+    minimum height=2.3mm
+  }
+}
 
 %caption labels
 \usepackage[labelfont=bf,labelsep=period]{caption}
@@ -832,33 +855,40 @@ for an illustration.
 \begin{tikzpicture}[scale=0.95]
 
 \node[vertex] (u) at  (0,0) {};
-\node[vertex] (w1) at  (4.5,0) {};
-\node[vertex] (w1p) at  (5,0) {};
-\node[vertex] (u2m) at  (10,0) {};
-\node[vertex] (u2) at (10.5,0) {};
-\node[vertex] (w) at (15.5,0) {};
+\node[vertex] (w1) at  (5,0) {};
+\node[vertex] (w1p) at  (5.5,0) {};
+\node[vertex] (u2m) at  (10.5,0) {};
+\node[vertex] (u2) at (11,0) {};
+\node[vertex] (w) at (16,0) {};
 
 \draw (u) to (0.5,0);
 \draw[arc,dashed] (u) to (w1);
-\draw (4,0) to (w1);
+\draw (4.5,0) to (w1);
 \draw (w1) to (w1p);
-\draw (w1p) to (5.5,0);
+\draw (w1p) to (6,0);
 \draw[arc,dashed] (w1p) to (u2m);
-\draw (9.5,0) to (u2m);
+\draw (10,0) to (u2m);
 \draw (u2m) to (u2);
-\draw (u2) to (11,0);
+\draw (u2) to (11.5,0);
 \draw[arc,dashed] (u2) to (w);
-\draw (15,0) to (w);
+\draw (15.5,0) to (w);
 \draw[arc] (w) to [bend right] (w1p);
 \draw[arc] (u2m)  to [bend right] (u);
 \draw[arc] (w1) to [bend right] (u2);
 
-\node at (4.6,-0.5){$w_1^{\phantom+}$};
-\node at (5.1,0.5){$w_1^+$};
-\node at (10.1,0.5){$u_2^-$};
-\node at (10.6,-0.5){$u_2^{\phantom-}$};
+\node[larrow] at (5.25,1.56) {};
+\node[larrow] at (10.75,1.56) {};
+\node[rarrow] at (2.5,0) {};
+\node[rarrow] at (8,0) {};
+\node[rarrow] at (13.5,0) {};
+\node[rarrow] at (8,-0.905) {};
+
+\node at (5.1,-0.5){$w_1^{\phantom+}$};
+\node at (5.6,0.5){$w_1^+$};
+\node at (10.6,0.5){$u_2^-$};
+\node at (11.1,-0.5){$u_2^{\phantom-}$};
 \node at (0,-0.5){$u$};
-\node at (15.5,-0.5){$w$};
+\node at (16,-0.5){$w$};
 
 \end{tikzpicture}
 \hspace{0.5cm}
@@ -895,8 +925,6 @@ is a shortcut back to $u_{11}$. See Figure \ref{fig:pseudorandom-hamiltonian-cas
 \begin{tikzpicture}[scale=0.95]
 
 \node[vertex] (u) at  (0,0) {};
-\node (up) at  (0.5,0) {};
-\node (u11mm) at  (2.5,0) {};
 \node[vertex] (u11m) at  (3,0) {};
 \node[vertex] (u11) at  (3.5,0) {};
 \node[vertex] (u12m) at  (6.5,0) {};
@@ -931,6 +959,17 @@ is a shortcut back to $u_{11}$. See Figure \ref{fig:pseudorandom-hamiltonian-cas
 \draw[arc] (w21) to [bend right] (w22p);
 \draw[arc] (w) to [bend right] (w21p);
 \draw[arc] (w22) to [bend right] (u11);
+
+\node[larrow] at (3.25,0.98) {};
+\node[larrow] at (13.75,0.98) {};
+\node[larrow] at (8.5,1.49) {};
+\node[rarrow] at (1.5,0) {};
+\node[rarrow] at (5,0) {};
+\node[rarrow] at (8.5,0) {};
+\node[rarrow] at (12,0) {};
+\node[rarrow] at (15.5,0) {};
+\node[rarrow] at (5,-0.61) {};
+\node[rarrow] at (12,-0.61) {};
 
 \node at (0,-0.5){$u$};
 \node at (3.1,-0.5){$u_{11}^-$};
