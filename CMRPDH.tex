@@ -395,7 +395,7 @@ cycle by adding edges.
 \global\long\def\patheps{\gamma}
 
 \begin{lem}
-\label{lem:hypergraph-almost-object}For any $\varepsilon=\varepsilon\left(\alpha\right)>0$, there is $\b=\b\left(\alpha\right)$ such that:
+\label{lem:hypergraph-almost-object}For any $\varepsilon>0$, there is $\b=\b\left(\varepsilon\right)$ such that:
 
 \begin{enumerate}[topsep=0px,label=(\alph*)]
 
@@ -625,9 +625,9 @@ this large matching to $G_{A,B}\left(H\right)$ will give a perfect
 matching in $G_{A,B}\left(H\right)\cup G_{A,B}\left(R\right)=G_{A,B}\left(H\cup R\right)$,
 corresponding to a perfect matching or loose Hamilton cycle in $H\cup R$.
 
-We make this precise as follows. For any $\varepsilon>0$, if $\chyp\left(\alpha\right)$
+We make this precise as follows. For any $\varepsilon>0$ depending on $\alpha$, if $\chyp\left(\alpha\right)$
 is large enough, \ref{lem:hypergraph-almost-object} ensures the a.a.s.
-existence of a matching or special partial-cycle $Q$ of size $\left(1-\varepsilon\right)n$
+existence of a matching or partial-cycle $Q$ of size $\left(1-\varepsilon\right)n$
 in $R$. Extend this to a perfect matching or loose Hamilton cycle
 $\bar{Q}$ on $V\left(R\right)$. Note that the distribution of $R$
 is invariant under relabelling of its vertices so we can relabel its
