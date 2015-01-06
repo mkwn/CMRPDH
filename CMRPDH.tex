@@ -332,7 +332,7 @@ describe a few different models here.
 First, note that for most practical purposes, models that involve
 the selection of $m$ random edges are equivalent to models that involve
 the selection of each edge with independent probability $p$, where
-$m=p{n \choose 2}$. One perspective or the other can be more intuitive
+$m=pN$ and $N$ is the total number of possible edges. One perspective or the other can be more intuitive
 or result in cleaner proofs; we will use both interchangeably as is
 convenient without further discussion. In all the situations in this
 paper, equivalence can be proved with standard conditioning and coupling
@@ -373,7 +373,7 @@ orientations of the chosen edges independently and uniformly at random.
 The resulting perturbed tournament $P$ a.a.s. has $q$ arc-disjoint
 Hamilton cycles, for $q=O\left(1\right)$.
 \end{thm}
-We will prove \ref{thm:tournament} and show that it is tight in \ref{sec:tournaments}.
+We will prove \ref{thm:tournament}, and show that it is tight, in \ref{sec:tournaments}.
 
 
 \section{\label{sec:hypergraphs}Perfect Matchings and Hamilton Cycles in
@@ -448,13 +448,12 @@ As per the discussion in the introduction, it is equivalent to consider
 the model for $R$ where each edge is independently present with probability
 $p=hn/{kn \choose k}=O\left(n^{1-k}\right)$.
 
-The probability a particular pair of edges is present in $R$ is $p^2$. There are $n^2$ pairs of vertices and for each there are $
-{n-2\choose 2\left(k-2\right)}{2\left(k-2\right) \choose k-2}=
+The probability a particular pair of edges is present in $R$ is $p^2$. There are $O\left(n^2\right)$ pairs of vertices and for each there are $O\left({n-2\choose k-2}^2\right)=
 O\left(n^{2\left(k-2\right)}\right)$ pairs of edges containing both those vertices. So, the expected number of pairs of vertices
 which are contained in more than one edge (have degree more than one)
 is $O\left(n^2n^{2\left(k-2\right)}p^2\right)=O\left(1\right)$. By Markov's inequality, there are a.a.s. less
-than $\sqrt{\patheps n/2}$ such pairs of vertices. So if we delete a
-set $D$ of $\patheps n/2$ vertices then every pair of vertices has
+than $\patheps n/2$ such pairs of vertices. So if we delete a
+set $D$ containing one member of each of those pairs, then every pair of vertices in the remaining graph has
 degree at most one.
 
 Let $d=k\ell$. For
@@ -469,20 +468,20 @@ Deleting a vertex of degree less than $d$ increases the average degree
 of the induced subhypergraph, so $S\backslash D$ includes a set of
 vertices spanning a subhypergraph $Q$ of $R$ with minimum degree
 at least $d$. Let $P$ be a longest loose path in $Q$ and let $v$
-be a vertex in one of the extremal edges of $P$. Since $P$ cannot
+be a vertex in one of the extremal edges of $P$ (which has degree one in $P$). Since $P$ cannot
 be extended to a longer path, each of the (at least $d$) edges containing
 $v$ also contains another vertex $u$ of $P$. But because $Q$ contains
 no vertices from $D$, there is at most
 one edge containing both $v$ and $u$, so $P$ must have at least
-$d$ vertices and therefore have length at least $\ell$. This proves
+$d$ vertices and therefore has length at least $\ell$. This proves
 our claim.
 
 We now prove \ref{itm:hypergraph-large-matching}. Consider a matching of maximum size in $R^{\mathrm{M}}$.
-There can be no edge between two unmatched vertices because this would
+There can be no edge consisting of unmatched vertices because this would
 allow us to extend the matching, contradicting maximality. Applying
-our claim with $\patheps=2\varepsilon$ and $\ell=1$, we can see that
+our claim with $\patheps=k\varepsilon$ and $\ell=1$, we can see that
 if $\bmat$ is large enough then
-a.a.s. every set of $2\varepsilon n$ vertices spans at least one
+a.a.s. every set of $k\varepsilon n$ vertices spans at least one
 edge in $R$. This proves there are fewer than \emph{$2\varepsilon n$}
 vertices unmatched after our maximum matching, hence our matching
 has at least $\left(1-\varepsilon\right)n$ edges.
@@ -609,11 +608,11 @@ Otherwise, choose $F\subseteq N\left(D\right)$ with $\left|F\right|=\alpha'k$
 and let $S$ contain the vertices of the clusters in $F$. By the
 same $\varepsilon$-regularity argument, $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'k\left(1-\varepsilon\right)\s n\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
 Since $\left|M\right|=\left(1-\xi\left(\alpha\right)\right)n$, each
-$V_{i}^{1}\cap W$ has at least $\left(\pi_{i}s-\xi\left(\alpha\right)\right)n$
+$V_{i}^{1}\cap W$ has at least $\left(\pi_{i}\s-\xi\left(\alpha\right)\right)n$
 neighbours in $M$, and at most $\alpha'k\left(\s^{2}+\varepsilon\right)n$
 of these are in $S$. So, 
 \begin{align*}
-\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in D}\left(\pi_{i}v-\xi\left(\alpha\right)-\alpha'k\left(\s^{2}+\varepsilon\right)\right)n\\
+\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in D}\left(\pi_{i}\s-\xi\left(\alpha\right)-\alpha'k\left(\s^{2}+\varepsilon\right)\right)n\\
  & \ge\left|W\right|-\varepsilon n-\left|D\right|\left(\xi\left(\alpha\right)+\alpha'k\left(\s^{2}+\varepsilon\right)\right)n.
 \end{align*}
 Since $\left|N_{C}\left(D\right)\right|<k$, there is $V_{j}^{2}$
@@ -639,12 +638,12 @@ $B$ with its edge set). We put an edge between $a\in A$ and $\left\{ b_{1},\dots
 if $\left\{ a,b_{1},\dots,b_{k-1}\right\} $ is an edge in $F$. Basically,
 the idea is that if $F$ has a large matching or partial-cycle, then there
 is $A$ and $B$ such that $G_{A,B}\left(F\right)$ has a large matching. Conversely,
-if $G_{A,B}\left(F\right)$ has a large matching for any for any $A$
+if $G_{A,B}\left(F\right)$ has a large matching for any $A$
 and $B$, then the edges of that matching correspond to a large matching or partial-cycle in $F$. \ref{lem:hypergraph-almost-object}
-will provide a large matching or partial-cycle in $R$, so there is $A$
-and $B$ such that $G_{A,B}\left(R\right)$ has a large matching.
+will provide a large matching or partial-cycle in the random hypergraph $R$, so there are $A$
+and $B$ such that $G_{A,B}\left(R\right)$ has a large matching (this matching is itself random).
 By \ref{lem:bipartite-plus-big-matching-perfect}, the addition of
-this large matching to $G_{A,B}\left(H\right)$ will give a perfect
+this matching to $G_{A,B}\left(H\right)$ will give a perfect
 matching in $G_{A,B}\left(H\right)\cup G_{A,B}\left(R\right)=G_{A,B}\left(H\cup R\right)$,
 corresponding to a perfect matching or loose Hamilton cycle in $H\cup R$.
 
@@ -658,7 +657,7 @@ vertices uniformly at random to assume that $\bar{Q}$ is a uniformly
 random perfect matching or loose Hamilton cycle.
 
 We describe an alternative way to realize a uniformly random perfect
-matching or Hamilton cycle. In the perfect matching case, choose a
+matching or loose Hamilton cycle. In the perfect matching case, choose a
 uniformly random ordering of $V\left(R\right)$: 
 \[
 a^{1},\dots,a^{n},\, b_{1}^{1},\dots,b_{k-1}^{1},\, b_{1}^{2},\dots,b_{k-1}^{n}.
