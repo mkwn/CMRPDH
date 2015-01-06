@@ -546,15 +546,17 @@ if for any $U^{1},U^{2}$ with $U^{\ell}\subseteq V^{\ell}$ and $\left|U^{\ell}\r
 we have $\left|d\left(U^{1},U^{2}\right)-d\left(V^{1},V^{2}\right)\right|\le\varepsilon$.
 
 \global\long\def\s{s}
+\global\long\def\k{r}
+\global\long\def\K{K}
 
 We will use a bipartite version of the regularity lemma (which can
 be deduced from say \cite[Theorem~2.3]{Tao05} in a similar way to
 \cite[Theorem~1.10]{KS96}). Let $\alpha'=\alpha/2$ and let $\varepsilon>0$
 be a small constant depending on $\alpha$ that will be determined
 later (assume for now that $\varepsilon<\alpha/8$). There is a large
-constant $K$ depending only on $\alpha$ such that there exist partitions
-$A=V_{0}^{1}\cup\dots\cup V_{k}^{1}$ and $B=V_{0}^{2}\cup\dots\cup V_{k}^{2}$
-with $k\le K$, in such a way that the following conditions are satisfied.
+constant $\K$ depending only on $\alpha$ such that there exist partitions
+$A=V_{0}^{1}\cup\dots\cup V_{\k}^{1}$ and $B=V_{0}^{2}\cup\dots\cup V_{\k}^{2}$
+with $\k\le \K$, in such a way that the following conditions are satisfied.
 The ``exceptional'' clusters $V_{0}^{1}$ and $V_{0}^{2}$ both
 have fewer than $\varepsilon n$ vertices, and the non-exceptional
 clusters in $A$ and $B$ have equal size: $\left|V_{i}^{\ell}\right|=\s n$.
@@ -570,8 +572,8 @@ $G'$. The fact that $G$ is dense implies that $C$ is dense as well:
 note that in $G'$ each $V_{i}^{\ell}$ has at least $\left(\alpha'+\varepsilon\right)n\left|V_{i}^{\ell}\right|$
 edges to other clusters. There are at most $\left(\varepsilon n\right)\left(\s n\right)$
 edges to the exceptional cluster $V_{0}$ and at most $\left(\s n\right)^{2}$
-edges to each other cluster. So, $d_{C}\left(V_{i}^{\ell}\right)\ge\left(\left(\alpha'+\varepsilon\right)n-\varepsilon n\right)\s n/\left(\s n\right)^{2}\ge\alpha'k$
-and $C$ has minimum degree at least $\alpha'k$.
+edges to each other cluster. So, $d_{C}\left(V_{i}^{\ell}\right)\ge\left(\left(\alpha'+\varepsilon\right)n-\varepsilon n\right)\s n/\left(\s n\right)^{2}\ge\alpha'\k$
+and $C$ has minimum degree at least $\alpha'\k$.
 \begin{proof}
 [Proof of \ref{lem:bipartite-plus-big-matching-perfect}]We use Hall's
 marriage theorem: we need to show that a.a.s. $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$
@@ -600,32 +602,32 @@ and let $D$ be the set of clusters $V_{i}^{1}$ with $\pi_{i}\ge\varepsilon$.
 If $\varepsilon$ is small, $D$ must be nonempty. Now, if $V_{j}^{2}\in N_{C}\left(D\right)$
 then by $\varepsilon$-regularity there are edges in $G'$ from $W$
 to at least $\left(1-\varepsilon\right)\s n$ vertices of $V_{j}^{2}$.
-It follows that if $\left|N_{C}\left(D\right)\right|=k$ (as would
+It follows that if $\left|N_{C}\left(D\right)\right|=\k$ (as would
 occur if $G$ was well-distributed) then $\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G'}\left(W\right)\right|\ge\left(1-\varepsilon\right)\left(n-\left|V_{0}^{2}\right|\right)\ge\left|W\right|$
 for small $\varepsilon$, and we are done.
 
-Otherwise, choose $F\subseteq N\left(D\right)$ with $\left|F\right|=\alpha'k$
+Otherwise, choose $F\subseteq N\left(D\right)$ with $\left|F\right|=\alpha'\k$
 and let $S$ contain the vertices of the clusters in $F$. By the
-same $\varepsilon$-regularity argument, $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'k\left(1-\varepsilon\right)\s n\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
+same $\varepsilon$-regularity argument, $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'\k\left(1-\varepsilon\right)\s n\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
 Since $\left|M\right|=\left(1-\xi\left(\alpha\right)\right)n$, each
 $V_{i}^{1}\cap W$ has at least $\left(\pi_{i}\s-\xi\left(\alpha\right)\right)n$
-neighbours in $M$, and at most $\alpha'k\left(\s^{2}+\varepsilon\right)n$
+neighbours in $M$, and at most $\alpha'\k\left(\s^{2}+\varepsilon\right)n$
 of these are in $S$. So, 
 \begin{align*}
-\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in D}\left(\pi_{i}\s-\xi\left(\alpha\right)-\alpha'k\left(\s^{2}+\varepsilon\right)\right)n\\
- & \ge\left|W\right|-\varepsilon n-\left|D\right|\left(\xi\left(\alpha\right)+\alpha'k\left(\s^{2}+\varepsilon\right)\right)n.
+\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in D}\left(\pi_{i}\s-\xi\left(\alpha\right)-\alpha'\k\left(\s^{2}+\varepsilon\right)\right)n\\
+ & \ge\left|W\right|-\varepsilon n-\left|D\right|\left(\xi\left(\alpha\right)+\alpha'\k\left(\s^{2}+\varepsilon\right)\right)n.
 \end{align*}
-Since $\left|N_{C}\left(D\right)\right|<k$, there is $V_{j}^{2}$
-outside $N_{C}\left(D\right)$, and this $V_{j}^{2}$ must have $\alpha'k$
-neighbours outside $D$ in $C$, so $\left|D\right|\le\left(1-\alpha'\right)k$
-and therefore $\left|D\right|\alpha'k\s^{2}\le\left(1-\alpha'\right)\alpha'$. Since $k=O\left(1\right)$, it follows that
+Since $\left|N_{C}\left(D\right)\right|<\k$, there is $V_{j}^{2}$
+outside $N_{C}\left(D\right)$, and this $V_{j}^{2}$ must have $\alpha'\k$
+neighbours outside $D$ in $C$, so $\left|D\right|\le\left(1-\alpha'\right)\k$
+and therefore $\left|D\right|\alpha'\k\s^{2}\le\left(1-\alpha'\right)\alpha'$. Since $\k=O\left(1\right)$, it follows that
 \begin{align*}
 \left|N_{G\cup M}\left(W\right)\right| & \ge\left|N_{G'}\left(W\right)\cap S\right|+\left|N_{M}\left(W\right)\backslash S\right|\\
  & \ge\alpha'n+\left|W\right|-\left(1-\alpha'\right)\alpha' n+O\left(\varepsilon+\varepsilon^{2}+\xi\left(\alpha\right)\right)n.
 \end{align*}
 If $\varepsilon$ is chosen to be small enough relative to $\alpha$
 and $\xi\left(\alpha\right)$ chosen to be small enough relative to
-$K$, then this gives $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$.
+$\K$, then this gives $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$.
 \end{proof}
 Now we describe the reduction of \ref{thm:hypergraph-theorems} to
 \ref{lem:bipartite-plus-big-matching-perfect}. Consider a $k$-uniform
