@@ -308,7 +308,7 @@ ranging from 3 to $n$.
 \begin{thm}
 \label{lem:pseudorandom-pancyclic}Let $D$ be a directed graph on
 $n$ vertices with all in- and out- degrees at least $8k$, and suppose
-for all disjoint $A,B\subseteq V\left(D\right)$ with $\left|A\right|=\left|B\right|\ge k$,
+for every pair of disjoint sets $A,B\subseteq V\left(D\right)$ with $\left|A\right|=\left|B\right|\ge k$,
 there is an arc from $A$ to $B$. Then $D$ is pancyclic.
 \end{thm}
 We hope this theorem could be of independent interest, but our particular
@@ -316,8 +316,18 @@ motivation is that it implies a number of results about randomly perturbed
 graphs and digraphs. In particular it provides very simple proofs
 of the theorems in \cite{BFM03} concerning Hamiltonicity in randomly
 perturbed graphs and digraphs, and allows us to extend these theorems
-to pancyclicity. We will prove \ref{lem:pseudorandom-pancyclic} and
-its corollaries in \ref{sec:digraphs}.
+to pancyclicity. Most generally, \ref{lem:pseudorandom-pancyclic} implies the following theorem.
+
+\begin{thm}
+\label{thm:smoothed-pancyclic}Let $\DD\left(n,m\right)$ be the uniform
+distribution on (not necessarily oriented) $n$-vertex, $m$-arc digraphs.
+For each $\alpha>0$, there is $\cdi=\cdi\left(\alpha\right)$ such that
+if $D$ is a digraph with all in- and out- degrees at least $\alpha n$,
+and $R\in\DD\left(n,\cdi n\right)$, then $D\cup R$
+is a.a.s. pancyclic.
+\end{thm}
+
+We will prove \ref{lem:pseudorandom-pancyclic,thm:smoothed-pancyclic} in  \ref{sec:digraphs}.
 
 Our final theorem concerns randomly perturbed tournaments. The model
 that starts with a fixed \mbox{(di-/hyper-)}graph and adds random
@@ -457,7 +467,7 @@ set $D$ containing one member of each of those pairs, then every pair of vertice
 degree at most one.
 
 Let $d=k\ell$. For
-large $h$, by the Chernoff bound then a union
+large $h$, by the Chernoff bound then the union
 bound, a.a.s. every set of $\patheps n/2$ vertices spans at least $d\patheps n/2$
 edges, which is to say that the average 1-degree in the induced subhypergraph
 is at least $kd$. We assume this holds for the remainder of the proof.
@@ -725,7 +735,7 @@ and more generally
 \[
 \Pr\left(b\cup\left\{ a^{i+1}\right\} \in E\left(H\right)\mid a^{1},\dots,a^{i}\right)\ge\left(\delta_{k-1}\left(H\right)-i\right)/n\ge\alpha/2
 \]
-for $i\le\alpha n/2$. By a Chernoff bound, $d_{G_{H}}\left(b\right)\ge\alpha^{2}n/8$
+for $i\le\alpha n/2$. By the Chernoff bound, $d_{G_{H}}\left(b\right)\ge\alpha^{2}n/8$
 with probability $1-e^{-\Omega\left(n\right)}$. With the union bound,
 this a.a.s. holds for all $b$.
 
@@ -764,17 +774,7 @@ ensures the existence of a perfect matching in $G_{A,B}\left(H\cup R\right)$. Th
 
 \section{\label{sec:digraphs}Pancyclicity in dense digraphs}
 
-In this section we prove \ref{lem:pseudorandom-pancyclic}, and as
-a corollary we also prove the following theorem.
-\begin{thm}
-\label{thm:smoothed-pancyclic}Let $\DD\left(n,m\right)$ be the uniform
-distribution on (not necessarily oriented) $n$-vertex, $m$-arc digraphs.
-For each $\alpha>0$, there is $\cdi=\cdi\left(\alpha\right)$ such that
-if $D$ is a digraph with all in- and out- degrees at least $\alpha n$,
-and $R\in\DD\left(n,\cdi n\right)$, then $D\cup R$
-is a.a.s. pancyclic.
-\end{thm}
-One motivation for this theorem is an observation by Bondy (see \cite{Bon75}),
+In this section we prove \ref{lem:pseudorandom-pancyclic,thm:smoothed-pancyclic}. One motivation to consider pancyclicity instead of just Hamiltonicity is an observation by Bondy (see \cite{Bon75}),
 that almost all known non-trivial conditions that ensure Hamiltonicity
 also ensure pancyclicity. He made an informal ``metaconjecture''
 that this was always the case; our \ref{thm:smoothed-pancyclic} verifies
@@ -791,8 +791,8 @@ We now turn to the proof of \ref{lem:pseudorandom-pancyclic}, which
 will follow from the corresponding result for Hamiltonicity.
 \begin{lem}
 \label{lem:pseudorandom-hamiltonian}Let $D$ be a directed graph
-with all in- and out- degrees at least $4k$, and suppose for all
-disjoint $A,B\subseteq V\left(D\right)$ with $\left|A\right|=\left|B\right|\ge k$,
+with all in- and out- degrees at least $4k$, and suppose for every pair of
+disjoint sets $A,B\subseteq V\left(D\right)$ with $\left|A\right|=\left|B\right|\ge k$,
 there is an arc from $A$ to $B$. Then $D$ is Hamiltonian.\end{lem}
 \begin{rem}
 \label{rem:constants}With some effort, the ideas in the proof of
@@ -803,7 +803,7 @@ $4k$, as Bondy's metaconjecture would suggest. The constants in \ref{lem:pseudor
 can both be halved for the undirected case, just by simplifying the
 main argument in the proof of \ref{lem:pseudorandom-hamiltonian}.
 
-The idea of the proof is to start with a longest path $P$ and manipulate
+The idea of the proof is to start with a longest path $P$ and to manipulate
 it into a cycle $C$ on the same vertex set. We will show that $D$
 is strongly connected, so if $C$ were not Hamiltonian, there would
 be an arc from $V\left(C\right)$ to its complement, which could be
@@ -816,7 +816,7 @@ a variation for directed graphs in \cite[Section~4.3]{FK05}.\end{rem}
 [Proof of \ref{lem:pseudorandom-hamiltonian}]First we acknowledge
 some immediate consequences of the condition on $D$. Note that if
 $A$ and $B$ are disjoint sets with size at least $k$, then in fact
-there are $\left|A\right|-k$ vertices of $A$ with an arc into $B$.
+there are at least $\left|A\right|-k$ vertices of $A$ with an arc into $B$.
 To see this, note that for any fewer number of such vertices in $A$,
 we can delete those vertices and at least $k$ will remain, one of
 which has an arc to $B$. Also, $D$ is strongly connected. To see
@@ -826,11 +826,11 @@ then there is a length-2 path from $v$ to $w$; otherwise there must
 be an arc from $N^{+}\left(v\right)$ to $N^{-}\left(w\right)$ giving
 a length-3 path.
 
-Let $P=u\dots w$ be a maximal-length directed path in $D$. We will
+Let $P=u,\dots,w$ be a maximum-length directed path in $D$. We will
 use the notation $v^{+}$ (respectively $v^{-}$) for the successor
 (respectively predecessor) of a vertex $v$ on $P$, and also write
-$V^{+},V^{-}$ for the set of successors or predecessors of a set
-of vertices $V$.
+$U^{+},U^{-}$ for the set of successors or predecessors of a set
+of vertices $U$.
 
 By maximality, $N^{+}\left(w\right)\subset P$ and $N^{-}\left(u\right)\subset P$.
 Let $U_{1}$ be the first $3k$ elements of $N^{-}\left(u\right)$
@@ -998,19 +998,19 @@ that $C$ is a Hamilton cycle.
 \end{proof}
 
 \begin{proof}
-[Proof of \ref{lem:pseudorandom-hamiltonian}]Fix a vertex $v$. Let
+[Proof of \ref{lem:pseudorandom-pancyclic}]Fix a vertex $v$. Let
 $U^{+}$ and $U^{-}$ be arbitrary $k$-subsets of $N^{+}\left(v\right)$
 and $N^{-}\left(v\right)$ respectively. There is an arc from $U^{+}$
 to $U^{-}$ which immediately gives a 3-cycle.
 
 Next, let $W^{+}$ be the set of (fewer than $k$) vertices with no
-arc into $U^{+}$, and similarly let $W^{-}$ be the set of vertices
-with no arc from $U^{-}$. Now consider the induced digraph $D'$
+arc from $U^{+}$, and similarly let $W^{-}$ be the set of vertices
+with no arc into $U^{-}$. Now consider the induced digraph $D'$
 obtained from $D$ by deleting $v$ and the vertices in $U^{+},U^{-},W^{+},W^{-}$.
 Since we have removed fewer than $4k$ vertices, $D'$ satisfies the
 conditions of \ref{lem:pseudorandom-hamiltonian} so has a Hamilton
 cycle. In particular, for every $\ell$ satisfying $4\le\ell\le n-4k$,
-there is a path $P_{\ell}=u_{\ell}\dots w_{\ell}$ in $D'$ of length
+there is a path $P_{\ell}=u_{\ell},\dots, w_{\ell}$ in $D'$ of length
 $\ell-4$. By construction, there is an arc from $U^{+}$ to $u_{\ell}$
 and from $w_{\ell}$ to $U^{-}$, which we can combine with arcs to
 and from $v$ to get a cycle of length $\ell$.
@@ -1024,27 +1024,27 @@ $D''$ has a Hamilton cycle, $D$ has a cycle of length $\ell$.
 \begin{proof}
 [Proof of \ref{thm:smoothed-pancyclic}]In view of the discussion
 in the introduction, we assume each possible arc is present in $R$
-with independent probability $p=2\cdi/n$.
+with probability $p=\cdi n/\left(2{n \choose 2}\right)\ge\cdi/n$ independently.
 
 If $A,B\subseteq V\left(D\right)$ are disjoint sets with $\left|A\right|=\left|B\right|=\alpha n/8$,
 the probability that there are no arcs from $A$ to $B$ in $D\cup R$
 is at most
 \[
-\left(1-p\right)^{\left(\alpha n/8\right)^{2}}\le e^{-p\alpha^{2}n^{2}/64}=e^{-\cdi\alpha^{2}n/32}.
+\left(1-p\right)^{\left(\alpha n/8\right)^{2}}\le e^{-p\alpha^{2}n^{2}/64}\le e^{-\cdi\alpha^{2}n/64}.
 \]
 The number of choices of such pairs of disjoint sets $A,B$ is
 \[
 {n \choose \alpha n/4}{\alpha n/4 \choose \alpha n/8}=O\left(\frac{1}{\sqrt{n}}e^{n\left(H\left(\alpha/4\right)+\alpha H\left(1/2\right)/4\right)}\right),
 \]
 where $H\left(\alpha\right)=-\alpha\log\alpha-\left(1-\alpha\right)\log\left(1-\alpha\right)$
-(this can be proved with Stirling's approximation). By a union bound,
+(this can be proved with Stirling's approximation). By the union bound,
 the probability that $D\cup R$ does not satisfy the condition of
 \ref{lem:pseudorandom-hamiltonian} is at most
 \[
-O\left(\frac{1}{\sqrt{n}}e^{n\left(H\left(\alpha/4\right)+\alpha H\left(1/2\right)/4-\cdi\alpha^{2}n/32+o\left(1\right)\right)}\right).
+O\left(\frac{1}{\sqrt{n}}e^{n\left(H\left(\alpha/4\right)+\alpha H\left(1/2\right)/4-\cdi\alpha^{2}n/64+o\left(1\right)\right)}\right).
 \]
-This converges to zero if $\cdi$ is chosen to
-be sufficiently large.\end{proof}
+If $\cdi$ is chosen to
+be sufficiently large, then this expression converges to zero, which means the digraph $D\cup R$ is a.a.s. pancyclic, by \ref{lem:pseudorandom-hamiltonian}.\end{proof}
 \begin{rem}
 If we are only interested in Hamiltonicity, we can use \ref{lem:pseudorandom-hamiltonian}
 directly in the proof of \ref{thm:smoothed-pancyclic}, which gives
@@ -1135,7 +1135,7 @@ uniformly over $k$.\end{lem}
 We only prove the statement where $v$ has outdegree $k$; the indegree
 case is identical. If $k=0$ the lemma is trivial, so assume $k\ge1$.
 First consider the cases where $k>\sqrt{n}$ or $p<1/\sqrt{n}$. There
-are $k$ arcs pointing away from $v$ in $T$, and a Cherhoff bound
+are $k$ arcs pointing away from $v$ in $T$, and the Cherhoff bound
 says that the probability more than $2k/3$ arcs are changed by the
 perturbation is
 \[
@@ -1145,7 +1145,7 @@ That is, with the required probability, $k/3$ of the original out-neighbours
 survive the perturbation.
 
 Otherwise (for large $n$), there is a set of $n/2$ arcs pointing
-towards $v$ in $T$. A Chernoff bound says that the probability less
+towards $v$ in $T$. The Chernoff bound says that the probability less
 than $k/3$ of these arcs are changed is $e^{-\Omega\left(\sqrt{n}\right)}$.
 That is, with the required probability, $k/3$ new out-neighbours
 are added by the perturbation.\end{proof}
@@ -1167,7 +1167,7 @@ By \ref{lem:preserve-degree}, we can assume $\left|N_{P}^{+}\left(w\right)\right
 We first prove the lemma for the case where $k\le12t'$. There are
 at least $n'=n/18-1$ arcs between $N_{P}^{+}\left(w\right)$ and
 $v$, each of which will be pointing towards $v$ in $P$ with independent
-probability at least $p$. By a Chernoff bound, the probability less
+probability at least $p$. By the Chernoff bound, the probability less
 than $t'$ arcs will point from $N_{P}^{+}\left(w\right)$ to $v$
 in $P$ is
 \[
