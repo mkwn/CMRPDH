@@ -1218,17 +1218,17 @@ where we have used the geometric series formula, the inequality $1-e^{-x}\ge\lef
 
 By Markov's inequality, a.a.s. $\left|Q\right|\le\sqrt{e^{-\Omega\left(pn\left(d+1\right)\right)}}O\left(d+1\right)=o\left(d+1\right)$.
 If $d\le4t$ then $\left|Q\right|=0$ for large $n$. Otherwise, $\left|Q\right|<d/4$ for large $n$, and every vertex $v\in Q$ has
-$3t$ safe in-neighbours $v_{1},\dots,v_{3t}$ different to $w$. Now, I claim that there are at least $t$ internally vertex-disjoint paths of length at most 4 from $w$ to $v$ in $P$. Suppose not, and fix a maximum-size set
+$3t$ safe in-neighbours $v_{1},\dots,v_{3t}$ different from $w$. Now, we claim that there are at least $t$ internally vertex-disjoint paths of length at most 4 from $w$ to $v$ in $P$. To prove this, suppose not, and fix a maximum-size set
 $M$ of such paths, with $\left|M\right|<t$. There are less than $3t$ internal vertices in the paths in $M$, so there is some $v_{i}$ not in any path of $M$. Then, there are $3t$ internally vertex-disjoint paths from $w$ to $v_{i}$, so one of these does not contain any
 internal vertex of a path in $M$. It follows that $w,\dots,v_{i},v$ is a path from $w$ to $v$ which is
-internally vertex-disjoint with every path in $M$, contradicting maximality.
+internally vertex-disjoint from every path in $M$, contradicting maximality.
 \end{proof}
 It follows from \ref{lem:lots-of-paths} that in $P$, a.a.s. every vertex
 outside $S$ has $t$ internally vertex-disjoint paths to and from every vertex in $S$.
-If we delete $t-1$ vertices, then there is at least one vertex $w$
+If $P$ has this property and we delete $t-1$ vertices, then there is at least one vertex $w$
 of $S$ remaining, and $w$ has least one path to and from every other
-vertex. That is, $P$ is $t$-strongly connected. (In fact, we have also
-proved that $P$ has diameter at most 8). We conclude that $P$ has $q$ arc-disjoint Hamilton cycles for any $q=O\left(1\right)$.
+vertex. That is, $P$ is a.a.s. $t$-strongly connected. (In fact, we have also
+proved that $P$ a.a.s. has diameter at most 8). We conclude that $P$ a.a.s. has $q$ arc-disjoint Hamilton cycles for any $q=O\left(1\right)$.
 
 
 \section{Concluding Remarks}
