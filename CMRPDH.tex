@@ -341,7 +341,7 @@ describe a few different models here.
 
 First, note that for most practical purposes, models that involve
 the selection of $m$ random edges are equivalent to models that involve
-the selection of each edge with independent probability $p$, where
+the selection of each edge with probability $p$ independently, where
 $m=pN$ and $N$ is the total number of possible edges. One perspective or the other can be more intuitive
 or result in cleaner proofs; we will use both interchangeably as is
 convenient without further discussion. In all the situations in this
@@ -374,16 +374,17 @@ It is known that almost all tournaments have a Hamiltonian cycle (see
 to ``dense'' tournaments. Nevertheless, we can give stronger results
 for tournaments with large minimum in- and out- degrees. We are also
 able to show that randomly perturbed tournaments are not just Hamiltonian,
-but have multiple edge-disjoint Hamilton cycles.
+but have multiple edge-disjoint Hamilton cycles. Recall that $\omega\left(f\right)$ represents a function that grows faster than $f$ (to be precise, $g=\omega\left(f\right)$ means $g/f\to\infty$).
 \begin{thm}
 \label{thm:tournament}Consider a tournament $T$ with $n$ vertices
 and all in- and out- degrees at least $d$. Independently designate
-$m=\omega\left(d+1\right)/n$ edges as ``random'' then choose the
+$m=\omega\left(n/\left(d+1\right)\right)$ edges as ``random'' then choose the
 orientations of the chosen edges independently and uniformly at random.
 The resulting perturbed tournament $P$ a.a.s. has $q$ arc-disjoint
 Hamilton cycles, for $q=O\left(1\right)$.
 \end{thm}
-We will prove \ref{thm:tournament}, and show that it is tight, in \ref{sec:tournaments}.
+
+Note that we allow for the case where the minimum degree $d$ is zero, and where $d$ is an arbitrary function of $n$. We will prove \ref{thm:tournament}, and show that it is tight, in \ref{sec:tournaments}.
 
 
 \section{\label{sec:hypergraphs}Perfect Matchings and Hamilton Cycles in
@@ -794,14 +795,6 @@ will follow from the corresponding result for Hamiltonicity.
 with all in- and out- degrees at least $4k$, and suppose for every pair of
 disjoint sets $A,B\subseteq V\left(D\right)$ with $\left|A\right|=\left|B\right|\ge k$,
 there is an arc from $A$ to $B$. Then $D$ is Hamiltonian.\end{lem}
-\begin{rem}
-\label{rem:constants}With some effort, the ideas in the proof of
-\ref{lem:pseudorandom-hamiltonian} can be used directly to prove
- \ref{lem:pseudorandom-pancyclic} with a weaker degree condition.
-We do not know whether the condition can be weakened all the way to
-$4k$, as Bondy's metaconjecture would suggest. The constants in \ref{lem:pseudorandom-pancyclic,lem:pseudorandom-hamiltonian}
-can both be halved for the undirected case, just by simplifying the
-main argument in the proof of \ref{lem:pseudorandom-hamiltonian}.
 
 The idea of the proof is to start with a longest path $P$ and to manipulate
 it into a cycle $C$ on the same vertex set. We will show that $D$
@@ -811,7 +804,7 @@ combined with $C$ to give a longer path than $P$, contradicting
 maximality. This type of argument goes back to the proof of Dirac's
 theorem \cite[Theorem~3]{Dir52}. It also bears some resemblance to
 the ``rotation-extension'' idea introduced in \cite{Pos76}, and
-a variation for directed graphs in \cite[Section~4.3]{FK05}.\end{rem}
+a variation for directed graphs in \cite[Section~4.3]{FK05}.
 \begin{proof}
 [Proof of \ref{lem:pseudorandom-hamiltonian}]First we acknowledge
 some immediate consequences of the condition on $D$. Note that if
@@ -997,9 +990,18 @@ the fact that the vertex set of $P$ induces a cycle $C$, implies
 that $C$ is a Hamilton cycle.
 \end{proof}
 
+\begin{rem}
+\label{rem:constants}With some effort, the ideas in the proof of
+\ref{lem:pseudorandom-hamiltonian} can be used directly to prove
+ \ref{lem:pseudorandom-pancyclic} with a weaker degree condition.
+We do not know whether the condition can be weakened all the way to
+$4k$, as Bondy's metaconjecture would suggest. Also, the constants in \ref{lem:pseudorandom-pancyclic,lem:pseudorandom-hamiltonian}
+can both be halved for the undirected case, just by simplifying the
+main argument in the proof of \ref{lem:pseudorandom-hamiltonian}.\end{rem}
+
 \begin{proof}
 [Proof of \ref{lem:pseudorandom-pancyclic}]Fix a vertex $v$. Let
-$U^{+}$ and $U^{-}$ be arbitrary $k$-subsets of $N^{+}\left(v\right)$
+$U^{+}$ and $U^{-}$ be arbitrary disjoint $k$-subsets of $N^{+}\left(v\right)$
 and $N^{-}\left(v\right)$ respectively. There is an arc from $U^{+}$
 to $U^{-}$ which immediately gives a 3-cycle.
 
@@ -1024,7 +1026,7 @@ $D''$ has a Hamilton cycle, $D$ has a cycle of length $\ell$.
 \begin{proof}
 [Proof of \ref{thm:smoothed-pancyclic}]In view of the discussion
 in the introduction, we assume each possible arc is present in $R$
-with probability $p=\cdi n/\left(2{n \choose 2}\right)\ge\cdi/n$ independently.
+with probability $p=\cdi n/\left(2{n \choose 2}\right)\ge\cdi/n$ independently. (Recall that digraphs are not necessarily oriented, and are allowed to have 2-cycles).
 
 If $A,B\subseteq V\left(D\right)$ are disjoint sets with $\left|A\right|=\left|B\right|=\alpha n/8$,
 the probability that there are no arcs from $A$ to $B$ in $D\cup R$
@@ -1059,7 +1061,7 @@ constant in \cite[Theorem~1]{BFM03} except for small values of $\alpha$.
 There are several seemingly different conditions that are equivalent
 to Hamiltonicity for tournaments (see \cite[Chapters~2-3]{Moo68}).
 A tournament is Hamiltonian if and only if it is irreducible (cannot
-be divided into two partitions with all arcs between the two partitions
+be divided into two parts with all arcs between the two parts
 in the same direction), if and only if it is strongly connected (has
 a directed path from every vertex to every other), if and only if
 it is pancyclic (contains cycles of all lengths). All tournaments
@@ -1070,39 +1072,35 @@ It was more recently proved in \cite{KLOP14} that if a tournament
 is $t$-strongly connected (it remains strongly connected after the
 deletion of $t-1$ vertices), then it has $\Omega\left(\sqrt{t}/\log t\right)$
 arc-disjoint Hamilton cycles (this was improved to $\Omega\left(\sqrt{t}\right)$
-in \cite{Pok14}). It is not difficult to show that a random tournament
-is a.a.s. $t$-connected for fixed $t$, which implies that a random
-tournament contains $q$ arc-disjoint Hamilton cycles for $q=O\left(1\right)$.
-We will use this to prove \ref{thm:tournament}.
+in \cite{Pok14}). Therefore, to show a tournament has $q$ arc-disjoint Hamilton cycles for any $q=O\left(1\right)$, it suffices to show that the tournament is $t$-strongly connected for any fixed $t$. In particular, it is not difficult to show that a random tournament is a.a.s. $t$-strongly connected for fixed $t$, which motivates \ref{thm:tournament}.
 
 Before we proceed to the proof, we first explain why \ref{thm:tournament}
 is sharp. The ``obvious'' worst case for $T$ is a \emph{transitive}
 tournament (corresponding to a linear order on the vertices). In this
-case, a superlinear number of edges must be flipped in order to a.a.s.
+case, a superlinear number of random edges must be flipped in order to a.a.s.
 flip one of the arcs pointing away from the least element of the linear
 order. Actually, the model where random edges are flipped in a transitive
 tournament has already been studied in \cite{LRG96}, by analogy to
 the evolution of the random graph.
 
 More generally, consider a ``transitive cluster-tournament'' $T$
-on $n=rk$ vertices defined as follows. Let $R$ be a regular tournament
-on $2d+1$ vertices (this means the indegree and outdegree are equal
-for each vertex). To construct $T$, start with $r$ disjoint copies
+on $n=r\left(2d+1\right)$ vertices defined as follows. Let $R$ be a regular tournament
+on $2d+1$ vertices (this means every vertex has indegree and outdegree $d$). To construct $T$, start with $r$ disjoint copies
 $R_{1},\dots,R_{r}$ of $R$, then put an arc from $v$ to $w$ for
 every $v\in R_{i}$, $w\in R_{j}$ with $i<j$. In order for the perturbed
 tournament $P$ to be Hamiltonian, there must be an arc entering $R_{1}$,
 so one of the $O\left(n\left(d+1\right)\right)$ arcs exiting $R_{1}$
-must be changed. This will not happen a.a.s. unless $m=\omega\left(d+1\right)/n$.
+must be changed. This will not happen a.a.s. unless $m=\omega\left(n/\left(d+1\right)\right)$.
 
 We now prove \ref{thm:tournament}. In accordance with the discussion
 in the introduction, we will work with the model where each edge is
-flipped with independent probability $p$, where $2p{n \choose 2}=m$.
+flipped with probability $p$ independently, where $2p{n \choose 2}=m$.
 (Designating an edge for resampling with probability $2p$ is the
 same as flipping it with probability $p$).
 
-Fix $t$; we will prove that $P$ is $t$-strongly connected. The
+Fix $t$; we will prove that $P$ is a.a.s. $t$-strongly connected. The
 idea of the proof is to choose a set $S$ of $t$ vertices with a
-large indegree and outdegree, then show that with high probability
+large indegree and outdegree, then to show that with high probability
 almost every vertex has many paths to and from each vertex in $S$.
 The probability that a vertex $v$ has paths from $S$ is smallest
 if $v$ has small indegree, so we need to show that not many vertices
@@ -1116,32 +1114,30 @@ The sum of indegrees (respectively outdegrees) of a tournament on
 $k$ vertices is ${k \choose 2}$, because each arc contributes 1
 to this sum. Therefore in every set of $k$ vertices of a tournament,
 there is a vertex of outdegree (indegree) at least $\left(k-1\right)/2$
-in the induced tournament.
+in the induced sub-tournament.
 \end{proof}
 A consequence of \ref{lem:extreme-indegree-bound} is that the set
 of all vertices with indegree (respectively outdegree) less than $n/6$
-has size smaller than $n/3$. So, there are at least $n/3$ vertices
-with indegree and outdegree at least $n/6$. We can therefore choose
+in $T$, has size smaller than $n/3$. So, there are at least $n/3$ vertices
+whose indegree and outdegree in $T$ are both at least $n/6$. We can therefore choose
 a set $S$ of $t$ such vertices.
 
-Now, we prove that the random perturbation does not change the in-
+Now, we prove that the random perturbation typically does not change the in-
 and -out degrees very much.
 \begin{lem}
 \label{lem:preserve-degree}If a vertex $v$ has outdegree (respectively
 indegree) $k$ in $T$, then it has outdegree (respectively indegree)
-at least $k/3$ in $P$, with probability $e^{-\Omega\left(\sqrt{n}\right)}$
+at least $k/3$ in $P$, with probability $e^{-\Omega\left(\sqrt{n}\right)}$,
 uniformly over $k$.\end{lem}
 \begin{proof}
 We only prove the statement where $v$ has outdegree $k$; the indegree
 case is identical. If $k=0$ the lemma is trivial, so assume $k\ge1$.
 First consider the cases where $k>\sqrt{n}$ or $p<1/\sqrt{n}$. There
-are $k$ arcs pointing away from $v$ in $T$, and the Cherhoff bound
-says that the probability more than $2k/3$ arcs are changed by the
-perturbation is
-\[
-e^{-\Omega\left(k^{2}/\E X\right)}=e^{-\Omega\left(\sqrt{n}\right)}.
-\]
-That is, with the required probability, $k/3$ of the original out-neighbours
+are $k$ arcs pointing away from $v$ in $T$, and the Chernoff bound
+says that the probability more than $2k/3$ of those are changed by the
+perturbation is $
+e^{-\Omega\left(1/p\right)}=e^{-\Omega\left(\sqrt{n}\right)}
+$. That is, with the required probability, $k/3$ of the original out-neighbours
 survive the perturbation.
 
 Otherwise (for large $n$), there is a set of $n/2$ arcs pointing
@@ -1151,11 +1147,11 @@ That is, with the required probability, $k/3$ new out-neighbours
 are added by the perturbation.\end{proof}
 \begin{lem}
 \label{lem:path-from-home}Suppose $w$ has outdegree (respectively
-indegree) at least $n/6$, and $v\ne w$ is a vertex with indegree
-(respectively outdegree) at least $k$. Then with probability $1-e^{-\Omega\left(\sqrt{n}\right)}-e^{-\Omega\left(np\left(k+1\right)\right)}$
+indegree) at least $n/6$ in $T$, and $v\ne w$ is a vertex with indegree
+(respectively outdegree) at least $k$ in $T$. Then with probability $1-e^{-\Omega\left(\sqrt{n}\right)}-e^{-\Omega\left(np\left(k+1\right)\right)}$
 (uniformly over $k$), there are $t'=3t$ internally vertex-disjoint
 paths of length at most 3 from $w$ to $v$ (respectively from $v$
-to $w$).\end{lem}
+to $w$) in $P$.\end{lem}
 \begin{proof}
 We will only prove the statement where $v$ has indegree at least
 $k$; the outdegree case is identical. By independence, we can condition
@@ -1166,13 +1162,10 @@ By \ref{lem:preserve-degree}, we can assume $\left|N_{P}^{+}\left(w\right)\right
 
 We first prove the lemma for the case where $k\le12t'$. There are
 at least $n'=n/18-1$ arcs between $N_{P}^{+}\left(w\right)$ and
-$v$, each of which will be pointing towards $v$ in $P$ with independent
-probability at least $p$. By the Chernoff bound, the probability less
+$v$, each of which will be pointing towards $v$ in $P$ with
+probability at least $p$ independently. By the Chernoff bound, the probability less
 than $t'$ arcs will point from $N_{P}^{+}\left(w\right)$ to $v$
-in $P$ is
-\[
-e^{-\Omega\left(\E Z-t'\right)}=e^{-\Omega\left(np\right)}=e^{-\Omega\left(np\left(k+1\right)\right)}.
-\]
+in $P$ is $e^{-\Omega\left(np\right)}=e^{-\Omega\left(np\left(k+1\right)\right)}$.
 So, with the required probability there are $t'$ suitable length-2
 paths from $w$ to $v$.
 
@@ -1191,28 +1184,27 @@ has at least $k'=k/6-t'-1$ vertices (note $k'\ge t'$ by assumption).
 Now, we would like to show that with the required probability there
 is a set of $t'$ independent arcs from $U^{+}$ into $U^{-}$ in
 $P$, which will give $t'$ suitable length-3 paths. Partition $U^{+}$(respectively
-$U^{-}$) into subsets $U_{1}^{+},\dots,U_{t'}^{+}$ (respectively
-$U_{1}^{-},\dots,U_{t'}^{-}$), such that each $\left|U_{1}^{+}\right|>n'/\left(2t'\right)$
-and each $\left|U_{1}^{-}\right|>k'/\left(2t'\right)$. For each $i$,
+$U^{-}$) into subsets $U_{1}^{+},\dots,U_{t'}^{+}$ of size $n'/t'$ (respectively, subsets
+$U_{1}^{-},\dots,U_{t'}^{-}$ of size $k'/t'$). For each $i$,
 the probability that there is no arc from $U_{i}^{+}$ into $U_{i}^{-}$
 after the perturbation is at most
 \[
-\left(1-p/2\right)^{n'k'/\left(4t'\right)}\le e^{-\Theta\left(np\left(k+1\right)\right)},
+\left(1-p\right)^{n'k'/\left(t'\right)^2}\le e^{-\Theta\left(np\left(k+1\right)\right)},
 \]
 so with the required probability there a set of $t'$ suitable independent
 arcs, each between a pair $U_{i}^{+},U_{i}^{-}$.\end{proof}
 \begin{lem}
 \label{lem:lots-of-paths}Fix some $w\in S$. In $P$, there are a.a.s.
-$t$ disjoint paths from $w$ to each other vertex (respectively,
+$t$ internally vertex-disjoint paths from $w$ to each other vertex (respectively,
 from each other vertex to $w$).\end{lem}
 \begin{proof}
 We only prove there are paths from $w$ to each other vertex; the
-reverse case is identical. If there are $3t$ disjoint paths of length
-at most 3 from $w$ to $v$ then we say $v$ is \emph{safe}. It follows
+reverse case is identical. If there are $3t$ internally vertex-disjoint paths from $w$ to $v$ in $P$ of length
+at most 3, then we say $v$ is \emph{safe}. It follows
 from \ref{lem:path-from-home} that a vertex with indegree $k$ is
 safe with probability $1-e^{-\Omega\left(\sqrt{n}\right)}-e^{-\Omega\left(np\left(k+1\right)\right)}$.
 
-By \ref{lem:extreme-indegree-bound}, there are at most $\left(2d+1\right)$
+By \ref{lem:extreme-indegree-bound}, there are at most $2d+1$
 vertices with outdegree $d$, and the vertex with the $2k$th smallest
 outdegree has outdegree at least $k-1$. Let $Q$ be the set of non-safe
 vertices, and note
@@ -1225,22 +1217,18 @@ where we have used the geometric series formula, the inequality $1-e^{-x}\ge\lef
 (for positive $x$) and the fact that $d+1=\Omega\left(1\right)$.
 
 By Markov's inequality, a.a.s. $\left|Q\right|\le\sqrt{e^{-\Omega\left(pn\left(d+1\right)\right)}}O\left(d+1\right)=o\left(d+1\right)$.
-If $d\le4t$ then $\left|Q\right|=0$ for large $n$. Otherwise, for
-large $n$, $\left|Q\right|\le3d$, so every vertex $v\in Q$ has
-$3t$ safe neighbours $v_{1},\dots,v_{3t}$. Now, fix a maximal set
-$M$ of disjoint paths from $w$ to $v$. If $\left|M\right|<t$ then
-the paths in $M$ collectively use less than $3t$ vertices other
-than $t$, so there is some $v_{i}$ not in any path of $M$, and
-there is some path from $w$ to $v_{i}$ that does not contain any
-vertex of $M$. But then $w\dots v_{i}v$ is a path from $w$ to $v$
-disjoint with every path in $M$, contradicting maximality.
+If $d\le4t$ then $\left|Q\right|=0$ for large $n$. Otherwise, $\left|Q\right|<d/4$ for large $n$, and every vertex $v\in Q$ has
+$3t$ safe in-neighbours $v_{1},\dots,v_{3t}$ different to $w$. Now, I claim that there are at least $t$ internally vertex-disjoint paths of length at most 4 from $w$ to $v$ in $P$. Suppose not, and fix a maximum-size set
+$M$ of such paths, with $\left|M\right|<t$. There are less than $3t$ internal vertices in the paths in $M$, so there is some $v_{i}$ not in any path of $M$. Then, there are $3t$ internally vertex-disjoint paths from $w$ to $v_{i}$, so one of these does not contain any
+internal vertex of a path in $M$. It follows that $w,\dots,v_{i},v$ is a path from $w$ to $v$ which is
+internally vertex-disjoint with every path in $M$, contradicting maximality.
 \end{proof}
-It follows from \ref{lem:lots-of-paths} that a.a.s. every vertex
-outside $S$ has $t$ disjoint paths to and from every vertex in $S$.
+It follows from \ref{lem:lots-of-paths} that in $P$, a.a.s. every vertex
+outside $S$ has $t$ internally vertex-disjoint paths to and from every vertex in $S$.
 If we delete $t-1$ vertices, then there is at least one vertex $w$
 of $S$ remaining, and $w$ has least one path to and from every other
-vertex. That is, $P$ is strongly connected. (In fact, we have also
-proved that $P$ has diameter at most 8).
+vertex. That is, $P$ is $t$-strongly connected. (In fact, we have also
+proved that $P$ has diameter at most 8). We conclude that $P$ has $q$ arc-disjoint Hamilton cycles for any $q=O\left(1\right)$.
 
 
 \section{Concluding Remarks}
@@ -1276,103 +1264,103 @@ be avoided, thereby drastically improving the constants $\chyp\left(\alpha\right
 \begin{thebibliography}{10}
 
 \bibitem{BHM04}
-Tom Bohman, Alan Frieze, Michael Krivelevich, and Ryan Martin, \emph{Adding
-  random edges to dense graphs}, Random Structures \& Algorithms \textbf{24}
-  (2004), no.~2, 105--117.
+T.~Bohman, A.~Frieze, M.~Krivelevich, and R.~Martin, \emph{Adding random edges
+  to dense graphs}, Random Structures \& Algorithms \textbf{24} (2004), no.~2,
+  105--117.
 
 \bibitem{BFM03}
-Tom Bohman, Alan Frieze, and Ryan Martin, \emph{How many random edges make a
-  dense graph {H}amiltonian?}, Random Structures \& Algorithms \textbf{22}
-  (2003), no.~1, 33--42.
+T.~Bohman, A.~Frieze, and R.~Martin, \emph{How many random edges make a dense
+  graph {H}amiltonian?}, Random Structures \& Algorithms \textbf{22} (2003),
+  no.~1, 33--42.
 
 \bibitem{Bon75}
-JA~Bondy, \emph{Pancyclic graphs: Recent results}, Infinite and finite sets: to
-  {P}aul {E}rd\H{o}s on his 60th birthday, Volume 1 (A~Hajnal, R~Rado, and
-  Vera~T Sos, eds.), Colloquia mathematica Societatis J\'anos Bolyai, vol.~10,
+J.~Bondy, \emph{Pancyclic graphs: Recent results}, Infinite and finite sets: to
+  {P}aul {E}rd\H{o}s on his 60th birthday, Volume 1 (A.~Hajnal, R.~Rado, and
+  V.~T. Sos, eds.), Colloquia mathematica Societatis J\'anos Bolyai, vol.~10,
   North-Holland Publishing Company, Amsterdam-London, 1975, pp.~181--187.
 
 \bibitem{Dir52}
-Gabriel~Andrew Dirac, \emph{Some theorems on abstract graphs}, Proceedings of
-  the London Mathematical Society \textbf{3} (1952), no.~1, 69--81.
+G.~A. Dirac, \emph{Some theorems on abstract graphs}, Proceedings of the London
+  Mathematical Society \textbf{3} (1952), no.~1, 69--81.
 
 \bibitem{DF11}
-Andrzej Dudek and Alan Frieze, \emph{Loose {H}amilton cycles in random uniform
+A.~Dudek and A.~Frieze, \emph{Loose {H}amilton cycles in random uniform
   hypergraphs}, Electronic Journal of Combinatorics \textbf{18} (2011), no.~1,
   Paper 48.
 
 \bibitem{FK05}
-Alan Frieze and Michael Krivelevich, \emph{On packing {H}amilton cycles in
-  $\varepsilon$-regular graphs}, Journal of Combinatorial Theory, Series B
+A.~Frieze and M.~Krivelevich, \emph{On packing {H}amilton cycles in
+  $\varepsilon$-regular graphs}, Journal of Combinatorial Theory Series B
   \textbf{94} (2005), no.~1, 159--172.
 
 \bibitem{JLR00}
-Svante Janson, Tomasz {\L{}}uczak, and Andrzej Ruci{\'n}ski, \emph{Random
-  graphs}, Cambridge University Press, 2000.
+S.~Janson, T.~{\L{}}uczak, and A.~Ruci{\'n}ski, \emph{Random graphs}, Cambridge
+  University Press, 2000.
 
 \bibitem{JKV08}
-Anders Johansson, Jeff Kahn, and Van Vu, \emph{Factors in random graphs},
-  Random Structures \& Algorithms \textbf{33} (2008), no.~1, 1--28.
+A.~Johansson, J.~Kahn, and V.~Vu, \emph{Factors in random graphs}, Random
+  Structures \& Algorithms \textbf{33} (2008), no.~1, 1--28.
 
 \bibitem{Kar72}
-R~M Karp, \emph{Reducibility among combinatorial problems}, Complexity of
-  Computer Computations (R~E Miller and J~W Thatcher, eds.), vol.~10, Plenum,
-  New York, 1972, pp.~85--104.
+R.~M. Karp, \emph{Reducibility among combinatorial problems}, Complexity of
+  Computer Computations (R.~E. Miller and J.~W. Thatcher, eds.), vol.~10,
+  Plenum, New York, 1972, pp.~85--104.
 
 \bibitem{KKMO11}
-Peter Keevash, Daniela K{\"u}hn, Richard Mycroft, and Deryk Osthus, \emph{Loose
-  {H}amilton cycles in hypergraphs}, Discrete Mathematics \textbf{311} (2011),
-  no.~7, 544--559.
+P.~Keevash, D.~K{\"u}hn, R.~Mycroft, and D.~Osthus, \emph{Loose {H}amilton
+  cycles in hypergraphs}, Discrete Mathematics \textbf{311} (2011), no.~7,
+  544--559.
 
 \bibitem{KS96}
-J~Koml\'os and M~Simonovits, \emph{Szemer\'edi's regularity lemma and its
+J.~Koml\'os and M.~Simonovits, \emph{Szemer\'edi's regularity lemma and its
   applications in graph theory}, Combinatorics, {P}aul {E}rd\H{o}s is eighty
-  (D~Mikl\'os, VT~Sos, and T~Szonyi, eds.), Bolyai society mathematical
-  studies, vol.~2, J\'anos {B}olyai Mathematical Society, Budapest, 1996,
+  (D.~Mikl\'os, V.~Sos, and T.~Szonyi, eds.), Bolyai Society Mathematical
+  Studies, vol.~2, J\'anos {B}olyai Mathematical Society, Budapest, 1996,
   pp.~295--352.
 
 \bibitem{KST06}
-Michael Krivelevich, Benny Sudakov, and Prasad Tetali, \emph{On smoothed
-  analysis in dense graphs and formulas}, Random Structures \& Algorithms
-  \textbf{29} (2006), no.~2, 180--193.
+M.~Krivelevich, B.~Sudakov, and P.~Tetali, \emph{On smoothed analysis in dense
+  graphs and formulas}, Random Structures \& Algorithms \textbf{29} (2006),
+  no.~2, 180--193.
 
 \bibitem{KLOP14}
-Daniela K{\"u}hn, John Lapinskas, Deryk Osthus, and Viresh Patel, \emph{Proof
-  of a conjecture of {T}homassen on {H}amilton cycles in highly connected
-  tournaments}, Proceedings of the London Mathematical Society (2014), pdu019.
+D.~K{\"u}hn, J.~Lapinskas, D.~Osthus, and V.~Patel, \emph{Proof of a conjecture
+  of {T}homassen on {H}amilton cycles in highly connected tournaments},
+  Proceedings of the London Mathematical Society (2014).
 
 \bibitem{LRG96}
-Tomasz {\L}uczak, Andrzej Ruci{\'n}ski, and Jacek Gruszka, \emph{On the
-  evolution of a random tournament}, Discrete Mathematics \textbf{148} (1996),
-  no.~1, 311--316.
+T.~{\L}uczak, A.~Ruci{\'n}ski, and J.~Gruszka, \emph{On the evolution of a
+  random tournament}, Discrete Mathematics \textbf{148} (1996), no.~1,
+  311--316.
 
 \bibitem{Moo68}
-JW~Moon, \emph{Topics on tournaments}, Holt, Rinehart and Winston, 1968.
+J.~Moon, \emph{Topics on tournaments}, Holt, Rinehart and Winston, 1968.
 
 \bibitem{MM62}
-JW~Moon and L~Moser, \emph{Almost all tournaments are irreducible}, Canadian
+J.~Moon and L.~Moser, \emph{Almost all tournaments are irreducible}, Canadian
   Mathematical Bulletin \textbf{5} (1962), 61--65.
 
 \bibitem{Pok14}
-Alexey Pokrovskiy, \emph{Edge disjoint {H}amiltonian cycles in highly connected
+A.~Pokrovskiy, \emph{Edge disjoint {H}amiltonian cycles in highly connected
   tournaments}, arXiv preprint arXiv:1406.7556 (2014).
 
 \bibitem{Pos76}
-L~P{\'o}sa, \emph{{H}amiltonian circuits in random graphs}, Discrete
+L.~P{\'o}sa, \emph{{H}amiltonian circuits in random graphs}, Discrete
   Mathematics \textbf{14} (1976), no.~4, 359--364.
 
 \bibitem{RR10}
-Vojtech R{\"o}dl and Andrzej Ruci{\'n}ski, \emph{Dirac-type questions for
-  hypergraphs -- a survey (or more problems for {E}ndre to solve)}, An
-  Irregular Mind: Szemer\'edi is 70 (Imre B\'arany and J\'ozsef Solymosi,
-  eds.), Bolyai Society Mathematical Studies, vol.~21, Springer and J\'anos
-  Bolyai Mathematical Society, New York and Budapest, 2010, pp.~561--590.
+V.~R{\"o}dl and A.~Ruci{\'n}ski, \emph{Dirac-type questions for hypergraphs --
+  a survey (or more problems for {E}ndre to solve)}, An Irregular Mind:
+  Szemer\'edi is 70 (I.~B\'arany and J.~Solymosi, eds.), Bolyai Society
+  Mathematical Studies, vol.~21, Springer and J\'anos Bolyai Mathematical
+  Society, New York and Budapest, 2010, pp.~561--590.
 
 \bibitem{ST03}
-Daniel~A Spielman and Shang-Hua Teng, \emph{Smoothed analysis: Motivation and
-  discrete models}, Algorithms and data structures: 8th International Workshop,
-  WADS 2003, Ottawa, Ontario, Canada, July 30 - August 1, 2003, Proceedings
-  (Frank Dehne, J{\"o}rg~R{\"u}diger Sack, and Michie Smid, eds.), Lecture
-  Notes in Computer Science, vol. 2748, Springer, 2003, pp.~256--270.
+D.~A. Spielman and S.-H. Teng, \emph{Smoothed analysis: Motivation and discrete
+  models}, Algorithms and data structures: 8th International Workshop, WADS
+  2003, Ottawa, Ontario, Canada, July 30 - August 1, 2003, Proceedings
+  (F.~Dehne, J.~R. Sack, and M.~Smid, eds.), Lecture Notes in Computer Science,
+  vol. 2748, Springer, 2003, pp.~256--270.
 
 \bibitem{ST04}
 \bysame, \emph{Smoothed analysis of algorithms: Why the simplex algorithm
@@ -1380,7 +1368,7 @@ Daniel~A Spielman and Shang-Hua Teng, \emph{Smoothed analysis: Motivation and
   385--463.
 
 \bibitem{Tao05}
-Terence Tao, \emph{Szemer\'edi's regularity lemma revisited}, Contributions to
+T.~Tao, \emph{Szemer\'edi's regularity lemma revisited}, Contributions to
   Discrete Mathematics \textbf{1} (2006), no.~1, 8--28.
 
 \end{thebibliography}
