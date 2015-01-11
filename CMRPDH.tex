@@ -128,9 +128,11 @@
   \providecommand{\remarkname}{Remark}
 \providecommand{\theoremname}{Theorem}
 
+\date{}
+
 \begin{document}
 
-\title{Cycles and matchings in randomly perturbed digraphs and hypergraphs}
+\title{\vspace{-1cm} Cycles and matchings in randomly perturbed digraphs and hypergraphs}
 
 
 \author{Michael Krivelevich
@@ -198,8 +200,8 @@ We give several results showing that different discrete structures
 gain certain spanning substructures (in particular, Hamilton cycles) after a modest random perturbation. First, we show
 that adding linearly many random edges to a dense $k$-uniform hypergraph ensures
 the (asymptotically almost sure) existence of a perfect matching or a loose
-Hamilton cycle. This involves a nonstandard application of Szemer\'edi's
-Regularity Lemma. We next show that digraphs with certain strong expansion
+Hamilton cycle. The proof involves a nonstandard application of Szemer\'edi's
+Regularity Lemma, which might be of independent interest. We next show that digraphs with certain strong expansion
 properties are pancyclic, and use this to show that adding a linear
 number of random edges typically makes a dense digraph pancyclic. Finally, we
 show that perturbing a certain (minimum-degree-dependent) number of
@@ -246,7 +248,8 @@ minimum degree at least $\alpha n$ and add $\cdi n$
 random edges, then the resulting graph will a.a.s. be Hamiltonian.
 Note that some dense graphs require a linear number of extra edges
 to become Hamiltonian (consider the complete bipartite graph with
-partition sizes $n/3$ and $2n/3$), so the order of magnitude of this result is tight. We can interpret this theorem as quantifying the ``fragility''
+partition sizes $n/3$ and $2n/3$), so the order of magnitude of this result is tight. 
+We can interpret this theorem as quantifying the ``fragility''
 of the few dense graphs that are not Hamiltonian, by determining the
 amount of random perturbation that is necessary to make a dense graph
 Hamiltonian. A comparison can be drawn to the notion of \emph{smoothed
@@ -295,11 +298,11 @@ proof. In particular, we cannot easily manipulate paths for P\'osa-type
 arguments, and we do not have an analogue of Hall's marriage theorem
 allowing us to deduce the existence of a perfect matching from an
 expansion property. Our proof involves reducing the theorem to the
-existence of a perfect matching in a certain randomly perturbed bipartite
+existence of a perfect matching in a certain randomly perturbed dense bipartite
 graph. The ``reason'' for a perfect matching in this perturbed graph
 seems to be quite different depending on the structure of the initial
-bipartite graph, so we make critical use of the structural description
-given by Szemer\'edi's regularity lemma.
+bipartite graph, hence the naive approach using Hall's theorem and union bound fails.
+Instead the proof uses in a nonstandard way the Szemer\'edi's regularity lemma.
 
 Our second contribution in this paper is a theorem giving a general
 expansion condition for\emph{ pancyclicity}. We say an $n$-vertex
@@ -320,7 +323,7 @@ to pancyclicity. Most generally, \ref{lem:pseudorandom-pancyclic} implies the fo
 
 \begin{thm}
 \label{thm:smoothed-pancyclic}Let $\DD\left(n,m\right)$ be the uniform
-distribution on (not necessarily oriented) $m$-arc digraphs on the vertex set $\range n$.
+distribution on $m$-arc digraphs on the vertex set $\range n$.
 For each $\alpha>0$, there is $\cdi=\cdi\left(\alpha\right)$ such that
 if $D$ is a digraph on $\range n$ with all in- and out- degrees at least $\alpha n$,
 and $R\in\DD\left(n,\cdi n\right)$, then $D\cup R$
@@ -368,17 +371,18 @@ uniformly and independently at random. This is mostly equivalent to
 the symmetric difference model, and is the model in which we prefer
 to state our theorem about randomly perturbed tournaments.
 
-It is known that almost all tournaments have a Hamiltonian cycle (see
-\ref{sec:tournaments}), so we do not need to restrict our attention
-to ``dense'' tournaments. Nevertheless, we can give stronger results
-for tournaments with large minimum in- and out- degrees. We are also
-able to show that randomly perturbed tournaments are not just Hamiltonian,
-but have multiple edge-disjoint Hamilton cycles. Recall that $\omega\left(f\right)$ represents a function that grows faster than $f$ (to be precise, $g=\omega\left(f\right)$ means $g/f\to\infty$).
+Although it is easy to construct tournaments with no Hamilton cycle, here we prove 
+that every tournament becomes Hamiltonian after a small random perturbation. We are also
+show that randomly perturbed tournaments are not just Hamiltonian,
+but have multiple edge-disjoint Hamilton cycles.
+Moreover, we can give stronger results
+for tournaments with large minimum in- and out- degrees. 
+Recall that $\omega\left(f\right)$ represents a function that grows faster than 
+$f$ (to be precise, $g=\omega\left(f\right)$ means $g/f\to\infty$).
 \begin{thm}
 \label{thm:tournament}Consider a tournament $T$ with $n$ vertices
-and all in- and out- degrees at least $d$. Independently designate
-$m=\omega\left(n/\left(d+1\right)\right)$ edges as ``random'' then choose the
-orientations of the chosen edges independently and uniformly at random.
+and all in- and out- degrees at least $d$. Independently choose
+$m=\omega\left(n/\left(d+1\right)\right)$ random edges of $T$ and orient them uniformly at random.
 The resulting perturbed tournament $P$ a.a.s. has $q$ arc-disjoint
 Hamilton cycles, for $q=O\left(1\right)$.
 \end{thm}
@@ -771,14 +775,14 @@ ensures the existence of a perfect matching in $G_{A,B}\left(H\cup R\right)$. Th
 
 In this section we prove \ref{lem:pseudorandom-pancyclic,thm:smoothed-pancyclic}. One motivation to consider pancyclicity instead of just Hamiltonicity is an observation by Bondy (see \cite{Bon75}),
 that almost all known non-trivial conditions that ensure Hamiltonicity
-also ensure pancyclicity. He made an informal ``metaconjecture''
+also ensure pancyclicity. He even made an informal ``metaconjecture''
 that this was always the case; our \ref{thm:smoothed-pancyclic} verifies
 his metaconjecture in the setting of randomly perturbed dense graphs
 and digraphs.
 
 \ref{thm:smoothed-pancyclic} obviously implies \cite[Theorems~1 and~3]{BFM03}.
 We do not fight very hard to optimize constants, but we note that
-if we make some simplifications in the proof of \ref{thm:smoothed-pancyclic},
+if we make some careful calculations in the proof of \ref{thm:smoothed-pancyclic},
 the resulting values of $\cdi\left(\alpha\right)$ seem to be better
 than those found in \cite{BFM03}, for most values of $\alpha$.
 
@@ -890,7 +894,8 @@ through the center is $P$; the broken lines indicate subpaths.}
 
 Otherwise, each vertex of $U_{1}$ precedes each vertex of $W_{2}$.
 Let $U_{12}$ contain the $k$ elements of $U_{1}$ furthest down
-the path. Let $U_{11}$ be the set of vertices among the first $2k$
+the path. Note that there are at least $2k$ vertices of $P$ (e.g., vertices of $U_1-U_{12}$) preceding all vertices in $U_{12}$. 
+Let $U_{11}$ be the set of vertices among the first $2k$
 vertices of $P$ which have an arc to $U_{12}^{+}$. By the discussion
 at the beginning of the proof, $\left|U_{11}\right|\ge k$. Similarly,
 let $W_{21}$ contain the $k$ elements of $W_{2}$ first appearing
@@ -1028,27 +1033,12 @@ is at most
 \[
 \left(1-p\right)^{\left(\alpha n/8\right)^{2}}\le e^{-p\alpha^{2}n^{2}/64}\le e^{-\cdi\alpha^{2}n/64}.
 \]
-The number of choices of such pairs of disjoint sets $A,B$ is
-\[
-{n \choose \alpha n/4}{\alpha n/4 \choose \alpha n/8}=O\left(\frac{1}{\sqrt{n}}e^{n\left(H\left(\alpha/4\right)+\alpha H\left(1/2\right)/4\right)}\right),
-\]
-where $H\left(\alpha\right)=-\alpha\log\alpha-\left(1-\alpha\right)\log\left(1-\alpha\right)$
-(this can be proved with Stirling's approximation). By the union bound,
+The number of choices of such pairs of disjoint sets $A,B$ is at most $2^{2n}$. By the union bound,
 the probability that $D\cup R$ does not satisfy the condition of
-\ref{lem:pseudorandom-hamiltonian} is at most
-\[
-O\left(\frac{1}{\sqrt{n}}e^{n\left(H\left(\alpha/4\right)+\alpha H\left(1/2\right)/4-\cdi\alpha^{2}n/64+o\left(1\right)\right)}\right).
-\]
-If $\cdi$ is chosen to
-be sufficiently large, then this expression converges to zero, which means the digraph $D\cup R$ is a.a.s. pancyclic by \ref{lem:pseudorandom-hamiltonian}.\end{proof}
-\begin{rem}
-If we are only interested in Hamiltonicity, we can use \ref{lem:pseudorandom-hamiltonian}
-directly in the proof of \ref{thm:smoothed-pancyclic}, which gives
-a better constant $\cdi\left(\alpha\right)$ than in \cite[Theorem~3]{BFM03},
-for all $\alpha$. If we make the adjustment for undirected graphs
-mentioned in \ref{rem:constants}, then we also beat the corresponding
-constant in \cite[Theorem~1]{BFM03} except for small values of $\alpha$.
-\end{rem}
+\ref{lem:pseudorandom-hamiltonian} is at most $2^{2n}e^{-\cdi\alpha^{2}n/64}$, which 
+converges to zero for sufficiently large $\cdi$. Therefore the digraph $D\cup R$ is a.a.s. 
+pancyclic by \ref{lem:pseudorandom-hamiltonian}.\end{proof}
+
 
 \section{\label{sec:tournaments}Hamilton cycles in tournaments}
 
@@ -1244,7 +1234,13 @@ different types of minimum degree and different types of cycles (see
 \cite{RR10} for a survey), which would suggest that similar random
 perturbation results are possible in these settings. In addition,
 it is possible that our use of Szemer\'edi's regularity lemma could
-be avoided, thereby drastically improving the constants $\chyp\left(\alpha\right)$.
+be avoided, thereby drastically improving the constants $\chyp\left(\alpha\right)$
+in \ref{thm:hypergraph-theorems}.
+
+\medskip
+
+\noindent{\bf Acknowledgement.} Part of this work was carried out when the third author visited
+Tel Aviv University, Israel. He would like to thank the School of Mathematical Sciences of Tel Aviv University for hospitality and for creating a stimulating research environment.
 
 \bibliographystyle{amsplain}
 \providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
