@@ -132,7 +132,7 @@
 
 \begin{document}
 
-\title{\vspace{-1cm} Cycles and matchings in randomly perturbed digraphs and hypergraphs}
+\title{\texorpdfstring{\vspace{-1cm}}{}Cycles and matchings in randomly perturbed digraphs and hypergraphs}
 
 
 \author{Michael Krivelevich
@@ -894,7 +894,7 @@ through the center is $P$; the broken lines indicate subpaths.}
 
 Otherwise, each vertex of $U_{1}$ precedes each vertex of $W_{2}$.
 Let $U_{12}$ contain the $k$ elements of $U_{1}$ furthest down
-the path. Note that there are at least $2k$ vertices of $P$ (e.g., vertices of $U_1-U_{12}$) preceding all vertices in $U_{12}$. 
+the path. Note that there are at least $2k$ vertices of $P$ (e.g., vertices of $U_1\backslash U_{12}$) preceding all vertices in $U_{12}$. 
 Let $U_{11}$ be the set of vertices among the first $2k$
 vertices of $P$ which have an arc to $U_{12}^{+}$. By the discussion
 at the beginning of the proof, $\left|U_{11}\right|\ge k$. Similarly,
@@ -1106,32 +1106,39 @@ in $T$, has size smaller than $n/3$. So, there are at least $n/3$ vertices
 whose indegree and outdegree in $T$ are both at least $n/6$. We can therefore choose
 a set $S$ of $t$ such vertices.
 
-Now, we prove that the random perturbation typically does not change the in-
-and -out degrees very much.
+Now, we prove that the random perturbation typically does not change
+the in- and -out degrees very much. 
 \begin{lem}
 \label{lem:preserve-degree}If a vertex $v$ has outdegree (respectively
 indegree) $k$ in $T$, then it has outdegree (respectively indegree)
-at least $k/3$ in $P$, with probability $e^{-\Omega\left(\sqrt{n}\right)}$ (uniformly over $k$).\end{lem}
+at least $k/2$ in $P$, with probability $1-o\left(e^{-k}\right)-o\left(1/n\right)$
+(uniformly over $k$).\end{lem}
 \begin{proof}
 We only prove the statement where $v$ has outdegree $k$; the indegree
-case is identical. If $k=0$ the lemma is trivial, so assume $k\ge1$.
-First consider the cases where $k>\sqrt{n}$ or $p<1/\sqrt{n}$. There
-are $k$ arcs pointing away from $v$ in $T$, and the Chernoff bound
-says that the probability more than $2k/3$ of those are changed by the
-perturbation is $
-e^{-\Omega\left(1/p\right)}=e^{-\Omega\left(\sqrt{n}\right)}
-$. That is, with the required probability, $k/3$ of the original out-neighbours
-survive the perturbation.
+case is identical.
 
-Otherwise (for large $n$), there is a set of $n/2$ arcs pointing
-towards $v$ in $T$. The Chernoff bound says that the probability less
-than $k/3$ of these arcs are changed is $e^{-\Omega\left(\sqrt{n}\right)}$.
-That is, with the required probability, $k/3$ new out-neighbours
+There are $k$ arcs pointing away from $v$ in $T$, and the Chernoff
+bound says that the probability more than $k/2$ of those are changed
+by the perturbation is at most 
+\[
+\left(e^{1/\left(2p\right)-1}\left(2p\right)^{1/\left(2p\right)}\right)^{kp}=e^{-k\Omega\left(\log\left(1/p\right)-1+2p\right)}
+\]
+If $p<1/\sqrt{n}$ then this probability is $e^{-k\Omega\left(\log\sqrt{n}\right)}=o\left(e^{-k}\right)$,
+and if $k\ge\sqrt{n}/2$ then this probability is $e^{-\Omega\left(\sqrt{n}\right)}=o\left(1/n\right)$.
+In both of these cases, $k/2$ of the original out-neighbours survive
+the perturbation with the required probability.
+
+The remaining case is where $p\ge1/\sqrt{n}$ and $k<\sqrt{n}/2$.
+In this case there is a set of $n/2$ arcs pointing towards $v$ in
+$T$. The Chernoff bound says that the probability less than $k/2$
+of these arcs are changed is $e^{-\Omega\left(\sqrt{n}\right)}=o\left(1/n\right)$.
+That is, with the required probability, $k/2$ new out-neighbours
 are added by the perturbation.\end{proof}
 \begin{lem}
 \label{lem:path-from-home}Suppose $w$ has outdegree (respectively
-indegree) at least $n/6$ in $T$, and $v$ is a vertex different from $w$ with indegree
-(respectively outdegree) at least $k$ in $T$. Then with probability $1-e^{-\Omega\left(\sqrt{n}\right)}-e^{-\Omega\left(np\left(k+1\right)\right)}$
+indegree) at least $n/6$ in $T$, and $v$ is a vertex different
+from $w$ with indegree (respectively outdegree) at least $k$ in
+$T$. Then with probability $1-o\left(e^{-k/\left(d+1\right)}\right)-o\left(1/n\right)$
 (uniformly over $k$), there are $t'=3t$ internally vertex-disjoint
 paths of length at most 3 from $w$ to $v$ (respectively from $v$
 to $w$) in $P$.\end{lem}
@@ -1141,65 +1148,67 @@ $k$; the outdegree case is identical. By independence, we can condition
 on the outcome of the perturbation on individual arcs. Condition on
 the outcome for all arcs adjacent to $w$, and let $N_{P}^{+}\left(w\right)$
 be the set of vertices to which there is an arc from $w$ in $P$.
-By \ref{lem:preserve-degree}, we can assume $\left|N_{P}^{+}\left(w\right)\right|\ge n/18$.
+By \ref{lem:preserve-degree}, we can assume $\left|N_{P}^{+}\left(w\right)\right|\ge n/12$.
 
-We first prove the lemma for the case where $k\le12t'$. There are
-at least $n'=n/18-1$ arcs between $N_{P}^{+}\left(w\right)$ and
-$v$, each of which will be pointing towards $v$ in $P$ with
-probability at least $p$ independently. By the Chernoff bound, the probability less
-than $t'$ arcs will point from $N_{P}^{+}\left(w\right)$ to $v$
-in $P$ is $e^{-\Omega\left(np\right)}=e^{-\Omega\left(np\left(k+1\right)\right)}$.
+We first prove the lemma for the case where $k\le2t'$. There are
+at least $n'=n/12-1$ arcs between $N_{P}^{+}\left(w\right)$ and
+$v$, each of which will be pointing towards $v$ in $P$ with probability
+at least $p$ independently. By the Chernoff bound, the probability
+less than $t'$ arcs will point from $N_{P}^{+}\left(w\right)$ to
+$v$ in $P$ is $e^{-\Omega\left(np\right)}=o\left(e^{-k/\left(d+1\right)}\right)$.
 So, with the required probability there are $t'$ suitable length-2
 paths from $w$ to $v$.
 
-We can now assume $k>12t'$. Condition on the result of the perturbation
+We can now assume $k>2t'$. Condition on the result of the perturbation
 for the arcs adjacent to $v$ (in addition to the arcs we have conditioned
 on so far). Let $N_{P}^{-}\left(v\right)$ be the set of vertices
 from which there is an edge into $v$ in $P$; by \ref{lem:preserve-degree},
-we can assume $\left|N_{P}^{-}\left(v\right)\right|\ge k/3$.
+we can assume $\left|N_{P}^{-}\left(v\right)\right|\ge k/2$.
 
 Now, if $\left|N_{P}^{+}\left(w\right)\cap N_{P}^{-}\left(v\right)\right|\ge t'$
 then there are $t'$ disjoint length-2 paths from $w$ to $v$ and
 we are done. So we can assume $U^{+}=N_{P}^{+}\left(w\right)\backslash\left(N_{P}^{-}\left(v\right)\cup\left\{ v\right\} \right)$
-has at least $n'=n/18-t'-1$ vertices, and $U^{-}=N_{P}^{-}\left(v\right)\backslash\left(N_{P}^{+}\left(w\right)\cup\left\{ w\right\} \right)$
-has at least $k'=k/6-t'-1$ vertices (note $k'\ge t'$ by assumption).
+has at least $n'=n/12-t'-1$ vertices, and $U^{-}=N_{P}^{-}\left(v\right)\backslash\left\{ w\right\} $
+has at least $k'=k/2-1$ vertices (note $k'\ge t'$ by assumption).
 
 Now, we would like to show that with the required probability there
 is a set of $t'$ independent arcs from $U^{+}$ into $U^{-}$ in
 $P$, which will give $t'$ suitable length-3 paths. Partition $U^{+}$(respectively
-$U^{-}$) into subsets $U_{1}^{+},\dots,U_{t'}^{+}$ of size $n'/t'$ (respectively, subsets
-$U_{1}^{-},\dots,U_{t'}^{-}$ of size $k'/t'$). For each $i$,
-the probability that there is no arc from $U_{i}^{+}$ into $U_{i}^{-}$
-after the perturbation is at most
+$U^{-}$) into subsets $U_{1}^{+},\dots,U_{t'}^{+}$ of size at least
+$n'/\left(2t'\right)$ (respectively, subsets $U_{1}^{-},\dots,U_{t'}^{-}$
+of size at least $k'/\left(2t'\right)$). For each $i$, the probability
+that there is no arc from $U_{i}^{+}$ into $U_{i}^{-}$ after the
+perturbation is at most 
 \[
-\left(1-p\right)^{n'k'/\left(t'\right)^2}\le e^{-\Theta\left(np\left(k+1\right)\right)},
+\left(1-p\right)^{n'k'/\left(2t'\right)^{2}}=e^{-\Omega\left(npk\right)}=o\left(e^{-k/\left(d+1\right)}\right)
 \]
 so with the required probability there a set of $t'$ suitable independent
 arcs, each between a pair $U_{i}^{+},U_{i}^{-}$.\end{proof}
 \begin{lem}
 \label{lem:lots-of-paths}Fix some $w\in S$. In $P$, there are a.a.s.
-$t$ internally vertex-disjoint paths from $w$ to each other vertex (respectively,
-from each other vertex to $w$).\end{lem}
+$t$ internally vertex-disjoint paths from $w$ to each other vertex
+(respectively, from each other vertex to $w$).\end{lem}
 \begin{proof}
 We only prove there are paths from $w$ to each other vertex; the
-reverse case is identical. If there are $3t$ internally vertex-disjoint paths from $w$ to $v$ in $P$ of length
-at most 3, then we say $v$ is \emph{safe}. It follows
-from \ref{lem:path-from-home} that a vertex with indegree $k$ is
-safe with probability $1-e^{-\Omega\left(\sqrt{n}\right)}-e^{-\Omega\left(np\left(k+1\right)\right)}$.
+reverse case is identical. If there are $3t$ internally vertex-disjoint
+paths from $w$ to $v$ in $P$ of length at most 3, then we say $v$
+is \emph{safe}. It follows from \ref{lem:path-from-home} that a vertex
+with indegree $k$ is safe with probability $1-f\left(n\right)e^{-k/\left(d+1\right)}+f\left(n\right)/n$,
+for some $f\left(n\right)=o\left(1\right)$.
 
-By \ref{lem:extreme-indegree-bound}, there are at most $2d+1$
-vertices with indegree $d$ in $T$, and the vertex with the $2k$th smallest
+By \ref{lem:extreme-indegree-bound}, there are at most $2d+1$ vertices
+with indegree $d$ in $T$, and the vertex with the $2k$th smallest
 indegree has indegree at least $k-1$. Let $Q$ be the set of non-safe
-vertices, and note
+vertices, and note 
 \begin{align*}
-\E\left|Q\right| & =\left(2d+1\right)e^{-\Omega\left(np\left(d+1\right)\right)}+\sum_{k=d+1}^{n}2e^{-\Omega\left(np\left(k+1\right)\right)}+ne^{-\Omega\left(\sqrt{n}\right)}\\
- & =e^{-\Omega\left(np\left(d+1\right)\right)}\left(O\left(d+1\right)+\frac{1}{1-e^{-\Omega\left(np\right)}}\right)+o\left(1\right)\\
- & =e^{-\Omega\left(np\left(d+1\right)\right)}O\left(d+1\right).
+\E\left|Q\right| & \le\left(2d+1\right)f\left(n\right)e^{-d/\left(d+1\right)}+\sum_{k=d+1}^{n}2f\left(n\right)e^{-k/\left(d+1\right)}+nf\left(n\right)/n\\
+ & =f\left(n\right)\left(O\left(d+1\right)+\frac{1}{1-e^{-1/\left(d+1\right)}}\right)\\
+ & =f\left(n\right)O\left(d+1\right).
 \end{align*}
-where we have used the geometric series formula, the inequality $1-e^{-x}\ge\left(x\land1\right)/2$
-(for positive $x$) and the fact that $d+1=\Omega\left(1\right)$.
+(We have used the geometric series formula and the inequality $1-e^{-x}\ge\left(x\land1\right)/2$
+for positive $x$).
 
-By Markov's inequality, a.a.s. $\left|Q\right|\le\sqrt{e^{-\Omega\left(pn\left(d+1\right)\right)}}O\left(d+1\right)=o\left(d+1\right)$.
+By Markov's inequality, a.a.s. $\left|Q\right|\le\sqrt{f\left(n\right)}O\left(d+1\right)=o\left(d+1\right)$.
 If $d\le4t$ then $\left|Q\right|=0$ for large $n$. Otherwise, $\left|Q\right|<d/4$ for large $n$, and every vertex $v\in Q$ has
 $3t$ safe in-neighbours $v_{1},\dots,v_{3t}$ different from $w$. Now, we claim that there are at least $t$ internally vertex-disjoint paths of length at most 4 from $w$ to $v$ in $P$. To prove this, suppose not, and fix a maximum-size set
 $M$ of such paths, with $\left|M\right|<t$. There are fewer than $3t$ internal vertices in the paths in $M$, so there is some $v_{i}$ not in any path of $M$. Then, there are $3t$ internally vertex-disjoint paths from $w$ to $v_{i}$, so one of these does not contain any
