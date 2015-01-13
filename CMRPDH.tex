@@ -266,11 +266,11 @@ edge consists of $k$ consecutive vertices and every pair of consecutive
 edges intersects in exactly one vertex. The degree of a set of vertices
 is the number of edges that include that set, and the \emph{minimum
 $\left(k-1\right)$-degree }$\delta_{k-1}$ is the minimum degree
-among sets of $k-1$ vertices.
-\begin{thm}
-\label{thm:hypergraph-theorems}Let $\HH_{k}\left(n,m\right)$ be
+among sets of $k-1$ vertices. Let $\HH_{k}\left(n,m\right)$ be
 the uniform distribution on $m$-edge $k$-uniform hypergraphs on
-the vertex set $\range n$. For each $\alpha>0$ there is $\chyp=\chyp\left(\alpha\right)$ such that:
+the vertex set $\range n$.
+\begin{thm}
+\label{thm:hypergraph-theorems}For each $\alpha>0$ there is $\chyp=\chyp\left(\alpha\right)$ such that:
 
 \begin{enumerate}[topsep=0px,label=(\alph*)]
 
@@ -299,10 +299,7 @@ arguments, and we do not have an analogue of Hall's marriage theorem
 allowing us to deduce the existence of a perfect matching from an
 expansion property. Our proof involves reducing the theorem to the
 existence of a perfect matching in a certain randomly perturbed dense bipartite
-graph. The ``reason'' for a perfect matching in this perturbed graph
-seems to be quite different depending on the structure of the initial
-bipartite graph, hence the naive approach using Hall's theorem and union bound fails.
-Instead the proof uses in a nonstandard way the Szemer\'edi's regularity lemma.
+graph. The na\"ive approach to prove the existence of a perfect matching in this graph would be to use Hall's theorem and the union bound. Unfortunately this fails, and in fact the ``reason'' for a perfect matching in this perturbed graph seems to be quite different depending on the structure of the initial bipartite graph. The proof therefore makes use of the structural description provided by Szemer\'edi's regularity lemma, in quite a nonstandard way.
 
 Our second contribution in this paper is a theorem giving a general
 expansion condition for\emph{ pancyclicity}. We say an $n$-vertex
@@ -319,12 +316,11 @@ motivation is that it implies a number of results about randomly perturbed
 graphs and digraphs. In particular it provides very simple proofs
 of the theorems in \cite{BFM03} concerning Hamiltonicity in randomly
 perturbed graphs and digraphs, and allows us to extend these theorems
-to pancyclicity. Most generally, \ref{lem:pseudorandom-pancyclic} implies the following theorem.
+to pancyclicity. Most generally, \ref{lem:pseudorandom-pancyclic} implies the following theorem. Let $\DD\left(n,m\right)$ be the uniform
+distribution on $m$-arc digraphs on the vertex set $\range n$ (in this paper we allow 2-cycles in digraphs, so there are $2{n\choose2}$ possible arcs).
 
 \begin{thm}
-\label{thm:smoothed-pancyclic}Let $\DD\left(n,m\right)$ be the uniform
-distribution on $m$-arc digraphs on the vertex set $\range n$.
-For each $\alpha>0$, there is $\cdi=\cdi\left(\alpha\right)$ such that
+\label{thm:smoothed-pancyclic}For each $\alpha>0$, there is $\cdi=\cdi\left(\alpha\right)$ such that
 if $D$ is a digraph on $\range n$ with all in- and out- degrees at least $\alpha n$,
 and $R\in\DD\left(n,\cdi n\right)$, then $D\cup R$
 is a.a.s. pancyclic.
@@ -419,7 +415,7 @@ to a loose Hamilton cycle, so a linear number must be added to complete
 the necessary $\left(2k+1\right)n/\left(k-1\right)$ edges. Similarly, this graph contains only $n$ out of the $\left(2k+1\right)n/k$ required edges in a perfect matching.
 
 Now we proceed to the proof of \ref{thm:hypergraph-theorems}, which
-will follow from a sequence of lemmas. The first step is to show that
+will follow from a sequence of lemmas. We will assume $k\ge3$, since the case $k=2$ is proved in \cite{BFM03}. The first step is to show that
 $R$ almost gives the structure of interest on its own. Let a \emph{
 partial-cycle} be a hypergraph which can be extended to a loose Hamilton
 cycle by adding edges.
@@ -681,23 +677,19 @@ defined by the ordering coincides with $\bar{Q}$. Then, let $A$
 consist of the vertices $a^{i}$ and let $B$ be the hypergraph with
 edges $b^i$.
 Note that $A$ is a uniformly random $n$-vertex set and $B$ is a
-uniformly random perfect matching on the remaining vertices. Also,
+uniformly random $\left(k-1\right)$-uniform perfect matching on the remaining vertices. Also,
 if we condition on $A$ and $B$ then $G_{A,B}\left(\bar{Q}\right)$
 is a uniformly random perfect matching, and $G_{A,B}\left(Q\right)$
 is a sub-matching with $\left(1-\varepsilon\right)n$ of its edges.
 
-The Hamilton cycle case is extremely similar. Choose a uniformly random
-ordering of $V\left(R\right)$:
+The Hamilton cycle case is similar. Again we want to define a uniformly random loose Hamilton cycle via a random ordering of $V\left(R\right)$. So, choose a uniformly random ordering:
 \[
-a^{i},\dots,a^{i},b_{0},\dots,b_{\left(k-2\right)n-1},
+a^{1},\dots,a^{n},b_{0},\dots,b_{\left(k-2\right)n-1}.
 \]
-and let $b^{i}=\left\{ b_{\left(k-2\right)i},b_{\left(k-2\right)i+1},\dots,b_{\left(k-2\right)\left(i+1\right)}\right\} $
-(where the subscripts are interpreted modulo $\left(k-2\right)n$).
-Our loose Hamilton cycle has edges of the form $\left\{ a^{i}\right\} \cup b^{i}$,
-which we couple with $\bar{Q}$ in the same way as before. Let $A$ contain
+For each $i$ let $b^{i}$ be the $\left(k-1\right)$-vertex set $\left\{ b_{\left(k-2\right)i},b_{\left(k-2\right)i+1},\dots,b_{\left(k-2\right)\left(i+1\right)}\right\}$ (where the subscripts are interpreted modulo $\left(k-2\right)n$). Note that in this case consecutive $b^i$ intersect each other in one vertex. We define our loose Hamilton cycle to have edges of the form $\left\{ a^{i}\right\} \cup b^{i}$. This loose Hamilton cycle is uniformly random, so we can couple our random ordering with $R$ in such a way that our loose Hamilton cycle coincides with $\bar Q$. Let $A$ contain
 the vertices $a^{i}$ and let $B$ contain the
 edges $b^{i}$. Exactly the same considerations hold: $A$ is a uniformly
-random $n$-vertex set, $B$ is a uniformly random loose Hamilton
+random $n$-vertex set, $B$ is a uniformly random $\left(k-1\right)$-uniform loose Hamilton
 cycle on the remaining vertices, and $G_{A,B}\left(Q\right)$ is a
 $\left(1-\varepsilon\right)n$-edge sub-matching of the uniformly random perfect
 matching $G_{A,B}\left(\bar{Q}\right)$.
@@ -781,9 +773,7 @@ his metaconjecture in the setting of randomly perturbed dense graphs
 and digraphs.
 
 \ref{thm:smoothed-pancyclic} obviously implies \cite[Theorems~1 and~3]{BFM03}.
-We do not fight very hard to optimize constants, but we note that
-if we make some careful calculations in the proof of \ref{thm:smoothed-pancyclic},
-the resulting values of $\cdi\left(\alpha\right)$ seem to be better
+We do not fight very hard to optimize constants, but we note that if we make more careful calculations with our proof approach, then the resulting values of $\cdi\left(\alpha\right)$ seem to be better
 than those found in \cite{BFM03}, for most values of $\alpha$.
 
 We now turn to the proof of \ref{lem:pseudorandom-pancyclic}, which
@@ -895,7 +885,7 @@ through the center is $P$; the broken lines indicate subpaths.}
 Otherwise, each vertex of $U_{1}$ precedes each vertex of $W_{2}$.
 Let $U_{12}$ contain the $k$ elements of $U_{1}$ furthest down
 the path. Note that there are at least $2k$ vertices of $P$ (e.g., vertices of $U_1\backslash U_{12}$) preceding all vertices in $U_{12}$. 
-Let $U_{11}$ be the set of vertices among the first $2k$
+Let $U_{11}$ be the set of vertices among those first $2k$
 vertices of $P$ which have an arc to $U_{12}^{+}$. By the discussion
 at the beginning of the proof, $\left|U_{11}\right|\ge k$. Similarly,
 let $W_{21}$ contain the $k$ elements of $W_{2}$ first appearing
@@ -989,14 +979,13 @@ the fact that the vertex set of $P$ induces a cycle $C$, implies
 that $C$ is a Hamilton cycle.
 \end{proof}
 
-\begin{rem}
-\label{rem:constants}With some effort, the ideas in the proof of
+We note that with some effort, the ideas in the proof of
 \ref{lem:pseudorandom-hamiltonian} can be used directly to prove
  \ref{lem:pseudorandom-pancyclic} with a weaker degree condition.
 We do not know whether the condition can be weakened all the way to
 $4k$, as Bondy's metaconjecture would suggest. Also, the constants in \ref{lem:pseudorandom-pancyclic,lem:pseudorandom-hamiltonian}
 can both be halved for the undirected case, just by simplifying the
-main argument in the proof of \ref{lem:pseudorandom-hamiltonian}.\end{rem}
+main argument in the proof of \ref{lem:pseudorandom-hamiltonian}.
 
 \begin{proof}
 [Proof of \ref{lem:pseudorandom-pancyclic}]Fix a vertex $v$. Let
@@ -1025,7 +1014,7 @@ $D''$ has a Hamilton cycle, $D$ has a cycle of length $\ell$.
 \begin{proof}
 [Proof of \ref{thm:smoothed-pancyclic}]In view of the discussion
 in the introduction, we assume each possible arc is present in $R$
-with probability $p=\cdi n/\left(2{n \choose 2}\right)\ge\cdi/n$ independently. (Recall that digraphs are not necessarily oriented, and are allowed to have 2-cycles).
+with probability $p=\cdi n/\left(2{n \choose 2}\right)\ge\cdi/n$ independently. (Recall that digraphs are allowed to have 2-cycles).
 
 If $A,B\subseteq V\left(D\right)$ are disjoint sets with $\left|A\right|=\left|B\right|=\alpha n/8$,
 the probability that there are no arcs from $A$ to $B$ in $D\cup R$
@@ -1080,7 +1069,7 @@ We now prove \ref{thm:tournament}. In accordance with the discussion
 in the introduction, we will work with the model where each edge is
 flipped with probability $p$ independently, where $2p{n \choose 2}=m$.
 (Designating an edge for resampling with probability $2p$ is the
-same as flipping it with probability $p$).
+same as flipping it with probability $p$). Note that $p\le1/2$ and in particular $p\le1-p$.
 
 Fix $t$; we will prove that $P$ is a.a.s. $t$-strongly connected. The
 idea of the proof is to choose a set $S$ of $t$ vertices with a
@@ -1107,32 +1096,24 @@ whose indegree and outdegree in $T$ are both at least $n/6$. We can therefore ch
 a set $S$ of $t$ such vertices.
 
 Now, we prove that the random perturbation typically does not change
-the in- and -out degrees very much. 
+the in- and out- degrees very much. 
 \begin{lem}
 \label{lem:preserve-degree}If a vertex $v$ has outdegree (respectively
 indegree) $k$ in $T$, then it has outdegree (respectively indegree)
-at least $k/2$ in $P$, with probability $1-o\left(e^{-k}\right)-o\left(1/n\right)$
+at least $k/3$ in $P$, with probability $1-o\left(e^{-k}\right)-o\left(1/n\right)$
 (uniformly over $k$).\end{lem}
 \begin{proof}
 We only prove the statement where $v$ has outdegree $k$; the indegree
 case is identical.
 
-There are $k$ arcs pointing away from $v$ in $T$, and the Chernoff
-bound says that the probability more than $k/2$ of those are changed
-by the perturbation is at most 
-\[
-\left(e^{1/\left(2p\right)-1}\left(2p\right)^{1/\left(2p\right)}\right)^{kp}=e^{-k\Omega\left(\log\left(1/p\right)-1+2p\right)}
-\]
-If $p<1/\sqrt{n}$ then this probability is $e^{-k\Omega\left(\log\sqrt{n}\right)}=o\left(e^{-k}\right)$,
-and if $k\ge\sqrt{n}/2$ then this probability is $e^{-\Omega\left(\sqrt{n}\right)}=o\left(1/n\right)$.
-In both of these cases, $k/2$ of the original out-neighbours survive
+There are $k$ arcs pointing away from $v$ in $T$. If $p<1/\sqrt{n}$ then the probability more than  $2k/3$ of those arcs are changed by the perturbation is at most $2^kp^{2k/3}=e^{-k\Omega\left(\log n\right)}=o\left(e^{-k}\right)$. If $k\ge\sqrt{n}/2$ then by the Chernoff bound and the fact that $p\le1/2$, the probability more than $2k/3$ arcs are changed is $e^{-\Omega\left(\sqrt{n}\right)}=o\left(1/n\right)$. In both of these cases, $k/3$ of the original out-neighbours survive
 the perturbation with the required probability.
 
 The remaining case is where $p\ge1/\sqrt{n}$ and $k<\sqrt{n}/2$.
 In this case there is a set of $n/2$ arcs pointing towards $v$ in
-$T$. The Chernoff bound says that the probability less than $k/2$
+$T$. The Chernoff bound says that the probability less than $k/3$
 of these arcs are changed is $e^{-\Omega\left(\sqrt{n}\right)}=o\left(1/n\right)$.
-That is, with the required probability, $k/2$ new out-neighbours
+That is, with the required probability, $k/3$ new out-neighbours
 are added by the perturbation.\end{proof}
 \begin{lem}
 \label{lem:path-from-home}Suppose $w$ has outdegree (respectively
@@ -1148,10 +1129,10 @@ $k$; the outdegree case is identical. By independence, we can condition
 on the outcome of the perturbation on individual arcs. Condition on
 the outcome for all arcs adjacent to $w$, and let $N_{P}^{+}\left(w\right)$
 be the set of vertices to which there is an arc from $w$ in $P$.
-By \ref{lem:preserve-degree}, we can assume $\left|N_{P}^{+}\left(w\right)\right|\ge n/12$.
+By \ref{lem:preserve-degree}, we can assume $\left|N_{P}^{+}\left(w\right)\right|\ge n/18$.
 
-We first prove the lemma for the case where $k\le2t'$. There are
-at least $n'=n/12-1$ arcs between $N_{P}^{+}\left(w\right)$ and
+We first prove the lemma for the case where $k\le3t'$. There are
+at least $n'=n/18-1$ arcs between $N_{P}^{+}\left(w\right)$ and
 $v$, each of which will be pointing towards $v$ in $P$ with probability
 at least $p$ independently. By the Chernoff bound, the probability
 less than $t'$ arcs will point from $N_{P}^{+}\left(w\right)$ to
@@ -1159,30 +1140,30 @@ $v$ in $P$ is $e^{-\Omega\left(np\right)}=o\left(e^{-k/\left(d+1\right)}\right)$
 So, with the required probability there are $t'$ suitable length-2
 paths from $w$ to $v$.
 
-We can now assume $k>2t'$. Condition on the result of the perturbation
+We can now assume $k>3t'$. Condition on the result of the perturbation
 for the arcs adjacent to $v$ (in addition to the arcs we have conditioned
 on so far). Let $N_{P}^{-}\left(v\right)$ be the set of vertices
 from which there is an edge into $v$ in $P$; by \ref{lem:preserve-degree},
-we can assume $\left|N_{P}^{-}\left(v\right)\right|\ge k/2$.
+we can assume $\left|N_{P}^{-}\left(v\right)\right|\ge k/3$.
 
 Now, if $\left|N_{P}^{+}\left(w\right)\cap N_{P}^{-}\left(v\right)\right|\ge t'$
 then there are $t'$ disjoint length-2 paths from $w$ to $v$ and
 we are done. So we can assume $U^{+}=N_{P}^{+}\left(w\right)\backslash\left(N_{P}^{-}\left(v\right)\cup\left\{ v\right\} \right)$
-has at least $n'=n/12-t'-1$ vertices, and $U^{-}=N_{P}^{-}\left(v\right)\backslash\left\{ w\right\} $
-has at least $k'=k/2-1$ vertices (note $k'\ge t'$ by assumption).
+has at least $n'=n/18-t'-1$ vertices, and $U^{-}=N_{P}^{-}\left(v\right)\backslash\left\{ w\right\} $
+has at least $k'=k/3-1$ vertices (note $k'\ge t'$ by assumption).
 
 Now, we would like to show that with the required probability there
 is a set of $t'$ independent arcs from $U^{+}$ into $U^{-}$ in
 $P$, which will give $t'$ suitable length-3 paths. Partition $U^{+}$(respectively
 $U^{-}$) into subsets $U_{1}^{+},\dots,U_{t'}^{+}$ of size at least
 $n'/\left(2t'\right)$ (respectively, subsets $U_{1}^{-},\dots,U_{t'}^{-}$
-of size at least $k'/\left(2t'\right)$). For each $i$, the probability
+of size at least $k'/\left(2t'\right)$). Recall that $1-p\ge p$, so for each $i$, the probability
 that there is no arc from $U_{i}^{+}$ into $U_{i}^{-}$ after the
 perturbation is at most 
 \[
-\left(1-p\right)^{n'k'/\left(2t'\right)^{2}}=e^{-\Omega\left(npk\right)}=o\left(e^{-k/\left(d+1\right)}\right)
+\left(1-p\right)^{n'k'/\left(2t'\right)^{2}}=e^{-\Omega\left(npk\right)}=o\left(e^{-k/\left(d+1\right)}\right).
 \]
-so with the required probability there a set of $t'$ suitable independent
+We conclude that with the required probability, there is a set of $t'$ suitable independent
 arcs, each between a pair $U_{i}^{+},U_{i}^{-}$.\end{proof}
 \begin{lem}
 \label{lem:lots-of-paths}Fix some $w\in S$. In $P$, there are a.a.s.
@@ -1193,7 +1174,7 @@ We only prove there are paths from $w$ to each other vertex; the
 reverse case is identical. If there are $3t$ internally vertex-disjoint
 paths from $w$ to $v$ in $P$ of length at most 3, then we say $v$
 is \emph{safe}. It follows from \ref{lem:path-from-home} that a vertex
-with indegree $k$ is safe with probability $1-f\left(n\right)e^{-k/\left(d+1\right)}+f\left(n\right)/n$,
+with indegree $k$ is safe with probability at least $1-f\left(n\right)e^{-k/\left(d+1\right)}+f\left(n\right)/n$,
 for some $f\left(n\right)=o\left(1\right)$.
 
 By \ref{lem:extreme-indegree-bound}, there are at most $2d+1$ vertices
