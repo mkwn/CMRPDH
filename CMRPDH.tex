@@ -393,9 +393,9 @@ We first make some observations about our minimum degree requirement.
 The \emph{minimum $q$-degree} $\delta_{q}\left(H\right)$ of $H$
 is the minimum degree among all sets of $q$ vertices. Note that this
 generalizes the two notions of denseness for graphs: in some contexts,
-we say graphs are dense if they have many edges (large $\delta_{0}$),
+we say graphs are dense if they have many edges,
 whereas in this paper we need a stronger notion of graph denseness
-based on minimum degree ($\delta_{1}$). For a $k$-regular hypergraph
+based on minimum degree. For a $k$-uniform hypergraph
 $H$, a double-counting argument shows that if $q\le p$ then
 \[
 \delta_{q}\left(H\right)\ge\delta_{p}\left(H\right){n-q \choose p-q}\left.\vphantom{\sum}\right/{k-q \choose p-q}.
@@ -467,8 +467,8 @@ set $D$ containing one member of each of those pairs, then every pair of vertice
 degree at most one.
 
 Let $d=k\ell$. For
-large $h$, by the Chernoff bound then the union
-bound, a.a.s. every set of $\patheps n/2$ vertices spans at least $d\patheps n/2$
+large $h$, using the Chernoff bound together with the union
+bound it is easy to show, a.a.s. every set of $\patheps n/2$ vertices spans at least $d\patheps n/2$
 edges, which is to say that the average 1-degree in the induced subhypergraph
 is at least $kd$. We assume this holds for the remainder of the proof.
 
@@ -492,7 +492,7 @@ allow us to extend the matching, contradicting maximality. Applying
 our claim with $\patheps=k\varepsilon$ and $\ell=1$, we can see that
 if $\bmat$ is large enough then
 a.a.s. every set of $k\varepsilon n$ vertices spans at least one
-edge in $R$. This proves there are fewer than \emph{$2\varepsilon n$}
+edge in $R$. This proves there are fewer than \emph{$k\varepsilon n$}
 vertices unmatched after our maximum matching, hence our matching
 has at least $\left(1-\varepsilon\right)n$ edges.
 
@@ -504,18 +504,18 @@ precisely when
 \[
 \left(k-2\right)q+\left(\ell\left(k-1\right)+1\right)q\le\left(k-1\right)n,
 \]
-which simplifies to the condition $q\left(\ell+1\right)=n$. In particular,
+which simplifies to the condition $q\left(\ell+1\right) \leq n$. In particular,
 for large $\ell\left(\varepsilon\right)$, a union of $n/\left(\ell\left(\varepsilon\right)+1\right)$
 length-$\ell\left(\varepsilon\right)$ loose paths is a partial-cycle
 with more than $\left(1-\varepsilon\right)n$ edges.
 
 Consider a maximum-size collection of disjoint length-$\ell\left(\varepsilon\right)$
-loose paths in $R^{\mathrm{H}}$. We will apply our claim with some $\ell$ larger than both $\ell\left(\varepsilon\right)$ and $1/\varepsilon$ and with $\patheps=\left(k-2\right)\varepsilon-1/\ell$. Our claim proves that if $\bmat$ is large enough then there are fewer than $\left(\left(k-1\right)\varepsilon-1/\ell\right)n$ vertices left over after our maximal collection of loose paths. This means our maximal collection has at least
+loose paths in $R^{\mathrm{H}}$. We will apply our claim with some $\ell$ larger than both $\ell\left(\varepsilon\right)$ and $1/\varepsilon$ and with $\patheps=\left(k-1\right)\varepsilon-1/\ell$. Our claim proves that if $\bmat$ is large enough then there are fewer than $\left(\left(k-1\right)\varepsilon-1/\ell\right)n$ vertices left over after our maximal collection of loose paths. This means our maximal collection has at least
 \[
-\frac{\left(k-1\right)n-\left(\left(k-1\right)\varepsilon-1/\ell\right)n}{\ell\left(k-1\right)+1}\ge\frac{n}{\ell}\left(1-\varepsilon\right)
+\frac{\left(k-1\right)n-\left(\left(k-1\right)\varepsilon-1/\ell\right)n}{\ell\left(k-1\right)+1}\ge\frac{n}{\ell}\left(1-\varepsilon\right)=q
 \]
 loose paths, comprising at least $\left(1-\varepsilon\right)n$
-edges. Our collection of loose paths therefore contains a $\left(1-\varepsilon\right)n$-edge partial-cycle.
+edges. Since $\ell> 1/\varepsilon$, $(\ell+1)q \leq n$ and therefore our collection of loose paths contains a $\left(1-\varepsilon\right)n$-edge partial-cycle.
 \end{proof}
 The second step to prove \ref{thm:hypergraph-theorems} is to show that a dense
 hypergraph plus a large partial structure a.a.s. gives the structure
