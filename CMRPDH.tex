@@ -13,9 +13,9 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amssymb}
-%\usepackage{setspace}
+\usepackage{setspace}
 \usepackage{esint}
-%\setstretch{0.98}
+\setstretch{0.95}
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
  breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
@@ -504,17 +504,13 @@ precisely when
 \[
 \left(k-2\right)q+\left(\ell\left(k-1\right)+1\right)q\le\left(k-1\right)n,
 \]
-which simplifies to the condition $q\left(\ell+1\right) \leq n$. In particular,
-for large $\ell$ (greater than $\lambda\left(\varepsilon\right)$, say), a union of $n/\left(\ell+1\right)$
-length-$\ell$ loose paths is a partial-cycle
-with more than $\left(1-\varepsilon\right)n$ edges.
+which simplifies to the condition $q\left(\ell+1\right) \leq n$.
 
-We will apply our claim with some $\ell$ larger than both $\lambda\left(\varepsilon\right)$ and $1/\varepsilon$ and with $\patheps=\left(k-1\right)\varepsilon-1/\ell$. Consider a maximum-size collection of disjoint length-$\ell$ loose paths in $R^{\mathrm{H}}$. Our claim proves that if $\bmat$ is large enough then there are fewer than $\left(\left(k-1\right)\varepsilon-1/\ell\right)n$ vertices left over after our maximal collection of loose paths. This means our maximal collection has at least
+We will apply our claim with $\ell=1/\varepsilon$ and $\patheps=\left(k-2\right)/\left(\ell+1\right)$. Consider a maximum-size collection of disjoint length-$\ell$ loose paths in $R^{\mathrm{H}}$. Our claim proves that if $\bmat$ is large enough then there are fewer than $\left(k-2\right)n/\left(\ell+1\right)$ vertices left over after our maximal collection of loose paths. This means our maximal collection has at least
 \[
-\frac{\left(k-1\right)n-\left(\left(k-1\right)\varepsilon-1/\ell\right)n}{\ell\left(k-1\right)+1}\ge\frac{n}{\ell}\left(1-\varepsilon\right)=q
+\frac{\left(k-1\right)n-\left(k-2\right)n/\left(\ell+1\right)}{\ell\left(k-1\right)+1}= n/\left(\ell+1\right)=:q
 \]
-loose paths, comprising at least $\left(1-\varepsilon\right)n$
-edges. Since $\ell> \lambda\left(\varepsilon\right)$, a subcollection of loose paths comprising $\left(1-\varepsilon\right)n$ edges is a partial-cycle.
+loose paths. Since $q\left(\ell+1\right) \leq n$, a subcollection of $q$ of these loose paths gives a partial-cycle, which has $\ell q=\left(1-1/\left(\ell+1\right)\right)n>\left(1-\varepsilon\right)n$ edges.
 \end{proof}
 The second step to prove \ref{thm:hypergraph-theorems} is to show that a dense
 hypergraph plus a large partial structure a.a.s. gives the structure
@@ -1096,7 +1092,7 @@ in $T$, has size smaller than $n/3$. So, there are at least $n/3$ vertices
 whose indegree and outdegree in $T$ are both at least $n/6$. We can therefore choose
 a set $S$ of $t$ such vertices.
 
-Now, we prove that the random perturbation typically does not change
+Now, we prove that the random perturbation typically does not reduce
 the in- and out- degrees very much. 
 \begin{lem}
 \label{lem:preserve-degree}If a vertex $v$ has outdegree (respectively
