@@ -729,8 +729,9 @@ The degree of $b$ in $G_{A,B}\left(H\right)$ is the number of edges $b\cup\left\
 By the Chernoff bound, $d_{G_{A,B}\left(H\right)}\left(b\right)\ge\alpha^{2}n/\left(8k\right)$
 with probability $1-e^{-\Omega\left(n\right)}$. With the union bound, a.a.s. $d_{G_{A,B}\left(H\right)}\left(b\right)\ge\alpha^{2}n/\left(8k\right)$ for all $b$.
 
-Now, instead condition on some $a\in A$ and imagine that the $\left(k-1\right)$-tuples $b^i$ are chosen one-by-one from the remaining vertices. Note that there are at least $\delta_{1}\left(H\right)$ choices of a $\left(k-1\right)$-tuple $b$ such that $\left\{a\right\}\cup b\in E\left(H\right)$, and note that each $b_{j}^{i}$
-shares at most ${kn \choose k-2}$ edges with $a$. Recall that $\delta_1\left(H\right)=\Omega\left(n^{k-1}\right)$, so  if $i\le2\sqrt{\amat}n$ for sufficently small $\amat$ and large $n$,
+Now, instead condition on some $a\in A$ and imagine that the $\left(k-1\right)$-tuples $b^i$ are chosen one-by-one from the remaining vertices
+(before choosing the rest of vertices of $A$). Note that there are at least $\delta_{1}\left(H\right)$ choices of a $\left(k-1\right)$-tuple $b$ such that $\left\{a\right\}\cup b\in E\left(H\right)$, and note that each $b_{j}^{i}$
+shares at most ${kn \choose k-2}$ edges with $a$. Recall that $\delta_1\left(H\right)=\Omega\left(n^{k-1}\right)$, so  if $i\le2\sqrt{\amat}n$ for sufficiently small $\amat$ and large $n$,
 then
 \[
 \Pr\left(\left\{ a\right\} \cup b^{i+1}\in E\left(H\right)\mid b^{1},\dots,b^{i}\right)\ge\left(\delta_{1}\left(H\right)-\left(k-1\right)i{kn \choose k-2}\right)\left.\vphantom{\sum}\right/{kn \choose k-1}\ge\sqrt{\amat}.
@@ -748,7 +749,8 @@ and let $A$, $b^i$ and $B$ be defined as before.
 
 With exactly the same proof as for \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-matching-degree-transfer},
 there is small $\aham$ such that a.a.s. $d_{G_{A,B}\left(H\right)}\left(b\right)\ge\aham n$
-for all $b\in B$. Next, condition on some $a\in A$, and imagine the $b^i$ are chosen one-by-one. Note  that the only intersection of $b^i$ with any of $b^0,\dots,b^{i-1}$ is the vertex $b_{\left(k-2\right)i}$, and the other vertices of $b^i$ are chosen uniformly at random from what remains. Also note that each $b_j$ shares at most ${\left(k-1\right)n \choose k-3}$ edges with both $a$ and $b_{\left(k-2\right)i}$. So, for small $\beta_k$, large $n$
+for all $b\in B$. Next, condition on some $a\in A$, and imagine the $b^i$ are chosen one-by-one
+(before choosing the rest of vertices of $A$). Note  that the only intersection of $b^i$ with any of $b^0,\dots,b^{i-1}$ is the vertex $b_{\left(k-2\right)i}$, and the other vertices of $b^i$ are chosen uniformly at random from what remains. Also note that each $b_j$ shares at most ${\left(k-1\right)n \choose k-3}$ edges with both $a$ and $b_{\left(k-2\right)i}$. So, for small $\beta_k$, large $n$
 and $1\le i\le2\sqrt{\aham}n$,
 \[
 \Pr\left(\left\{ a\right\} \cup b^{i}\in E\left(H\right)\mid b^{0},\dots,b^{i-1}\right)\ge\left(\delta_{2}\left(H\right)-\left(k-2\right)i{\left(k-1\right)n \choose k-3}\right)\left.\vphantom{\sum}\right/{ \left(k-1\right)n \choose k-2}\ge\sqrt{\aham}.
