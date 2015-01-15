@@ -468,7 +468,7 @@ degree at most one.
 
 Let $d=k\ell$. For
 large $h$, using the Chernoff bound together with the union
-bound it is easy to show, a.a.s. every set of $\patheps n/2$ vertices spans at least $d\patheps n/2$
+bound, it is easy to show that a.a.s. every set of $\patheps n/2$ vertices spans at least $d\patheps n/2$
 edges, which is to say that the average 1-degree in the induced subhypergraph
 is at least $kd$. We assume this holds for the remainder of the proof.
 
@@ -492,7 +492,7 @@ allow us to extend the matching, contradicting maximality. Applying
 our claim with $\patheps=k\varepsilon$ and $\ell=1$, we can see that
 if $\bmat$ is large enough then
 a.a.s. every set of $k\varepsilon n$ vertices spans at least one
-edge in $R$. This proves there are fewer than \emph{$k\varepsilon n$}
+edge in $R$. This proves there are fewer than $k\varepsilon n$
 vertices unmatched after our maximum matching, hence our matching
 has at least $\left(1-\varepsilon\right)n$ edges.
 
@@ -505,17 +505,16 @@ precisely when
 \left(k-2\right)q+\left(\ell\left(k-1\right)+1\right)q\le\left(k-1\right)n,
 \]
 which simplifies to the condition $q\left(\ell+1\right) \leq n$. In particular,
-for large $\ell\left(\varepsilon\right)$, a union of $n/\left(\ell\left(\varepsilon\right)+1\right)$
-length-$\ell\left(\varepsilon\right)$ loose paths is a partial-cycle
+for large $\ell$ (greater than $\lambda\left(\varepsilon\right)$, say), a union of $n/\left(\ell+1\right)$
+length-$\ell$ loose paths is a partial-cycle
 with more than $\left(1-\varepsilon\right)n$ edges.
 
-Consider a maximum-size collection of disjoint length-$\ell\left(\varepsilon\right)$
-loose paths in $R^{\mathrm{H}}$. We will apply our claim with some $\ell$ larger than both $\ell\left(\varepsilon\right)$ and $1/\varepsilon$ and with $\patheps=\left(k-1\right)\varepsilon-1/\ell$. Our claim proves that if $\bmat$ is large enough then there are fewer than $\left(\left(k-1\right)\varepsilon-1/\ell\right)n$ vertices left over after our maximal collection of loose paths. This means our maximal collection has at least
+We will apply our claim with some $\ell$ larger than both $\lambda\left(\varepsilon\right)$ and $1/\varepsilon$ and with $\patheps=\left(k-1\right)\varepsilon-1/\ell$. Consider a maximum-size collection of disjoint length-$\ell$ loose paths in $R^{\mathrm{H}}$. Our claim proves that if $\bmat$ is large enough then there are fewer than $\left(\left(k-1\right)\varepsilon-1/\ell\right)n$ vertices left over after our maximal collection of loose paths. This means our maximal collection has at least
 \[
 \frac{\left(k-1\right)n-\left(\left(k-1\right)\varepsilon-1/\ell\right)n}{\ell\left(k-1\right)+1}\ge\frac{n}{\ell}\left(1-\varepsilon\right)=q
 \]
 loose paths, comprising at least $\left(1-\varepsilon\right)n$
-edges. Since $\ell> 1/\varepsilon$, $(\ell+1)q \leq n$ and therefore our collection of loose paths contains a $\left(1-\varepsilon\right)n$-edge partial-cycle.
+edges. Since $\ell> \lambda\left(\varepsilon\right)$, a subcollection of loose paths comprising $\left(1-\varepsilon\right)n$ edges is a partial-cycle.
 \end{proof}
 The second step to prove \ref{thm:hypergraph-theorems} is to show that a dense
 hypergraph plus a large partial structure a.a.s. gives the structure
@@ -529,6 +528,9 @@ Let $\bar{M}$ be a uniformly random perfect matching between $A$
 and $B$ and let $M$ be any sub-matching of $\bar{M}$ with $\left(1-\xi\right) n$
 edges. Then a.a.s. $G\cup M$ has a perfect matching. 
 \end{lem}
+
+Note that while we require $\bar M$ to be uniformly random, we make no assumptions about the distribution of $M$ other than that is contained within $\bar M$.
+
 The immediate na\"ive approach to prove this lemma would be to show each set of vertices expands, and then to apply the union bound and Hall's marriage theorem. However, the
 probability of failure to expand is not small enough for this to work.
 We can gain some insight into the problem by considering two ``extremal''
@@ -570,7 +572,7 @@ $A=V_{0}^{1}\cup\dots\cup V_{\k}^{1}$ and $B=V_{0}^{2}\cup\dots\cup V_{\k}^{2}$
 with $\k\le \K$, in such a way that the following conditions are satisfied.
 The ``exceptional'' clusters $V_{0}^{1}$ and $V_{0}^{2}$ both
 have fewer than $\varepsilon n$ vertices, and the non-exceptional
-clusters in $A$ and $B$ have equal size: $\left|V_{i}^{\ell}\right|=\s n$.
+clusters in $A$ and $B$ have equal size: $\left|V_{i}^{\ell}\right|=\s n$. (Note that this implies $1-\varepsilon\le rs\le1$).
 There is a subgraph $G'\subseteq G$ with minimum degree at least
 $\left(\alpha'+\varepsilon\right)n$ such that each pair of distinct
 clusters $V_{i}^{1},V_{j}^{2}$ ($i,j\ge1$) is $\varepsilon$-regular
@@ -579,7 +581,7 @@ in $G'$ with density zero or at least $2\varepsilon$.
 Define the cluster graph $C$ as the bipartite graph whose vertices
 are the non-exceptional clusters $V_{i}^{\ell}$, and whose edges
 are the pairs of clusters between which there is nonzero density in
-$G'$. The fact that $G$ is dense implies that $C$ is dense as well, as follows. In $G'$ each $V_{i}^{\ell}$ has at least $\left(\alpha'+\varepsilon\right)n\left|V_{i}^{\ell}\right|$
+$G'$. The fact that $G'$ is dense implies that $C$ is dense as well, as follows. In $G'$ each $V_{i}^{\ell}$ has at least $\left(\alpha'+\varepsilon\right)n\left|V_{i}^{\ell}\right|$
 edges to other clusters. There are at most $\left(\varepsilon n\right)\left(\s n\right)$
 edges to the exceptional cluster $V_{0}$ and at most $\left(\s n\right)^{2}$
 edges to each other cluster. So, $d_{C}\left(V_{i}^{\ell}\right)\ge\left(\left(\alpha'+\varepsilon\right)n-\varepsilon n\right)\s n/\left(\s n\right)^{2}\ge\alpha'\k$
@@ -608,7 +610,7 @@ We assume this holds for the remainder of the proof.
 Consider any $W\subset A$ with $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$.
 For each $i$ let $\pi_{i}=\left|V_{i}^{1}\cap W\right|/\left(\s n\right)$,
 and let $D$ be the set of clusters $V_{i}^{1}$ with $\pi_{i}\ge\varepsilon$.
-If $\varepsilon$ is small, $D$ must be nonempty. Now, if $V_{j}^{2}\in N_{C}\left(D\right)$
+If $\varepsilon$ is small compared to $\alpha$, then $D$ must be nonempty. Now, if $V_{j}^{2}\in N_{C}\left(D\right)$
 then by $\varepsilon$-regularity there are edges in $G'$ from $W$
 to at least $\left(1-\varepsilon\right)\s n$ vertices of $V_{j}^{2}$.
 It follows that if $\left|N_{C}\left(D\right)\right|=\k$ (as would
@@ -617,7 +619,7 @@ for small $\varepsilon$, and we are done.
 
 Otherwise, choose $F\subseteq N\left(D\right)$ with $\left|F\right|=\alpha'\k$
 and let $S$ contain the vertices of the clusters in $F$. By the
-same $\varepsilon$-regularity argument, $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'\k\left(1-\varepsilon\right)\s n\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
+same $\varepsilon$-regularity argument as in the previous paragraph, $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'\k\left(1-\varepsilon\right)\s n\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
 Since $\left|M\right|=\left(1-\xi\left(\alpha\right)\right)n$, each
 $V_{i}^{1}\cap W$ has at least $\left(\pi_{i}\s-\xi\left(\alpha\right)\right)n$
 neighbours in $M$, and at most $\alpha'\k\left(\s^{2}+\varepsilon\right)n$
@@ -676,7 +678,7 @@ random ordering with $R$ in such a way that the perfect matching
 defined by the ordering coincides with $\bar{Q}$. Then, let $A$
 consist of the vertices $a^{i}$ and let $B$ be the hypergraph with
 edges $b^i$.
-Note that $A$ is a uniformly random $n$-vertex set and $B$ is a
+Note that $A$ is a uniformly random $n$-vertex set with a uniformly random ordering $a^{1},\dots,a^{n}$, and $B$ is a
 uniformly random $\left(k-1\right)$-uniform perfect matching on the remaining vertices. Also,
 if we condition on $A$ and $B$ then $G_{A,B}\left(\bar{Q}\right)$
 is a uniformly random perfect matching, and $G_{A,B}\left(Q\right)$
@@ -689,7 +691,7 @@ a^{1},\dots,a^{n},b_{0},\dots,b_{\left(k-2\right)n-1}.
 For each $i$ let $b^{i}$ be the $\left(k-1\right)$-vertex set $\left\{ b_{\left(k-2\right)i},b_{\left(k-2\right)i+1},\dots,b_{\left(k-2\right)\left(i+1\right)}\right\}$ (where the subscripts are interpreted modulo $\left(k-2\right)n$). Note that in this case consecutive $b^i$ intersect each other in one vertex. We define our loose Hamilton cycle to have edges of the form $\left\{ a^{i}\right\} \cup b^{i}$. This loose Hamilton cycle is uniformly random, so we can couple our random ordering with $R$ in such a way that our loose Hamilton cycle coincides with $\bar Q$. Let $A$ contain
 the vertices $a^{i}$ and let $B$ contain the
 edges $b^{i}$. Exactly the same considerations hold: $A$ is a uniformly
-random $n$-vertex set, $B$ is a uniformly random $\left(k-1\right)$-uniform loose Hamilton
+random $n$-vertex set with a uniformly random ordering $a^{1},\dots,a^{n}$, $B$ is a uniformly random $\left(k-1\right)$-uniform loose Hamilton
 cycle on the remaining vertices, and $G_{A,B}\left(Q\right)$ is a
 $\left(1-\varepsilon\right)n$-edge sub-matching of the uniformly random perfect
 matching $G_{A,B}\left(\bar{Q}\right)$.
@@ -722,41 +724,40 @@ a^{1},\dots,a^{n},\, b_{1}^{1},\dots,b_{k-1}^{1},\, b_{1}^{2},\dots,b_{k-1}^{n}.
 be a uniformly random ordering of $V\left(H\right)$, with $A$, $b^i$ and
 $B$ defined as before.
 
-First, condition on some $b\in B$. Note that $\Pr\left(b\cup\left\{ a^{1}\right\} \in E\left(H\right)\right)\ge\delta_{k-1}\left(H\right)/\left(kn\right)$
-and more generally 
+First, condition on some $\left(k-1\right)$-tuple $b\in B$, and imagine that the $a^i$ are chosen one-by-one. Given $b$ and $a^{1},\dots,a^{i}$, this means that $a^{i+1}$ has a uniformly random distribution from the remaining vertices. There are at least $\delta_{k-1}\left(H\right)$ choices of $a$ that will make $b\cup\left\{a\right\}$ an edge of $E\left(H\right)$, so for $i\le\alpha n/2$,
 \[
-\Pr\left(b\cup\left\{ a^{i+1}\right\} \in E\left(H\right)\mid a^{1},\dots,a^{i}\right)\ge\left(\delta_{k-1}\left(H\right)-i\right)/\left(kn\right)\ge\alpha/\left(2k\right)
+\Pr\left(b\cup\left\{ a^{i+1}\right\} \in E\left(H\right)\mid a^{1},\dots,a^{i}\right)\ge\left(\delta_{k-1}\left(H\right)-i\right)/\left(kn\right)\ge\alpha/\left(2k\right).
 \]
-for $i\le\alpha n/2$. By the Chernoff bound, $d_{G_{H}}\left(b\right)\ge\alpha^{2}n/\left(8k\right)$
-with probability $1-e^{-\Omega\left(n\right)}$. With the union bound, a.a.s. $d_{G_{H}}\left(b\right)\ge\alpha^{2}n/\left(8k\right)$ for all $b$.
+The degree of $b$ in $G_{A,B}\left(H\right)$ is the number of edges $b\cup\left\{ a^{i}\right\}$ in $E\left(H\right)$, which we have just shown stochastically dominates a $\Bin(\alpha n/2,\alpha/\left(2k\right))$ distribution.
+\begin{comment}This means we can couple our random ordering with a sequence of independent random variables $X_1,\dots,X_{\alpha n/2}$ each having a Bernoulli distribution with parameter $\alpha/\left(2k\right)$, in such a way that $d_{G_{A,B}\left(H\right)}\left(b\right)\ge\sum_{i=1}^{\alpha n/2}X_i$. \end{comment}
+By the Chernoff bound, $d_{G_{A,B}\left(H\right)}\left(b\right)\ge\alpha^{2}n/\left(8k\right)$
+with probability $1-e^{-\Omega\left(n\right)}$. With the union bound, a.a.s. $d_{G_{A,B}\left(H\right)}\left(b\right)\ge\alpha^{2}n/\left(8k\right)$ for all $b$.
 
-Now, $\delta_{1}\left(H\right)\ge\alpha'n^{k-1}$ for some $\alpha'>0$
-depending on $\alpha$. Condition on some $a\in A$. Each $b_{j}^{i}$
-shares at most ${kn \choose k-2}$ edges with $a$, so if $j\le2\sqrt{\amat}n$
-for sufficently small $\amat$ and large $n$,
+Now, instead condition on some $a\in A$ and imagine that the $\left(k-1\right)$-tuples $b^i$ are chosen one-by-one from the remaining vertices. Note that there are at least $\delta_{1}\left(H\right)$ choices of a $\left(k-1\right)$-tuple $b$ such that $\left\{a\right\}\cup b\in E\left(H\right)$, and note that each $b_{j}^{i}$
+shares at most ${kn \choose k-2}$ edges with $a$. Recall that $\delta_1\left(H\right)=\Omega\left(n^{k-1}\right)$, so  if $i\le2\sqrt{\amat}n$ for sufficently small $\amat$ and large $n$,
 then
 \[
-\Pr\left(\left\{ a\right\} \cup b^{j+1}\in E\left(H\right)\mid b^{1},\dots,b^{j}\right)\ge\left(\delta_{1}\left(H\right)-\left(k-1\right)j{kn \choose k-2}\right)\left.\vphantom{\sum}\right/{kn \choose k-1}\ge\sqrt{\amat}.
+\Pr\left(\left\{ a\right\} \cup b^{i+1}\in E\left(H\right)\mid b^{1},\dots,b^{i}\right)\ge\left(\delta_{1}\left(H\right)-\left(k-1\right)i{kn \choose k-2}\right)\left.\vphantom{\sum}\right/{kn \choose k-1}\ge\sqrt{\amat}.
 \]
-By the Chernoff bound and the union bound, a.a.s. each $d_{G_{H}}\left(a\right)\ge\amat n$.
+By the same argument as in the previous paragraph, using the Chernoff bound and the union bound, a.a.s. each $d_{G_{A,B}\left(H\right)}\left(a\right)\ge\amat n$.
 \end{proof}
 
 \begin{proof}
 [Proof of \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-cycle-degree-transfer}]We give
-essentially the same proof as for \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-matching-degree-transfer}.
+essentially the same proof as for \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-matching-degree-transfer}. As in the discussion preceding the lemma, choose a uniformly random ordering
 \[
-a^{i},\dots,a^{i},b_{0},\dots,b_{\left(k-2\right)n-1},
+a^{1},\dots,a^{n},b_{0},\dots,b_{\left(k-2\right)n-1},
 \]
 and let $A$, $b^i$ and $B$ be defined as before.
 
 With exactly the same proof as for \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-matching-degree-transfer},
-there is small $\aham$ such that a.a.s. $d_{G_{H}}\left(b\right)\ge\aham n$
-for all $b\in B$. Next, condition on some $a\in A$. For small $\beta_k$, large $n$
-and $1\le j\le2\sqrt{\aham}n$,
+there is small $\aham$ such that a.a.s. $d_{G_{A,B}\left(H\right)}\left(b\right)\ge\aham n$
+for all $b\in B$. Next, condition on some $a\in A$, and imagine the $b^i$ are chosen one-by-one. Note  that the only intersection of $b^i$ with any of $b^0,\dots,b^{i-1}$ is the vertex $b_{\left(k-2\right)i}$, and the other vertices of $b^i$ are chosen uniformly at random from what remains. Also note that each $b_j$ shares at most ${\left(k-1\right)n \choose k-3}$ edges with both $a$ and $b_{\left(k-2\right)i}$. So, for small $\beta_k$, large $n$
+and $1\le i\le2\sqrt{\aham}n$,
 \[
-\Pr\left(\left\{ a\right\} \cup b^{j}\in E\left(H\right)\mid b^{0},\dots,b^{j-1}\right)\ge\left(\delta_{2}\left(H\right)-\left(\left(k-2\right)j+1\right){\left(k-1\right)n \choose k-3}\right)\left.\vphantom{\sum}\right/{ \left(k-1\right)n \choose k-2}\ge\sqrt{\aham},
+\Pr\left(\left\{ a\right\} \cup b^{i}\in E\left(H\right)\mid b^{0},\dots,b^{i-1}\right)\ge\left(\delta_{2}\left(H\right)-\left(k-2\right)i{\left(k-1\right)n \choose k-3}\right)\left.\vphantom{\sum}\right/{ \left(k-1\right)n \choose k-2}\ge\sqrt{\aham}.
 \]
-so a.a.s. each $d_{G_{H}}\left(a\right)\ge\aham n$.
+By the same argument as before, a.a.s. each $d_{G_{A,B}\left(H\right)}\left(a\right)\ge\aham n$.
 \end{proof}
 We have established that if $\chyp\left(\alpha\right)$ 
 is large enough then $G_{A,B}\left(H\right)$ is a.a.s. a bipartite graph with minimum degree $\a\left(\alpha\right)n$, and $G_{A,B}\left(R\right)$ contains a $\left(1-\xi\left(\a\left(\alpha\right)\right)\right)n$-edge sub-matching $G_{A,B}\left(Q\right)$ of the uniformly random perfect matching $G_{A,B}\left(\bar{Q}\right)$. \ref{lem:bipartite-plus-big-matching-perfect} then
@@ -1131,7 +1132,7 @@ the outcome for all arcs adjacent to $w$, and let $N_{P}^{+}\left(w\right)$
 be the set of vertices to which there is an arc from $w$ in $P$.
 By \ref{lem:preserve-degree}, we can assume $\left|N_{P}^{+}\left(w\right)\right|\ge n/18$.
 
-We first prove the lemma for the case where $k\le3t'$. There are
+We first prove the lemma for the case where $k\le6t'$. There are
 at least $n'=n/18-1$ arcs between $N_{P}^{+}\left(w\right)$ and
 $v$, each of which will be pointing towards $v$ in $P$ with probability
 at least $p$ independently. By the Chernoff bound, the probability
@@ -1140,7 +1141,7 @@ $v$ in $P$ is $e^{-\Omega\left(np\right)}=o\left(e^{-k/\left(d+1\right)}\right)$
 So, with the required probability there are $t'$ suitable length-2
 paths from $w$ to $v$.
 
-We can now assume $k>3t'$. Condition on the result of the perturbation
+We can now assume $k>6t'$. Condition on the result of the perturbation
 for the arcs adjacent to $v$ (in addition to the arcs we have conditioned
 on so far). Let $N_{P}^{-}\left(v\right)$ be the set of vertices
 from which there is an edge into $v$ in $P$; by \ref{lem:preserve-degree},
@@ -1150,7 +1151,7 @@ Now, if $\left|N_{P}^{+}\left(w\right)\cap N_{P}^{-}\left(v\right)\right|\ge t'$
 then there are $t'$ disjoint length-2 paths from $w$ to $v$ and
 we are done. So we can assume $U^{+}=N_{P}^{+}\left(w\right)\backslash\left(N_{P}^{-}\left(v\right)\cup\left\{ v\right\} \right)$
 has at least $n'=n/18-t'-1$ vertices, and $U^{-}=N_{P}^{-}\left(v\right)\backslash\left\{ w\right\} $
-has at least $k'=k/3-1$ vertices (note $k'\ge t'$ by assumption).
+has at least $k'=k/3-1$ vertices (note $k'\ge 2t'$ by assumption).
 
 Now, we would like to show that with the required probability there
 is a set of $t'$ independent arcs from $U^{+}$ into $U^{-}$ in
@@ -1190,9 +1191,7 @@ vertices, and note
 for positive $x$).
 
 By Markov's inequality, a.a.s. $\left|Q\right|\le\sqrt{f\left(n\right)}O\left(d+1\right)=o\left(d+1\right)$.
-If $d\le4t$ then $\left|Q\right|=0$ for large $n$. Otherwise, $\left|Q\right|<d/4$ for large $n$, and every vertex $v\in Q$ has
-$3t$ safe in-neighbours $v_{1},\dots,v_{3t}$ different from $w$. Now, we claim that there are at least $t$ internally vertex-disjoint paths of length at most 4 from $w$ to $v$ in $P$. To prove this, suppose not, and fix a maximum-size set
-$M$ of such paths, with $\left|M\right|<t$. There are fewer than $3t$ internal vertices in the paths in $M$, so there is some $v_{i}$ not in any path of $M$. Then, there are $3t$ internally vertex-disjoint paths from $w$ to $v_{i}$, so one of these does not contain any
+If $d\le12t$ then $\left|Q\right|=0$ for large $n$ and we are done. Otherwise, we will show that there are a.a.s. suitable paths of length at most 4 from $w$ to each other vertex. By \ref{lem:preserve-degree} the perturbation a.a.s. reduces the degree of each vertex by a factor of at most 3 (the probability of this not occurring is $o\left(\sum_{k=0}^\infty e^{-k}\right)+o\left(1\right)=o\left(1\right)$), so every vertex $v\in Q$ a.a.s. has indegree at least $d/3$. We have $\left|Q\right|<d/12$ for large $n$, and we are assuming $d>12t$, so for every vertex $v$ we can choose $3t$ safe in-neighbours $v_{1},\dots,v_{3t}$ different from $w$. Now, fix some $v$ and consider a maximum-size collection $M$ of internally vertex-disjoint paths of length at most 4 from $w$ to $v$ in $P$. For the purpose of contradiction assume that $\left|M\right|<t$. There are fewer than $3t$ internal vertices in the paths in $M$, so there is some $v_{i}$ not in any path of $M$. Then, there are $3t$ internally vertex-disjoint paths from $w$ to $v_{i}$, so one of these does not contain any
 internal vertex of a path in $M$. It follows that $w,\dots,v_{i},v$ is a path from $w$ to $v$ which is
 internally vertex-disjoint from every path in $M$, contradicting maximality.
 \end{proof}
