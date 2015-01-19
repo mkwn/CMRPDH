@@ -15,7 +15,7 @@
 \usepackage{amssymb}
 \usepackage{setspace}
 \usepackage{esint}
-\setstretch{0.95}
+\setstretch{0.948}
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
  breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=false]
@@ -196,15 +196,15 @@ Benny Sudakov\thanks{Department of Mathematics, ETH, 8092 Zurich. Email: \href{m
 \global\long\def\aham{\a}
 
 \begin{abstract}
-We give several results showing that different discrete structures
-gain certain spanning substructures (in particular, Hamilton cycles) after a modest random perturbation. First, we show
+We give several results showing that different discrete structures typically
+gain certain spanning substructures (in particular, Hamilton cycles) after a modest random perturbation. First, we prove
 that adding linearly many random edges to a dense $k$-uniform hypergraph ensures
 the (asymptotically almost sure) existence of a perfect matching or a loose
 Hamilton cycle. The proof involves a nonstandard application of Szemer\'edi's
-Regularity Lemma, which might be of independent interest. We next show that digraphs with certain strong expansion
+Regularity Lemma, which might be of independent interest. We next prove that digraphs with certain strong expansion
 properties are pancyclic, and use this to show that adding a linear
 number of random edges typically makes a dense digraph pancyclic. Finally, we
-show that perturbing a certain (minimum-degree-dependent) number of
+prove that perturbing a certain (minimum-degree-dependent) number of
 random edges in a tournament typically ensures the existence of multiple edge-disjoint
 Hamilton cycles. All our results are tight.
 \end{abstract}
@@ -463,7 +463,7 @@ O\left(n^{2\left(k-2\right)}\right)$ pairs of edges containing both those vertic
 which are contained in more than one edge (have degree more than one)
 is $O\left(n^2n^{2\left(k-2\right)}p^2\right)=O\left(1\right)$. By Markov's inequality, there are a.a.s. fewer
 than $\patheps n/2$ such pairs of vertices. So if we delete a
-set $D$ containing one member of each of those pairs, then every pair of vertices in the remaining graph has
+set $D$ containing one member of each of those pairs, then every pair of vertices in the remaining hypergraph has
 degree at most one.
 
 Let $d=k\ell$. For
@@ -657,7 +657,7 @@ corresponding to a perfect matching or loose Hamilton cycle in $H\cup R$.
 We make this precise as follows. For any $\varepsilon>0$ depending on $\alpha$, if $\chyp\left(\alpha\right)$
 is large enough, \ref{lem:hypergraph-almost-object} ensures the a.a.s.
 existence of a $\left(1-\varepsilon\right)n$-edge matching or partial-cycle $Q$ in $R$. Extend this to a perfect matching or loose Hamilton cycle
-$\bar{Q}$ on $V\left(R\right)$. Note that the distribution of $R$
+$\bar{Q}$ on $V\left(R\right)$ in an arbitrary way. Note that the distribution of $R$
 is invariant under relabelling of its vertices so we can relabel its
 vertices uniformly at random to assume that $\bar{Q}$ is a uniformly
 random perfect matching or loose Hamilton cycle.
@@ -702,12 +702,12 @@ holds.
 \item{\label{itm:hypergraph-bipartite-matching-degree-transfer}Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}\oldref{itm:hypergraph-matching-theorem},
 let $A$ be a uniformly random set of $n$ vertices, and let $B$
 be a uniformly random perfect matching on $V\left(H\right)\backslash A$.
-Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree $\amat n$.}
+Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree at least $\amat n$.}
 
 \item{\label{itm:hypergraph-bipartite-cycle-degree-transfer}Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}\oldref{itm:hypergraph-cycle-theorem},
 let $A$ be a uniformly random set of $n$ vertices, and let $B$
 be a uniformly random loose Hamilton cycle on $V\left(H\right)\backslash A$.
-Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree $\aham n$.}
+Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree at least $\aham n$.}
 
 \end{enumerate}\end{lem}
 \begin{proof}
@@ -1181,7 +1181,7 @@ with indegree $d$ in $T$, and the vertex with the $2k$th smallest
 indegree has indegree at least $k-1$. Let $Q$ be the set of non-safe
 vertices, and note 
 \begin{align*}
-\E\left|Q\right| & \le\left(2d+1\right)f\left(n\right)e^{-d/\left(d+1\right)}+\sum_{k=d+1}^{n}2f\left(n\right)e^{-k/\left(d+1\right)}+nf\left(n\right)/n\\
+\E\left[\left|Q\right|\right] & \le\left(2d+1\right)f\left(n\right)e^{-d/\left(d+1\right)}+\sum_{k=d+1}^{n}2f\left(n\right)e^{-k/\left(d+1\right)}+nf\left(n\right)/n\\
  & =f\left(n\right)\left(O\left(d+1\right)+\frac{1}{1-e^{-1/\left(d+1\right)}}\right)\\
  & =f\left(n\right)O\left(d+1\right).
 \end{align*}
@@ -1198,12 +1198,12 @@ outside $S$ has $t$ internally vertex-disjoint paths to and from every vertex in
 If $P$ has this property and we delete $t-1$ vertices, then there is at least one vertex $w$
 of $S$ remaining, and $w$ has least one path to and from every other
 vertex. That is, $P$ is a.a.s. $t$-strongly connected. (In fact, we have also
-proved that $P$ a.a.s. has diameter at most 8). We conclude that $P$ a.a.s. has $q$ arc-disjoint Hamilton cycles for any $q=O\left(1\right)$.
+proved that $P$ a.a.s. has diameter at most 8). Recall that a $t$-strongly connected tournament has $\Omega\left(\sqrt t\right)$ arc-disjoint Hamilton cycles, so we can conclude that $P$ a.a.s. has $q$ arc-disjoint Hamilton cycles for any $q=O\left(1\right)$.
 
 
 \section{Concluding Remarks}
 
-We have determined the amount of random perturbation required to make
+We have determined the amount of random perturbation typically required to make
 a tournament, dense digraph or dense uniform hypergraph Hamiltonian. In
 the process, we have proved a general lemma about pancyclicity in
 highly connected digraphs, and demonstrated an interesting application
@@ -1226,8 +1226,7 @@ in \ref{thm:hypergraph-theorems}.
 
 \medskip
 
-\noindent{\bf Acknowledgement.} Part of this work was carried out when the third author visited
-Tel Aviv University, Israel. He would like to thank the School of Mathematical Sciences of Tel Aviv University for hospitality and for creating a stimulating research environment.
+\noindent{\bf Acknowledgement.} Parts of this work were carried out when the first author visited the Institute for Mathematical Research (FIM) of ETH Zurich, and also when the third author visited the School of Mathematical Sciences of Tel Aviv University, Israel. We would like to thank both institutions for their hospitality and for creating a stimulating research environment.
 
 \bibliographystyle{amsplain}
 \providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
