@@ -139,9 +139,9 @@
 \thanks{School of Mathematical Sciences, Raymond and Beverly Sackler Faculty of Exact Sciences, Tel Aviv University, 6997801, Israel. Email: \href{mailto:krivelev@post.tau.ac.il}
 {\nolinkurl{krivelev@post.tau.ac.il}}. Research supported in part by USA-Israel BSF Grant 2010115 and
 by grant 912/12 from the Israel Science Foundation.}\and
-Matthew Kwan\thanks{Department of Mathematics, ETH, 8092 Zurich. Email: \href{mailto:matthew.kwan@math.ethz.ch}
-{\nolinkurl{matthew.kwan@math.ethz.ch}}}\and
-Benny Sudakov\thanks{Department of Mathematics, ETH, 8092 Zurich. Email: \href{mailto:benjamin.sudakov@math.ethz.ch}{\nolinkurl{benjamin.sudakov@math.ethz.ch}}. Research supported in part by SNSF grant 200021-149111.}}
+Matthew Kwan\thanks{Department of Mathematics, ETH, 8092 Z\"urich. Email: \href{mailto:matthew.kwan@math.ethz.ch}
+{\nolinkurl{matthew.kwan@math.ethz.ch}}.}\and
+Benny Sudakov\thanks{Department of Mathematics, ETH, 8092 Z\"urich. Email: \href{mailto:benjamin.sudakov@math.ethz.ch}{\nolinkurl{benjamin.sudakov@math.ethz.ch}}. Research supported in part by SNSF grant 200021-149111.}}
 
 \maketitle
 \global\long\def\RR{\mathbb{R}}
@@ -175,6 +175,7 @@ Benny Sudakov\thanks{Department of Mathematics, ETH, 8092 Zurich. Email: \href{m
 \global\long\def\Po{\operatorname{Po}}
 \global\long\def\Bin{\operatorname{Bin}}
 \global\long\def\Ber{\operatorname{Ber}}
+\global\long\def\Pr{\mathbb{P}}
 \global\long\def\Geom{\operatorname{Geom}}
 \global\long\def\Hom{\operatorname{Hom}}
 \global\long\def\floor#1{\left\lfloor #1\right\rfloor }
@@ -200,13 +201,23 @@ We give several results showing that different discrete structures typically
 gain certain spanning substructures (in particular, Hamilton cycles) after a modest random perturbation. First, we prove
 that adding linearly many random edges to a dense $k$-uniform hypergraph ensures
 the (asymptotically almost sure) existence of a perfect matching or a loose
-Hamilton cycle. The proof involves a nonstandard application of Szemer\'edi's
+Hamilton cycle. The proof involves an interesting application of Szemer\'edi's
 Regularity Lemma, which might be of independent interest. We next prove that digraphs with certain strong expansion
 properties are pancyclic, and use this to show that adding a linear
 number of random edges typically makes a dense digraph pancyclic. Finally, we
 prove that perturbing a certain (minimum-degree-dependent) number of
 random edges in a tournament typically ensures the existence of multiple edge-disjoint
 Hamilton cycles. All our results are tight.
+
+2010 Mathematics subject classification:
+%Primary
+05C80, % random graphs
+05C35.% extremal problems
+%Secondary
+%05C65% hypergraphs
+%05C45% Eulerian and Hamiltonian graphs
+%05C38% Paths and cycles
+
 \end{abstract}
 
 \section{Introduction and Results}
@@ -229,14 +240,14 @@ the (labelled) graphs with $n$ vertices and $\alpha{n \choose 2}$
 edges, then the degrees will probably each be about $\alpha n$. Such
 a random graph is Hamiltonian with probability $1-o\left(1\right)$
 (we say it is Hamiltonian \emph{asymptotically almost surely}, or
-\emph{a.a.s.}). This follows from a stronger result \cite{Pos76}
+\emph{a.a.s.}). This follows from a stronger result by P\'osa \cite{Pos76}
 that gives a \emph{threshold} for Hamiltonicity: a random $n$-vertex,
-$m$-edge graph is Hamiltonian a.a.s. if $m\gg n\log n$, and fails
-to be Hamiltonian a.a.s. if $m\ll n\log n$. Here and from now on,
+$m$-edge graph is Hamiltonian a.a.s.{} if $m\gg n\log n$, and fails
+to be Hamiltonian a.a.s.{} if $m\ll n\log n$. Here and from now on,
 all asymptotics are as $n\to\infty$, and we implicitly round large
 quantities to integers.
 
-In \cite{BFM03}, the authors studied the random graph model that
+Bohman, Frieze and Martin \cite{BFM03} studied the random graph model that
 starts with a dense graph and adds $m$ random edges (this model has
 since been studied in a number of other contexts; see for example
 \cite{BHM04,KST06}). They found that to ensure Hamiltonicity in this
@@ -245,7 +256,7 @@ over the standard model where we start with nothing. To be precise,
 \cite[Theorem~1]{BFM03} says that for every $\alpha>0$ there is
 $\cdi=\cdi\left(\alpha\right)$ such that if we start with a graph with
 minimum degree at least $\alpha n$ and add $\cdi n$
-random edges, then the resulting graph will a.a.s. be Hamiltonian.
+random edges, then the resulting graph will a.a.s.{} be Hamiltonian.
 Note that some dense graphs require a linear number of extra edges
 to become Hamiltonian (consider the complete bipartite graph with
 partition sizes $n/3$ and $2n/3$), so the order of magnitude of this result is tight. 
@@ -253,7 +264,7 @@ We can interpret this theorem as quantifying the ``fragility''
 of the few dense graphs that are not Hamiltonian, by determining the
 amount of random perturbation that is necessary to make a dense graph
 Hamiltonian. A comparison can be drawn to the notion of \emph{smoothed
-analysis} of algorithms introduced in \cite{ST04}, which involves
+analysis} of algorithms introduced by Spielman and Teng \cite{ST04}, which involves
 studying the performance of algorithms on randomly perturbed inputs.
 
 Our first contribution in this paper is to generalize the aforementioned
@@ -277,12 +288,12 @@ the vertex set $\range n$.
 \item{\label{itm:hypergraph-matching-theorem}If $H$ is
 a $k$-uniform hypergraph on $\range{kn}$ with $\delta_{k-1}\left(H\right)\ge\alpha n$,
 and $R\in\HH_{k}\left(kn,\chypmat n\right)$, then
-$H\cup R$ a.a.s. has a perfect matching.}
+$H\cup R$ a.a.s.{} has a perfect matching.}
 
 \item{\label{itm:hypergraph-cycle-theorem}If $H$ is
 a $k$-uniform hypergraph on $\range{\left(k-1\right)n}$with
 $\delta_{k-1}\left(H\right)\ge\alpha n$, and $R\in\HH\left(\left(k-1\right)n,\chypham n\right)$,
-then $H\cup R$ a.a.s. has a loose Hamilton cycle.}
+then $H\cup R$ a.a.s.{} has a loose Hamilton cycle.}
 
 \end{enumerate}
 \end{thm}
@@ -299,7 +310,7 @@ arguments, and we do not have an analogue of Hall's marriage theorem
 allowing us to deduce the existence of a perfect matching from an
 expansion property. Our proof involves reducing the theorem to the
 existence of a perfect matching in a certain randomly perturbed dense bipartite
-graph. The na\"ive approach to prove the existence of a perfect matching in this graph would be to use Hall's theorem and the union bound. Unfortunately this fails, and in fact the ``reason'' for a perfect matching in this perturbed graph seems to be quite different depending on the structure of the initial bipartite graph. The proof therefore makes use of the structural description provided by Szemer\'edi's regularity lemma, in quite a nonstandard way.
+graph. The na\"ive approach to prove the existence of a perfect matching in this graph would be to use Hall's theorem and the union bound. Unfortunately this fails, and in fact the ``reason'' for a perfect matching in this perturbed graph seems to be quite different depending on the structure of the initial bipartite graph. The proof therefore makes use of the structural description provided by Szemer\'edi's regularity lemma in an interesting way.
 
 Our second contribution in this paper is a theorem giving a general
 expansion condition for\emph{ pancyclicity}. We say an $n$-vertex
@@ -323,7 +334,7 @@ distribution on $m$-arc digraphs on the vertex set $\range n$ (in this paper we 
 \label{thm:smoothed-pancyclic}For each $\alpha>0$, there is $\cdi=\cdi\left(\alpha\right)$ such that
 if $D$ is a digraph on $\range n$ with all in- and out- degrees at least $\alpha n$,
 and $R\in\DD\left(n,\cdi n\right)$, then $D\cup R$
-is a.a.s. pancyclic.
+is a.a.s.{} pancyclic.
 \end{thm}
 
 We will prove \ref{lem:pseudorandom-pancyclic,thm:smoothed-pancyclic} in  \ref{sec:digraphs}.
@@ -345,9 +356,9 @@ $m=pN$ and $N$ is the total number of possible edges. One perspective or the oth
 or result in cleaner proofs; we will use both interchangeably as is
 convenient without further discussion. In all the situations in this
 paper, equivalence can be proved with standard conditioning and coupling
-arguments.
+arguments (see for example \cite[Section~1.4]{JLR00}).
 
-As suggested in \cite[Definition~1]{ST03}, one possible alternative
+As suggested by Spielman and Teng in \cite[Definition~1]{ST03}, one possible alternative
 model is to \emph{change} random edges, instead of adding them. So,
 for our results so far, instead of taking the union of a fixed dense
 object with a random sparse object, we would take the symmetric difference.
@@ -368,7 +379,7 @@ the symmetric difference model, and is the model in which we prefer
 to state our theorem about randomly perturbed tournaments.
 
 Although it is easy to construct tournaments with no Hamilton cycle, here we prove 
-that every tournament becomes Hamiltonian after a small random perturbation. We are also
+that every tournament becomes Hamiltonian after a small random perturbation. We also
 show that randomly perturbed tournaments are not just Hamiltonian,
 but have multiple edge-disjoint Hamilton cycles.
 Moreover, we can give stronger results
@@ -379,7 +390,7 @@ $f$ (to be precise, $g=\omega\left(f\right)$ means $g/f\to\infty$).
 \label{thm:tournament}Consider a tournament $T$ with $n$ vertices
 and all in- and out- degrees at least $d$. Independently choose
 $m=\omega\left(n/\left(d+1\right)\right)$ random edges of $T$ and orient them uniformly at random.
-The resulting perturbed tournament $P$ a.a.s. has $q$ arc-disjoint
+The resulting perturbed tournament $P$ a.a.s.{} has $q$ arc-disjoint
 Hamilton cycles, for $q=O\left(1\right)$.
 \end{thm}
 
@@ -390,7 +401,7 @@ Note that we allow for the case where the minimum degree $d$ is zero, and where 
 Hypergraphs}
 
 We first make some observations about our minimum degree requirement.
-The \emph{minimum $q$-degree} $\delta_{q}\left(H\right)$ of $H$
+The \emph{minimum $q$-degree} $\delta_{q}\left(H\right)$ of a hypergraph $H$
 is the minimum degree among all sets of $q$ vertices. Note that this
 generalizes the two notions of denseness for graphs: in some contexts,
 we say graphs are dense if they have many edges,
@@ -416,9 +427,10 @@ the necessary $\left(2k+1\right)n/\left(k-1\right)$ edges. Similarly, this graph
 
 Now we proceed to the proof of \ref{thm:hypergraph-theorems}, which
 will follow from a sequence of lemmas. We will assume $k\ge3$, since the case $k=2$ is proved in \cite{BFM03}. The first step is to show that
-$R$ almost gives the structure of interest on its own. Let a \emph{
-partial-cycle} be a hypergraph which can be extended to a loose Hamilton
-cycle by adding edges.
+$R$ almost gives the structure of interest on its own. Let a \emph{partial-cycle} be a hypergraph which can be extended to a loose Hamilton
+cycle by adding edges. Recall that $\HH_{k}\left(n,m\right)$ is
+the uniform distribution on $m$-edge $k$-uniform hypergraphs on
+the vertex set $\range n$.
 
 \global\long\def\b{\chyp}
 %\global\long\def\bmat{\b^{\mathrm{M}}}
@@ -433,42 +445,46 @@ cycle by adding edges.
 \begin{enumerate}[topsep=0px,label=(\alph*)]
 
 \item{\label{itm:hypergraph-large-matching}$R^{\mathrm{M}}\in\HH_{k}\left(kn,\bmat n\right)$
-a.a.s. has a matching of $\left(1-\varepsilon\right)n$ edges.}
+a.a.s.{} has a matching of $\left(1-\varepsilon\right)n$ edges.}
 
 \item{\label{itm:hypergraph-large-subcycle}$R^{\mathrm{H}}\in\HH_{k}\left(\left(k-1\right)n,\bham n\right)$
-a.a.s. has a partial-cycle with $\left(1-\varepsilon\right)n$ edges.}
+a.a.s.{} has a partial-cycle with $\left(1-\varepsilon\right)n$ edges.}
 
 \end{enumerate}\end{lem}
 \begin{proof}
 First we define a \emph{loose path} by analogy with loose cycles:
 a $k$-uniform loose path is a hypergraph with a vertex ordering such
 that every edge consists of $k$ consecutive vertices and every pair
-of consecutive edges intersects in exactly one vertex. A matching
+of consecutive edges intersects in exactly one vertex. We say that the edges at the start and at the end of the ordering are \emph{extremal edges}. A matching
 is a collection of loose paths of length 1, and a partial-cycle is any
 collection of loose paths with enough vertices left over to link them
 together into a cycle.
 
-We will first prove that for any $\ell\ge1$ and $\patheps>0$, there
+We will first prove the following:
+
+\textbf{Claim:} for any $\ell\ge1$ and $\patheps>0$, there
 is $h=h\left(\ell,\patheps\right)$ such that the following holds. In a
 random hypergraph $R\in\HH_{k}\left(kn,hn\right)$,
-a.a.s. every set of $\patheps n$ vertices contains a loose path of length
-$\ell$. Parts \oldref{itm:hypergraph-large-matching} and \oldref{itm:hypergraph-large-subcycle} of the Lemma will follow from this fact.
+a.a.s.{} every set of $\patheps n$ vertices contains a loose path of length
+$\ell$.
 
-As per the discussion in the introduction, it is equivalent to consider
+Parts \oldref{itm:hypergraph-large-matching} and \oldref{itm:hypergraph-large-subcycle} of the Lemma will follow from this claim.
+
+In accordance with the discussion in the introduction, it is equivalent to consider
 the model for $R$ where each edge is independently present with probability
 $p=hn/{kn \choose k}=O\left(n^{1-k}\right)$.
 
 The probability a particular pair of edges is present in $R$ is $p^2$. There are $O\left(n^2\right)$ pairs of vertices and for each there are $O\left({n-2\choose k-2}^2\right)=
 O\left(n^{2\left(k-2\right)}\right)$ pairs of edges containing both those vertices. So, the expected number of pairs of vertices
 which are contained in more than one edge (have degree more than one)
-is $O\left(n^2n^{2\left(k-2\right)}p^2\right)=O\left(1\right)$. By Markov's inequality, there are a.a.s. fewer
+is $O\left(n^2n^{2\left(k-2\right)}p^2\right)=O\left(1\right)$. By Markov's inequality, there are a.a.s.{} fewer
 than $\patheps n/2$ such pairs of vertices. So if we delete a
 set $D$ containing one member of each of those pairs, then every pair of vertices in the remaining hypergraph has
 degree at most one.
 
 Let $d=k\ell$. For
 large $h$, using the Chernoff bound together with the union
-bound, it is easy to show that a.a.s. every set of $\patheps n/2$ vertices spans at least $d\patheps n/2$
+bound, it is easy to show that a.a.s.{} every set of $\patheps n/2$ vertices spans at least $d\patheps n/2$
 edges, which is to say that the average 1-degree in the induced subhypergraph
 is at least $kd$. We assume this holds for the remainder of the proof.
 
@@ -478,7 +494,7 @@ Deleting a vertex of degree less than $d$ increases the average degree
 of the induced subhypergraph, so $S\backslash D$ includes a set of
 vertices spanning a subhypergraph $Q$ of $R$ with minimum degree
 at least $d$. Let $P$ be a longest loose path in $Q$ and let $v$
-be a vertex with degree one in $P$ in one of the extremal edges of $P$. Since $P$ cannot
+be a vertex with degree one in $P$, in one of the extremal edges of $P$. Since $P$ cannot
 be extended to a longer path, each of the (at least $d$) edges containing
 $v$ also contains another vertex $u$ of $P$. But because $Q$ contains
 no vertices from $D$, there is at most
@@ -491,7 +507,7 @@ There can be no edge consisting of unmatched vertices because this would
 allow us to extend the matching, contradicting maximality. Applying
 our claim with $\patheps=k\varepsilon$ and $\ell=1$, we can see that
 if $\bmat$ is large enough then
-a.a.s. every set of $k\varepsilon n$ vertices spans at least one
+a.a.s.{} every set of $k\varepsilon n$ vertices spans at least one
 edge in $R$. This proves there are fewer than $k\varepsilon n$
 vertices unmatched after our maximum matching, hence our matching
 has at least $\left(1-\varepsilon\right)n$ edges.
@@ -513,7 +529,7 @@ We will apply our claim with $\ell=1/\varepsilon$ and $\patheps=\left(k-2\right)
 loose paths. Since $q\left(\ell+1\right) \leq n$, a subcollection of $q$ of these loose paths gives a partial-cycle, which has $\ell q=\left(1-1/\left(\ell+1\right)\right)n>\left(1-\varepsilon\right)n$ edges.
 \end{proof}
 The second step to prove \ref{thm:hypergraph-theorems} is to show that a dense
-hypergraph plus a large partial structure a.a.s. gives the structure
+hypergraph plus a large partial structure a.a.s.{} gives the structure
 we are looking for. For both theorems, we will be able to reduce this
 step to the following lemma.
 \begin{lem}
@@ -521,8 +537,8 @@ step to the following lemma.
 such that the following holds. Let $G$ be a bipartite graph with
 parts $A,B$ of equal size $n$, and suppose $\delta\left(G\right)\ge\alpha n$.
 Let $\bar{M}$ be a uniformly random perfect matching between $A$
-and $B$ and let $M$ be any sub-matching of $\bar{M}$ with $\left(1-\xi\right) n$
-edges. Then a.a.s. $G\cup M$ has a perfect matching. 
+and $B$ (not necessarily contained in $G$) and let $M$ be any sub-matching of $\bar{M}$ with $\left(1-\xi\right) n$
+edges. Then a.a.s.{} $G\cup M$ has a perfect matching. 
 \end{lem}
 
 Note that while we require $\bar M$ to be uniformly random, we make no assumptions about the distribution of $M$ other than that is contained within $\bar M$.
@@ -584,22 +600,22 @@ edges to each other cluster. So, $d_{C}\left(V_{i}^{\ell}\right)\ge\left(\left(\
 and $C$ has minimum degree at least $\alpha'\k$.
 \begin{proof}
 [Proof of \ref{lem:bipartite-plus-big-matching-perfect}]We use Hall's
-marriage theorem: we need to show that a.a.s. $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$
+marriage theorem: we need to show that a.a.s.{} $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$
 for all $W\subseteq A$. If $\left|W\right|\le\alpha n$, then $\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G}\left(W\right)\right|\ge\alpha n\ge\left|W\right|$
 by the degree condition on $G$. Similarly, if $\left|W\right|\ge\left(1-\alpha\right)n$
 then every $b\in B$ has an edge to $W$ in $G$, so $\left|N_{G\cup M}\left(W\right)\right|=\left|B\right|\ge\left|W\right|$.
 The difficult case is where $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$. 
 
-Apply our version of the regularity lemma. We first want to prove
-that the edges of $\bar{M}$ a.a.s. ``spread out evenly'' between
+Apply the bipartite version of the regularity lemma above. We first want to prove
+that the edges of $\bar{M}$ a.a.s.{} ``spread out evenly'' between
 the $O\left(1\right)$ clusters. Fix some non-exceptional clusters $V_{i}^{1}$ and $V_{j}^{2}$,
 with $i,j\ge1$. The vertices of each $V_{i}^{1}$ are matched by
 $\bar{M}$ to $\s n$ uniformly random vertices of $B$. The number
 of such vertices in $V_{j}^{2}$ is then hypergeometrically distributed,
 so with probability $1-e^{\Omega\left(n\right)}$ (see for example
-\cite[Theorem 2.10]{JLR00}) there are not more than $\left(\s^{2}+\varepsilon\right)n$
+\cite[Theorem~2.10]{JLR00}) there are not more than $\left(\s^{2}+\varepsilon\right)n$
 edges of $\bar{M}$ between $V_{i}^{1}$ and $V_{j}^{2}$. By the
-union bound, a.a.s. there are at most $\left(\s^{2}+\varepsilon\right)n$
+union bound, a.a.s.{} there are at most $\left(\s^{2}+\varepsilon\right)n$
 edges of $\bar{M}$ between every pair of non-exceptional clusters $V_{i}^{1}$, $V_{j}^{2}$.
 We assume this holds for the remainder of the proof.
 
@@ -655,7 +671,7 @@ matching in $G_{A,B}\left(H\right)\cup G_{A,B}\left(R\right)=G_{A,B}\left(H\cup 
 corresponding to a perfect matching or loose Hamilton cycle in $H\cup R$.
 
 We make this precise as follows. For any $\varepsilon>0$ depending on $\alpha$, if $\chyp\left(\alpha\right)$
-is large enough, \ref{lem:hypergraph-almost-object} ensures the a.a.s.
+is large enough, \ref{lem:hypergraph-almost-object} ensures the a.a.s.{}
 existence of a $\left(1-\varepsilon\right)n$-edge matching or partial-cycle $Q$ in $R$. Extend this to a perfect matching or loose Hamilton cycle
 $\bar{Q}$ on $V\left(R\right)$ in an arbitrary way. Note that the distribution of $R$
 is invariant under relabelling of its vertices so we can relabel its
@@ -692,7 +708,7 @@ cycle on the remaining vertices, and $G_{A,B}\left(Q\right)$ is a
 $\left(1-\varepsilon\right)n$-edge sub-matching of the uniformly random perfect
 matching $G_{A,B}\left(\bar{Q}\right)$.
 
-We give one final lemma, establishing that $G_{A,B}\left(H\right)$ is a.a.s. dense if $H$ is.
+We give one final lemma, establishing that $G_{A,B}\left(H\right)$ is a.a.s.{} dense if $H$ is.
 \begin{lem}
 \label{lem:hypergraph-bipartite-degree-transfer}There is $\a=\a\left(\alpha\right)>0$ such that the following
 holds.
@@ -702,12 +718,12 @@ holds.
 \item{\label{itm:hypergraph-bipartite-matching-degree-transfer}Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}\oldref{itm:hypergraph-matching-theorem},
 let $A$ be a uniformly random set of $n$ vertices, and let $B$
 be a uniformly random perfect matching on $V\left(H\right)\backslash A$.
-Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree at least $\amat n$.}
+Then a.a.s.{} $G_{A,B}\left(H\right)$ has minimum degree at least $\amat n$.}
 
 \item{\label{itm:hypergraph-bipartite-cycle-degree-transfer}Let $H$ satisfy the conditions of \ref{thm:hypergraph-theorems}\oldref{itm:hypergraph-cycle-theorem},
 let $A$ be a uniformly random set of $n$ vertices, and let $B$
 be a uniformly random loose Hamilton cycle on $V\left(H\right)\backslash A$.
-Then a.a.s. $G_{A,B}\left(H\right)$ has minimum degree at least $\aham n$.}
+Then a.a.s.{} $G_{A,B}\left(H\right)$ has minimum degree at least $\aham n$.}
 
 \end{enumerate}\end{lem}
 \begin{proof}
@@ -727,7 +743,7 @@ First, condition on some $\left(k-1\right)$-tuple $b\in B$, and imagine that the
 The degree of $b$ in $G_{A,B}\left(H\right)$ is the number of edges $b\cup\left\{ a^{i}\right\}$ in $E\left(H\right)$, which we have just shown stochastically dominates a $\Bin(\alpha n/2,\alpha/\left(2k\right))$ distribution.
 \begin{comment}This means we can couple our random ordering with a sequence of independent random variables $X_1,\dots,X_{\alpha n/2}$ each having a Bernoulli distribution with parameter $\alpha/\left(2k\right)$, in such a way that $d_{G_{A,B}\left(H\right)}\left(b\right)\ge\sum_{i=1}^{\alpha n/2}X_i$. \end{comment}
 By the Chernoff bound, $d_{G_{A,B}\left(H\right)}\left(b\right)\ge\alpha^{2}n/\left(8k\right)$
-with probability $1-e^{-\Omega\left(n\right)}$. With the union bound, a.a.s. $d_{G_{A,B}\left(H\right)}\left(b\right)\ge\alpha^{2}n/\left(8k\right)$ for all $b$.
+with probability $1-e^{-\Omega\left(n\right)}$. With the union bound, a.a.s.{} $d_{G_{A,B}\left(H\right)}\left(b\right)\ge\alpha^{2}n/\left(8k\right)$ for all $b$.
 
 Now, instead condition on some $a\in A$ and imagine that the $\left(k-1\right)$-tuples $b^i$ are chosen one-by-one from the remaining vertices
 (before choosing the rest of vertices of $A$). Note that there are at least $\delta_{1}\left(H\right)$ choices of a $\left(k-1\right)$-tuple $b$ such that $\left\{a\right\}\cup b\in E\left(H\right)$, and note that each $b_{j}^{i}$
@@ -736,7 +752,7 @@ then
 \[
 \Pr\left(\left\{ a\right\} \cup b^{i+1}\in E\left(H\right)\mid b^{1},\dots,b^{i}\right)\ge\left(\delta_{1}\left(H\right)-\left(k-1\right)i{kn \choose k-2}\right)\left.\vphantom{\sum}\right/{kn \choose k-1}\ge\sqrt{\amat}.
 \]
-By the same argument as in the previous paragraph, using the Chernoff bound and the union bound, a.a.s. each $d_{G_{A,B}\left(H\right)}\left(a\right)\ge\amat n$.
+By the same argument as in the previous paragraph, using the Chernoff bound and the union bound, a.a.s.{} each $d_{G_{A,B}\left(H\right)}\left(a\right)\ge\amat n$.
 \end{proof}
 
 \begin{proof}
@@ -748,17 +764,17 @@ a^{1},\dots,a^{n},b_{0},\dots,b_{\left(k-2\right)n-1},
 and let $A$, $b^i$ and $B$ be defined as before.
 
 With exactly the same proof as for \ref{lem:hypergraph-bipartite-degree-transfer}\oldref{itm:hypergraph-bipartite-matching-degree-transfer},
-there is small $\aham$ such that a.a.s. $d_{G_{A,B}\left(H\right)}\left(b\right)\ge\aham n$
+there is small $\aham$ such that a.a.s.{} $d_{G_{A,B}\left(H\right)}\left(b\right)\ge\aham n$
 for all $b\in B$. Next, condition on some $a\in A$, and imagine the $b^i$ are chosen one-by-one
 (before choosing the rest of vertices of $A$). Note  that the only intersection of $b^i$ with any of $b^0,\dots,b^{i-1}$ is the vertex $b_{\left(k-2\right)i}$, and the other vertices of $b^i$ are chosen uniformly at random from what remains. Also note that each $b_j$ shares at most ${\left(k-1\right)n \choose k-3}$ edges with both $a$ and $b_{\left(k-2\right)i}$. So, for small $\beta_k$, large $n$
 and $1\le i\le2\sqrt{\aham}n$,
 \[
 \Pr\left(\left\{ a\right\} \cup b^{i}\in E\left(H\right)\mid b^{0},\dots,b^{i-1}\right)\ge\left(\delta_{2}\left(H\right)-\left(k-2\right)i{\left(k-1\right)n \choose k-3}\right)\left.\vphantom{\sum}\right/{ \left(k-1\right)n \choose k-2}\ge\sqrt{\aham}.
 \]
-By the same argument as before, a.a.s. each $d_{G_{A,B}\left(H\right)}\left(a\right)\ge\aham n$.
+By the same argument as before, a.a.s.{} each $d_{G_{A,B}\left(H\right)}\left(a\right)\ge\aham n$.
 \end{proof}
 We have established that if $\chyp\left(\alpha\right)$ 
-is large enough then $G_{A,B}\left(H\right)$ is a.a.s. a bipartite graph with minimum degree $\a\left(\alpha\right)n$, and $G_{A,B}\left(R\right)$ contains a $\left(1-\xi\left(\a\left(\alpha\right)\right)\right)n$-edge sub-matching $G_{A,B}\left(Q\right)$ of the uniformly random perfect matching $G_{A,B}\left(\bar{Q}\right)$. \ref{lem:bipartite-plus-big-matching-perfect} then
+is large enough then $G_{A,B}\left(H\right)$ is a.a.s.{} a bipartite graph with minimum degree $\a\left(\alpha\right)n$, and $G_{A,B}\left(R\right)$ contains a $\left(1-\xi\left(\a\left(\alpha\right)\right)\right)n$-edge sub-matching $G_{A,B}\left(Q\right)$ of the uniformly random perfect matching $G_{A,B}\left(\bar{Q}\right)$. \ref{lem:bipartite-plus-big-matching-perfect} then
 ensures the existence of a perfect matching in $G_{A,B}\left(H\cup R\right)$. This corresponds to a perfect matching or loose Hamilton cycle in $H\cup R$.
 
 
@@ -790,8 +806,8 @@ be an arc from $V\left(C\right)$ to its complement, which could be
 combined with $C$ to give a longer path than $P$, contradicting
 maximality. This type of argument goes back to the proof of Dirac's
 theorem \cite[Theorem~3]{Dir52}. It also bears some resemblance to
-the ``rotation-extension'' idea introduced in \cite{Pos76}, and
-a variation for directed graphs in \cite[Section~4.3]{FK05}.
+the ``rotation-extension'' idea introduced by P\'osa in \cite{Pos76}, and
+a variation for directed graphs by Frieze and Krivelevich \cite[Section~4.3]{FK05}.
 \begin{proof}
 [Proof of \ref{lem:pseudorandom-hamiltonian}]First we acknowledge
 some immediate consequences of the condition on $D$. Note that if
@@ -1024,7 +1040,7 @@ is at most
 The number of choices of such pairs of disjoint sets $A,B$ is at most $2^{2n}$. By the union bound,
 the probability that $D\cup R$ does not satisfy the condition of
 \ref{lem:pseudorandom-hamiltonian} is at most $2^{2n}e^{-\cdi\alpha^{2}n/64}$, which 
-converges to zero for sufficiently large $\cdi$. Therefore the digraph $D\cup R$ is a.a.s. 
+converges to zero for sufficiently large $\cdi$. Therefore the digraph $D\cup R$ is a.a.s.{} 
 pancyclic by \ref{lem:pseudorandom-hamiltonian}.\end{proof}
 
 
@@ -1037,22 +1053,22 @@ be divided into two parts with all arcs between the two parts
 in the same direction), if and only if it is strongly connected (has
 a directed path from every vertex to every other), if and only if
 it is pancyclic (contains cycles of all lengths). All tournaments
-have a Hamilton path, and it was first proved in \cite{MM62} that
-a uniformly random tournament is a.a.s. irreducible, hence Hamiltonian.
+have a Hamilton path, and it was first proved by Moon and Moser in \cite{MM62} that
+a uniformly random tournament is a.a.s.{} irreducible, hence Hamiltonian.
 
-It was more recently proved in \cite{KLOP14} that if a tournament
+More recently, K{\"u}hn, Lapinskas, Osthus and Patel \cite{KLOP14} proved in  that if a tournament
 is $t$-strongly connected (it remains strongly connected after the
 deletion of $t-1$ vertices), then it has $\Omega\left(\sqrt{t}/\log t\right)$
-arc-disjoint Hamilton cycles (this was improved to $\Omega\left(\sqrt{t}\right)$
-in \cite{Pok14}). Therefore, to show a tournament has $q$ arc-disjoint Hamilton cycles for any $q=O\left(1\right)$, it suffices to show that the tournament is $t$-strongly connected for any fixed $t$. In particular, it is not difficult to show that a random tournament is a.a.s. $t$-strongly connected for fixed $t$, which motivates \ref{thm:tournament}.
+arc-disjoint Hamilton cycles. (This was improved to $\Omega\left(\sqrt{t}\right)$
+by Pokrovskiy \cite{Pok14}). Therefore, to show a tournament has $q$ arc-disjoint Hamilton cycles for any $q=O\left(1\right)$, it suffices to show that the tournament is $t$-strongly connected for any fixed $t$. In particular, it is not difficult to show that a random tournament is a.a.s.{} $t$-strongly connected for fixed $t$, which motivates \ref{thm:tournament}.
 
 Before we proceed to the proof, we first explain why \ref{thm:tournament}
 is sharp. The ``obvious'' worst case for $T$ is a \emph{transitive}
 tournament (corresponding to a linear order on the vertices). In this
-case, a superlinear number of random edges must be flipped in order to a.a.s.
+case, a superlinear number of random edges must be flipped in order to a.a.s.{}
 flip one of the arcs pointing away from the least element of the linear
-order. Actually, the model where random edges are flipped in a transitive
-tournament has already been studied in \cite{LRG96}, by analogy to
+order. Actually, {\L}uczak, Ruci{\'n}ski and Gruszka \cite{LRG96} have already studied the model where random edges are flipped in a transitive
+tournament, by analogy to
 the evolution of the random graph.
 
 More generally, consider a ``transitive cluster-tournament'' $T$
@@ -1062,7 +1078,7 @@ $R_{1},\dots,R_{r}$ of $R$, then put an arc from $v$ to $w$ for
 every $v\in R_{i}$, $w\in R_{j}$ with $i<j$. In order for the perturbed
 tournament $P$ to be Hamiltonian, there must be an arc entering $R_{1}$,
 so one of the $O\left(n\left(d+1\right)\right)$ arcs exiting $R_{1}$
-must be changed. This will not happen a.a.s. unless $m=\omega\left(n/\left(d+1\right)\right)$.
+must be changed. This will not happen a.a.s.{} unless $m=\omega\left(n/\left(d+1\right)\right)$.
 
 We now prove \ref{thm:tournament}. In accordance with the discussion
 in the introduction, we will work with the model where each edge is
@@ -1070,8 +1086,10 @@ flipped with probability $p$ independently, where $2p{n \choose 2}=m$.
 (Designating an edge for resampling with probability $2p$ is the
 same as flipping it with probability $p$). Note that $p\le1/2$ and in particular $p\le1-p$.
 
-Fix $t$; we will prove that $P$ is a.a.s. $t$-strongly connected. The
-idea of the proof is to choose a set $S$ of $t$ vertices with a
+Fix $t$, and let $T$ be a tournament with $n$ vertices
+and all in- and out- degrees at least $d$. As described above, flip each edge with probability $p=\omega\left(1/\left(n\left(d+1\right)\right)\right)$, to obtain a perturbed tournament $P$. We will prove that $P$ is a.a.s.{} $t$-strongly connected.
+
+The idea of the proof is to choose a set $S$ of $t$ vertices with a
 large indegree and outdegree, then to show that with high probability
 almost every vertex has many paths to and from each vertex in $S$.
 The probability that a vertex $v$ has paths to and from from $S$ is smallest
@@ -1099,7 +1117,7 @@ the in- and out- degrees very much.
 \begin{lem}
 \label{lem:preserve-degree}If a vertex $v$ has outdegree (respectively
 indegree) $k$ in $T$, then it has outdegree (respectively indegree)
-at least $k/3$ in $P$, with probability $1-o\left(e^{-k}\right)-o\left(1/n\right)$
+at least $k/3$ in the randomly perturbed tournament $P$, with probability $1-o\left(e^{-k}\right)-o\left(1/n\right)$
 (uniformly over $k$).\end{lem}
 \begin{proof}
 We only prove the statement where $v$ has outdegree $k$; the indegree
@@ -1121,7 +1139,7 @@ from $w$ with indegree (respectively outdegree) at least $k$ in
 $T$. Then with probability $1-o\left(e^{-k/\left(d+1\right)}\right)-o\left(1/n\right)$
 (uniformly over $k$), there are $t'=3t$ internally vertex-disjoint
 paths of length at most 3 from $w$ to $v$ (respectively from $v$
-to $w$) in $P$.\end{lem}
+to $w$) in the randomly perturbed tournament $P$.\end{lem}
 \begin{proof}
 We will only prove the statement where $v$ has indegree at least
 $k$; the outdegree case is identical. By independence, we can condition
@@ -1165,7 +1183,7 @@ perturbation is at most
 We conclude that with the required probability, there is a set of $t'$ suitable independent
 arcs, each between a pair $U_{i}^{+},U_{i}^{-}$.\end{proof}
 \begin{lem}
-\label{lem:lots-of-paths}Fix some $w\in S$. In $P$, there are a.a.s.
+\label{lem:lots-of-paths}Fix some $w\in S$. In the randomly perturbed tournament $P$, there are a.a.s.{}
 $t$ internally vertex-disjoint paths from $w$ to each other vertex
 (respectively, from each other vertex to $w$).\end{lem}
 \begin{proof}
@@ -1177,7 +1195,7 @@ with indegree $k$ is safe with probability at least $1-f\left(n\right)e^{-k/\lef
 for some $f\left(n\right)=o\left(1\right)$.
 
 By \ref{lem:extreme-indegree-bound}, there are at most $2d+1$ vertices
-with indegree $d$ in $T$, and the vertex with the $2k$th smallest
+with indegree $d$ in $T$, and the vertex with the $2k$-th smallest
 indegree has indegree at least $k-1$. Let $Q$ be the set of non-safe
 vertices, and note 
 \begin{align*}
@@ -1188,17 +1206,21 @@ vertices, and note
 (We have used the geometric series formula and the inequality $1-e^{-x}\ge\left(x\land1\right)/2$
 for positive $x$).
 
-By Markov's inequality, a.a.s. $\left|Q\right|\le\sqrt{f\left(n\right)}O\left(d+1\right)=o\left(d+1\right)$.
-If $d\le12t$ then $\left|Q\right|=0$ for large $n$ and we are done. Otherwise, we will show that there are a.a.s. suitable paths of length at most 4 from $w$ to each other vertex. By \ref{lem:preserve-degree} the perturbation a.a.s. reduces the degree of each vertex by a factor of at most 3 (the probability of this not occurring is $o\left(\sum_{k=0}^\infty e^{-k}\right)+o\left(1\right)=o\left(1\right)$), so every vertex $v\in Q$ a.a.s. has indegree at least $d/3$. We have $\left|Q\right|<d/12$ for large $n$, and we are assuming $d>12t$, so for every vertex $v$ we can choose $3t$ safe in-neighbours $v_{1},\dots,v_{3t}$ different from $w$. Now, fix some $v$ and consider a maximum-size collection $M$ of internally vertex-disjoint paths of length at most 4 from $w$ to $v$ in $P$. For the purpose of contradiction assume that $\left|M\right|<t$. There are fewer than $3t$ internal vertices in the paths in $M$, so there is some $v_{i}$ not in any path of $M$. Then, there are $3t$ internally vertex-disjoint paths from $w$ to $v_{i}$, so one of these does not contain any
+By Markov's inequality, a.a.s.{} $\left|Q\right|\le\sqrt{f\left(n\right)}O\left(d+1\right)=o\left(d+1\right)$.
+If $d\le12t$ then $\left|Q\right|=0$ for large $n$ and we are done. Otherwise, $d>12t$, and we will show that there are a.a.s.{} suitable paths of length at most 4 from $w$ to each other vertex.
+
+By \ref{lem:preserve-degree} the perturbation a.a.s.{} reduces the degree of each vertex by a factor of at most 3 (the probability of this not occurring is $o\left(\sum_{k=0}^\infty e^{-k}\right)+o\left(1\right)=o\left(1\right)$), so every vertex $v\in Q$ a.a.s.{} has indegree at least $d/3$. We have $\left|Q\right|<d/12$ for large $n$, and we are assuming $d>12t$, so for every vertex $v$ we can choose $d/3-d/12-1=d/4-1\ge 3t$ safe in-neighbours $v_{1},\dots,v_{3t}$ different from $w$.
+
+Now, fix some $v$ and consider a maximum-size collection $M$ of internally vertex-disjoint paths of length at most 4 from $w$ to $v$ in $P$. For the purpose of contradiction assume that $\left|M\right|<t$. There are fewer than $3t$ internal vertices in the paths in $M$, so there is some $v_{i}$ not in any path of $M$. Then, there are $3t$ internally vertex-disjoint paths from $w$ to $v_{i}$, so one of these does not contain any
 internal vertex of a path in $M$. It follows that $w,\dots,v_{i},v$ is a path from $w$ to $v$ which is
 internally vertex-disjoint from every path in $M$, contradicting maximality.
 \end{proof}
-It follows from \ref{lem:lots-of-paths} that in $P$, a.a.s. every vertex
+It follows from \ref{lem:lots-of-paths} that in $P$, a.a.s.{} every vertex
 outside $S$ has $t$ internally vertex-disjoint paths to and from every vertex in $S$.
 If $P$ has this property and we delete $t-1$ vertices, then there is at least one vertex $w$
 of $S$ remaining, and $w$ has least one path to and from every other
-vertex. That is, $P$ is a.a.s. $t$-strongly connected. (In fact, we have also
-proved that $P$ a.a.s. has diameter at most 8). Recall that a $t$-strongly connected tournament has $\Omega\left(\sqrt t\right)$ arc-disjoint Hamilton cycles, so we can conclude that $P$ a.a.s. has $q$ arc-disjoint Hamilton cycles for any $q=O\left(1\right)$.
+vertex. That is, $P$ is a.a.s.{} $t$-strongly connected. (In fact, we have also
+proved that $P$ a.a.s.{} has diameter at most 8, since there is a path of length at most 4 between $w$ and any other vertex). Recall that a $t$-strongly connected tournament has $\Omega\left(\sqrt t\right)$ arc-disjoint Hamilton cycles, so we can conclude that $P$ a.a.s.{} has $q$ arc-disjoint Hamilton cycles for any $q=O\left(1\right)$.
 
 
 \section{Concluding Remarks}
@@ -1226,7 +1248,7 @@ in \ref{thm:hypergraph-theorems}.
 
 \medskip
 
-\noindent{\bf Acknowledgement.} Parts of this work were carried out when the first author visited the Institute for Mathematical Research (FIM) of ETH Zurich, and also when the third author visited the School of Mathematical Sciences of Tel Aviv University, Israel. We would like to thank both institutions for their hospitality and for creating a stimulating research environment.
+\noindent{\bf Acknowledgement.} Parts of this work were carried out when the first author visited the Institute for Mathematical Research (FIM) of ETH Z\"urich, and also when the third author visited the School of Mathematical Sciences of Tel Aviv University, Israel. We would like to thank both institutions for their hospitality and for creating a stimulating research environment.
 
 \bibliographystyle{amsplain}
 \providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
