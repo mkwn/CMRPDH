@@ -202,7 +202,7 @@ gain certain spanning substructures (in particular, Hamilton cycles) after a mod
 that adding linearly many random edges to a dense $k$-uniform hypergraph ensures
 the (asymptotically almost sure) existence of a perfect matching or a loose
 Hamilton cycle. The proof involves an interesting application of Szemer\'edi's
-Regularity Lemma, which might be of independent interest. We next prove that digraphs with certain strong expansion
+Regularity Lemma, which might be independently useful. We next prove that digraphs with certain strong expansion
 properties are pancyclic, and use this to show that adding a linear
 number of random edges typically makes a dense digraph pancyclic. Finally, we
 prove that perturbing a certain (minimum-degree-dependent) number of
@@ -240,7 +240,7 @@ the (labelled) graphs with $n$ vertices and $\alpha{n \choose 2}$
 edges, then the degrees will probably each be about $\alpha n$. Such
 a random graph is Hamiltonian with probability $1-o\left(1\right)$
 (we say it is Hamiltonian \emph{asymptotically almost surely}, or
-\emph{a.a.s.}). This follows from a stronger result by P\'osa \cite{Pos76}
+\emph{a.a.s.}). This follows from a stronger result independently by P\'osa \cite{Pos76} and Korshunov \cite{Kor76}
 that gives a \emph{threshold} for Hamiltonicity: a random $n$-vertex,
 $m$-edge graph is Hamiltonian a.a.s.{} if $m\gg n\log n$, and fails
 to be Hamiltonian a.a.s.{} if $m\ll n\log n$. Here and from now on,
@@ -287,7 +287,7 @@ the vertex set $\range n$.
 
 \item{\label{itm:hypergraph-matching-theorem}If $H$ is
 a $k$-uniform hypergraph on $\range{kn}$ with $\delta_{k-1}\left(H\right)\ge\alpha n$,
-and $R\in\HH_{k}\left(kn,\chypmat n\right)$, then
+and $R^{\mathrm{M}}\in\HH_{k}\left(kn,\chypmat n\right)$, then
 $H\cup R$ a.a.s.{} has a perfect matching.}
 
 \item{\label{itm:hypergraph-cycle-theorem}If $H$ is
@@ -604,7 +604,7 @@ marriage theorem: we need to show that a.a.s.{} $\left|N_{G\cup M}\left(W\right)
 for all $W\subseteq A$. If $\left|W\right|\le\alpha n$, then $\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G}\left(W\right)\right|\ge\alpha n\ge\left|W\right|$
 by the degree condition on $G$. Similarly, if $\left|W\right|\ge\left(1-\alpha\right)n$
 then every $b\in B$ has an edge to $W$ in $G$, so $\left|N_{G\cup M}\left(W\right)\right|=\left|B\right|\ge\left|W\right|$.
-The difficult case is where $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$. 
+The difficult case is where $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$.
 
 Apply the bipartite version of the regularity lemma above. We first want to prove
 that the edges of $\bar{M}$ a.a.s.{} ``spread out evenly'' between
@@ -613,9 +613,9 @@ with $i,j\ge1$. The vertices of each $V_{i}^{1}$ are matched by
 $\bar{M}$ to $\s n$ uniformly random vertices of $B$. The number
 of such vertices in $V_{j}^{2}$ is then hypergeometrically distributed,
 so with probability $1-e^{\Omega\left(n\right)}$ (see for example
-\cite[Theorem~2.10]{JLR00}) there are not more than $\left(\s^{2}+\varepsilon\right)n$
-edges of $\bar{M}$ between $V_{i}^{1}$ and $V_{j}^{2}$. By the
-union bound, a.a.s.{} there are at most $\left(\s^{2}+\varepsilon\right)n$
+\cite[Theorem~2.10]{JLR00}) there are not more than $\left(\s^{2}+\sigma\right)n$
+edges of $\bar{M}$ between $V_{i}^{1}$ and $V_{j}^{2}$ (where $\sigma>0$ is any small constant). By the
+union bound, a.a.s.{} there are at most $\left(\s^{2}+\sigma\right)n$
 edges of $\bar{M}$ between every pair of non-exceptional clusters $V_{i}^{1}$, $V_{j}^{2}$.
 We assume this holds for the remainder of the proof.
 
@@ -629,16 +629,16 @@ It follows that if $\left|N_{C}\left(D\right)\right|=\k$ (as would
 occur if $G$ was well-distributed) then $\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G'}\left(W\right)\right|\ge\left(1-\varepsilon\right)\left(n-\left|V_{0}^{2}\right|\right)\ge\left|W\right|$
 for small $\varepsilon$, and we are done.
 
-Otherwise, choose $F\subseteq N\left(D\right)$ with $\left|F\right|=\alpha'\k$
+Otherwise, choose $F\subseteq N_C\left(D\right)$ with $\left|F\right|=\alpha'\k$
 and let $S$ contain the vertices of the clusters in $F$. By the
 same $\varepsilon$-regularity argument as in the previous paragraph, $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'\k\left(1-\varepsilon\right)\s n\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
-Since $\left|M\right|=\left(1-\xi\left(\alpha\right)\right)n$, each
-$V_{i}^{1}\cap W$ has at least $\left(\pi_{i}\s-\xi\left(\alpha\right)\right)n$
-neighbours in $M$, and at most $\alpha'\k\left(\s^{2}+\varepsilon\right)n$
+Since $\left|M\right|=\left(1-\xi\right)n$, each
+$V_{i}^{1}\cap W$ has at least $\left(\pi_{i}\s-\xi\right)n$
+neighbours in $M$, and at most $\alpha'\k\left(\s^{2}+\sigma\right)n$
 of these are in $S$. So, 
 \begin{align*}
-\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in D}\left(\pi_{i}\s-\xi\left(\alpha\right)-\alpha'\k\left(\s^{2}+\varepsilon\right)\right)n\\
- & \ge\left|W\right|-\varepsilon n-\left|D\right|\left(\xi\left(\alpha\right)+\alpha'\k\left(\s^{2}+\varepsilon\right)\right)n.
+\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in D}\left(\pi_{i}\s-\xi-\alpha'\k\left(\s^{2}+\sigma\right)\right)n\\
+ & \ge\left|W\right|-\varepsilon n-\left|D\right|\left(\xi+\alpha'\k\left(\s^{2}+\sigma\right)\right)n.
 \end{align*}
 Since $\left|N_{C}\left(D\right)\right|<\k$, there is $V_{j}^{2}$
 outside $N_{C}\left(D\right)$. This $V_{j}^{2}$ must have $\alpha'\k$
@@ -646,9 +646,9 @@ neighbours outside $D$ in $C$, so $\left|D\right|\le\left(1-\alpha'\right)\k$
 and therefore $\left|D\right|\alpha'\k\s^{2}\le\left(1-\alpha'\right)\alpha'$. Since $\k=O\left(1\right)$, it follows that
 \begin{align*}
 \left|N_{G\cup M}\left(W\right)\right| & \ge\left|N_{G'}\left(W\right)\cap S\right|+\left|N_{M}\left(W\right)\backslash S\right|\\
- & \ge\alpha'n+\left|W\right|-\left(1-\alpha'\right)\alpha' n+O\left(\varepsilon+\varepsilon^{2}+\xi\left(\alpha\right)\right)n.
+ & \ge\alpha'n+\left|W\right|-\left(1-\alpha'\right)\alpha' n+O\left(\varepsilon+\varepsilon^{2}+r\xi+r^2\sigma\right)n.
 \end{align*}
-If $\varepsilon$ and $\xi\left(\alpha\right)$ are chosen to be small enough, then this gives $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$.
+If $\varepsilon$, $\sigma$ and $\xi$ are chosen to be small enough, then this gives $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$.
 \end{proof}
 Now we describe the reduction of \ref{thm:hypergraph-theorems} to
 \ref{lem:bipartite-plus-big-matching-perfect}. Consider a $k$-uniform
@@ -1314,6 +1314,9 @@ J.~Koml\'os and M.~Simonovits, \emph{Szemer\'edi's regularity lemma and its
   (D.~Mikl\'os, V.~S\'os, and T.~Sz\H{o}nyi, eds.), Bolyai Society Mathematical
   Studies, vol.~2, J\'anos {B}olyai Mathematical Society, Budapest, 1996,
   pp.~295--352.
+
+\bibitem{Kor76}
+A.~D. Korshunov, \emph{Solution of a problem of {E}rd\H{o}s and {R}\'enyi on {H}amilton cycles in nonoriented graphs}, Soviet Mathematics Doklady \textbf{17} (1976), 760--764.
 
 \bibitem{KST06}
 M.~Krivelevich, B.~Sudakov, and P.~Tetali, \emph{On smoothed analysis in dense
