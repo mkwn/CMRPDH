@@ -598,57 +598,57 @@ edges to other clusters. There are at most $\left(\varepsilon n\right)\left(\s n
 edges to the exceptional cluster $V_{0}$ and at most $\left(\s n\right)^{2}$
 edges to each other cluster. So, $d_{C}\left(V_{i}^{\ell}\right)\ge\left(\left(\alpha'+\varepsilon\right)n-\varepsilon n\right)\s n/\left(\s n\right)^{2}\ge\alpha'\k$
 and $C$ has minimum degree at least $\alpha'\k$.
-\begin{proof}
-[Proof of \ref{lem:bipartite-plus-big-matching-perfect}]We use Hall's
-marriage theorem: we need to show that a.a.s.{} $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$
+\begin{proof}[Proof of \ref{lem:bipartite-plus-big-matching-perfect}]
+We use Hall's marriage theorem: we need to show that a.a.s.{} $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$
 for all $W\subseteq A$. If $\left|W\right|\le\alpha n$, then $\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G}\left(W\right)\right|\ge\alpha n\ge\left|W\right|$
 by the degree condition on $G$. Similarly, if $\left|W\right|\ge\left(1-\alpha\right)n$
 then every $b\in B$ has an edge to $W$ in $G$, so $\left|N_{G\cup M}\left(W\right)\right|=\left|B\right|\ge\left|W\right|$.
 The difficult case is where $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$.
 
-Apply the bipartite version of the regularity lemma above. We first want to prove
-that the edges of $\bar{M}$ a.a.s.{} ``spread out evenly'' between
-the $O\left(1\right)$ clusters. Fix some non-exceptional clusters $V_{i}^{1}$ and $V_{j}^{2}$,
-with $i,j\ge1$. The vertices of each $V_{i}^{1}$ are matched by
-$\bar{M}$ to $\s n$ uniformly random vertices of $B$. The number
-of such vertices in $V_{j}^{2}$ is then hypergeometrically distributed,
-so with probability $1-e^{\Omega\left(n\right)}$ (see for example
-\cite[Theorem~2.10]{JLR00}) there are not more than $\left(\s^{2}+\sigma\right)n$
-edges of $\bar{M}$ between $V_{i}^{1}$ and $V_{j}^{2}$ (where $\sigma>0$ is any small constant). By the
-union bound, a.a.s.{} there are at most $\left(\s^{2}+\sigma\right)n$
-edges of $\bar{M}$ between every pair of non-exceptional clusters $V_{i}^{1}$, $V_{j}^{2}$.
-We assume this holds for the remainder of the proof.
+Apply the bipartite version of the regularity lemma above, to obtain
+a subgraph $G'$ and a dense cluster graph $C$. For a set of clusters
+$F$, we let $\bigcup F$ denote the set of all vertices in those clusters.
 
 Consider any $W\subset A$ with $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$.
 For each $i$ let $\pi_{i}=\left|V_{i}^{1}\cap W\right|/\left(\s n\right)$,
 and let $D$ be the set of clusters $V_{i}^{1}$ with $\pi_{i}\ge\varepsilon$.
-If $\varepsilon$ is small compared to $\alpha$, then $D$ must be nonempty. Now, if $V_{j}^{2}\in N_{C}\left(D\right)$
-then by $\varepsilon$-regularity there are edges in $G'$ from $W$
-to at least $\left(1-\varepsilon\right)\s n$ vertices of $V_{j}^{2}$.
-It follows that if $\left|N_{C}\left(D\right)\right|=\k$ (as would
-occur if $G$ was well-distributed) then $\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G'}\left(W\right)\right|\ge\left(1-\varepsilon\right)\left(n-\left|V_{0}^{2}\right|\right)\ge\left|W\right|$
+Note that $\left|W\backslash\bigcup D\right|\le\left|D\right|\varepsilon sn\le\varepsilon n$. Also,
+if $\varepsilon$ is small compared to $\alpha$, then $D$ must be
+nonempty. Now, if $V_{j}^{2}\in N_{C}\left(D\right)$ then by $\varepsilon$-regularity
+there are edges in $G'$ from $W$ to at least $\left(1-\varepsilon\right)\s n$
+vertices of $V_{j}^{2}$. It follows that 
+\[
+\left|\bigcup N_{C}\left(D\right)\backslash N_{G'}\left(W\right)\right|\le\varepsilon\left|D\right|sn\le\varepsilon n.
+\]
+If $\left|N_{C}\left(D\right)\right|=\k$ (as would occur if $G$
+was well-distributed) then
+\[
+\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G'}\left(W\right)\right|\ge \left|\bigcup N_{C}\left(D\right)\right|-\varepsilon n\ge n-2\varepsilon n\ge\left|W\right|
+\]
 for small $\varepsilon$, and we are done.
 
-Otherwise, choose $F\subseteq N_C\left(D\right)$ with $\left|F\right|=\alpha'\k$
-and let $S$ contain the vertices of the clusters in $F$. By the
-same $\varepsilon$-regularity argument as in the previous paragraph, $\left|N_{G'}\left(W\right)\cap S\right|\ge\alpha'\k\left(1-\varepsilon\right)\s n\ge\left(1-\varepsilon\right)^{2}\alpha'n$.
-Since $\left|M\right|=\left(1-\xi\right)n$, each
-$V_{i}^{1}\cap W$ has at least $\left(\pi_{i}\s-\xi\right)n$
-neighbours in $M$, and at most $\alpha'\k\left(\s^{2}+\sigma\right)n$
-of these are in $S$. So, 
-\begin{align*}
-\left|N_{M}\left(W\right)\backslash S\right| & \ge\sum_{V_{i}^{1}\in D}\left(\pi_{i}\s-\xi-\alpha'\k\left(\s^{2}+\sigma\right)\right)n\\
- & \ge\left|W\right|-\varepsilon n-\left|D\right|\left(\xi+\alpha'\k\left(\s^{2}+\sigma\right)\right)n.
-\end{align*}
-Since $\left|N_{C}\left(D\right)\right|<\k$, there is $V_{j}^{2}$
-outside $N_{C}\left(D\right)$. This $V_{j}^{2}$ must have $\alpha'\k$
-neighbours outside $D$ in $C$, so $\left|D\right|\le\left(1-\alpha'\right)\k$
-and therefore $\left|D\right|\alpha'\k\s^{2}\le\left(1-\alpha'\right)\alpha'$. Since $\k=O\left(1\right)$, it follows that
-\begin{align*}
-\left|N_{G\cup M}\left(W\right)\right| & \ge\left|N_{G'}\left(W\right)\cap S\right|+\left|N_{M}\left(W\right)\backslash S\right|\\
- & \ge\alpha'n+\left|W\right|-\left(1-\alpha'\right)\alpha' n+O\left(\varepsilon+\varepsilon^{2}+r\xi+r^2\sigma\right)n.
-\end{align*}
-If $\varepsilon$, $\sigma$ and $\xi$ are chosen to be small enough, then this gives $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$.
+Otherwise, there is $V_{j}^{2}$ outside $N_{C}\left(D\right)$. This
+$V_{j}^{2}$ must have $\alpha'\k$ neighbours outside $D$ in $C$,
+so $\left|D\right|\le\left(1-\alpha'\right)\k$. For a set of clusters
+$F$, let $\bigcup F$ be the set of all vertices in those clusters.
+Now, $\bigcup N_{C}\left(D\right)$ is a fixed set of at least $\alpha'sn$
+vertices in $B$ and $N_{\bar{M}}\left(\bigcup D\right)$ is a uniformly
+random set of $\left|\bigcup D\right|\le\left(1-\alpha'\right)rsn\le\left(1-\alpha\right)n$
+vertices in $B$ (which means $B\backslash N_{\bar{M}}\left(\bigcup D\right)$
+is a uniformly random set of at least $\alpha'n$ vertices). So, $\left|\bigcup N_{C}\left(D\right)\backslash N_{\bar{M}}\left(\bigcup D\right)\right|$
+is hypergeometrically distributed with mean at least $\left(\alpha'\right)^{2}$.
+By a concentration inequality (see for example \cite[Theorem~2.10]{JLR00}),
+a.a.s.
+\[
+\left|\bigcup N_{C}\left(D\right)\backslash N_{\bar{M}}\left(\bigcup D\right)\right|\ge\left(\alpha'\right)^{2}n-o\left(n\right).
+\]
+There are fewer than $2^r=O(1)$ possibilities for $D$, so by the union bound this inequality holds a.a.s.{} for the $D$ arising from \emph{any} choice of $W$. We then have
+\[
+\left|N_{G\cup M}\left(W\right)\right| \ge\left|N_{M}\left(W\right)\right|+\left|N_{G'}\left(W\right)\backslash N_{\bar{M}}\left(W\right)\right|
+  \ge\left|W\right|-\xi n+\left|\bigcup N_{C}\left(D\right)\backslash N_{\bar{M}}\left(\bigcup D\right)\right|-2\varepsilon n.\\
+\]
+For small $\varepsilon$ and $\xi$, this
+gives $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|+\left(\alpha'\right)^{2}n-O\left(\xi+\varepsilon\right)n\ge \left|W\right|$.
 \end{proof}
 Now we describe the reduction of \ref{thm:hypergraph-theorems} to
 \ref{lem:bipartite-plus-big-matching-perfect}. Consider a $k$-uniform
