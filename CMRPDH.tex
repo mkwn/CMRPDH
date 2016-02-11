@@ -15,6 +15,7 @@
 \usepackage{amssymb}
 \usepackage{setspace}
 \usepackage{esint}
+%\usepackage{color}
 \setstretch{0.948}
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
@@ -42,7 +43,7 @@
 \theoremstyle{plain}
 \newtheorem{conjecture}[thm]{\protect\conjecturename}
 \theoremstyle{remark}
-\newtheorem{rem}[thm]{\protect\remarkname}
+\newtheorem*{rem*}{\protect\remarkname}
 \theoremstyle{remark}
 \newtheorem{claim}[thm]{\protect\claimname}
 \crefname{enumi}{Part}{Parts}
@@ -240,14 +241,14 @@ the (labelled) graphs with $n$ vertices and $\alpha{n \choose 2}$
 edges, then the degrees will probably each be about $\alpha n$. Such
 a random graph is Hamiltonian with probability $1-o\left(1\right)$
 (we say it is Hamiltonian \emph{asymptotically almost surely}, or
-\emph{a.a.s.}). This follows from a stronger result independently by P\'osa \cite{Pos76} and Korshunov \cite{Kor76}
+\emph{a.a.s.}). This follows from a stronger result independently due to P\'osa \cite{Pos76} and Korshunov \cite{Kor76}
 that gives a \emph{threshold} for Hamiltonicity: a random $n$-vertex,
 $m$-edge graph is Hamiltonian a.a.s.{} if $m\gg n\log n$, and fails
 to be Hamiltonian a.a.s.{} if $m\ll n\log n$. Here and from now on,
 all asymptotics are as $n\to\infty$, and we implicitly round large
 quantities to integers.
 
-Bohman, Frieze and Martin \cite{BFM03} studied the random graph model that
+In \cite{BFM03}, Bohman, Frieze and Martin studied the random graph model that
 starts with a dense graph and adds $m$ random edges (this model has
 since been studied in a number of other contexts; see for example
 \cite{BHM04,KST06}). They found that to ensure Hamiltonicity in this
@@ -590,14 +591,14 @@ $\left(\alpha'+\varepsilon\right)n$ such that each pair of distinct
 clusters $V_{i}^{1},V_{j}^{2}$ ($i,j\ge1$) is $\varepsilon$-regular
 in $G'$ with density zero or at least $2\varepsilon$.
 
-Define the cluster graph $C$ as the bipartite graph whose vertices
+Define the cluster graph $\Gamma$ as the bipartite graph whose vertices
 are the non-exceptional clusters $V_{i}^{\ell}$, and whose edges
 are the pairs of clusters between which there is nonzero density in
-$G'$. The fact that $G'$ is dense implies that $C$ is dense as well, as follows. In $G'$ each $V_{i}^{\ell}$ has at least $\left(\alpha'+\varepsilon\right)n\left|V_{i}^{\ell}\right|$
+$G'$. The fact that $G'$ is dense implies that $\Gamma$ is dense as well, as follows. In $G'$ each $V_{i}^{\ell}$ has at least $\left(\alpha'+\varepsilon\right)n\left|V_{i}^{\ell}\right|$
 edges to other clusters. There are at most $\left(\varepsilon n\right)\left(\s n\right)$
 edges to the exceptional cluster $V_{0}$ and at most $\left(\s n\right)^{2}$
-edges to each other cluster. So, $d_{C}\left(V_{i}^{\ell}\right)\ge\left(\left(\alpha'+\varepsilon\right)n-\varepsilon n\right)\s n/\left(\s n\right)^{2}\ge\alpha'\k$
-and $C$ has minimum degree at least $\alpha'\k$.
+edges to each other cluster. So, $d_{\Gamma}\left(V_{i}^{\ell}\right)\ge\left(\left(\alpha'+\varepsilon\right)n-\varepsilon n\right)\s n/\left(\s n\right)^{2}\ge\alpha'\k$
+and $\Gamma$ has minimum degree at least $\alpha'\k$.
 \begin{proof}[Proof of \ref{lem:bipartite-plus-big-matching-perfect}]
 We use Hall's marriage theorem: we need to show that a.a.s.{} $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|$
 for all $W\subseteq A$. If $\left|W\right|\le\alpha n$, then $\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G}\left(W\right)\right|\ge\alpha n\ge\left|W\right|$
@@ -605,51 +606,52 @@ by the degree condition on $G$. Similarly, if $\left|W\right|\ge\left(1-\alpha\r
 then every $b\in B$ has an edge to $W$ in $G$, so $\left|N_{G\cup M}\left(W\right)\right|=\left|B\right|\ge\left|W\right|$.
 The difficult case is where $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$.
 
-Apply the bipartite version of the regularity lemma above, to obtain
-a subgraph $G'$ and a dense cluster graph $C$. For a set of clusters
-$F$, we let $\bigcup F$ denote the set of all vertices in those clusters.
-
-Consider any $W\subset A$ with $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$.
+Apply the bipartite version of the regularity lemma above (with $\varepsilon$ sufficiently small compared to $\alpha$), to obtain
+a subgraph $G'$ and a dense cluster graph $\Gamma$. Consider any $W\subset A$ with $\alpha n\le\left|W\right|\le\left(1-\alpha\right)n$.
 For each $i$ let $\pi_{i}=\left|V_{i}^{1}\cap W\right|/\left(\s n\right)$,
-and let $D$ be the set of clusters $V_{i}^{1}$ with $\pi_{i}\ge\varepsilon$.
-Note that $\left|W\backslash\bigcup D\right|\le\left|D\right|\varepsilon sn\le\varepsilon n$. Also,
-if $\varepsilon$ is small compared to $\alpha$, then $D$ must be
-nonempty. Now, if $V_{j}^{2}\in N_{C}\left(D\right)$ then by $\varepsilon$-regularity
+and let $X$ be the set of clusters $V_{i}^{1}$ with $\pi_{i}\ge\varepsilon$. Let $A_X$ denote the set of all vertices in those clusters.
+Note that $\left|W\backslash A_X\right|\le r\varepsilon sn\le\varepsilon n$. Also,
+if $\varepsilon$ is small compared to $\alpha$, then $X$ must be
+nonempty. Now, if $V_{j}^{2}\in N_{\Gamma}\left(X\right)$ then by $\varepsilon$-regularity
 there are edges in $G'$ from $W$ to at least $\left(1-\varepsilon\right)\s n$
-vertices of $V_{j}^{2}$. It follows that 
-\[
-\left|\bigcup N_{C}\left(D\right)\backslash N_{G'}\left(W\right)\right|\le\varepsilon\left|D\right|sn\le\varepsilon n.
-\]
-If $\left|N_{C}\left(D\right)\right|=\k$ (as would occur if $G$
+vertices of $V_{j}^{2}$. Let $Y=N_{\Gamma}\left(X\right)$ and let $B_Y$ be the set of vertices in the clusters in $Y$; it follows that $\left|B_Y\backslash N_{G'}\left(W\right)\right|\le\varepsilon\left|Y\right|sn\le\varepsilon n$.
+
+If $\left|Y\right|=\k$ (as would occur if $G$
 was well-distributed) then
 \[
-\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G'}\left(W\right)\right|\ge \left|\bigcup N_{C}\left(D\right)\right|-\varepsilon n\ge n-2\varepsilon n\ge\left|W\right|
+\left|N_{G\cup M}\left(W\right)\right|\ge\left|N_{G'}\left(W\right)\right|\ge \left|B_Y\right|-\varepsilon n\ge n-2\varepsilon n\ge\left|W\right|
 \]
-for small $\varepsilon$, and we are done.
+for $2\varepsilon\le \alpha$, and we are done.
 
-Otherwise, there is $V_{j}^{2}$ outside $N_{C}\left(D\right)$. This
-$V_{j}^{2}$ must have $\alpha'\k$ neighbours outside $D$ in $C$,
-so $\left|D\right|\le\left(1-\alpha'\right)\k$. For a set of clusters
-$F$, let $\bigcup F$ be the set of all vertices in those clusters.
-Now, $\bigcup N_{C}\left(D\right)$ is a fixed set of at least $\alpha'sn$
-vertices in $B$ and $N_{\bar{M}}\left(\bigcup D\right)$ is a uniformly
-random set of $\left|\bigcup D\right|\le\left(1-\alpha'\right)rsn\le\left(1-\alpha\right)n$
-vertices in $B$ (which means $B\backslash N_{\bar{M}}\left(\bigcup D\right)$
-is a uniformly random set of at least $\alpha'n$ vertices). So, $\left|\bigcup N_{C}\left(D\right)\backslash N_{\bar{M}}\left(\bigcup D\right)\right|$
-is hypergeometrically distributed with mean at least $\left(\alpha'\right)^{2}$.
+Otherwise, there is $V_{j}^{2}$ outside $Y=N_{\Gamma}\left(D\right)$. This
+$V_{j}^{2}$ must have $\alpha'\k$ neighbours outside $X$ in $\Gamma$,
+so $\left|X\right|\le\left(1-\alpha'\right)\k$. Now, $Y\ge\alpha'r$ so $B_Y$ is a fixed set of at least $\alpha'rsn\ge \left(1-\varepsilon\right)\alpha'n$
+vertices in $B$. Also, $N_{\bar{M}}\left(A_X\right)$ is a uniformly
+random set of $\left|A_X\right|\le\left(1-\alpha'\right)rsn\le\left(1-\alpha'\right)n$
+vertices in $B$, which means $B\backslash N_{\bar{M}}\left(A_X\right)$
+is a uniformly random set of at least $\alpha'n$ vertices. So, $\left|B_Y\backslash N_{\bar{M}}\left(A_X\right)\right|$
+is hypergeometrically distributed with mean at least $\left(1-\varepsilon\right)\left(\alpha'\right)^{2}n$.
 By a concentration inequality (see for example \cite[Theorem~2.10]{JLR00}),
 a.a.s.
 \[
-\left|\bigcup N_{C}\left(D\right)\backslash N_{\bar{M}}\left(\bigcup D\right)\right|\ge\left(\alpha'\right)^{2}n-o\left(n\right).
+\left|B_Y\backslash N_{\bar{M}}\left(A_X\right)\right|\ge\left(\alpha'\right)^{2}n-2\varepsilon n.
 \]
-There are fewer than $2^r=O(1)$ possibilities for $D$, so by the union bound this inequality holds a.a.s.{} for the $D$ arising from \emph{any} choice of $W$. We then have
+There are fewer than $2^r=O(1)$ possibilities for $X$, so by the union bound this inequality holds a.a.s.{} for the $X$ arising from \emph{any} choice of $W$. Now, note that $\left|N_{\bar{M}}\left(W\right)\backslash N_{\bar{M}}\left(A_X\right)\right|=\left|W\backslash A_X\right|$ and recall that $\left|W\backslash A_X\right|,\,\left|B_Y\backslash N_{G'}\left(W\right)\right|\le\varepsilon n$, so
+\[
+\left|N_{G'}\left(W\right)\backslash N_{\bar{M}}\left(W\right)\right|
+  \ge\left|B_Y\backslash N_{\bar{M}}\left(A_X\right)\right|-2\varepsilon n\ge\left(\alpha'\right)^{2}n-4\varepsilon n.
+\]
+Also, $\left|N_{M}\left(W\right)\right|\le \left|N_{\bar M}\left(W\right)\right|-\xi n=\left|W\right|-\xi n$. We conclude that
 \[
 \left|N_{G\cup M}\left(W\right)\right| \ge\left|N_{M}\left(W\right)\right|+\left|N_{G'}\left(W\right)\backslash N_{\bar{M}}\left(W\right)\right|
-  \ge\left|W\right|-\xi n+\left|\bigcup N_{C}\left(D\right)\backslash N_{\bar{M}}\left(\bigcup D\right)\right|-2\varepsilon n.\\
+  \ge\left|W\right|-\xi n+\left(\alpha'\right)^{2}n-4\varepsilon n.\\
 \]
-For small $\varepsilon$ and $\xi$, this
-gives $\left|N_{G\cup M}\left(W\right)\right|\ge\left|W\right|+\left(\alpha'\right)^{2}n-O\left(\xi+\varepsilon\right)n\ge \left|W\right|$.
+For small $\varepsilon$ and $\xi$ (say $4\varepsilon\le\xi=\left(\alpha'\right)^{2}/2=\alpha^2/8$), this
+gives $\left|N_{G\cup M}\left(W\right)\right|\ge \left|W\right|$.
 \end{proof}
+\begin{rem*}
+Note that $\xi$ does not depend on any of the constants arising in the regularity lemma. These constants only influence the value of $n$ needed to make the probability implicit in ``a.a.s.'' close to 1.
+\end{rem*}
 Now we describe the reduction of \ref{thm:hypergraph-theorems} to
 \ref{lem:bipartite-plus-big-matching-perfect}. Consider a $k$-uniform
 hypergraph $L$. Suppose $A$ is a set of $n$ vertices and $B$ is
@@ -1229,7 +1231,7 @@ We have determined the amount of random perturbation typically required to make
 a tournament, dense digraph or dense uniform hypergraph Hamiltonian. In
 the process, we have proved a general lemma about pancyclicity in
 highly connected digraphs, and demonstrated an interesting application
-of the Szemer\'edi regularity lemma. In the hypergraph setting, there are a few important questions
+of the Szemer\'edi regularity lemma. In the hypergraph setting, there are some important questions
 this paper leaves open.
 
 First, we have only studied loose Hamiltonicity. The other most popular
@@ -1241,14 +1243,11 @@ high $\left(k-1\right)$-degree, which is the strongest density assumption
 we could make. There are a large variety of Dirac-type theorems for
 different types of minimum degree and different types of cycles (see
 \cite{RR10} for a survey), which would suggest that similar random
-perturbation results are possible in these settings. In addition,
-it is possible that our use of Szemer\'edi's regularity lemma could
-be avoided, thereby drastically improving the constants $\chyp\left(\alpha\right)$
-in \ref{thm:hypergraph-theorems}.
+perturbation results are possible in these settings.
 
 \medskip
 
-\noindent{\bf Acknowledgement.} Parts of this work were carried out when the first author visited the Institute for Mathematical Research (FIM) of ETH Z\"urich, and also when the third author visited the School of Mathematical Sciences of Tel Aviv University, Israel. We would like to thank both institutions for their hospitality and for creating a stimulating research environment.
+\noindent{\bf Acknowledgement.} Parts of this work were carried out when the first author visited the Institute for Mathematical Research (FIM) of ETH Z\"urich, and also when the third author visited the School of Mathematical Sciences of Tel Aviv University, Israel. We would like to thank both institutions for their hospitality and for creating a stimulating research environment. We also thank the anonymous referee for their thorough proofreading.
 
 \bibliographystyle{amsplain}
 \providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
