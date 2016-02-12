@@ -275,7 +275,7 @@ there is no single most natural notion of a cycle or of minimum degree
 in hypergraphs. A $k$-uniform \emph{loose} cycle is a $k$-uniform
 hypergraph with a cyclic ordering on its vertices such that every
 edge consists of $k$ consecutive vertices and every pair of consecutive
-edges intersects in exactly one vertex. The degree of a set of vertices
+edges intersects in exactly one vertex. The \emph{degree} of a set of vertices
 is the number of edges that include that set, and the \emph{minimum
 $\left(k-1\right)$-degree }$\delta_{k-1}$ is the minimum degree
 among sets of $k-1$ vertices. Let $\HH_{k}\left(n,m\right)$ be
@@ -391,8 +391,8 @@ $f$ (to be precise, $g=\omega\left(f\right)$ means $g/f\to\infty$).
 \label{thm:tournament}Consider a tournament $T$ with $n$ vertices
 and all in- and out- degrees at least $d$. Independently choose
 $m=\omega\left(n/\left(d+1\right)\right)$ random edges of $T$ and orient them uniformly at random.
-The resulting perturbed tournament $P$ a.a.s.{} has $q$ arc-disjoint
-Hamilton cycles, for $q=O\left(1\right)$.
+For any constant $q$, the resulting perturbed tournament $P$ a.a.s.{} has $q$ arc-disjoint
+Hamilton cycles.
 \end{thm}
 
 Note that we allow for the case where the minimum degree $d$ is zero, and where $d$ is an arbitrary function of $n$. We will prove \ref{thm:tournament}, and show that it is tight, in \ref{sec:tournaments}.
